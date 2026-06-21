@@ -9,7 +9,7 @@
         "dev": "next dev --webpack",
         "dev:turbo": "next dev",
         "build": "next build",
-        "build:railway": "cross-env CI=1 next build",
+        "build:railway": "cross-env CI=1 next build && node scripts/prepare-standalone-assets.mjs",
         "build:windows": "next build --webpack",
         "start": "next start",
         "start:railway": "node .next/standalone/server.js",
