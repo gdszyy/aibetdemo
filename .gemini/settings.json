@@ -1,0 +1,15 @@
+{
+    "mcpServers": {
+        "playwright": {
+            "command": "npx",
+            "args": ["-y", "@executeautomation/playwright-mcp-server"]
+        },
+        "browsermcp": {
+            "command": "npx",
+            "args": ["-y", "@browsermcp/mcp"]
+        }
+    },
+    "context": {
+        "fileName": ["AGENTS.md"]
+    }
+}

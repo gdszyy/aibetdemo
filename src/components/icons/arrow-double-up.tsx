@@ -1,0 +1,19 @@
+import type { SVGProps } from "react";
+const SvgArrowDoubleUp = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    fill="none"
+    viewBox="0 0 12 12"
+    {...props}
+  >
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeWidth={2}
+      d="M10 10 6.283 6.283a.4.4 0 0 0-.566 0L2 10M10 6 6.283 2.283a.4.4 0 0 0-.566 0L2 6"
+    />
+  </svg>
+);
+export default SvgArrowDoubleUp;

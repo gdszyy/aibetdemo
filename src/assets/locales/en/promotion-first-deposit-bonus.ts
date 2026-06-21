@@ -1,0 +1,126 @@
+export default {
+    hero: {
+        badge: '🎉 {appName} 5th ANNIVERSARY',
+        title: 'Triple Bonus on Your First Deposits',
+        amountPrefix: 'Get up to',
+        amount: '{amount}',
+        amountSuffix: 'in rewards',
+        subtitle: 'Make your first 3 deposits and receive up to {amount} in bonuses.',
+        validityLabel: 'Valid',
+    },
+    cta: 'Deposit Now',
+    howItWorks: {
+        title: 'How to participate?',
+        subtitle: 'Just 3 steps to claim your bonus.',
+        step1: { title: 'Sign up', desc: 'Create your account and complete KYC verification' },
+        step2: { title: 'Deposit', desc: 'Make your deposit and choose your bonus type' },
+        step3: { title: 'Win!', desc: 'Meet the wagering requirement and withdraw your winnings' },
+    },
+    promoCodes: {
+        title: 'Promo Codes',
+        subtitle: 'Enter the code on the deposit page to activate your bonus.',
+        infoText:
+            'Copy the code for your stage and bonus type, then enter it on the deposit page to activate your bonus automatically.',
+        bonus: 'Bonus:',
+        copyToast: 'Code {code} copied!',
+        copied: 'Copied!',
+        copyCode: 'Copy code',
+        note: '<strong>Remember:</strong> Each code only works for its corresponding stage. Once you use a Casino code, the Sports code for that stage becomes invalid.',
+    },
+    stages: {
+        stage1: { label: 'Stage #1', sublabel: 'First Deposit' },
+        stage2: { label: 'Stage #2', sublabel: 'Second Deposit' },
+        stage3: { label: 'Stage #3', sublabel: 'Third Deposit' },
+    },
+    bonusType: {
+        casino: 'Casino',
+        sport: 'Sports',
+    },
+    bonusDetails: {
+        title: 'Bonus Scheme',
+        subtitle: 'Details of the 3 anniversary deposit bonuses.',
+        best: '🔥 BEST',
+        bonusLabel: 'bonus',
+        deposit: 'Deposit:',
+        requirement: 'Requirement',
+        maxWithdraw: 'Max. withdrawal',
+        validOdds: 'Valid odds:',
+        wageringUnit: 'x Bonus',
+        exampleTitle: 'Calculation Example',
+        exampleText:
+            'If you receive a bonus of <strong>{receive}</strong> with a <strong>{requirement}x</strong> requirement, you need to wager <strong>{wager}</strong> in valid bets to request a withdrawal of your winnings.',
+    },
+    rules: {
+        title: 'Activity Rules',
+        subtitle: 'Read the terms and conditions carefully to make the most of your bonus.',
+        general: {
+            title: 'General Terms',
+            item0: 'This activity is available to all new users who have completed KYC verification.',
+            item1: 'The activity is divided into 3 deposit stages. Users must participate in order: Stage 1 → Stage 2 → Stage 3. You cannot skip stages or use bonuses from later stages early.',
+            item2: 'Each stage offers two types of bonus: Casino or Sports. You can only choose one per stage. If you use one coupon, the other for that same stage becomes automatically invalid.',
+            item3: 'Each user can participate only once per stage. A single deposit cannot be combined with other active promotions.',
+        },
+        deadlines: {
+            title: 'Deadlines and validity',
+            item0: 'Each stage must be completed within <strong>30 days</strong> of activation. If not completed in time, the bonus and its benefits are voided.',
+            item1: 'Once claimed, the bonus must be used within <strong>14 days</strong>. Unused bonuses expire automatically.',
+            item2: 'Activated stages can coexist independently. The progress, validity, and settlement of each stage are calculated separately.',
+            item3: 'The same wagered amount cannot be counted toward more than one bonus activity.',
+        },
+        sportsBetting: {
+            title: 'Valid betting rules — Sports',
+            item0: 'Only settled sports bets are counted.',
+            item1: 'Only bets with odds of <strong>1.60x or higher</strong> are counted. Bets with odds below 1.60x are not valid.',
+            item2: 'Only bets placed with real money are counted. Bets with Bonus or Free Bet funds do not apply.',
+            item3: 'The following do not apply: refunded, cancelled, invalid bets, Cash Out bets, or markets excluded by the platform.',
+        },
+        casinoBetting: {
+            title: 'Valid betting rules — Casino',
+            item0: 'Only bets placed with real money are counted. Bets with Bonus or Free Spins do not apply.',
+            item1: 'All eligible Casino games contribute toward the wagering requirement.',
+            item2: 'Some special games, special tables, or games excluded by the platform may not be counted. Check the activity page or platform notices for more details.',
+        },
+        pauseResume: {
+            title: 'Bonus pause and resumption',
+            item0: 'If the user withdraws all available balance for the activity before completing the wagering requirement, the bonus will enter a <strong>paused</strong> state.',
+            item1: 'During the pause: no wagering progress is accumulated, the bonus cannot be wagered, and no withdrawals can be made.',
+            item2: 'To <strong>resume</strong> the bonus, make the minimum required deposit for that stage again within the validity period. Other active bonuses are not affected.',
+        },
+        withdrawals: {
+            title: 'Winnings and withdrawals',
+            item0: 'The bonus amount cannot be withdrawn directly.',
+            item1: 'Net winnings obtained using the bonus can be requested for withdrawal once the wagering requirement is met.',
+            item2: 'Withdrawable winnings per stage are capped at the "Max. withdrawal" limit shown above. Any amount exceeding the cap will be forfeited.',
+            item3: 'Example: if the limit is {withdrawalsItem3Amount1} and you accumulate {withdrawalsItem3Amount2} in winnings, only {withdrawalsItem3Amount3} will be credited to your withdrawable balance; the remaining {withdrawalsItem3Amount4} will be forfeited.',
+        },
+        restrictions: {
+            title: 'Account restrictions and important terms',
+            item0: 'Each CPF, account, device, IP, bank card, and email address can only participate once.',
+            item1: 'Bonuses are personal and non-transferable. They cannot be assigned, gifted, or sold.',
+            item2: 'By participating, you accept the General Terms and Conditions and the Privacy Policy of the platform.',
+            item3: 'The platform reserves the right to cancel bonuses, reverse winnings, or restrict participation if a violation of the rules is detected.',
+            item4: 'The platform may modify, suspend, or cancel this activity for legal, regulatory, technical, or operational reasons. The platform reserves the right of final interpretation of these terms.',
+        },
+    },
+    responsibleGaming: {
+        title: 'Responsible Gaming Notice',
+        warning1:
+            '<strong>Restricted to persons aged 18 and over.</strong> Gambling can be addictive. Please gamble responsibly.',
+        warning2:
+            'This promotion does not guarantee winnings. All bets involve financial risk. Please participate responsibly.',
+        help: 'If you need help, contact customer support or visit <link>GAMBLERS ANONYMOUS</link>',
+    },
+    list: {
+        title: 'Promotions',
+        subtitle:
+            'Unlock exciting rewards with our latest promotions!\nJoin now and take advantage of limited-time bonuses, special deals, and exclusive benefits.',
+        joinNow: 'Join Now',
+        joined: 'Joined',
+        empty: 'Coming Soon — Get ready for amazing promotions!',
+        status: {
+            active: 'Active',
+            upcoming: 'Upcoming',
+            ended: 'Ended',
+        },
+    },
+};

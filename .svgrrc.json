@@ -1,0 +1,31 @@
+{
+    "plugins": ["@svgr/plugin-svgo", "@svgr/plugin-jsx", "@svgr/plugin-prettier"],
+    "svgoConfig": {
+        "plugins": [
+            {
+                "name": "preset-default",
+                "params": {
+                    "overrides": {
+                        "removeViewBox": false
+                    }
+                }
+            },
+            "prefixIds"
+        ]
+    },
+    "typescript": true,
+    "jsxRuntime": "automatic",
+    "outDir": "src/components/icons",
+    "icon": true,
+    "expandProps": "end",
+    "replaceAttrValues": {
+        "#A0A8B4": "currentColor",
+        "#787F8D": "currentColor",
+        "#51555E": "currentColor",
+        "#495266": "currentColor",
+        "#FFAE00": "currentColor",
+        "#009B39": "currentColor"
+    },
+    "filenameCase": "kebab",
+    "index": true
+}

@@ -1,0 +1,14 @@
+import type { FC } from 'react';
+import { getColor } from '../utils/helper';
+import type { SVGIconProps } from '../utils/types';
+
+export const SportMmaOutlined: FC<SVGIconProps> = ({ color = ['currentColor'], ...props }) => {
+    return (
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="1em" {...props}>
+            <path
+                d="M3.27999 11.4673H4.87999L6.01332 6.66732H7.94666L6.34666 13.334H0.946655L2.47999 6.66732H4.41332L3.27999 11.4673ZM9.54666 11.2007L9.07999 13.334H7.14666L8.07999 9.33398H13.08L12.6133 11.2007H9.54666ZM8.27999 8.53398H13.2133L13.68 6.66732H8.74666L8.27999 8.53398ZM19.28 6.66732L18.8133 8.40065H15.9467L15.2133 11.4673H18.08L17.68 13.334H12.88L14.48 6.66732H19.28Z"
+                fill={getColor(color, 1, '#495266')}
+            />
+        </svg>
+    );
+};

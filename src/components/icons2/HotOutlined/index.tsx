@@ -1,0 +1,23 @@
+import type { FC } from 'react';
+import { getColor } from '../utils/helper';
+import type { SVGIconProps } from '../utils/types';
+
+export const HotOutlined: FC<SVGIconProps> = ({ color = ['currentColor', 'currentColor'], ...props }) => {
+    return (
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" width="1em" {...props}>
+            <path
+                d="M14 25.6673C16.3206 25.6673 18.5462 24.7454 20.1872 23.1045C21.8281 21.4636 22.75 19.238 22.75 16.9173C22.75 15.7507 22.75 13.4173 20.4167 10.5007C20.4167 10.5007 20.3 13.8303 17.997 13.3473C14.2718 12.5692 19.082 5.25415 12.25 2.33398C12.25 8.16732 5.25 9.91732 5.25 16.9173C5.25 19.238 6.17187 21.4636 7.81282 23.1045C9.45376 24.7454 11.6794 25.6673 14 25.6673Z"
+                stroke={getColor(color, 1, '#E80104')}
+                strokeWidth="1.75"
+                strokeLinejoin="round"
+            />
+            <path
+                d="M14 22.1678C11.7448 22.1678 9.91663 20.3992 9.91663 17.5"
+                stroke={getColor(color, 2, '#E80104')}
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+};

@@ -1,0 +1,28 @@
+import type { FC } from 'react';
+import { getColor } from '../utils/helper';
+import type { SVGIconProps } from '../utils/types';
+
+export const SportAustralianRugbyOutlined: FC<SVGIconProps> = ({
+    color = ['currentColor', 'currentColor'],
+    ...props
+}) => {
+    return (
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="1em" {...props}>
+            <path
+                d="M2.09364 15.5357C5.03924 17.8629 9.67679 17.8558 13.3846 15.2596C17.0924 12.6633 18.6852 8.30791 17.5058 4.74401C14.5602 2.41684 9.92265 2.42395 6.21487 5.02016C2.50709 7.61638 0.914273 11.9718 2.09364 15.5357Z"
+                stroke={getColor(color, 1, '#495266')}
+                strokeWidth="1.66667"
+                strokeMiterlimit="2"
+                strokeLinejoin="round"
+            />
+            <path
+                d="M16.8266 5.21971L13.4135 7.60961L6.58723 12.3894M3.1741 14.7793L7.54294 11.7202M6.65521 10.3072L8.56713 13.0377M11.4336 6.96133L13.3455 9.69183M9.04441 8.63426L10.9563 11.3648"
+                stroke={getColor(color, 2, '#495266')}
+                strokeWidth="1.66667"
+                strokeMiterlimit="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+};

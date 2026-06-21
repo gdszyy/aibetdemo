@@ -1,0 +1,100 @@
+export default {
+    /** Bet Builder (Crear Apuesta) — ⚠️ MOCK feature, wording kept for backend wiring */
+    betBuilder: {
+        title: 'Bet Builder',
+        subtitle: 'Combine multiple picks from this match',
+        combinedOdds: 'Combined odds',
+        stake: 'Stake',
+        potentialWin: 'Potential win',
+        placeBet: 'Place bet',
+        empty: 'Select at least 2 options to build a bet',
+        clear: 'Clear',
+        added: 'Bet created (demo)',
+        demoBadge: 'DEMO',
+    },
+    /** Match weather / venue header — ⚠️ MOCK data */
+    conditions: {
+        stadium: 'Stadium',
+        capacity: 'Capacity',
+        referee: 'Referee',
+        weather: 'Weather',
+        sunny: 'Sunny',
+        cloudy: 'Cloudy',
+        rain: 'Rain',
+    },
+    /** Sport topic page (导航专题页化) */
+    topicPage: {
+        allCompetitions: 'All Competitions',
+        competitionCount: '{count, plural, one {# competition} other {# competitions}}',
+        featuredMatches: 'Featured Matches',
+        futuresHint: 'Choose a competition to see available outright markets.',
+        futuresTab: 'Futures',
+        futuresTitle: 'Futures',
+        heroSubtitle: 'Markets, featured matches, and competitions in one place',
+        matchCount: '{count, plural, one {# match} other {# matches}}',
+        matchesTab: 'Matches',
+        popular: 'Popular',
+        popularFutures: 'Popular Futures',
+        next12h: 'Next 12 hours',
+        next24h: 'Next 24 hours',
+        timeFilterNote: 'Time filter needs backend time-window support',
+        upcomingMatches: 'Upcoming Matches',
+    },
+    title: 'HOT MATCHES',
+    liveTitle: 'LIVE MATCHES',
+    popularMarket: 'POPULAR MARKETS',
+    hide: 'Hide',
+    noMoreMatches: '— There are no more matches at the moment. —',
+    noMoreMarkets: '— There are no more markets at the moment. —',
+    noMatchesAvailable: 'No matches available',
+    noMarketAvailable: 'No markets available',
+    liveMarketsBackSoon: 'Live market offers will be back soon!',
+    live: 'LIVE',
+    liveMatchCount: '{count, plural, one {MATCH #} other {MATCHES #}}',
+    all: 'All',
+    today: 'Today',
+    outright: 'Outright',
+    paused: 'Paused',
+    live1: 'Live',
+    backHome: 'Back to Homepage',
+    odds: 'Odds',
+    marketAdditional: 'Additional',
+    showMore: 'Show {count} more',
+    showLess: 'Show less',
+    loadingMarkets: 'Loading markets...',
+    loadingMore: 'Loading more...',
+    analytic: 'Analytic',
+    bet: 'Bet',
+    worldCupLeagueTitle: 'FIFA WORLD CUP',
+    worldCupHotMatch: 'Hot Match',
+
+    recommendLiveMatches: {
+        title: 'Best Live Match',
+    },
+
+    parlayBoost: {
+        title: 'PARLAY BOOST',
+        sheetClose: 'Close',
+    },
+    superOdd: {
+        title: 'SUPERODD',
+    },
+    followBet: {
+        title: 'FOLLOW BET',
+    },
+
+    hotLeagues: {
+        title: 'Popular Competitions',
+    },
+
+    hotMatches: {
+        title: 'Popular Matches',
+    },
+
+    hotLeagueMatchCarousel: {
+        liveTitle: 'BEST LIVE MATCHES',
+        upcomingTitle: 'BEST MATCHES',
+        exploreMarkets: 'Click to explore the full market offer!',
+        goToSlide: 'Go to slide {index}',
+    },
+};

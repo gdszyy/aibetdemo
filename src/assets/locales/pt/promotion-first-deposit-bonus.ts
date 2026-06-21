@@ -1,0 +1,126 @@
+export default {
+    hero: {
+        badge: '🎉 5º Aniversário da {appName}',
+        title: 'Bônus triplo nos seus primeiros depósitos',
+        amountPrefix: 'Ganhe até',
+        amount: '{amount}',
+        amountSuffix: 'em recompensas',
+        subtitle: 'Faça seus primeiros 3 depósitos e receba até {amount} em bônus.',
+        validityLabel: 'Validade',
+    },
+    cta: 'Depositar agora',
+    howItWorks: {
+        title: 'Como participar?',
+        subtitle: 'Apenas 3 passos para resgatar seu bônus.',
+        step1: { title: 'Cadastre-se', desc: 'Crie sua conta e complete a verificação KYC' },
+        step2: { title: 'Deposite', desc: 'Faça seu depósito e escolha o tipo de bônus' },
+        step3: { title: 'Ganhe!', desc: 'Cumpra o requisito de aposta e saque seus ganhos' },
+    },
+    promoCodes: {
+        title: 'Códigos promocionais',
+        subtitle: 'Insira o código na página de depósito para ativar seu bônus.',
+        infoText:
+            'Copie o código correspondente à sua etapa e tipo de bônus e insira-o na página de depósito para ativar seu bônus automaticamente.',
+        bonus: 'Bônus:',
+        copyToast: 'Código {code} copiado!',
+        copied: 'Copiado!',
+        copyCode: 'Copiar código',
+        note: '<strong>Lembre-se:</strong> Cada código funciona apenas para sua etapa correspondente. Ao usar um código de Cassino, o código de Esportes dessa etapa ficará inválido.',
+    },
+    stages: {
+        stage1: { label: 'Etapa #1', sublabel: 'Primeiro Depósito' },
+        stage2: { label: 'Etapa #2', sublabel: 'Segundo Depósito' },
+        stage3: { label: 'Etapa #3', sublabel: 'Terceiro Depósito' },
+    },
+    bonusType: {
+        casino: 'Cassino',
+        sport: 'Esportes',
+    },
+    bonusDetails: {
+        title: 'Esquema de Bônus',
+        subtitle: 'Detalhes dos 3 bônus de depósito de aniversário.',
+        best: '🔥 MELHOR',
+        bonusLabel: 'de bônus',
+        deposit: 'Depósito:',
+        requirement: 'Requisito de Aposta',
+        maxWithdraw: 'Saque máx.',
+        validOdds: 'Odds válidas:',
+        wageringUnit: 'x Bônus',
+        exampleTitle: 'Exemplo de cálculo',
+        exampleText:
+            'Se você receber um bônus de <strong>{receive}</strong> com requisito de <strong>{requirement}x</strong>, precisará apostar <strong>{wager}</strong> em apostas válidas para solicitar o saque dos seus ganhos.',
+    },
+    rules: {
+        title: 'Regras da Atividade',
+        subtitle: 'Leia atentamente os termos e condições para aproveitar ao máximo seu bônus.',
+        general: {
+            title: 'Termos Gerais',
+            item0: 'Esta atividade está disponível para todos os novos usuários que concluíram a verificação KYC.',
+            item1: 'A atividade é dividida em 3 etapas de depósito. Os usuários devem participar em ordem: Etapa 1 → Etapa 2 → Etapa 3. Não é possível pular etapas nem usar bônus de etapas posteriores antecipadamente.',
+            item2: 'Cada etapa oferece dois tipos de bônus: Cassino ou Esportes. Você só pode escolher um por etapa. Se usar um dos cupons, o outro da mesma etapa será automaticamente invalidado.',
+            item3: 'Cada usuário pode participar apenas uma vez por etapa. Um mesmo depósito não pode ser combinado com outras promoções ativas.',
+        },
+        deadlines: {
+            title: 'Prazos e validade',
+            item0: 'Cada etapa deve ser concluída em um prazo de <strong>30 dias</strong> a partir da ativação. Se não for concluída a tempo, o bônus e seus benefícios serão anulados.',
+            item1: 'Uma vez resgatado, o bônus deve ser utilizado em um prazo de <strong>14 dias</strong>. Bônus não utilizados expiram automaticamente.',
+            item2: 'As etapas ativadas podem coexistir de forma independente. O progresso, a validade e a liquidação de cada etapa são calculados separadamente.',
+            item3: 'O mesmo valor apostado não pode ser contabilizado em mais de uma atividade de bônus.',
+        },
+        sportsBetting: {
+            title: 'Regras de apostas válidas — Esportes',
+            item0: 'Somente apostas esportivas já liquidadas são contabilizadas.',
+            item1: 'Somente apostas com odds de <strong>1.60x ou superiores</strong> são contabilizadas. Apostas com odds inferiores a 1.60x não são válidas.',
+            item2: 'Somente apostas com dinheiro real são contabilizadas. Apostas com Bônus ou Free Bet não se aplicam.',
+            item3: 'Não se aplicam: apostas reembolsadas, canceladas, inválidas, com Cash Out, nem mercados excluídos pela plataforma.',
+        },
+        casinoBetting: {
+            title: 'Regras de apostas válidas — Cassino',
+            item0: 'Somente apostas realizadas com dinheiro real são contabilizadas. Apostas com Bônus ou Giros Grátis não se aplicam.',
+            item1: 'Todos os jogos de Cassino elegíveis contribuem para o requisito de aposta.',
+            item2: 'Alguns jogos especiais, mesas especiais ou jogos excluídos pela plataforma podem não ser contabilizados. Consulte a página da atividade ou os avisos da plataforma para mais detalhes.',
+        },
+        pauseResume: {
+            title: 'Pausa e retomada do bônus',
+            item0: 'Se o usuário retirar todo o saldo disponível para a atividade antes de completar o requisito de aposta, o bônus entrará em estado de <strong>pausa</strong>.',
+            item1: 'Durante a pausa: não há acúmulo de progresso de apostas, não é possível apostar com esse bônus e não é possível fazer saques.',
+            item2: 'Para <strong>retomar</strong> o bônus, faça novamente o depósito mínimo exigido para essa etapa dentro do período de validade. Os demais bônus ativos não são afetados.',
+        },
+        withdrawals: {
+            title: 'Ganhos e saques',
+            item0: 'O valor do bônus não pode ser sacado diretamente.',
+            item1: 'Os ganhos líquidos obtidos usando o bônus podem ser solicitados para saque após o cumprimento do requisito de aposta.',
+            item2: 'Os ganhos retiráveis por etapa não podem exceder o limite de "Saque máx." indicado. O excedente será automaticamente perdido.',
+            item3: 'Exemplo: se o limite é {withdrawalsItem3Amount1} e você acumula {withdrawalsItem3Amount2} em ganhos, apenas {withdrawalsItem3Amount3} serão creditados para seu saldo retirável; os {withdrawalsItem3Amount4} restantes serão perdidos.',
+        },
+        restrictions: {
+            title: 'Restrições de conta e termos importantes',
+            item0: 'Cada CPF, conta, dispositivo, IP, cartão bancário e e-mail só pode participar uma vez.',
+            item1: 'Os bônus são pessoais e intransferíveis. Não podem ser cedidos, doados ou vendidos.',
+            item2: 'Ao participar, você aceita os Termos e Condições Gerais e a Política de Privacidade da plataforma.',
+            item3: 'A plataforma se reserva o direito de cancelar bônus, reverter ganhos ou restringir a participação se for detectado descumprimento das regras.',
+            item4: 'A plataforma pode modificar, suspender ou cancelar esta atividade por razões legais, regulatórias, técnicas ou operacionais. A plataforma se reserva o direito de interpretação final destes termos.',
+        },
+    },
+    responsibleGaming: {
+        title: 'Aviso de Jogo Responsável',
+        warning1:
+            '<strong>Proibido para menores de 18 anos.</strong> O jogo pode causar dependência. Aposte com responsabilidade.',
+        warning2:
+            'Esta promoção não garante ganhos. Todas as apostas envolvem risco financeiro. Participe de forma responsável.',
+        help: 'Se precisar de ajuda, entre em contato com o atendimento ao cliente ou visite <link>Jogadores Anônimos</link>',
+    },
+    list: {
+        title: 'Promoções',
+        subtitle:
+            'Desbloqueie recompensas incríveis com nossas últimas promoções!\nParticipe agora e aproveite bônus por tempo limitado, ofertas especiais e benefícios exclusivos.',
+        joinNow: 'Cadastre-se agora',
+        joined: 'Já participou',
+        empty: 'Em breve — Prepare-se para promoções incríveis!',
+        status: {
+            active: 'Em curso',
+            upcoming: 'Em breve',
+            ended: 'Encerrado',
+        },
+    },
+};

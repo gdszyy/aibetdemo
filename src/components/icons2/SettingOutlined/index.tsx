@@ -1,0 +1,16 @@
+import type { FC } from 'react';
+import { getColor } from '../utils/helper';
+import type { SVGIconProps } from '../utils/types';
+
+export const SettingOutlined: FC<SVGIconProps> = ({ color = ['currentColor', 'currentColor'], ...props }) => {
+    return (
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="1em" {...props}>
+            <path
+                d="M6.2998 2L13.7002 2C14.2723 2.00017 14.8003 2.30557 15.0859 2.7998L18.7861 9.20117C19.0717 9.69541 19.0717 10.3046 18.7861 10.7988L15.0859 17.2002C14.8003 17.6944 14.2723 17.9998 13.7002 18H6.2998C5.72769 17.9998 5.19968 17.6944 4.91406 17.2002L1.21387 10.7988C0.928263 10.3046 0.928263 9.69541 1.21387 9.20117L4.91406 2.7998C5.19968 2.30557 5.72769 2.00017 6.2998 2Z"
+                stroke={getColor(color, 1, '#2A303C')}
+                strokeWidth="2"
+            />
+            <circle cx="9.99976" cy="10" r="3.2" stroke={getColor(color, 2, '#2A303C')} strokeWidth="1.6" />
+        </svg>
+    );
+};

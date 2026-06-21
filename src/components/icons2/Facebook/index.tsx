@@ -1,0 +1,18 @@
+import type { FC } from 'react';
+import { getColor } from '../utils/helper';
+import type { SVGIconProps } from '../utils/types';
+
+export const Facebook: FC<SVGIconProps> = ({ color = ['#1977F3', 'white'], ...props }) => {
+    return (
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="1em" {...props}>
+            <path
+                d="M10 19.9999C15.5228 19.9999 20 15.5228 20 9.99995C20 4.47713 15.5228 0 10 0C4.47715 0 0 4.47713 0 9.99995C0 15.5228 4.47715 19.9999 10 19.9999Z"
+                fill={getColor(color, 1, '#1977F3')}
+            />
+            <path
+                d="M13.8926 12.8923L14.3356 10.001H11.5624V8.12507C11.5624 7.33474 11.9491 6.5627 13.1923 6.5627H14.4537V4.10172C14.4537 4.10172 13.309 3.90625 12.2149 3.90625C9.93114 3.90625 8.43768 5.29002 8.43768 7.7974V10.001H5.89795V12.8923H8.43768V19.8801C8.94675 19.9603 9.46847 20.001 10 20.001C10.5316 20.001 11.0533 19.9588 11.5624 19.8801V12.8923H13.8926Z"
+                fill={getColor(color, 2, 'white')}
+            />
+        </svg>
+    );
+};

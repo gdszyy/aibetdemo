@@ -1,0 +1,25 @@
+import type { FC } from 'react';
+import { getColor } from '../utils/helper';
+import type { SVGIconProps } from '../utils/types';
+
+export const CasinoCrashFilled: FC<SVGIconProps> = ({
+    color = ['currentColor', 'currentColor', 'currentColor'],
+    ...props
+}) => {
+    return (
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="1em" {...props}>
+            <path
+                d="M15.9386 4.6325L14.2375 8.08486L12.896 6.98933L15.9386 4.6325Z"
+                fill={getColor(color, 1, '#495266')}
+            />
+            <path
+                d="M4.9095 6.41634L6.4378 7.67678L4.86249 8.39679L4.9095 6.41634Z"
+                fill={getColor(color, 2, '#495266')}
+            />
+            <path
+                d="M13 10.5L18 8L15 15L19.5 12.5L16 19H14C14 16.7909 12.2091 15 10 15C7.79086 15 6 16.7909 6 19H4L0.5 13L5 15L2 8L7 10.5L10 1L13 10.5Z"
+                fill={getColor(color, 3, '#495266')}
+            />
+        </svg>
+    );
+};

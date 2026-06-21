@@ -1,0 +1,320 @@
+/* ===== Color Scheme ===== */
+
+:root {
+    color-scheme: light;
+}
+
+.dark {
+    color-scheme: dark;
+}
+
+/* ===== Global Resets ===== */
+
+* {
+    /* list-style: none; */ /* Tailwind Preflight 已经会重置列表样式，有些地方需要圆点时使用 list-disc 即可 */
+    box-sizing: border-box;
+    outline: none;
+}
+
+html {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    width: 100%;
+    max-width: 100%;
+    touch-action: pan-x pan-y;
+    background: var(--page-bg);
+    --header-strip-height: 0px;
+}
+
+@media (min-width: 1024px) {
+    html {
+        --header-strip-height: 28px; /* Betbus-style top promo strip + main navbar totals about 100px. */
+    }
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    touch-action: pan-x pan-y;
+    background: var(--page-bg);
+    color: var(--content-primary);
+}
+
+/* Radix Select uses react-remove-scroll which sets overflow:hidden + data-scroll-locked on body.
+   This breaks position:sticky (navbar, sidebars). Select doesn't need scroll-lock — override it.
+   Double attribute selector raises specificity above the dynamically injected <style> from
+   react-remove-scroll-bar (which appends to <head> after our CSS, winning at equal specificity). */
+body[data-scroll-locked][data-scroll-locked] {
+    /* biome-ignore lint/complexity/noImportantStyles: Overrides inline third-party scroll lock styles. */
+    overflow: visible !important;
+    /* biome-ignore lint/complexity/noImportantStyles: Overrides inline third-party scroll lock styles. */
+    overflow-x: clip !important;
+    /* biome-ignore lint/complexity/noImportantStyles: Overrides inline third-party scroll lock styles. */
+    position: static !important;
+    /* biome-ignore lint/complexity/noImportantStyles: Overrides inline third-party scroll lock styles. */
+    margin-right: 0 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: Overrides inline third-party scroll lock styles. */
+    padding-right: 0 !important;
+}
+
+#__root-dom-app-container {
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+    touch-action: pan-x pan-y;
+}
+
+#__root-dom-modal-container {
+    touch-action: manipulation;
+}
+
+/* ===== Layer Overrides ===== */
+
+@layer base {
+    .dark body {
+        background-color: hsla(211, 42%, 12%, 1);
+    }
+}
+
+@layer utilities {
+    body {
+        font-family: var(--font-sans);
+    }
+
+    .betbus body {
+        background: var(--page-bg);
+        color: var(--content-primary);
+    }
+
+    code,
+    kbd,
+    samp,
+    pre {
+        font-family: inherit;
+    }
+}
+
+/* ===== Input Normalization ===== */
+
+/* Hide the "eye" button in Edge browser for password input fields */
+input[type="password"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+/* Chrome, Edge, Safari */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* ===== Text Selection ===== */
+
+/* Elements where text selection is allowed */
+input,
+textarea,
+[contenteditable="true"],
+.selectable {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+.ellipsis {
+    max-width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ===== Scrollbar Utilities ===== */
+
+/* Thin scrollbar (4px) - general purpose */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #e2e5ea transparent;
+    scroll-behavior: smooth;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track-piece {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #e2e5ea;
+    border-radius: 0;
+    border: 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #e2e5ea;
+}
+
+/* Hidden scrollbar */
+.hidden-scrollbar {
+    scrollbar-width: none; /* Firefox */
+}
+.hidden-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+/* User center scrollbar (8px, themed) */
+.user-center-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--filltext-ft-c) var(--filltext-ft-b);
+    scrollbar-gutter: stable;
+}
+
+.user-center-scrollbar.user-center-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.user-center-scrollbar.user-center-scrollbar::-webkit-scrollbar:vertical {
+    width: 8px;
+}
+
+.user-center-scrollbar::-webkit-scrollbar-track {
+    background: var(--filltext-ft-b);
+    border-radius: 999px;
+}
+
+.user-center-scrollbar::-webkit-scrollbar-thumb {
+    min-height: 60px;
+    background: var(--filltext-ft-c);
+    border-radius: 999px;
+}
+
+/* Transaction scrollbar (4px thin) */
+.transaction-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(160, 168, 180, 0.5) transparent;
+    scroll-behavior: smooth;
+}
+
+.transaction-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.transaction-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 2px;
+}
+
+.transaction-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(160, 168, 180, 0.5);
+    border-radius: 2px;
+}
+
+.transaction-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(160, 168, 180, 0.8);
+}
+
+/* ===== Account Card ===== */
+
+/* Shared page-level card container for all Account pages (deposit, withdraw, KYC, transaction, FAQ, etc.) */
+@utility account-card {
+    background-color: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--style-radius-card);
+    padding: var(--style-card-padding);
+    box-shadow: var(--style-card-shadow);
+
+    @media (width >= 768px) {
+        border-radius: var(--style-radius-panel);
+    }
+}
+
+/* ===== Component Overrides ===== */
+
+/* Fix sonner toast container centering */
+[data-sonner-toaster] {
+    /* biome-ignore lint/complexity/noImportantStyles: Overrides Sonner's runtime positioning styles. */
+    left: 0 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: Overrides Sonner's runtime positioning styles. */
+    right: 0 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: Overrides Sonner's runtime positioning styles. */
+    width: auto !important;
+    /* biome-ignore lint/complexity/noImportantStyles: Overrides Sonner's runtime positioning styles. */
+    transform: none !important;
+}
+
+/* Toast overlay: CSS-driven via :has() — no JS state needed.
+   Overlay is always in DOM but hidden. Shown only when a toast opts into mask. */
+.toast-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms ease;
+}
+body:has([data-toast-mask="true"]) .toast-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Market token: adds letter-spacing not supported by @theme text shorthand */
+.text-market {
+    letter-spacing: 0.84px;
+}
+
+/* FAQ Q-badge gradients */
+.faq-badge-default {
+    background-image: var(--gradient-h);
+}
+.faq-badge-active {
+    background-image: var(--gradient-a);
+}
+
+/* LiveChat #chat-widget-container — max-md 全屏 */
+#chat-widget-container {
+    @variant max-md {
+        @apply fixed! inset-0! size-full! max-h-full! max-w-full!;
+    }
+}
+
+#chat-widget-container iframe {
+    @variant max-md {
+        @apply size-full! min-h-full! min-w-full! max-h-full! max-w-full!;
+    }
+}
+
+@layer utilities {
+    /* Chrome, Safari, Edge */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    /* Firefox */
+    .scrollbar-hide {
+        -ms-overflow-style: none; /* IE and old Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+}

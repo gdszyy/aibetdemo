@@ -1,0 +1,100 @@
+export default {
+    /** Crear Apuesta — ⚠️ función MOCK */
+    betBuilder: {
+        title: 'Crear Apuesta',
+        subtitle: 'Combina varias selecciones del mismo partido',
+        combinedOdds: 'Cuota combinada',
+        stake: 'Importe',
+        potentialWin: 'Posible ganancia',
+        placeBet: 'Realizar Apuesta',
+        empty: 'Selecciona al menos 2 opciones para crear la apuesta',
+        clear: 'Limpiar',
+        added: 'Apuesta creada (demo)',
+        demoBadge: 'DEMO',
+    },
+    /** Clima / estadio del partido — ⚠️ datos MOCK */
+    conditions: {
+        stadium: 'Estadio',
+        capacity: 'Aforo',
+        referee: 'Árbitro',
+        weather: 'Clima',
+        sunny: 'Soleado',
+        cloudy: 'Nublado',
+        rain: 'Lluvia',
+    },
+    /** Página del deporte (导航专题页化) */
+    topicPage: {
+        allCompetitions: 'Todas las Competiciones',
+        competitionCount: '{count, plural, one {# competicion} other {# competiciones}}',
+        featuredMatches: 'Partidos Destacados',
+        futuresHint: 'Elige una competicion para ver mercados futuros disponibles.',
+        futuresTab: 'Futuras',
+        futuresTitle: 'Futuras',
+        heroSubtitle: 'Mercados, partidos destacados y competiciones en un solo lugar',
+        matchCount: '{count, plural, one {# partido} other {# partidos}}',
+        matchesTab: 'Partidos',
+        popular: 'Popular',
+        popularFutures: 'Futuras Populares',
+        next12h: 'Próximas 12 horas',
+        next24h: 'Próximas 24 horas',
+        timeFilterNote: 'El filtro por tiempo requiere soporte del backend',
+        upcomingMatches: 'Proximos Partidos',
+    },
+    title: 'PARTIDOS DESTACADOS',
+    liveTitle: 'PARTIDOS EN VIVO',
+    popularMarket: 'MERCADOS POPULARES',
+    hide: 'Ocultar',
+    noMoreMatches: '— No hay más partidos en este momento. —',
+    noMoreMarkets: '— No hay más mercados en este momento. —',
+    noMatchesAvailable: 'No hay partidos disponibles',
+    noMarketAvailable: 'No hay mercados disponibles',
+    liveMarketsBackSoon: 'La oferta de mercados en vivo volverá pronto.',
+    live: 'EN VIVO',
+    liveMatchCount: '{count, plural, one {PARTIDO #} other {PARTIDOS #}}',
+    all: 'Todos',
+    today: 'Hoy',
+    outright: 'Futuro',
+    paused: 'Pausado',
+    live1: 'En vivo',
+    backHome: 'Volver al inicio',
+    odds: 'Cuotas',
+    marketAdditional: 'Additional',
+    showMore: 'Ver {count} más',
+    showLess: 'Ver menos',
+    loadingMarkets: 'Cargando mercados...',
+    loadingMore: 'Cargando más...',
+    analytic: 'Analítica',
+    bet: 'Apuesta',
+    worldCupLeagueTitle: 'COPA MUNDIAL DE LA FIFA',
+    worldCupHotMatch: 'Partido destacado',
+
+    recommendLiveMatches: {
+        title: 'Mejor Partido en Vivo',
+    },
+
+    parlayBoost: {
+        title: 'BOOST COMBO',
+        sheetClose: 'Cerrar',
+    },
+    superOdd: {
+        title: 'SUPERODD',
+    },
+    followBet: {
+        title: 'SEGUIR APUESTA',
+    },
+
+    hotLeagues: {
+        title: 'Popular Competitions',
+    },
+
+    hotMatches: {
+        title: 'Popular Matches',
+    },
+
+    hotLeagueMatchCarousel: {
+        liveTitle: 'MEJORES PARTIDOS EN VIVO',
+        upcomingTitle: 'MEJORES PARTIDOS',
+        exploreMarkets: 'Haz clic para explorar la oferta completa de mercados.',
+        goToSlide: 'Ir a la diapositiva {index}',
+    },
+};

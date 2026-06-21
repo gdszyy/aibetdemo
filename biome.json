@@ -1,0 +1,99 @@
+{
+    "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true
+    },
+    "files": {
+        "ignoreUnknown": true,
+        "includes": ["**", "!node_modules", "!.vscode", "!.next", "!dist", "!build", "!public", "!src/components/icons"]
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 120
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "single"
+        }
+    },
+    "css": {
+        "parser": {
+            "tailwindDirectives": true
+        }
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "correctness": {
+                "useExhaustiveDependencies": {
+                    "level": "error",
+                    "fix": "safe",
+                    "options": {
+                        "hooks": [
+                            {
+                                "name": "useDeepCompareEffect",
+                                "closureIndex": 0,
+                                "dependenciesIndex": 1
+                            },
+                            {
+                                "name": "useDeepCompareLayoutEffect",
+                                "closureIndex": 0,
+                                "dependenciesIndex": 1
+                            },
+                            {
+                                "name": "useDebounceEffect",
+                                "closureIndex": 0,
+                                "dependenciesIndex": 1
+                            }
+                        ]
+                    }
+                },
+                "noUnusedImports": {
+                    "level": "error"
+                },
+                "noUnusedVariables": {
+                    "level": "error",
+                    "options": {
+                        "ignoreRestSiblings": false
+                    }
+                },
+                "noConstantCondition": {
+                    "level": "warn"
+                }
+            },
+            "suspicious": {
+                "noExplicitAny": "warn",
+                "noShadowRestrictedNames": "warn"
+            },
+            "security": {
+                "noDangerouslySetInnerHtml": "warn"
+            },
+            "a11y": {
+                "useKeyWithClickEvents": {
+                    "level": "off"
+                },
+                "useValidAnchor": {
+                    "level": "warn"
+                },
+                "noSvgWithoutTitle": {
+                    "level": "off"
+                },
+                "noStaticElementInteractions": {
+                    "level": "off"
+                },
+                "noLabelWithoutControl": {
+                    "level": "off"
+                }
+            }
+        },
+        "domains": {
+            "next": "recommended",
+            "react": "recommended"
+        }
+    }
+}

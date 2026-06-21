@@ -1,0 +1,162 @@
+name: main → test
+
+on:
+  push:
+    branches: [main]  # main 有更新就触发
+
+jobs:
+  sync-branches:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ secrets.ADMIN_PAT }}
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取完整历史以便比较分支
+
+      - name: 1. 检查 main 和 test1 是否有差异
+        id: check_diff
+        run: |
+          git fetch origin test1
+          DIFF=$(git diff origin/main origin/test1 --name-only)
+          
+          if [ -z "$DIFF" ]; then
+            echo "No differences between main and test1"
+            echo "has_diff=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Differences found:"
+            echo "$DIFF"
+            echo "has_diff=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 2. 无差异 → 标记状态
+        id: no_diff_step
+        if: ${{ steps.check_diff.outputs.has_diff == 'false' }}
+        run: |
+          echo "lark_message=ℹ️ 信息：main → test1 分支内容相同，无需同步" >> "$GITHUB_OUTPUT"
+
+      - name: 3. 有差异 → 使用 GitHub CLI 创建/更新 PR
+        id: create_pr
+        if: ${{ steps.check_diff.outputs.has_diff == 'true' }}
+        run: |
+          # 检查是否已存在从 main 到 test1 的 PR
+          EXISTING_PR=$(gh api repos/${{ github.repository }}/pulls --jq '.[] | select(.head.ref == "main" and .base.ref == "test1" and .state == "open") | .number' 2>/dev/null)
+          
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR #$EXISTING_PR already exists, updating..."
+            # 更新现有 PR 的标题和描述
+            gh api -X PATCH repos/${{ github.repository }}/pulls/$EXISTING_PR \
+              -f title="Auto PR: main → test1 (${{ github.sha }})" \
+              -f body="🔄 自动 PR：main 分支更新，同步到 test1\n提交：${{ github.sha }}\n触发：${{ github.event.head_commit.message }}"
+            echo "pr_number=$EXISTING_PR" >> "$GITHUB_OUTPUT"
+          else
+            echo "Creating new PR from main to test1..."
+            # 创建新 PR
+            PR_JSON=$(gh api -X POST repos/${{ github.repository }}/pulls \
+              -f head="main" \
+              -f base="test1" \
+              -f title="Auto PR: main → test1 (${{ github.sha }})" \
+              -f body="🔄 自动 PR：main 分支更新，同步到 test1\n提交：${{ github.sha }}\n触发：${{ github.event.head_commit.message }}")
+            PR_NUMBER=$(echo "$PR_JSON" | jq -r '.number')
+            echo "Created PR #$PR_NUMBER"
+            echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 4. 检查 PR 合并状态
+        id: check_pr
+        if: ${{ steps.check_diff.outputs.has_diff == 'true' }}
+        run: |
+          PR_NUMBER=${{ steps.create_pr.outputs.pr_number }}
+          
+          if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" = "null" ]; then
+            echo "PR creation failed"
+            echo "mergeable_state=not_found" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          
+          echo "Found PR number: $PR_NUMBER"
+          
+          # 等待 GitHub 计算合并状态，最多重试3次
+          MAX_RETRIES=3
+          RETRY_DELAY=15
+          
+          for i in $(seq 1 $MAX_RETRIES); do
+            PR_JSON=$(gh api repos/${{ github.repository }}/pulls/$PR_NUMBER)
+            MERGEABLE_STATE=$(echo "$PR_JSON" | jq -r .mergeable_state)
+            echo "Attempt $i: mergeable_state=$MERGEABLE_STATE"
+            
+            if [ "$MERGEABLE_STATE" != "unknown" ]; then
+              break
+            fi
+            
+            if [ $i -lt $MAX_RETRIES ]; then
+              echo "Waiting $RETRY_DELAY seconds for GitHub to calculate merge status..."
+              sleep $RETRY_DELAY
+            fi
+          done
+          
+          echo "Final mergeable_state=$MERGEABLE_STATE"
+          echo "mergeable_state=$MERGEABLE_STATE" >> "$GITHUB_OUTPUT"
+          echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+
+      - name: 5. 尝试自动合并（clean/blocked 状态）
+        id: merge_step
+        if: ${{ steps.check_pr.outputs.mergeable_state == 'clean' || steps.check_pr.outputs.mergeable_state == 'blocked' }}
+        run: |
+          # 使用 --admin 标志强制合并，绕过分支保护规则
+          gh pr merge ${{ steps.check_pr.outputs.pr_number }} --merge --admin
+          PR_URL="https://github.com/${{ github.repository }}/pull/${{ steps.check_pr.outputs.pr_number }}"
+          echo "lark_message=✅ 成功：main → test1 自动合并完成\nPR: $PR_URL" >> "$GITHUB_OUTPUT"
+
+      - name: 6. 有冲突 → 标记状态
+        id: conflict_step
+        if: ${{ steps.check_pr.outputs.mergeable_state == 'conflicting' }}
+        run: |
+          PR_URL="https://github.com/${{ github.repository }}/pull/${{ steps.check_pr.outputs.pr_number }}"
+          echo "lark_message=❌ 冲突：main → test1 PR 存在合并冲突，请手动处理\nPR: $PR_URL" >> "$GITHUB_OUTPUT"
+
+      - name: 7. PR 创建失败 → 标记状态
+        id: not_found_step
+        if: ${{ steps.check_pr.outputs.mergeable_state == 'not_found' }}
+        run: |
+          echo "lark_message=⚠️ 警告：创建 main → test1 的 PR 失败" >> "$GITHUB_OUTPUT"
+
+      - name: 7.5 状态未知 → 标记状态
+        id: unknown_step
+        if: ${{ steps.check_pr.outputs.mergeable_state == 'unknown' }}
+        run: |
+          PR_URL="https://github.com/${{ github.repository }}/pull/${{ steps.check_pr.outputs.pr_number }}"
+          echo "lark_message=⚠️ 警告：PR 合并状态无法确定，请手动检查\nPR: $PR_URL" >> "$GITHUB_OUTPUT"
+
+      - name: 7.6 状态被阻止 → 标记状态
+        id: blocked_step
+        if: ${{ steps.check_pr.outputs.mergeable_state == 'blocked' }}
+        run: |
+          PR_URL="https://github.com/${{ github.repository }}/pull/${{ steps.check_pr.outputs.pr_number }}"
+          echo "lark_message=⚠️ 警告：PR 被阻止合并（可能需要审查或状态检查），请手动处理\nPR: $PR_URL" >> "$GITHUB_OUTPUT"
+
+      - name: 7.7 状态为 Dirty（有待处理提交）→ 标记状态
+        id: dirty_step
+        if: ${{ steps.check_pr.outputs.mergeable_state == 'dirty' }}
+        run: |
+          PR_URL="https://github.com/${{ github.repository }}/pull/${{ steps.check_pr.outputs.pr_number }}"
+          echo "lark_message=ℹ️ 信息：PR 有待处理的提交，等待审查完成后自动合并\nPR: $PR_URL" >> "$GITHUB_OUTPUT"
+
+      - name: 8. 飞书机器人通知
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.LARK }}
+          method: POST
+          contentType: application/json
+          data: |
+            {
+              "msg_type": "text",
+              "content": {
+                "text": "${{ steps.merge_step.outputs.lark_message || steps.conflict_step.outputs.lark_message || steps.not_found_step.outputs.lark_message || steps.unknown_step.outputs.lark_message || steps.blocked_step.outputs.lark_message || steps.dirty_step.outputs.lark_message || steps.no_diff_step.outputs.lark_message || '❌ 未知错误：未能发送通知' }}"
+              }
+            }

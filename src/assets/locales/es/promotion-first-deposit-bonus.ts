@@ -1,0 +1,126 @@
+export default {
+    hero: {
+        badge: '🎉 5º ANIVERSARIO de {appName}',
+        title: 'Triple bono en tus primeros depósitos',
+        amountPrefix: 'Obtén hasta',
+        amount: '{amount}',
+        amountSuffix: 'en recompensas',
+        subtitle: 'Realiza tus primeros 3 depósitos y recibe hasta {amount} en bonos.',
+        validityLabel: 'Vigencia',
+    },
+    cta: 'Depositar ahora',
+    howItWorks: {
+        title: '¿Cómo participar?',
+        subtitle: 'Solo 3 pasos para reclamar tu bono.',
+        step1: { title: 'Regístrate', desc: 'Crea tu cuenta y completa la verificación KYC' },
+        step2: { title: 'Deposita', desc: 'Realiza tu depósito y elige tu tipo de bono' },
+        step3: { title: '¡Gana!', desc: 'Cumple el requisito de apuesta y retira tus ganancias' },
+    },
+    promoCodes: {
+        title: 'Códigos promocionales',
+        subtitle: 'Ingresa el código en la página de depósito para activar tu bono.',
+        infoText:
+            'Copia el código correspondiente a tu etapa y tipo de bono, e ingrésalo en la página de depósito para activar tu bono automáticamente.',
+        bonus: 'Bono:',
+        copyToast: '¡Código {code} copiado!',
+        copied: '¡Copiado!',
+        copyCode: 'Copiar código',
+        note: '<strong>Recuerda:</strong> Cada código solo funciona para su etapa correspondiente. Una vez que uses un código de Casino, el código de Deportes de esa etapa se invalidará.',
+    },
+    stages: {
+        stage1: { label: 'Etapa #1', sublabel: 'Primer Depósito' },
+        stage2: { label: 'Etapa #2', sublabel: 'Segundo Depósito' },
+        stage3: { label: 'Etapa #3', sublabel: 'Tercer Depósito' },
+    },
+    bonusType: {
+        casino: 'Casino',
+        sport: 'Deportes',
+    },
+    bonusDetails: {
+        title: 'Esquema de Bonos',
+        subtitle: 'Detalles de los 3 bonos de depósito por aniversario.',
+        best: '🔥 MEJOR',
+        bonusLabel: 'de bono',
+        deposit: 'Depósito:',
+        requirement: 'Requisito',
+        maxWithdraw: 'Máx. retiro',
+        validOdds: 'Cuotas válidas:',
+        wageringUnit: 'x Bono',
+        exampleTitle: 'Ejemplo de cálculo',
+        exampleText:
+            'Si recibes un bono de <strong>{receive}</strong> con requisito de <strong>{requirement}x</strong>, necesitas apostar <strong>{wager}</strong> en apuestas válidas para solicitar el retiro de tus ganancias.',
+    },
+    rules: {
+        title: 'Reglas de la Actividad',
+        subtitle: 'Lee atentamente los términos y condiciones para aprovechar al máximo tu bono.',
+        general: {
+            title: 'Términos Generales',
+            item0: 'Esta actividad está disponible para todos los usuarios nuevos que hayan completado la verificación KYC.',
+            item1: 'La actividad se divide en 3 etapas de depósito. Los usuarios deben participar en orden: Etapa 1 → Etapa 2 → Etapa 3. No se pueden saltar etapas ni usar bonos de etapas posteriores antes de tiempo.',
+            item2: 'Cada etapa ofrece dos tipos de bono: Casino o Deportes. Solo puedes elegir uno por etapa. Si usas un código, el otro de esa misma etapa se invalidará automáticamente.',
+            item3: 'Cada usuario puede participar una sola vez por etapa. Un mismo depósito no puede combinarse con otras promociones activas.',
+        },
+        deadlines: {
+            title: 'Plazos y vigencia',
+            item0: 'Cada etapa debe completarse en un plazo de <strong>30 días</strong> desde que se activa. Si no se completa a tiempo, el bono y sus beneficios quedan anulados.',
+            item1: 'Una vez reclamado, el bono debe usarse en un plazo de <strong>14 días</strong>. Los bonos no utilizados vencen automáticamente.',
+            item2: 'Las etapas activadas pueden coexistir de forma independiente. El progreso, la vigencia y la liquidación de cada etapa se calculan por separado.',
+            item3: 'El mismo monto apostado no puede contabilizarse en más de una actividad de bono.',
+        },
+        sportsBetting: {
+            title: 'Reglas de apuestas válidas — Deportes',
+            item0: 'Solo se contabilizan las apuestas deportivas ya liquidadas.',
+            item1: 'Solo se cuentan las apuestas con cuotas de <strong>1.60x o superiores</strong>. Las apuestas con cuotas menores a 1.60x no son válidas.',
+            item2: 'Solo se contabilizan apuestas con dinero real. Las apuestas con Bono o Free Bet no aplican.',
+            item3: 'No aplican: apuestas reembolsadas, canceladas, inválidas, con Cash Out, ni mercados excluidos por la plataforma.',
+        },
+        casinoBetting: {
+            title: 'Reglas de apuestas válidas — Casino',
+            item0: 'Solo se contabilizan las apuestas realizadas con dinero real. Las apuestas con Bono o Giros Gratis no aplican.',
+            item1: 'Todos los juegos de Casino elegibles contribuyen al requisito de apuesta.',
+            item2: 'Algunos juegos especiales, mesas especiales o juegos excluidos por la plataforma pueden no contabilizarse. Consulta la página de la actividad o los avisos de la plataforma para más detalles.',
+        },
+        pauseResume: {
+            title: 'Pausa y reanudación del bono',
+            item0: 'Si el usuario retira todo el saldo disponible para la actividad antes de completar el requisito de apuesta, el bono entrará en estado de <strong>pausa</strong>.',
+            item1: 'Durante la pausa: no se acumula progreso de apuestas, no se puede apostar con ese bono y no se puede retirar.',
+            item2: 'Para <strong>reanudar</strong> el bono, vuelve a realizar el depósito mínimo requerido para esa etapa dentro del período de vigencia. Los demás bonos activos no se ven afectados.',
+        },
+        withdrawals: {
+            title: 'Ganancias y retiros',
+            item0: 'El monto del bono no puede retirarse directamente.',
+            item1: 'Las ganancias netas obtenidas usando el bono pueden solicitarse para retiro una vez cumplido el requisito de apuesta.',
+            item2: 'Las ganancias retirables por etapa no pueden superar el límite de "Máx. retiro" indicado. El excedente se perderá automáticamente.',
+            item3: 'Ejemplo: si el límite es {withdrawalsItem3Amount1} y acumulas {withdrawalsItem3Amount2} en ganancias, solo {withdrawalsItem3Amount3} pasarán a tu saldo retirable; los {withdrawalsItem3Amount4} restantes se perderán.',
+        },
+        restrictions: {
+            title: 'Restricciones de cuenta y términos importantes',
+            item0: 'Cada CURP, cuenta, dispositivo, IP, tarjeta bancaria y correo electrónico solo puede participar una vez.',
+            item1: 'Los bonos son personales e intransferibles. No pueden cederse, regalarse ni venderse.',
+            item2: 'Al participar, aceptas los Términos y Condiciones Generales y la Política de Privacidad de la plataforma.',
+            item3: 'La plataforma se reserva el derecho de cancelar bonos, revertir ganancias o restringir la participación si se detecta incumplimiento de las reglas.',
+            item4: 'La plataforma puede modificar, suspender o cancelar esta actividad por razones legales, regulatorias, técnicas u operativas. La plataforma se reserva la interpretación final de estas reglas.',
+        },
+    },
+    responsibleGaming: {
+        title: 'Aviso de Juego Responsable',
+        warning1:
+            '<strong>Prohibido para menores de 18 años.</strong> El juego puede causar adicción. Apuesta con responsabilidad.',
+        warning2:
+            'Esta promoción no garantiza ganancias. Todas las apuestas implican riesgo financiero. Participa de manera responsable.',
+        help: 'Si necesitas ayuda, contacta al servicio de atención al cliente o visita <link>JUGADORES ANÓNIMOS</link>',
+    },
+    list: {
+        title: 'Promociones',
+        subtitle:
+            'Desbloquea increíbles recompensas con nuestras últimas promociones.\nÚnete ahora y aprovecha bonos por tiempo limitado, ofertas especiales y beneficios exclusivos.',
+        joinNow: 'Únete ahora',
+        joined: 'Ya participaste',
+        empty: 'Próximamente — ¡Prepárate para increíbles promociones!',
+        status: {
+            active: 'Activa',
+            upcoming: 'Próximamente',
+            ended: 'Finalizada',
+        },
+    },
+};

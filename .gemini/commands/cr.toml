@@ -1,0 +1,119 @@
+description = "代码审查"
+prompt = """
+## 用法
+```
+/cr                           # 审查当前 git diff（未暂存的更改）
+/cr --staged                  # 审查已暂存的更改
+/cr <file_or_dir>             # 审查指定文件或目录
+/cr <branch>                  # 审查当前分支与目标分支的差异
+/cr <pr_url>                  # 审查 GitHub PR
+```
+
+## 规则
+- 范围：优先审查本地未提交、待推送的代码，或审查最近的提交。或按用户指示。
+- 逐条检查以下清单，**先**分析并列出待修改项，等待用户审批，**不要**先开始修改代码。
+- **网络搜索**：发现自定义实现时，搜索更成熟/标准的方案（详见 `general-rules.md` §2 "网络搜索"）。
+- **不要**自动 commit / push 代码
+- **验证环节**：完成全部清单后，以全新视角对 diff 做第二轮扫描 — 特别寻找：
+  1. 跨文件问题（如类型在 model 中更改但调用方未更新）
+  2. 标记"OK"太快的项 — 重读最复杂的已更改函数一次
+  3. 清单未覆盖但感觉不对的地方（命名、数据流、边界情况）
+
+---
+
+## P0 核心 — 正确性与安全性
+- 构建通过
+- \\[暂时跳过\\] 测试通过 — 不破坏现有功能
+- 安全：无 token/key 硬编码，无 XSS / 注入风险
+- **无 Bug**：useEffect 中无无效表达式，无重复渲染，所有 fire-and-forget promise `.catch()`
+- **错误处理**：无静默 `catch () {}`，无 `.catch()` 内 `throw new Error(msg)`，使用 `Toast.error(msg, { id })` 去重，`ErrorReject` 用于 API 错误，SSR 返回空数组（不抛出）
+
+## P1 架构与模式
+- 参考 `general-rules.md` §3（编码规范）和 `frontend.md`（架构）。
+
+### 状态管理
+见 `frontend.md` §2 的决策矩阵。**红旗**：`useState` + `useEffect` 镜像服务端数据（→ React Query）。仅一个组件读取的 Zustand（→ useState）。
+
+### 路由导航
+见 `frontend.md` §7 的完整规则。关键检查：
+- 所有 `Link`/`useRouter`/`redirect` 从 `@/i18n` 导入，禁止 `next/link` 或 `next/navigation`（丢失 locale）
+- `window.location.href` 仅用于外部 URL / 协议链接 — 禁止用于内部路由
+- 确定性父路由（`router.push`），禁止用 `router.back()` 做"返回上级"
+
+### 组件组合
+见 `general-rules.md` §3。关键检查：最大约 250 行，禁止跨模块 `_*` 导入，`*Base` 后缀用于纯 UI，受控 props 优于内部重新推导。
+
+### 库优先检查
+审查常见 UI 原语（drawer、bottom sheet、date picker、virtual list、carousel 等）的自定义实现时，**先搜索成熟库**。见 `general-rules.md` §2 "库优先检查" 的触发列表和评估标准。将已解决问题的自定义重实现标记为技术债务。
+
+### 设计模式
+见 `frontend.md` §3。检查受控组件 / 策略 / 工厂 / 观察者 / DataLoader / Slice 模式能否简化实现。
+
+### Zustand
+
+```typescript
+// 好：粒度选择器
+const toggleSidebar = useUIStore((s) => s.toggleSidebar);
+
+// 差：选择整个 store — 任何变化都会重渲染
+const store = useUIStore();
+```
+
+### React Query
+
+```typescript
+// 好：WS 缓存更新中的时间戳守卫
+queryClient.setQueryData<MatchEvent>(queryKey, (prev) => {
+    if (!prev || prev.odds_timestamp >= payload.timestamp) return prev;
+    return updateEventWithOdds(prev, payload);
+});
+
+// 好：enabled 防止无依赖时的查询
+useQuery({ queryKey: [...], queryFn: ..., enabled: !!currencyId });
+```
+
+## P2 浏览器兼容性与布局
+- **跨浏览器 flex**：`flex-1 min-w-0` 而非 `w-full` 用于分享空间的 flex 子元素（Firefox 严格）。`min-h-0` + `overflow-y-auto` 用于可滚动 flex 容器。按钮/标签上用 `whitespace-nowrap`。
+- **亚像素边框**：`border`（1px）而非 `border-[0.5px]` — 部分浏览器会四舍五入为 0。
+- **Chrome + Firefox 中测试**布局/样式更改。
+
+## P2.1 类型安全与数据处理
+
+### 类型安全 — 推荐
+- 判别联合类型、`as const`、函数重载、`ComponentRef<typeof X>`、泛型约束
+
+### 类型安全 — 拒绝
+```typescript
+// 拒绝: `as any`, `as unknown as X`, 无 NaN 守卫的 parseInt, 重复的 `as Type` 断言
+```
+
+### 数据处理
+- **不可变性**：返回 `{ ...param, field }`，禁止修改输入。`prev.map()` 而非 `.forEach()` mutation。
+- **副作用**：`if (cond) { fn() }`，而非 `Boolean(cond) && fn()`。
+
+## P3 国际化、区域、格式化
+- UI 或控制台中无中文
+- 文案使用 `t('key')`，禁止硬编码
+- 货币/时间/数字通过 `useIntlFormatter()`（`formatCurrency`、`formatDatetime`、`formatNumber`）
+- **金额不四舍五入**：所有面向用户的货币金额必须使用 `roundingMode: 'trunc'`（截断），禁止默认四舍五入（`halfExpand`）。使用 `formatCurrency()` / `formatCompactAmount()`（已内置 trunc）。红旗：裸 `.toFixed()`、无 `roundingMode: 'trunc'` 的 `Intl.NumberFormat`、无 `roundingMode` 的 `NumberFlow` format。
+
+## P4 样式、图标、字体
+- **Tailwind 令牌**：`text-body-sm` 而非 `text-[14px] font-normal`。`rounded-sm` 而非 `rounded-[8px]`。
+- **禁止手动 Poppins**：禁��� `font-['Poppins']`
+- **图标**：仅 `@/components/icons`。新增：`src/assets/icons/` → `pnpm icon:build`
+- **禁止硬编码颜色**：仅令牌类，禁止裸 hex/rgb
+- **lint 通过**
+
+## P5 性能
+- `useMemo`/`useCallback` 用于传给子组件的派生数据和 handlers
+- `enabled: condition` 防止不必要的查询
+- 注意：列表项缺少 `memo()`，`staleTime: 0 + gcTime: 0`（过于激进），缺少 `useCallback` 的滚动监听器
+
+## P6 调试与清理
+- 生产环境无 `console.log`（用 `NODE_ENV === 'development'` 守卫）
+- 无定时 hack（`await delay(100)`），无魔法数字，无死代码
+- 生产安全：`.agent/references/production-safety.md` — 测试页面守卫、环境隔离、环境变量模式。审查发布/生产代码时阅读。
+
+### 常见反模式速查表
+> 参考：`.agent/references/cr-anti-patterns.md` — 完整反模式查找表（15 项）。代码审查时阅读。
+"""

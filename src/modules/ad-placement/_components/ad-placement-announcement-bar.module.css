@@ -1,0 +1,52 @@
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-1 * var(--ad-placement-marquee-distance)));
+    }
+}
+
+.marquee {
+    left: var(--ad-placement-marquee-left);
+    animation: marquee var(--ad-placement-marquee-duration, 12s) linear infinite;
+    animation-fill-mode: both;
+    will-change: transform;
+}
+
+.marqueeOnce {
+    left: var(--ad-placement-marquee-left);
+    animation: marquee var(--ad-placement-marquee-duration, 3s) linear 1;
+    animation-fill-mode: forwards;
+    will-change: transform;
+}
+
+.paused {
+    animation-play-state: paused;
+}
+
+.verticalTrack {
+    transition: transform 240ms ease;
+    will-change: transform;
+}
+
+.verticalItem {
+    opacity: 0;
+    transition: opacity 240ms ease;
+}
+
+.verticalItem[data-active="true"] {
+    opacity: 1;
+}
+
+.verticalItem > :not(.marqueeOnce) {
+    max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .verticalTrack,
+    .verticalItem {
+        transition-duration: 0ms;
+    }
+}

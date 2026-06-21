@@ -1,0 +1,17 @@
+import type { FC } from 'react';
+import { getColor } from '../utils/helper';
+import type { SVGIconProps } from '../utils/types';
+
+export const WalletOutlined: FC<SVGIconProps> = ({ color = ['currentColor'], ...props }) => {
+    return (
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" width="1em" {...props}>
+            <path
+                d="M1 4.66667V2.66667M1 2.66667C1 2.11333 1.44667 1.66667 2 1.66667L9.99333 1C10.92 1 11.6667 1.70667 11.6667 2.58667V3.66667H2C1.44667 3.66667 1 3.22 1 2.66667ZM13 6.33333H8.80933C8.178 6.33333 7.66667 6.81067 7.66667 7.4V9.26667C7.66667 9.856 8.17867 10.3333 8.80933 10.3333H13M9.66667 8.33333H9.67333M1.8 3.66667H11.4C12.28 3.66667 13 4.38667 13 5.26667V11.4C13 12.28 12.28 13 11.4 13H2.6C1.72 13 1 12.28 1 11.4V4.46667C1 4.02667 1.36 3.66667 1.8 3.66667Z"
+                stroke={getColor(color, 1, '#99A4B7')}
+                strokeWidth="0.875"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+};

@@ -1,0 +1,84 @@
+# FROM 188701361258.dkr.ecr.us-west-2.amazonaws.com/node:lts-alpine3.22 AS base
+FROM 315435444188.dkr.ecr.us-west-2.amazonaws.com/node:lts-alpine3.22 AS base
+# FROM node:24-alpine3.22 AS base
+
+# docker build --no-cache --progress=plain --build-arg NODE_ENV=xptest1 -t match-1 ./
+
+# FROM node:lts-bookworm AS base
+FROM base AS builder
+WORKDIR /app
+
+# RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#https://mirrors.tuna.tsinghua.edu.cn/alpine#g' /etc/apk/repositories
+# RUN apk update
+
+# Install dependencies only when needed
+# ARG GIT_COMMIT_ID
+# ENV GIT_COMMIT_ID=$GIT_COMMIT_ID
+# RUN apk add --no-cache libc6-compat git
+
+# 开发 更换 npm 源（国内推荐）
+# RUN npm config set registry https://registry.npmmirror.com/
+
+# 安装 pnpm
+RUN npm install -g pnpm@^10
+
+# Sentry source map upload (build-time only, not in runner image)
+# ARG SENTRY_AUTH_TOKEN
+
+# Node environment for selecting .env file
+ARG NODE_ENV
+
+COPY . .
+
+# 构建前端
+ENV CI=1
+
+RUN --mount=type=secret,id=sentry_token \
+    export SENTRY_AUTH_TOKEN=$(cat /run/secrets/sentry_token) && \
+    echo "SENTRY_AUTH_TOKEN: ${SENTRY_AUTH_TOKEN}" && \
+    ENV_FILE="${NODE_ENV#xp}" && \
+    # 仅允许 test、test1、test2、production 这几个值
+    case "$ENV_FILE" in \
+        test|test1|test2|production) \
+            if [ -f ".env.$ENV_FILE" ]; then \
+                echo "Using .env.$ENV_FILE as source environment file (from NODE_ENV=$NODE_ENV)"; \
+                cp -f ".env.$ENV_FILE" ".env.production"; \
+            fi \
+            ;; \
+        *) \
+            echo "Using default .env.production environment file"; \
+            ;; \
+    esac && \
+    \
+    pnpm install --frozen-lockfile && \
+    pnpm build
+
+
+
+# RUN pnpm install --frozen-lockfile && SENTRY_AUTH_TOKEN="$SENTRY_AUTH_TOKEN" pnpm build
+
+# Production image, copy all the files and run next
+FROM base AS runner
+# FROM nginx:1.28-alpine AS runner
+WORKDIR /app
+
+ARG GIT_COMMIT_ID
+ENV GIT_COMMIT_ID=$GIT_COMMIT_ID
+
+RUN npm install -g pnpm@^10
+
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+RUN set -eux; \
+    addgroup --system --gid 1001 nodejs; \
+    adduser --system --uid 1001 nextjs;
+
+
+EXPOSE 3000
+
+ENV HOSTNAME="0.0.0.0"
+
+# 启动 Next.js
+CMD ["node", "server.js"]

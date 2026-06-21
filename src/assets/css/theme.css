@@ -1,0 +1,901 @@
+:root {
+    /* 以下是基本色 */
+
+    --brand-primary-0: #e80104;
+    --brand-primary-1: #fff0f0;
+    --brand-primary-2: #ffdddd;
+    --brand-primary-3: #ff9697;
+    --brand-primary-4: #c70003;
+    --brand-primary-5: #4f0001;
+
+    --func-win: #068547;
+    --func-lost: #af0507;
+    --func-favorite: #ff8800;
+    --func-bonus: #ffc31d;
+    --func-pending: #b18118;
+    --func-void: #c4c4c4;
+
+    --promo-parlay-boost-bg: #ffe100;
+    --promo-parlay-boost-accent: #fdc500;
+
+    --filltext-ft-a: #f5f6f8;
+    --filltext-ft-b: #f0f2f5;
+    --filltext-ft-c: #e2e5ea;
+    --filltext-ft-d: #c5cbd6;
+    --filltext-ft-e: #99a4b7;
+    --filltext-ft-f: #6d7d98;
+    --filltext-ft-g: #495266;
+    --filltext-ft-h: #2a303c;
+
+    --neutral-white-a: rgba(255, 255, 255, 0.04);
+    --neutral-white-b: rgba(255, 255, 255, 0.08);
+    --neutral-white-c: rgba(255, 255, 255, 0.12);
+    --neutral-white-d: rgba(255, 255, 255, 0.2);
+    --neutral-white-e: rgba(255, 255, 255, 0.4);
+    --neutral-white-f: rgba(255, 255, 255, 0.6);
+    --neutral-white-g: rgba(255, 255, 255, 0.8);
+    --neutral-white-h: #ffffff;
+
+    --neutral-black-a: rgba(46, 46, 46, 0.04);
+    --neutral-black-b: rgba(46, 46, 46, 0.08);
+    --neutral-black-c: rgba(46, 46, 46, 0.12);
+    --neutral-black-d: rgba(46, 46, 46, 0.2);
+    --neutral-black-e: rgba(46, 46, 46, 0.4);
+    --neutral-black-f: rgba(46, 46, 46, 0.6);
+    --neutral-black-g: rgba(46, 46, 46, 0.8);
+    --neutral-black-h: #2e2e2e;
+
+    --auxiliary-pink: #ff576c;
+    --auxiliary-orange: #ff7601;
+    --auxiliary-green: #67c000;
+    --auxiliary-blue: #2563eb;
+    --auxiliary-purple: #9333ea;
+    --auxiliary-brown: #985526;
+    --auxiliary-cyan: #7ad9b4;
+    --auxiliary-gray: #9cb9dd;
+
+    /** 渐变色 */
+    --gradient-a: linear-gradient(135deg, #ffb199 3.12%, #ff0844 96.88%);
+    --gradient-b: linear-gradient(135deg, #ffea00 3.12%, #ff0000 96.88%);
+    --gradient-c: linear-gradient(135deg, #d9ff00 3.12%, #67c000 96.88%);
+    --gradient-d: linear-gradient(135deg, #00ffff 3.12%, #0004ff 96.88%);
+    --gradient-e: linear-gradient(135deg, #ff4aed 3.12%, #4a00e0 96.88%);
+    --gradient-f: linear-gradient(135deg, #ef9240 3.12%, #42190d 96.88%);
+    --gradient-g: linear-gradient(135deg, #c7ffe0 3.12%, #2bb388 96.88%);
+    --gradient-h: linear-gradient(135deg, #d8e9ff 3.12%, #638abd 96.88%);
+
+    /** 以上是基本色 */
+
+    /** 以下是特定功能配色 */
+
+    /** 主色 */
+    --brand-red: var(--brand-primary-0);
+
+    /** 卡片色 */
+    --card-rbd: var(--neutral-white-h);
+    --mini-sbd: var(--filltext-ft-d);
+
+    /** 以上是特定功能配色 */
+
+    /* pc左侧菜单的宽度 */
+    --sidebar-width-expand: 240px;
+    --sidebar-width-collapse: 51px;
+
+    /** ============ 语义主题层（多配色方案 / scheme 切换） ============
+     * 组件优先使用 page / surface / border / content / accent 语义令牌，
+     * 切换配色方案时只需在对应 scheme 作用域覆盖变量，无需改组件。
+     * :root = GTB 默认方案（浅色 + 红）。深色方案见文件下方 :root.betbus。 */
+    --page-bg: var(--filltext-ft-a); /* 页面底色 */
+    --page-bg-transparent: rgba(245, 246, 248, 0); /* 页面底色透明态，用于渐隐遮罩 */
+    --surface-1: var(--neutral-white-h); /* 卡片 / 面板 / 弹层主体底 */
+    --surface-2: var(--filltext-ft-b); /* 次级 / 悬浮 / 输入底 */
+    --surface-3: var(--filltext-ft-c); /* 三级 / 分隔条 / 嵌套底 */
+    --surface-shell: var(--filltext-ft-a); /* 顶部导航 / 侧栏 / 底部栏外壳 */
+    --surface-shell-gradient: linear-gradient(90deg, #080004 0%, #1a0008 42%, #080004 100%);
+    --surface-selected: var(--filltext-ft-c); /* 选中态或赛事详情中的强调底 */
+    --surface-raised: var(--neutral-white-h); /* 浮层 / popover / drawer */
+    --surface-muted: var(--filltext-ft-a); /* 弱强调模块 / skeleton / 空态背景 */
+    --border-subtle: var(--filltext-ft-c); /* 常规分割线 / 卡片描边 */
+    --border-strong: var(--filltext-ft-d); /* 强描边 / 聚焦前的可见边界 */
+    --content-primary: var(--filltext-ft-h); /* 主文字 */
+    --content-secondary: var(--filltext-ft-g); /* 次级文字 */
+    --content-muted: var(--filltext-ft-e); /* 弱文字 / disabled */
+    --content-inverse: var(--neutral-white-h); /* 深色/品牌色块上的文字 */
+    --on-brand: var(--neutral-white-h); /* 品牌色 / 功能色块上的文字与图标 */
+    --status-success-surface: #effbf3;
+    --status-success-text: #1e8e3e;
+    --status-danger-surface: #f3f3f3;
+    --status-danger-text: #d93026;
+    --status-info-surface: #f0f7ff;
+
+    /** ============ 形态规格层（全主题共享，可被具体 scheme 覆盖） ============ */
+    --style-radius-control: var(--radius-sm);
+    --style-radius-card: var(--radius-sm);
+    --style-radius-panel: var(--radius-md);
+    --style-card-padding: calc(var(--spacing) * 4);
+    --style-card-gap: calc(var(--spacing) * 4);
+    --style-card-shadow: 0 1px 2px rgba(46, 46, 46, 0.08);
+    --style-floating-shadow: 0 8px 24px rgba(46, 46, 46, 0.16);
+    --accent-warm: var(--func-bonus); /* 赔率高亮 / 金色提示 / 运营弱强调 */
+
+    --interactive-row-text: var(--filltext-ft-g);
+    --interactive-row-icon: var(--filltext-ft-g);
+    --interactive-row-hover-bg: rgba(255, 255, 255, 0.08);
+    --interactive-row-hover-text: var(--filltext-ft-g);
+    --interactive-row-hover-icon: var(--filltext-ft-g);
+    --interactive-row-active-bg: rgba(255, 255, 255, 0.08);
+    --interactive-row-active-text: var(--brand-primary-0);
+    --interactive-row-active-icon: var(--brand-primary-0);
+    --interactive-active-rail-bg: transparent;
+    --interactive-active-rail-shadow: none;
+    --interactive-card-hover-bg: var(--surface-1);
+    --interactive-card-hover-shadow: 0 2px 1.5px 0 var(--neutral-black-d);
+    --odds-idle-hover-bg: var(--surface-2);
+    --odds-idle-hover-border: var(--surface-3);
+    --odds-selected-bg: var(--brand-primary-0);
+    --odds-selected-hover-bg: var(--brand-primary-4);
+    --odds-selected-text: var(--on-brand);
+    --dock-bar-bg: var(--surface-shell);
+    --dock-bar-hover-bg: var(--surface-muted);
+    --mobile-nav-bg: var(--surface-shell);
+    --mobile-nav-border: var(--border-subtle);
+    --mobile-nav-text: var(--filltext-ft-f);
+    --mobile-nav-icon: var(--filltext-ft-f);
+    --mobile-nav-active-icon-bg: var(--brand-primary-0);
+    --mobile-nav-active-icon: var(--neutral-white-h);
+    --mobile-nav-active-text: var(--brand-primary-0);
+    --mobile-touch-active-opacity: 0.65;
+    --mobile-menu-bg: transparent;
+    --mobile-menu-border: transparent;
+    --mobile-drawer-bg: var(--surface-shell);
+    --mobile-drawer-overlay-bg: rgba(0, 0, 0, 0.7);
+    --mobile-drawer-border: var(--border-subtle);
+    --mobile-drawer-shadow: var(--style-floating-shadow);
+    --mobile-drawer-close-bg: var(--surface-2);
+    --mobile-drawer-close-border: var(--border-strong);
+    --mobile-summary-bar-border: var(--border-subtle);
+    --mobile-summary-bar-radius: var(--style-radius-panel);
+    --mobile-summary-bar-shadow: var(--style-floating-shadow);
+    --mobile-dock-icon-bg: var(--brand-primary-0);
+    --mobile-dock-icon-text: var(--on-brand);
+    --mobile-dock-action-bg: var(--brand-primary-0);
+    --mobile-dock-action-hover-bg: var(--brand-primary-4);
+    --mobile-sheet-overlay-bg: rgba(0, 0, 0, 0.75);
+    --mobile-sheet-bg: var(--surface-1);
+    --mobile-sheet-inner-bg: var(--page-bg);
+    --mobile-sheet-radius: var(--style-radius-panel);
+    --mobile-sheet-shadow: var(--style-floating-shadow);
+}
+
+/************ SCHEME: betbus（深色 + 红色，对标 betbus 布局转型） ****************
+ * 多配色方案机制：next-themes 以 class 形式挂到 <html>（= :root）。
+ * 选中 betbus → <html class="betbus">，此处覆盖的「原始色变量」会沿
+ * tokens.css 的 @theme(--color-*: var(--原始变量)) 间接生效，全站颜色类自动换肤。
+ * 新增第三套方案 = 复制本块、改类名与取值、并在 theme-provider 的 themes 数组加一项。
+ * 命名仍沿用旧语义（如 neutral-white-h=白），故部分变量在深色下取值与名字相反，属预期。*/
+:root.betbus {
+    color-scheme: dark; /* 让原生控件/滚动条走深色 */
+
+    /* —— 主色环：betbus active red 体系 —— */
+    --brand-primary-0: #fa434e; /* betbus active red */
+    --brand-primary-1: #321016;
+    --brand-primary-2: #160006;
+    --brand-primary-3: #ff6c75;
+    --brand-primary-4: #d93642;
+    --brand-primary-5: #4b070d;
+
+    /* —— 灰阶（filltext）整体反转：浅→深 变 深→浅，深色主题由此成立 —— */
+    --filltext-ft-a: #010101; /* header/top strip */
+    --filltext-ft-b: #121212; /* page background */
+    --filltext-ft-c: #252525; /* card / panel background */
+    --filltext-ft-d: #313131; /* 较强描边 */
+    --filltext-ft-e: #878787; /* weak text */
+    --filltext-ft-f: #c3c3c3; /* secondary text */
+    --filltext-ft-g: #d4d4d4; /* near-primary text */
+    --filltext-ft-h: #f2f2f2; /* 主文字 */
+
+    /* —— neutral-black 反转：深色文字/分隔（含半透明）→ 浅色，避免深底上看不见 —— */
+    --neutral-black-a: rgba(255, 255, 255, 0.04);
+    --neutral-black-b: rgba(255, 255, 255, 0.08);
+    --neutral-black-c: rgba(255, 255, 255, 0.12);
+    --neutral-black-d: rgba(255, 255, 255, 0.2);
+    --neutral-black-e: rgba(255, 255, 255, 0.4);
+    --neutral-black-f: rgba(255, 255, 255, 0.6);
+    --neutral-black-g: rgba(255, 255, 255, 0.8);
+    --neutral-black-h: #ededed;
+    /* neutral-white 系列保持不变：白色用于品牌色块上的白字/图标，深色下仍需为白 */
+
+    /* —— 语义主题层 → betbus 深色三级表面 —— */
+    --page-bg: #121212;
+    --page-bg-transparent: rgba(18, 18, 18, 0);
+    --surface-1: #252525; /* card / panel */
+    --surface-2: #2f2f2f; /* hover / input */
+    --surface-3: #363636; /* 三级 / 分隔 */
+    --surface-shell: #010101;
+    --surface-shell-gradient: linear-gradient(90deg, #050505 0%, #101010 42%, #050505 100%);
+    --surface-selected: #252525;
+    --surface-raised: #252525;
+    --surface-muted: #1f1f1f;
+    --border-subtle: #313131;
+    --border-strong: #444444;
+    --content-primary: #f2f2f2;
+    --content-secondary: #d4d4d4;
+    --content-muted: #878787;
+    --content-inverse: #ffffff;
+    --on-brand: #ffffff; /* 绿/红色块上的文字仍为白（v1 取舍，见映射文档 QA 项）*/
+    --status-success-surface: rgba(0, 184, 107, 0.14);
+    --status-success-text: #00b86b;
+    --status-danger-surface: rgba(250, 67, 78, 0.14);
+    --status-danger-text: #fa434e;
+    --status-info-surface: rgba(74, 142, 219, 0.14);
+    --style-card-shadow: none;
+    --style-floating-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    --accent-warm: #f0c289;
+    --odds-selected-text: #ffffff;
+
+    /* —— 功能色：深色下适度提亮以保证可读性 —— */
+    --func-win: #00b86b;
+    --func-lost: #fa434e;
+    --func-favorite: #ff9a3d;
+    --func-bonus: #ffce4d;
+    --func-pending: #cda23f;
+    --func-void: #777777;
+}
+
+/************ SCHEME: match - dark sportsbook reference from sports-theme-preview ****************/
+:root.match {
+    color-scheme: dark;
+
+    --brand-primary-0: #26c07a;
+    --brand-primary-1: rgba(38, 192, 122, 0.13);
+    --brand-primary-2: rgba(38, 192, 122, 0.2);
+    --brand-primary-3: #33d488;
+    --brand-primary-4: #1b9e61;
+    --brand-primary-5: #07130d;
+
+    --filltext-ft-a: #0f0f0f;
+    --filltext-ft-b: #161616;
+    --filltext-ft-c: #1e1e1e;
+    --filltext-ft-d: #313131;
+    --filltext-ft-e: #8c8c8c;
+    --filltext-ft-f: #a6a6a6;
+    --filltext-ft-g: #c8c8c8;
+    --filltext-ft-h: #f2f2f2;
+
+    --neutral-black-a: rgba(255, 255, 255, 0.04);
+    --neutral-black-b: rgba(255, 255, 255, 0.08);
+    --neutral-black-c: rgba(255, 255, 255, 0.12);
+    --neutral-black-d: rgba(255, 255, 255, 0.2);
+    --neutral-black-e: rgba(255, 255, 255, 0.4);
+    --neutral-black-f: rgba(255, 255, 255, 0.6);
+    --neutral-black-g: rgba(255, 255, 255, 0.8);
+    --neutral-black-h: #f2f2f2;
+
+    --page-bg: #0f0f0f;
+    --page-bg-transparent: rgba(15, 15, 15, 0);
+    --surface-1: #1e1e1e;
+    --surface-2: #2b2b2b;
+    --surface-3: #363636;
+    --surface-shell: #161616;
+    --surface-shell-gradient: linear-gradient(90deg, #0f0f0f 0%, #161616 42%, #0f0f0f 100%);
+    --surface-selected: #2b2b2b;
+    --surface-raised: #1e1e1e;
+    --surface-muted: #161616;
+    --border-subtle: #313131;
+    --border-strong: #414141;
+    --content-primary: #f2f2f2;
+    --content-secondary: #a6a6a6;
+    --content-muted: #777777;
+    --content-inverse: #07130d;
+    --on-brand: #07130d;
+    --status-success-surface: rgba(38, 192, 122, 0.13);
+    --status-success-text: #33d488;
+    --status-danger-surface: rgba(255, 90, 90, 0.14);
+    --status-danger-text: #ff5a5a;
+    --status-info-surface: rgba(72, 132, 255, 0.14);
+
+    --style-card-shadow: 0 16px 32px -22px rgba(0, 0, 0, 0.75);
+    --style-floating-shadow: 0 12px 28px -18px rgba(0, 0, 0, 0.6);
+    --accent-warm: #ffce4d;
+    --interactive-row-text: #a6a6a6;
+    --interactive-row-icon: #a6a6a6;
+    --interactive-row-hover-bg: #1e1e1e;
+    --interactive-row-hover-text: #f2f2f2;
+    --interactive-row-hover-icon: #26c07a;
+    --interactive-row-active-bg: #2b2b2b;
+    --interactive-row-active-text: #f2f2f2;
+    --interactive-row-active-icon: #26c07a;
+    --interactive-active-rail-bg: #26c07a;
+    --interactive-active-rail-shadow: 0 0 8px rgba(38, 192, 122, 0.65);
+    --interactive-card-hover-bg: #242424;
+    --interactive-card-hover-shadow: 0 15px 26px -14px rgba(0, 0, 0, 0.6);
+    --odds-idle-hover-bg: rgba(38, 192, 122, 0.13);
+    --odds-idle-hover-border: #26c07a;
+    --odds-selected-bg: linear-gradient(140deg, #33d488, #1b9e61);
+    --odds-selected-hover-bg: linear-gradient(140deg, #3fe094, #26c07a);
+    --odds-selected-text: #07130d;
+    --dock-bar-bg: linear-gradient(110deg, #1d6644 0%, #2b2b2b 92%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #25855a 0%, #363636 92%);
+    --mobile-nav-bg: rgba(15, 15, 15, 0.97);
+    --mobile-nav-border: #313131;
+    --mobile-nav-text: #8c8c8c;
+    --mobile-nav-icon: #8c8c8c;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #26c07a;
+    --mobile-nav-active-text: #26c07a;
+    --mobile-menu-bg: #1e1e1e;
+    --mobile-menu-border: #414141;
+    --mobile-drawer-bg: #161616;
+    --mobile-drawer-overlay-bg: rgba(0, 0, 0, 0.55);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(0, 0, 0, 0.65);
+    --mobile-summary-bar-border: rgba(255, 255, 255, 0.1);
+    --mobile-summary-bar-radius: 12px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 -6px 20px -12px rgba(0, 0, 0, 0.55);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.92);
+    --mobile-dock-action-bg: #33d488;
+    --mobile-dock-action-hover-bg: #26c07a;
+    --mobile-sheet-overlay-bg: rgba(0, 0, 0, 0.55);
+    --mobile-sheet-bg: #1e1e1e;
+    --mobile-sheet-inner-bg: #0f0f0f;
+    --mobile-sheet-radius: 12px;
+    --mobile-sheet-shadow: 0 -16px 36px -16px rgba(0, 0, 0, 0.7);
+
+    --func-win: #26c07a;
+    --func-lost: #ff5a5a;
+    --func-favorite: #ff9a3d;
+    --func-bonus: #ffce4d;
+    --func-pending: #cda23f;
+    --func-void: #777777;
+}
+
+/************ SCHEME: match-light - light counterpart for the match sportsbook theme ****************/
+:root.match-light {
+    color-scheme: light;
+
+    --brand-primary-0: #169c63;
+    --brand-primary-1: rgba(22, 156, 99, 0.12);
+    --brand-primary-2: rgba(22, 156, 99, 0.2);
+    --brand-primary-3: #26c07a;
+    --brand-primary-4: #0f7f50;
+    --brand-primary-5: #053a24;
+
+    --filltext-ft-a: #f4f8f6;
+    --filltext-ft-b: #ecf3ef;
+    --filltext-ft-c: #dbe7e1;
+    --filltext-ft-d: #b9c9c1;
+    --filltext-ft-e: #7b8b84;
+    --filltext-ft-f: #5e7068;
+    --filltext-ft-g: #33443c;
+    --filltext-ft-h: #17251f;
+
+    --neutral-black-a: rgba(16, 37, 28, 0.04);
+    --neutral-black-b: rgba(16, 37, 28, 0.08);
+    --neutral-black-c: rgba(16, 37, 28, 0.12);
+    --neutral-black-d: rgba(16, 37, 28, 0.2);
+    --neutral-black-e: rgba(16, 37, 28, 0.4);
+    --neutral-black-f: rgba(16, 37, 28, 0.6);
+    --neutral-black-g: rgba(16, 37, 28, 0.8);
+    --neutral-black-h: #10251c;
+
+    --page-bg: #f4f8f6;
+    --page-bg-transparent: rgba(244, 248, 246, 0);
+    --surface-1: #ffffff;
+    --surface-2: #edf4f0;
+    --surface-3: #dce8e2;
+    --surface-shell: #ffffff;
+    --surface-shell-gradient: linear-gradient(90deg, #ffffff 0%, #f4f8f6 44%, #ffffff 100%);
+    --surface-selected: #dff3ea;
+    --surface-raised: #ffffff;
+    --surface-muted: #eef4f1;
+    --border-subtle: #d8e2dd;
+    --border-strong: #b8c8c1;
+    --content-primary: #17251f;
+    --content-secondary: #3f544b;
+    --content-muted: #7b8b84;
+    --content-inverse: #ffffff;
+    --on-brand: #ffffff;
+    --status-success-surface: rgba(22, 156, 99, 0.12);
+    --status-success-text: #0f7f50;
+    --status-danger-surface: rgba(214, 62, 62, 0.12);
+    --status-danger-text: #c93434;
+    --status-info-surface: rgba(65, 125, 212, 0.12);
+
+    --style-card-shadow: 0 12px 28px -22px rgba(16, 37, 28, 0.24);
+    --style-floating-shadow: 0 14px 34px -22px rgba(16, 37, 28, 0.28);
+    --accent-warm: #c18416;
+    --interactive-row-text: #5e7068;
+    --interactive-row-icon: #5e7068;
+    --interactive-row-hover-bg: #ecf5f0;
+    --interactive-row-hover-text: #17251f;
+    --interactive-row-hover-icon: #169c63;
+    --interactive-row-active-bg: #dff3ea;
+    --interactive-row-active-text: #17251f;
+    --interactive-row-active-icon: #169c63;
+    --interactive-active-rail-bg: #169c63;
+    --interactive-active-rail-shadow: 0 0 8px rgba(22, 156, 99, 0.35);
+    --interactive-card-hover-bg: #f8fbf9;
+    --interactive-card-hover-shadow: 0 14px 28px -20px rgba(16, 37, 28, 0.28);
+    --odds-idle-hover-bg: rgba(22, 156, 99, 0.12);
+    --odds-idle-hover-border: #169c63;
+    --odds-selected-bg: linear-gradient(140deg, #33d488, #169c63);
+    --odds-selected-hover-bg: linear-gradient(140deg, #4ade99, #16a66b);
+    --odds-selected-text: #062014;
+    --dock-bar-bg: linear-gradient(110deg, #0f7f50 0%, #174533 92%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #169c63 0%, #1f5c43 92%);
+    --mobile-nav-bg: rgba(255, 255, 255, 0.96);
+    --mobile-nav-border: #d8e2dd;
+    --mobile-nav-text: #708178;
+    --mobile-nav-icon: #708178;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #169c63;
+    --mobile-nav-active-text: #169c63;
+    --mobile-menu-bg: #ffffff;
+    --mobile-menu-border: #c7d6cf;
+    --mobile-drawer-bg: #ffffff;
+    --mobile-drawer-overlay-bg: rgba(14, 42, 30, 0.42);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(10, 45, 30, 0.25);
+    --mobile-drawer-close-bg: #edf4f0;
+    --mobile-drawer-close-border: #c7d6cf;
+    --mobile-summary-bar-border: rgba(13, 91, 58, 0.18);
+    --mobile-summary-bar-radius: 12px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 -6px 20px -12px rgba(16, 37, 28, 0.36);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
+    --mobile-dock-action-bg: #0f7f50;
+    --mobile-dock-action-hover-bg: #169c63;
+    --mobile-sheet-overlay-bg: rgba(14, 42, 30, 0.42);
+    --mobile-sheet-bg: #ffffff;
+    --mobile-sheet-inner-bg: #f4f8f6;
+    --mobile-sheet-radius: 12px;
+    --mobile-sheet-shadow: 0 -16px 36px -16px rgba(16, 37, 28, 0.3);
+
+    --func-win: #169c63;
+    --func-lost: #c93434;
+    --func-favorite: #d97a18;
+    --func-bonus: #c18416;
+    --func-pending: #9b7518;
+    --func-void: #9ca7a1;
+}
+
+/************ SCHEME: superbet-light - light Superbet-inspired sportsbook theme ****************/
+:root.superbet-light {
+    color-scheme: light;
+
+    --brand-primary-0: #e60012;
+    --brand-primary-1: rgba(230, 0, 18, 0.1);
+    --brand-primary-2: rgba(230, 0, 18, 0.18);
+    --brand-primary-3: #ff3345;
+    --brand-primary-4: #bf0010;
+    --brand-primary-5: #4a0006;
+
+    --filltext-ft-a: #f6f7f9;
+    --filltext-ft-b: #eef1f5;
+    --filltext-ft-c: #dde2ea;
+    --filltext-ft-d: #bcc5d2;
+    --filltext-ft-e: #7c8898;
+    --filltext-ft-f: #5c6879;
+    --filltext-ft-g: #303947;
+    --filltext-ft-h: #151923;
+
+    --neutral-black-a: rgba(14, 17, 24, 0.04);
+    --neutral-black-b: rgba(14, 17, 24, 0.08);
+    --neutral-black-c: rgba(14, 17, 24, 0.12);
+    --neutral-black-d: rgba(14, 17, 24, 0.2);
+    --neutral-black-e: rgba(14, 17, 24, 0.4);
+    --neutral-black-f: rgba(14, 17, 24, 0.6);
+    --neutral-black-g: rgba(14, 17, 24, 0.8);
+    --neutral-black-h: #0e1118;
+
+    --page-bg: #f6f7f9;
+    --page-bg-transparent: rgba(246, 247, 249, 0);
+    --surface-1: #ffffff;
+    --surface-2: #f0f2f6;
+    --surface-3: #e2e7ef;
+    --surface-shell: #ffffff;
+    --surface-shell-gradient: linear-gradient(90deg, #ffffff 0%, #fff4f5 44%, #ffffff 100%);
+    --surface-selected: #ffe6e9;
+    --surface-raised: #ffffff;
+    --surface-muted: #f2f4f7;
+    --border-subtle: #dbe1ea;
+    --border-strong: #b9c3d1;
+    --content-primary: #151923;
+    --content-secondary: #303947;
+    --content-muted: #7c8898;
+    --content-inverse: #ffffff;
+    --on-brand: #ffffff;
+    --status-success-surface: rgba(18, 154, 93, 0.12);
+    --status-success-text: #118a54;
+    --status-danger-surface: rgba(230, 0, 18, 0.12);
+    --status-danger-text: #c70013;
+    --status-info-surface: rgba(45, 113, 216, 0.12);
+
+    --style-card-shadow: 0 12px 28px -22px rgba(14, 17, 24, 0.24);
+    --style-floating-shadow: 0 14px 34px -22px rgba(14, 17, 24, 0.3);
+    --accent-warm: #d79618;
+    --interactive-row-text: #5c6879;
+    --interactive-row-icon: #5c6879;
+    --interactive-row-hover-bg: #fff1f2;
+    --interactive-row-hover-text: #151923;
+    --interactive-row-hover-icon: #e60012;
+    --interactive-row-active-bg: #ffe6e9;
+    --interactive-row-active-text: #151923;
+    --interactive-row-active-icon: #e60012;
+    --interactive-active-rail-bg: #e60012;
+    --interactive-active-rail-shadow: 0 0 8px rgba(230, 0, 18, 0.35);
+    --interactive-card-hover-bg: #fff9fa;
+    --interactive-card-hover-shadow: 0 14px 28px -20px rgba(14, 17, 24, 0.3);
+    --odds-idle-hover-bg: rgba(230, 0, 18, 0.1);
+    --odds-idle-hover-border: #e60012;
+    --odds-selected-bg: linear-gradient(140deg, #ff3345, #e60012);
+    --odds-selected-hover-bg: linear-gradient(140deg, #ff4a59, #bf0010);
+    --odds-selected-text: #ffffff;
+    --dock-bar-bg: linear-gradient(110deg, #e60012 0%, #3a1118 92%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #ff3345 0%, #4a151d 92%);
+    --mobile-nav-bg: rgba(255, 255, 255, 0.96);
+    --mobile-nav-border: #dbe1ea;
+    --mobile-nav-text: #7c8898;
+    --mobile-nav-icon: #7c8898;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #e60012;
+    --mobile-nav-active-text: #e60012;
+    --mobile-menu-bg: #ffffff;
+    --mobile-menu-border: #dbe1ea;
+    --mobile-drawer-bg: #ffffff;
+    --mobile-drawer-overlay-bg: rgba(14, 17, 24, 0.44);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(14, 17, 24, 0.28);
+    --mobile-drawer-close-bg: #f0f2f6;
+    --mobile-drawer-close-border: #dbe1ea;
+    --mobile-summary-bar-border: rgba(230, 0, 18, 0.2);
+    --mobile-summary-bar-radius: 12px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 -6px 20px -12px rgba(14, 17, 24, 0.34);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
+    --mobile-dock-action-bg: #e60012;
+    --mobile-dock-action-hover-bg: #bf0010;
+    --mobile-sheet-overlay-bg: rgba(14, 17, 24, 0.44);
+    --mobile-sheet-bg: #ffffff;
+    --mobile-sheet-inner-bg: #f6f7f9;
+    --mobile-sheet-radius: 12px;
+    --mobile-sheet-shadow: 0 -16px 36px -16px rgba(14, 17, 24, 0.32);
+
+    --func-win: #129a5d;
+    --func-lost: #e60012;
+    --func-favorite: #ff8a1f;
+    --func-bonus: #ffcc33;
+    --func-pending: #a97812;
+    --func-void: #9aa3b0;
+}
+
+/************ SCHEME: superbet-dark - dark Superbet-inspired sportsbook theme ****************/
+:root.superbet-dark {
+    color-scheme: dark;
+
+    --brand-primary-0: #ff1f32;
+    --brand-primary-1: rgba(255, 31, 50, 0.14);
+    --brand-primary-2: rgba(255, 31, 50, 0.22);
+    --brand-primary-3: #ff4a59;
+    --brand-primary-4: #d90014;
+    --brand-primary-5: #570008;
+
+    --filltext-ft-a: #07080c;
+    --filltext-ft-b: #0d0f16;
+    --filltext-ft-c: #171a23;
+    --filltext-ft-d: #282d3a;
+    --filltext-ft-e: #858d9b;
+    --filltext-ft-f: #b3bac6;
+    --filltext-ft-g: #d5d9e1;
+    --filltext-ft-h: #f4f6f9;
+
+    --neutral-black-a: rgba(255, 255, 255, 0.04);
+    --neutral-black-b: rgba(255, 255, 255, 0.08);
+    --neutral-black-c: rgba(255, 255, 255, 0.12);
+    --neutral-black-d: rgba(255, 255, 255, 0.2);
+    --neutral-black-e: rgba(255, 255, 255, 0.4);
+    --neutral-black-f: rgba(255, 255, 255, 0.6);
+    --neutral-black-g: rgba(255, 255, 255, 0.8);
+    --neutral-black-h: #f4f6f9;
+
+    --page-bg: #0d0f16;
+    --page-bg-transparent: rgba(13, 15, 22, 0);
+    --surface-1: #171a23;
+    --surface-2: #202431;
+    --surface-3: #2a3040;
+    --surface-shell: #07080c;
+    --surface-shell-gradient: linear-gradient(90deg, #07080c 0%, #1d070b 44%, #07080c 100%);
+    --surface-selected: #2a1820;
+    --surface-raised: #171a23;
+    --surface-muted: #11141c;
+    --border-subtle: #282d3a;
+    --border-strong: #3b4252;
+    --content-primary: #f4f6f9;
+    --content-secondary: #d5d9e1;
+    --content-muted: #858d9b;
+    --content-inverse: #07080c;
+    --on-brand: #ffffff;
+    --status-success-surface: rgba(34, 197, 126, 0.14);
+    --status-success-text: #31d28b;
+    --status-danger-surface: rgba(255, 31, 50, 0.14);
+    --status-danger-text: #ff4a59;
+    --status-info-surface: rgba(87, 145, 255, 0.14);
+
+    --style-card-shadow: 0 16px 32px -22px rgba(0, 0, 0, 0.78);
+    --style-floating-shadow: 0 12px 28px -18px rgba(0, 0, 0, 0.72);
+    --accent-warm: #ffcc33;
+    --interactive-row-text: #b3bac6;
+    --interactive-row-icon: #b3bac6;
+    --interactive-row-hover-bg: #202431;
+    --interactive-row-hover-text: #f4f6f9;
+    --interactive-row-hover-icon: #ff1f32;
+    --interactive-row-active-bg: #2a1820;
+    --interactive-row-active-text: #f4f6f9;
+    --interactive-row-active-icon: #ff1f32;
+    --interactive-active-rail-bg: #ff1f32;
+    --interactive-active-rail-shadow: 0 0 8px rgba(255, 31, 50, 0.55);
+    --interactive-card-hover-bg: #1d212c;
+    --interactive-card-hover-shadow: 0 15px 26px -14px rgba(0, 0, 0, 0.68);
+    --odds-idle-hover-bg: rgba(255, 31, 50, 0.14);
+    --odds-idle-hover-border: #ff1f32;
+    --odds-selected-bg: linear-gradient(140deg, #ff4a59, #d90014);
+    --odds-selected-hover-bg: linear-gradient(140deg, #ff6170, #ff1f32);
+    --odds-selected-text: #ffffff;
+    --dock-bar-bg: linear-gradient(110deg, #a80010 0%, #202431 92%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #d90014 0%, #2a3040 92%);
+    --mobile-nav-bg: rgba(7, 8, 12, 0.97);
+    --mobile-nav-border: #282d3a;
+    --mobile-nav-text: #858d9b;
+    --mobile-nav-icon: #858d9b;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #ff1f32;
+    --mobile-nav-active-text: #ff1f32;
+    --mobile-menu-bg: #171a23;
+    --mobile-menu-border: #3b4252;
+    --mobile-drawer-bg: #0d0f16;
+    --mobile-drawer-overlay-bg: rgba(0, 0, 0, 0.58);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(0, 0, 0, 0.72);
+    --mobile-drawer-close-bg: #202431;
+    --mobile-drawer-close-border: #3b4252;
+    --mobile-summary-bar-border: rgba(255, 255, 255, 0.1);
+    --mobile-summary-bar-radius: 12px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 -6px 20px -12px rgba(0, 0, 0, 0.62);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
+    --mobile-dock-action-bg: #ff1f32;
+    --mobile-dock-action-hover-bg: #ff4a59;
+    --mobile-sheet-overlay-bg: rgba(0, 0, 0, 0.58);
+    --mobile-sheet-bg: #171a23;
+    --mobile-sheet-inner-bg: #0d0f16;
+    --mobile-sheet-radius: 12px;
+    --mobile-sheet-shadow: 0 -16px 36px -16px rgba(0, 0, 0, 0.75);
+
+    --func-win: #31d28b;
+    --func-lost: #ff4a59;
+    --func-favorite: #ff9a3d;
+    --func-bonus: #ffcc33;
+    --func-pending: #cda23f;
+    --func-void: #747c89;
+}
+
+/************ SCHEME: betano-light - light Betano-inspired sportsbook theme ****************/
+:root.betano-light {
+    color-scheme: light;
+
+    --brand-primary-0: #ff3d00;
+    --brand-primary-1: rgba(255, 61, 0, 0.1);
+    --brand-primary-2: rgba(255, 61, 0, 0.18);
+    --brand-primary-3: #ff6a33;
+    --brand-primary-4: #d93400;
+    --brand-primary-5: #4b1200;
+
+    --filltext-ft-a: #f6f7fb;
+    --filltext-ft-b: #eef0f8;
+    --filltext-ft-c: #dde1ef;
+    --filltext-ft-d: #bac1d6;
+    --filltext-ft-e: #7b849c;
+    --filltext-ft-f: #5b647e;
+    --filltext-ft-g: #303852;
+    --filltext-ft-h: #101426;
+
+    --neutral-black-a: rgba(14, 15, 34, 0.04);
+    --neutral-black-b: rgba(14, 15, 34, 0.08);
+    --neutral-black-c: rgba(14, 15, 34, 0.12);
+    --neutral-black-d: rgba(14, 15, 34, 0.2);
+    --neutral-black-e: rgba(14, 15, 34, 0.4);
+    --neutral-black-f: rgba(14, 15, 34, 0.6);
+    --neutral-black-g: rgba(14, 15, 34, 0.8);
+    --neutral-black-h: #0e0f22;
+
+    --page-bg: #f6f7fb;
+    --page-bg-transparent: rgba(246, 247, 251, 0);
+    --surface-1: #ffffff;
+    --surface-2: #f0f2fa;
+    --surface-3: #e1e5f2;
+    --surface-shell: #ffffff;
+    --surface-shell-gradient: linear-gradient(90deg, #ff3d00 0%, #ff5a1f 50%, #ff3d00 100%);
+    --surface-selected: #fff4ee;
+    --surface-raised: #ffffff;
+    --surface-muted: #fff8f4;
+    --border-subtle: #eadfd9;
+    --border-strong: #d5c1b6;
+    --content-primary: #101426;
+    --content-secondary: #303852;
+    --content-muted: #7b849c;
+    --content-inverse: #ffffff;
+    --on-brand: #0e0f22;
+    --status-success-surface: rgba(0, 160, 103, 0.12);
+    --status-success-text: #008f5c;
+    --status-danger-surface: rgba(224, 52, 52, 0.12);
+    --status-danger-text: #c93434;
+    --status-info-surface: rgba(54, 111, 218, 0.12);
+
+    --style-card-shadow: 0 12px 28px -22px rgba(14, 15, 34, 0.24);
+    --style-floating-shadow: 0 14px 34px -22px rgba(14, 15, 34, 0.3);
+    --accent-warm: #c98700;
+    --interactive-row-text: #5b647e;
+    --interactive-row-icon: #5b647e;
+    --interactive-row-hover-bg: #fff3ed;
+    --interactive-row-hover-text: #101426;
+    --interactive-row-hover-icon: #ff3d00;
+    --interactive-row-active-bg: #fff0ea;
+    --interactive-row-active-text: #101426;
+    --interactive-row-active-icon: #ff3d00;
+    --interactive-active-rail-bg: #ff3d00;
+    --interactive-active-rail-shadow: 0 0 8px rgba(255, 61, 0, 0.35);
+    --interactive-card-hover-bg: #fff9f6;
+    --interactive-card-hover-shadow: 0 14px 28px -20px rgba(14, 15, 34, 0.28);
+    --odds-idle-hover-bg: #edf8f3;
+    --odds-idle-hover-border: #00a067;
+    --odds-selected-bg: #00a067;
+    --odds-selected-hover-bg: #008f5c;
+    --odds-selected-text: #ffffff;
+    --dock-bar-bg: #111b34;
+    --dock-bar-hover-bg: #1b2743;
+    --mobile-nav-bg: rgba(255, 255, 255, 0.96);
+    --mobile-nav-border: #eadfd9;
+    --mobile-nav-text: #7b849c;
+    --mobile-nav-icon: #7b849c;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #ff3d00;
+    --mobile-nav-active-text: #ff3d00;
+    --mobile-menu-bg: #ffffff;
+    --mobile-menu-border: #eadfd9;
+    --mobile-drawer-bg: #ffffff;
+    --mobile-drawer-overlay-bg: rgba(14, 15, 34, 0.46);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(14, 15, 34, 0.28);
+    --mobile-drawer-close-bg: #fff4ee;
+    --mobile-drawer-close-border: #eadfd9;
+    --mobile-summary-bar-border: rgba(255, 61, 0, 0.2);
+    --mobile-summary-bar-radius: 12px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 -6px 20px -12px rgba(14, 15, 34, 0.34);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
+    --mobile-dock-action-bg: #ff3d00;
+    --mobile-dock-action-hover-bg: #ff6a33;
+    --mobile-sheet-overlay-bg: rgba(14, 15, 34, 0.46);
+    --mobile-sheet-bg: #ffffff;
+    --mobile-sheet-inner-bg: #f6f7fb;
+    --mobile-sheet-radius: 12px;
+    --mobile-sheet-shadow: 0 -16px 36px -16px rgba(14, 15, 34, 0.32);
+
+    --func-win: #00a067;
+    --func-lost: #c93434;
+    --func-favorite: #ff7a21;
+    --func-bonus: #ffca2c;
+    --func-pending: #a87911;
+    --func-void: #98a1b6;
+}
+
+/************ SCHEME: betano-dark - dark Betano-inspired sportsbook theme ****************/
+:root.betano-dark {
+    color-scheme: dark;
+
+    --brand-primary-0: #ff5a1f;
+    --brand-primary-1: rgba(255, 90, 31, 0.14);
+    --brand-primary-2: rgba(255, 90, 31, 0.22);
+    --brand-primary-3: #ff7a40;
+    --brand-primary-4: #ff3d00;
+    --brand-primary-5: #5c1700;
+
+    --filltext-ft-a: #0a0b18;
+    --filltext-ft-b: #0e0f22;
+    --filltext-ft-c: #181a2f;
+    --filltext-ft-d: #292d46;
+    --filltext-ft-e: #858da8;
+    --filltext-ft-f: #b1b8cf;
+    --filltext-ft-g: #d4d9e8;
+    --filltext-ft-h: #f4f6fb;
+
+    --neutral-black-a: rgba(255, 255, 255, 0.04);
+    --neutral-black-b: rgba(255, 255, 255, 0.08);
+    --neutral-black-c: rgba(255, 255, 255, 0.12);
+    --neutral-black-d: rgba(255, 255, 255, 0.2);
+    --neutral-black-e: rgba(255, 255, 255, 0.4);
+    --neutral-black-f: rgba(255, 255, 255, 0.6);
+    --neutral-black-g: rgba(255, 255, 255, 0.8);
+    --neutral-black-h: #f4f6fb;
+
+    --page-bg: #0e0f22;
+    --page-bg-transparent: rgba(14, 15, 34, 0);
+    --surface-1: #181a2f;
+    --surface-2: #222640;
+    --surface-3: #2d324f;
+    --surface-shell: #0a0b18;
+    --surface-shell-gradient: linear-gradient(90deg, #0a0b18 0%, #201027 44%, #0a0b18 100%);
+    --surface-selected: #302033;
+    --surface-raised: #181a2f;
+    --surface-muted: #121426;
+    --border-subtle: #292d46;
+    --border-strong: #3c4364;
+    --content-primary: #f4f6fb;
+    --content-secondary: #d4d9e8;
+    --content-muted: #858da8;
+    --content-inverse: #0e0f22;
+    --on-brand: #0e0f22;
+    --status-success-surface: rgba(30, 203, 133, 0.14);
+    --status-success-text: #31d893;
+    --status-danger-surface: rgba(255, 90, 90, 0.14);
+    --status-danger-text: #ff6868;
+    --status-info-surface: rgba(91, 149, 255, 0.14);
+
+    --style-card-shadow: 0 16px 32px -22px rgba(0, 0, 0, 0.78);
+    --style-floating-shadow: 0 12px 28px -18px rgba(0, 0, 0, 0.72);
+    --accent-warm: #ffca2c;
+    --interactive-row-text: #b1b8cf;
+    --interactive-row-icon: #b1b8cf;
+    --interactive-row-hover-bg: #222640;
+    --interactive-row-hover-text: #f4f6fb;
+    --interactive-row-hover-icon: #ff5a1f;
+    --interactive-row-active-bg: #302033;
+    --interactive-row-active-text: #f4f6fb;
+    --interactive-row-active-icon: #ff5a1f;
+    --interactive-active-rail-bg: #ff5a1f;
+    --interactive-active-rail-shadow: 0 0 8px rgba(255, 90, 31, 0.55);
+    --interactive-card-hover-bg: #1e2138;
+    --interactive-card-hover-shadow: 0 15px 26px -14px rgba(0, 0, 0, 0.68);
+    --odds-idle-hover-bg: rgba(49, 216, 147, 0.14);
+    --odds-idle-hover-border: #31d893;
+    --odds-selected-bg: linear-gradient(140deg, #31d893, #00a067);
+    --odds-selected-hover-bg: linear-gradient(140deg, #42e5a3, #00b572);
+    --odds-selected-text: #0e0f22;
+    --dock-bar-bg: linear-gradient(110deg, #ff5a1f 0%, #181a2f 92%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #ff7a40 0%, #222640 92%);
+    --mobile-nav-bg: rgba(10, 11, 24, 0.97);
+    --mobile-nav-border: #292d46;
+    --mobile-nav-text: #858da8;
+    --mobile-nav-icon: #858da8;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #ff5a1f;
+    --mobile-nav-active-text: #ff5a1f;
+    --mobile-menu-bg: #181a2f;
+    --mobile-menu-border: #3c4364;
+    --mobile-drawer-bg: #0e0f22;
+    --mobile-drawer-overlay-bg: rgba(0, 0, 0, 0.58);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(0, 0, 0, 0.72);
+    --mobile-drawer-close-bg: #222640;
+    --mobile-drawer-close-border: #3c4364;
+    --mobile-summary-bar-border: rgba(255, 255, 255, 0.1);
+    --mobile-summary-bar-radius: 12px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 -6px 20px -12px rgba(0, 0, 0, 0.62);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
+    --mobile-dock-action-bg: #ff5a1f;
+    --mobile-dock-action-hover-bg: #ff7a40;
+    --mobile-sheet-overlay-bg: rgba(0, 0, 0, 0.58);
+    --mobile-sheet-bg: #181a2f;
+    --mobile-sheet-inner-bg: #0e0f22;
+    --mobile-sheet-radius: 12px;
+    --mobile-sheet-shadow: 0 -16px 36px -16px rgba(0, 0, 0, 0.75);
+
+    --func-win: #31d893;
+    --func-lost: #ff6868;
+    --func-favorite: #ff9a3d;
+    --func-bonus: #ffca2c;
+    --func-pending: #cda23f;
+    --func-void: #747c8f;
+}

@@ -1,0 +1,17 @@
+import type { FC } from 'react';
+import { getColor } from '../utils/helper';
+import type { SVGIconProps } from '../utils/types';
+
+export const VipBenefitsWithdraw: FC<SVGIconProps> = ({ color = ['currentColor'], ...props }) => {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="1em" {...props}>
+            <path
+                d="M8.25 15H14.25M2.25 9.75H21.75M17.25 15H18.75M3.75 5.25C3 5.25 2.25 6 2.25 6.75V17.25C2.25 18 3 18.75 3.75 18.75H20.25C21 18.75 21.75 18 21.75 17.25V6.75C21.75 6 21 5.25 20.25 5.25H3.75Z"
+                stroke={getColor(color, 1, '#6D7D98')}
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+};

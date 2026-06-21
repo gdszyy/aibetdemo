@@ -1,0 +1,13 @@
+
+> match-pc@0.1.0 dev D:\Documents\gotobet\match-pc(3)\match-pc
+> next dev --webpack "-p" "3000"
+
+▲ Next.js 16.2.3 (webpack)
+- Local:         http://localhost:3000
+- Network:       http://198.18.0.1:3000
+- Environments: .env.development, .env
+✓ Ready in 291ms
+○ (serwist) Serwist is disabled.
+○ (serwist) Serwist is disabled.
+○ Compiling /instrumentation ...
+

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Theme Designer"
+  short_description: "Design and configure gotobet themes"
+  default_prompt: "Use $theme-designer to design and configure a new gotobet visual theme."

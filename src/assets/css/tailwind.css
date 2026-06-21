@@ -1,0 +1,11 @@
+/* 1. CSS imports */
+@import "./theme.css";
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./tokens.css";
+@import "./base.css";
+@import "./animations.css";
+
+/* 2. Tailwind engine + cascade layers */
+@plugin "tailwind-scrollbar";
+@custom-variant dark (&:is(.dark *));

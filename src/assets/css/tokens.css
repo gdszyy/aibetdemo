@@ -1,0 +1,210 @@
+@theme {
+    --font-sans: var(--font-roboto-flex);
+    --font-poppins: var(--font-poppins);
+    --font-roboto-flex: var(--font-roboto-flex), sans-serif;
+    --font-rowdies: var(--font-rowdies);
+    --font-barlow: var(--font-barlow);
+    --font-racing-sans-one: var(--font-racing-sans-one);
+
+    --variation-headline:
+        "GRAD" 36, "XOPQ" 101, "XTRA" 468, "YOPQ" 79, "YTAS" 750, "YTDE" -203, "YTFI" 738, "YTLC" 514, "YTUC" 712,
+        "slnt" 0, "wdth" 43;
+    --variation-title:
+        "GRAD" 36, "XOPQ" 35, "XTRA" 468, "YOPQ" 79, "YTAS" 750, "YTDE" -203, "YTFI" 738, "YTLC" 514, "YTUC" 712, "slnt"
+        0, "wdth" 43;
+
+    /* ============================================
+       TEXT SECTION - Figma Design System (2026-03-19)
+       ============================================ */
+
+    /* Auxiliary - 10px/11px/12px secondary text */
+    --text-auxiliary-xxs: 10px;
+    --text-auxiliary-xxs--line-height: 14px;
+    --text-auxiliary-xxs--font-weight: 300;
+
+    --text-auxiliary-2xs: 11px;
+    --text-auxiliary-2xs--line-height: 14px;
+    --text-auxiliary-2xs--font-weight: 300;
+
+    --text-auxiliary-xs: 12px;
+    --text-auxiliary-xs--line-height: 16px;
+    --text-auxiliary-xs--font-weight: 300;
+
+    --text-auxiliary-sm: 12px;
+    --text-auxiliary-sm--line-height: 16px;
+    --text-auxiliary-sm--font-weight: 400;
+
+    --text-auxiliary-md: 12px;
+    --text-auxiliary-md--line-height: 16px;
+    --text-auxiliary-md--font-weight: 600;
+
+    /* Body - 14px body text */
+    --text-body-sm: 14px;
+    --text-body-sm--line-height: 18px;
+    --text-body-sm--font-weight: 400;
+
+    --text-body-md: 14px;
+    --text-body-md--line-height: 18px;
+    --text-body-md--font-weight: 500;
+
+    --text-body-lg: 14px;
+    --text-body-lg--line-height: 18px;
+    --text-body-lg--font-weight: 700;
+
+    /* Market - 14px odds/market (body-lg + letter-spacing) */
+    --text-market: 14px;
+    --text-market--line-height: 18px;
+    --text-market--font-weight: 700;
+    --text-market--letter-spacing: 0.84px;
+
+    /* Title - 16/18/20px headings */
+    --text-title-sm: 16px;
+    --text-title-sm--line-height: 20px;
+    --text-title-sm--font-weight: 700;
+
+    --text-title-md: 18px;
+    --text-title-md--line-height: 22px;
+    --text-title-md--font-weight: 700;
+
+    --text-title-lg: 20px;
+    --text-title-lg--line-height: 24px;
+    --text-title-lg--font-weight: 900;
+
+    --text-headline-sm: 24px;
+    --text-headline-sm--line-height: 28px;
+    --text-headline-sm--font-weight: 600;
+
+    --text-headline-md: 28px;
+    --text-headline-md--line-height: 32px;
+    --text-headline-md--font-weight: 600;
+
+    --text-headline-lg: 32px;
+    --text-headline-lg--line-height: 36px;
+    --text-headline-lg--font-weight: 600;
+
+    /** color start */
+    --color-brand-primary-0: var(--brand-primary-0);
+    --color-brand-primary-1: var(--brand-primary-1);
+    --color-brand-primary-2: var(--brand-primary-2);
+    --color-brand-primary-3: var(--brand-primary-3);
+    --color-brand-primary-4: var(--brand-primary-4);
+    --color-brand-primary-5: var(--brand-primary-5);
+
+    --color-func-win: var(--func-win);
+    --color-func-lost: var(--func-lost);
+    --color-func-favorite: var(--func-favorite);
+    --color-func-bonus: var(--func-bonus);
+    --color-func-pending: var(--func-pending);
+    --color-func-void: var(--func-void);
+
+    --color-promo-parlay-boost-bg: var(--promo-parlay-boost-bg);
+    --color-promo-parlay-boost-accent: var(--promo-parlay-boost-accent);
+
+    --color-filltext-ft-a: var(--filltext-ft-a);
+    --color-filltext-ft-b: var(--filltext-ft-b);
+    --color-filltext-ft-c: var(--filltext-ft-c);
+    --color-filltext-ft-d: var(--filltext-ft-d);
+    --color-filltext-ft-e: var(--filltext-ft-e);
+    --color-filltext-ft-f: var(--filltext-ft-f);
+    --color-filltext-ft-g: var(--filltext-ft-g);
+    --color-filltext-ft-h: var(--filltext-ft-h);
+
+    --color-neutral-white-a: var(--neutral-white-a);
+    --color-neutral-white-b: var(--neutral-white-b);
+    --color-neutral-white-c: var(--neutral-white-c);
+    --color-neutral-white-d: var(--neutral-white-d);
+    --color-neutral-white-e: var(--neutral-white-e);
+    --color-neutral-white-f: var(--neutral-white-f);
+    --color-neutral-white-g: var(--neutral-white-g);
+    --color-neutral-white-h: var(--neutral-white-h);
+
+    --color-neutral-black-a: var(--neutral-black-a);
+    --color-neutral-black-b: var(--neutral-black-b);
+    --color-neutral-black-c: var(--neutral-black-c);
+    --color-neutral-black-d: var(--neutral-black-d);
+    --color-neutral-black-e: var(--neutral-black-e);
+    --color-neutral-black-f: var(--neutral-black-f);
+    --color-neutral-black-g: var(--neutral-black-g);
+    --color-neutral-black-h: var(--neutral-black-h);
+
+    --color-auxiliary-pink: var(--auxiliary-pink);
+    --color-auxiliary-orange: var(--auxiliary-orange);
+    --color-auxiliary-green: var(--auxiliary-green);
+    --color-auxiliary-blue: var(--auxiliary-blue);
+    --color-auxiliary-purple: var(--auxiliary-purple);
+    --color-auxiliary-brown: var(--auxiliary-brown);
+    --color-auxiliary-cyan: var(--auxiliary-cyan);
+    --color-auxiliary-gray: var(--auxiliary-gray);
+
+    --color-brand-red: var(--brand-red);
+
+    --color-card-rbd: var(--card-rbd);
+    --color-mini-sbd: var(--mini-sbd);
+
+    /* 语义主题层（scheme 切换）：bg-page/surface-*、text-content-*、border-border-* */
+    --color-page-bg: var(--page-bg);
+    --color-surface-1: var(--surface-1);
+    --color-surface-2: var(--surface-2);
+    --color-surface-3: var(--surface-3);
+    --color-surface-shell: var(--surface-shell);
+    --color-surface-selected: var(--surface-selected);
+    --color-surface-raised: var(--surface-raised);
+    --color-surface-muted: var(--surface-muted);
+    --color-border-subtle: var(--border-subtle);
+    --color-border-strong: var(--border-strong);
+    --color-content-primary: var(--content-primary);
+    --color-content-secondary: var(--content-secondary);
+    --color-content-muted: var(--content-muted);
+    --color-content-inverse: var(--content-inverse);
+    --color-on-brand: var(--on-brand);
+    --color-accent-warm: var(--accent-warm);
+    --color-status-success-surface: var(--status-success-surface);
+    --color-status-success-text: var(--status-success-text);
+    --color-status-danger-surface: var(--status-danger-surface);
+    --color-status-danger-text: var(--status-danger-text);
+    --color-status-info-surface: var(--status-info-surface);
+    /** color end */
+
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 20px;
+    --radius-control: var(--style-radius-control);
+    --radius-card: var(--style-radius-card);
+    --radius-panel: var(--style-radius-panel);
+    --radius-full: 999px;
+
+    --shadow-card: var(--style-card-shadow);
+    --shadow-floating: var(--style-floating-shadow);
+
+    /* Mobile Adaptation */
+    --safe-area-top: env(safe-area-inset-top);
+    --safe-area-bottom: env(safe-area-inset-bottom);
+    --safe-area-left: env(safe-area-inset-left);
+    --safe-area-right: env(safe-area-inset-right);
+
+    --min-touch-target: 44px;
+    --bottom-bar-height: 56px;
+    --bottom-bar-safe-padding: calc(8px + env(safe-area-inset-bottom));
+    --bottom-bar-safe-height: calc(var(--bottom-bar-height) + var(--bottom-bar-safe-padding));
+    --mobile-cart-summary-bar-height: 60px;
+    --mobile-auth-action-bar-height: 48px;
+    --main-content-max-width: 1280px;
+}
+
+@utility text-headline-sm {
+    font-family: var(--font-roboto-flex);
+    font-variation-settings: var(--variation-headline);
+}
+@utility text-headline-md {
+    font-family: var(--font-roboto-flex);
+    font-variation-settings: var(--variation-headline);
+}
+@utility text-headline-lg {
+    font-family: var(--font-roboto-flex);
+    font-variation-settings: var(--variation-headline);
+}
+
+@utility variation-title {
+    font-variation-settings: var(--variation-title);
+}

@@ -1,0 +1,108 @@
+⚠ ./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+Critical dependency: the request of a dependency is an expression
+
+Import trace for requested module:
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/index.js
+./node_modules/.pnpm/@fastify+otel@0.16.0_@opentelemetry+api@1.9.0/node_modules/@fastify/otel/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/integrations/tracing/fastify/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/index.js
+./node_modules/.pnpm/@sentry+nextjs@10.40.0_@ope_6f3c16add66e039ccef5fae9fb3e7c3c/node_modules/@sentry/nextjs/build/cjs/index.server.js
+./sentry.server.config.ts
+
+./node_modules/.pnpm/require-in-the-middle@8.0.1/node_modules/require-in-the-middle/index.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/.pnpm/require-in-the-middle@8.0.1/node_modules/require-in-the-middle/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/integrations/tracing/postgresjs.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/index.js
+./node_modules/.pnpm/@sentry+nextjs@10.40.0_@ope_6f3c16add66e039ccef5fae9fb3e7c3c/node_modules/@sentry/nextjs/build/cjs/index.server.js
+./sentry.server.config.ts
+⚠ ./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+Critical dependency: the request of a dependency is an expression
+
+Import trace for requested module:
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/index.js
+./node_modules/.pnpm/@fastify+otel@0.16.0_@opentelemetry+api@1.9.0/node_modules/@fastify/otel/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/integrations/tracing/fastify/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/index.js
+./node_modules/.pnpm/@sentry+nextjs@10.40.0_@ope_6f3c16add66e039ccef5fae9fb3e7c3c/node_modules/@sentry/nextjs/build/cjs/index.server.js
+./sentry.server.config.ts
+
+./node_modules/.pnpm/require-in-the-middle@8.0.1/node_modules/require-in-the-middle/index.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/.pnpm/require-in-the-middle@8.0.1/node_modules/require-in-the-middle/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/integrations/tracing/postgresjs.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/index.js
+./node_modules/.pnpm/@sentry+nextjs@10.40.0_@ope_6f3c16add66e039ccef5fae9fb3e7c3c/node_modules/@sentry/nextjs/build/cjs/index.server.js
+./sentry.server.config.ts
+⚠ ./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+Critical dependency: the request of a dependency is an expression
+
+Import trace for requested module:
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/index.js
+./node_modules/.pnpm/@fastify+otel@0.16.0_@opentelemetry+api@1.9.0/node_modules/@fastify/otel/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/integrations/tracing/fastify/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/index.js
+./node_modules/.pnpm/@sentry+nextjs@10.40.0_@ope_6f3c16add66e039ccef5fae9fb3e7c3c/node_modules/@sentry/nextjs/build/cjs/index.server.js
+
+./node_modules/.pnpm/require-in-the-middle@8.0.1/node_modules/require-in-the-middle/index.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/.pnpm/require-in-the-middle@8.0.1/node_modules/require-in-the-middle/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/integrations/tracing/postgresjs.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/index.js
+./node_modules/.pnpm/@sentry+nextjs@10.40.0_@ope_6f3c16add66e039ccef5fae9fb3e7c3c/node_modules/@sentry/nextjs/build/cjs/index.server.js
+⚠ ./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+Critical dependency: the request of a dependency is an expression
+
+Import trace for requested module:
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_6afa3aa63a1ee1e91372360a2d45582d/node_modules/@opentelemetry/instrumentation/build/esm/index.js
+./node_modules/.pnpm/@fastify+otel@0.16.0_@opentelemetry+api@1.9.0/node_modules/@fastify/otel/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/integrations/tracing/fastify/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/index.js
+./node_modules/.pnpm/@sentry+nextjs@10.40.0_@ope_6f3c16add66e039ccef5fae9fb3e7c3c/node_modules/@sentry/nextjs/build/cjs/index.server.js
+
+./node_modules/.pnpm/require-in-the-middle@8.0.1/node_modules/require-in-the-middle/index.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/.pnpm/require-in-the-middle@8.0.1/node_modules/require-in-the-middle/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+./node_modules/.pnpm/@opentelemetry+instrumentat_0d8e01436db8276d176627709ff9ab7c/node_modules/@opentelemetry/instrumentation/build/esm/index.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/integrations/tracing/postgresjs.js
+./node_modules/.pnpm/@sentry+node@10.40.0/node_modules/@sentry/node/build/cjs/index.js
+./node_modules/.pnpm/@sentry+nextjs@10.40.0_@ope_6f3c16add66e039ccef5fae9fb3e7c3c/node_modules/@sentry/nextjs/build/cjs/index.server.js
+(node:20400) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'D:\System Volume Information'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'D:\pagefile.sys'

@@ -1,0 +1,368 @@
+/* ===== Radix Collapsible ===== */
+
+@keyframes collapsible-down {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: var(--radix-collapsible-content-height);
+        opacity: 1;
+    }
+}
+
+@keyframes collapsible-up {
+    from {
+        height: var(--radix-collapsible-content-height);
+        opacity: 1;
+    }
+    to {
+        height: 0;
+        opacity: 0;
+    }
+}
+
+/* ===== Skeleton ===== */
+
+@keyframes skeleton-pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.animate-skeleton-pulse {
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+/* ===== Odds Trend ===== */
+
+/* Trend bubble float animation - upward drift on rise */
+@keyframes float-up {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+/* Trend bubble float animation - downward drift on drop */
+@keyframes float-down {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(3px);
+    }
+}
+
+/* Odds trend arrow blink - 5s flash cycle */
+@keyframes blink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.animate-blink {
+    animation: blink 2.5s ease-in-out infinite;
+}
+
+.animate-trend-up {
+    animation: bounce-trend-up 1s ease-in-out infinite;
+}
+
+.animate-trend-down {
+    animation: bounce-trend-down 1s ease-in-out infinite;
+}
+
+/* Odds trend: arrow bounce up */
+@keyframes bounce-trend-up {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-1.5px);
+    }
+}
+
+/* Odds trend: arrow bounce down */
+@keyframes bounce-trend-down {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(1.5px);
+    }
+}
+
+/* ===== UI Effects ===== */
+
+/* Settings button hover: rotate 60 degrees */
+@keyframes spin-60 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(60deg);
+    }
+}
+
+@keyframes spin-slow {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin-slow 4s ease-in-out infinite;
+}
+
+@property --world-cup-gradient-border-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 180deg;
+}
+
+/* 世界杯通行证边框流光：旋转原有线性渐变角度 */
+@keyframes world-cup-gradient-border-streamer {
+    to {
+        --world-cup-gradient-border-angle: 540deg;
+    }
+}
+
+.animate-world-cup-gradient-border-streamer {
+    --world-cup-gradient-border-angle: 180deg;
+    animation: world-cup-gradient-border-streamer 2.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-world-cup-gradient-border-streamer {
+        animation: none;
+    }
+}
+
+/* ===== Border Beam ===== */
+
+@keyframes beam-travel {
+    from {
+        offset-distance: 0%;
+    }
+    to {
+        offset-distance: 100%;
+    }
+}
+
+@keyframes beam-dash {
+    to {
+        stroke-dashoffset: -100;
+    }
+}
+
+/* Beam body breathing pulse: stroke-width + opacity oscillation */
+@keyframes beam-pulse {
+    0%,
+    20%,
+    100% {
+        opacity: 0.2;
+        stroke-width: 0.8px;
+        filter: blur(0.5px);
+    }
+    50% {
+        opacity: 0.8;
+        stroke-width: 2px;
+        filter: blur(1px);
+    }
+    80% {
+        opacity: 0.2;
+        stroke-width: 0.8px;
+        filter: blur(0.5px);
+    }
+}
+
+@keyframes beam-spin {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+/* ===== Match ===== */
+
+/* Match paused badge: inner dot + expanding fading outer ring */
+@keyframes match-paused-ripple {
+    0% {
+        transform: scale(1);
+        opacity: 0.35;
+    }
+    70% {
+        opacity: 0.15;
+    }
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+.animate-match-paused-ripple {
+    animation: match-paused-ripple 2s ease-out infinite;
+}
+
+/* ===== Casino ===== */
+
+/* Launch button: gentle scale pulse — uses CSS `scale` property (not `transform: scale()`) to avoid Tailwind v4 transform variable conflicts */
+@keyframes game-launch-pulse {
+    0%,
+    100% {
+        scale: 1;
+    }
+    50% {
+        scale: 1.06;
+    }
+}
+
+.animate-game-launch-pulse {
+    animation: game-launch-pulse 2s ease-in-out infinite;
+    box-shadow: 0px 4px 4px 0px var(--neutral-black-f);
+}
+
+/* ===== Toast ===== */
+
+@keyframes weak-signal-dot-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.18);
+        opacity: 0.78;
+    }
+}
+
+.toast-weak-signal-dot {
+    transform-origin: 12px 18.5px;
+    animation: weak-signal-dot-pulse 1.2s ease-in-out infinite;
+}
+
+/* ===== Animated Ellipsis ===== */
+
+/* Steps through "." -> ".." -> "..." */
+@keyframes ellipsis-typing {
+    to {
+        width: 3ch;
+    }
+}
+
+/* ===== Gift Box Wobble ===== */
+/* Quick wobble burst in first 10% of cycle, idle for remaining 90% */
+
+@keyframes gift-wobble {
+    0% {
+        transform: rotate(0deg);
+    }
+    2% {
+        transform: rotate(-5deg);
+    }
+    4% {
+        transform: rotate(4deg);
+    }
+    6% {
+        transform: rotate(-3deg);
+    }
+    8% {
+        transform: rotate(1.5deg);
+    }
+    10% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.animate-ellipsis::after {
+    content: "...";
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    letter-spacing: 2px;
+    animation: ellipsis-typing 1.5s steps(3, end) infinite;
+}
+
+/* ===== Shine Sweep (coin polish on hover) ===== */
+
+@keyframes shine-sweep {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.coin-shine {
+    position: relative;
+    overflow: hidden;
+    border-radius: 9999px;
+}
+
+.coin-shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.6) 50%, transparent 70%);
+    transform: translateX(-100%);
+}
+
+.group:hover .coin-shine::after {
+    animation: shine-sweep 600ms ease-out forwards;
+}
+
+@keyframes bet-slip-settings-slide-in {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.bet-slip-settings-slide-in {
+    animation: bet-slip-settings-slide-in 300ms ease-out both;
+    transform-origin: center;
+}
+
+@keyframes accordion-down {
+    from {
+        height: 0;
+    }
+    to {
+        height: var(--radix-accordion-content-height);
+    }
+}
+
+@keyframes accordion-up {
+    from {
+        height: var(--radix-accordion-content-height);
+    }
+    to {
+        height: 0;
+    }
+}
+
+.animate-accordion-down {
+    animation: accordion-down 200ms ease-out;
+}
+
+.animate-accordion-up {
+    animation: accordion-up 200ms ease-out;
+}
