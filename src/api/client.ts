@@ -72,6 +72,24 @@ const ServiceEnvConfigs: Record<ServiceName, string> = {
     'app/activity': process.env.NEXT_PUBLIC_ACTIVITY_SERVICE || '',
 };
 
+const ServiceProxySegments: Record<ServiceName, string> = {
+    'app/ws': 'ws',
+    'app/uof': 'uof',
+    'app/user': 'user',
+    'app/payment': 'payment',
+    'app/game': 'game',
+    'app/sport': 'sport',
+    'app/activity': 'activity',
+};
+
+const RAILWAY_HOST_PATTERN = /(?:^|\.)railway\.app$/i;
+
+const shouldUseRailwayApiProxy = () => {
+    if (typeof window === 'undefined') return false;
+    if (process.env.NEXT_PUBLIC_DISABLE_RAILWAY_API_PROXY === 'true') return false;
+    return RAILWAY_HOST_PATTERN.test(window.location.hostname);
+};
+
 // TODO 临时写死ls
 const REQUEST_SOURCE_HEADER_VALUE = 'ls';
 
@@ -439,7 +457,14 @@ export const getServiceUrl = (serviceName: ServiceName, host?: string) => {
 
 /** Create service-specific fetcher */
 const createServiceFetcher = (serviceName: ServiceName) => {
-    const resolveBaseUrl = () => getServiceUrl(serviceName);
+    const resolveBaseUrl = () => {
+        if (shouldUseRailwayApiProxy()) {
+            return `/api/proxy/${ServiceProxySegments[serviceName]}`;
+        }
+
+        return getServiceUrl(serviceName);
+    };
+
     if (!ServiceEnvConfigs[serviceName]) {
         console.warn(`[Warning] ${serviceName} service is not configured. API calls to this service will fail.`);
     }
