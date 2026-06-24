@@ -20,6 +20,7 @@ import { useThemeComponentProfile } from '@/components/theme-provider/component-
 import { getSportConfig } from '@/constants/sports-config';
 import { useGameSubscription } from '@/hooks/use-game-subscription';
 import { Link } from '@/i18n';
+import { useBreadcrumb } from '@/modules/match/_hooks/use-breadcrumb';
 import { useLiveStatusSuffix } from '@/modules/match/_hooks/use-live-status-suffix';
 import { useMatchListObserver } from '@/modules/match/_hooks/use-match-list-observer';
 import { shouldShowMatchInList } from '@/modules/match/_utils/match-utils';
@@ -239,34 +240,45 @@ const FeaturedMatches: FC<{
     );
 };
 
+const TIME_WINDOWS = ['3h', '12h', '24h'] as const;
+type TimeWindow = (typeof TIME_WINDOWS)[number];
+
 const TimeWindowSelector: FC<{
-    value: '12h' | '24h' | null;
-    onChange: (value: '12h' | '24h' | null) => void;
+    value: TimeWindow | null;
+    onChange: (value: TimeWindow | null) => void;
 }> = ({ value, onChange }) => {
     const t = useTranslations('matches');
+    const windowLabels: Record<TimeWindow, string> = {
+        '3h': t('topicPage.next3h'),
+        '12h': t('topicPage.next12h'),
+        '24h': t('topicPage.next24h'),
+    };
 
     return (
         <div className="px-3 md:px-4">
             <h3 className="mb-3 text-title-sm font-bold text-filltext-ft-h">{t('topicPage.upcomingMatches')}</h3>
-            <div className="grid gap-2 md:grid-cols-2">
-                {(['12h', '24h'] as const).map((window) => (
-                    <button
-                        key={window}
-                        type="button"
-                        onClick={() => onChange(value === window ? null : window)}
-                        className={cn(
-                            'flex h-[74px] items-center gap-3 rounded border px-4 text-left transition-colors',
-                            value === window
-                                ? 'border-brand-primary-0 bg-surface-2 text-filltext-ft-h'
-                                : 'border-neutral-white-c bg-surface-1 text-filltext-ft-g',
-                        )}
-                    >
-                        <ClockOutlined className="size-5 shrink-0 text-brand-primary-0" />
-                        <span className="text-body-md font-bold">
-                            {window === '12h' ? t('topicPage.next12h') : t('topicPage.next24h')}
-                        </span>
-                    </button>
-                ))}
+            {/* 参考稿 .next-grid：三个时间窗卡片排成等宽三列（移动端单列），卡片化圆角描边。
+                保留原有「点击切换时间窗筛选」交互，仅对齐栅格与卡片结构，配色沿用当前主题 token。 */}
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                {TIME_WINDOWS.map((window) => {
+                    const selected = value === window;
+                    return (
+                        <button
+                            key={window}
+                            type="button"
+                            onClick={() => onChange(selected ? null : window)}
+                            className={cn(
+                                'flex items-center gap-3 rounded-[11px] border px-4 py-4 text-left transition-colors',
+                                selected
+                                    ? 'border-brand-primary-0 bg-surface-2 text-filltext-ft-h'
+                                    : 'border-neutral-white-c bg-surface-1 text-filltext-ft-g hover:border-brand-primary-0',
+                            )}
+                        >
+                            <ClockOutlined className="size-5 shrink-0 text-brand-primary-0" />
+                            <span className="text-body-md font-bold">{windowLabels[window]}</span>
+                        </button>
+                    );
+                })}
             </div>
             {value && <p className="mt-1 text-auxiliary-md text-filltext-ft-f">{t('topicPage.timeFilterNote')}</p>}
         </div>
@@ -287,8 +299,9 @@ const CountryAccordion: FC<{ sportId: string; category: MenuCategory; liveSuffix
     });
 
     return (
-        <div className="border-filltext-ft-d/25 border-b last:border-b-0">
-            {/* 地区（父级）行：字母头像 + 加粗名称 + 数量徽章 + 圆形箭头。
+        <div className="mb-2 overflow-hidden rounded-[10px] border border-filltext-ft-d/25 last:mb-0">
+            {/* 参考稿 .pop-acc：每个地区是一张独立圆角描边卡片（卡片间距 mb-2），不再用分隔线堆叠。
+                地区（父级）行：字母头像 + 加粗名称 + 数量徽章 + 圆形箭头。
                 展开时整行抬升到 surface-2 并加左侧品牌色导引条，使其明显区别于下方联赛子项。 */}
             <button
                 type="button"
@@ -342,7 +355,7 @@ const CountryAccordion: FC<{ sportId: string; category: MenuCategory; liveSuffix
                                 <Loading className="size-4" variant="color-red" />
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 gap-0.5 md:grid-cols-2">
+                            <div className="grid grid-cols-1 gap-0.5 md:grid-cols-3">
                                 {leagues.map((league) => (
                                     <Link
                                         key={league.tournament_id}
@@ -378,9 +391,12 @@ export const SportTopicPanel: FC<SportTopicPanelProps> = ({ sportId }) => {
     const t = useTranslations('matches');
     const componentProfile = useThemeComponentProfile();
     const isBetano = componentProfile.homeRecommend.profile === 'betano-ticket-feed';
+    // superbet 改用外层 MatchListShell 的头部（面包屑 + All/Live/Today），
+    // 故此处隐藏专题页自带的 hero + tabs，避免「体育标题 + tab」重复；其余主题保留专题页头部。
+    const isSuperbet = componentProfile.brand === 'superbet';
     const liveSuffix = useLiveStatusSuffix();
     const [activeLetter, setActiveLetter] = useState<string | null>(null);
-    const [timeWindow, setTimeWindow] = useState<'12h' | '24h' | null>(null);
+    const [timeWindow, setTimeWindow] = useState<TimeWindow | null>(null);
     const [activeTab, setActiveTab] = useState<TopicTab>('matches');
     const enabled = navMode === 'topic';
 
@@ -404,10 +420,10 @@ export const SportTopicPanel: FC<SportTopicPanelProps> = ({ sportId }) => {
             activeLetter ? categories.filter((category) => firstLetter(category.name) === activeLetter) : categories,
         [categories, activeLetter],
     );
-    const sportTitle = useMemo(
-        () => sportId.replace(/[-_]+/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase()),
-        [sportId],
-    );
+    // sportId 是 sr:sport:1 这类原始 ID，标题需用接口返回的真实运动名（如 Football），
+    // 复用 useBreadcrumb（与面包屑同一 queryKey，缓存共享）。
+    const { data: breadcrumb } = useBreadcrumb({ sportId: enabled ? sportId : undefined });
+    const sportTitle = breadcrumb?.sport_name ?? '';
     const totalMatches = useMemo(
         () => categories.reduce((sum, category) => sum + (category.match_count ?? 0), 0),
         [categories],
@@ -429,18 +445,22 @@ export const SportTopicPanel: FC<SportTopicPanelProps> = ({ sportId }) => {
                     'overflow-visible rounded-[var(--component-topic-shell-radius)] bg-[var(--component-topic-shell-bg)] pb-2',
             )}
         >
-            <SportTopicHero
-                sportId={sportId}
-                title={sportTitle}
-                totalMatches={totalMatches}
-                totalCompetitions={categories.length}
-            />
-            <TopicTabs
-                active={activeTab}
-                onChange={setActiveTab}
-                matchesLabel={t('topicPage.matchesTab')}
-                futuresLabel={t('topicPage.futuresTab')}
-            />
+            {!isSuperbet && (
+                <>
+                    <SportTopicHero
+                        sportId={sportId}
+                        title={sportTitle}
+                        totalMatches={totalMatches}
+                        totalCompetitions={categories.length}
+                    />
+                    <TopicTabs
+                        active={activeTab}
+                        onChange={setActiveTab}
+                        matchesLabel={t('topicPage.matchesTab')}
+                        futuresLabel={t('topicPage.futuresTab')}
+                    />
+                </>
+            )}
 
             <div className="flex flex-col gap-6 py-4">
                 {!isFutures && (
@@ -491,7 +511,8 @@ export const SportTopicPanel: FC<SportTopicPanelProps> = ({ sportId }) => {
 
                 <div className="px-3 md:px-4">
                     <h3 className="mb-2 text-body-md font-bold text-filltext-ft-h">{t('topicPage.allCompetitions')}</h3>
-                    <div className="grid grid-cols-4 gap-3 md:grid-cols-11">
+                    {/* 参考稿 .compchips：字母筛选改为 flex 自动换行的胶囊，去掉固定栅格列数。 */}
+                    <div className="flex flex-wrap gap-2">
                         <button
                             type="button"
                             onClick={() => setActiveLetter(null)}
@@ -528,7 +549,7 @@ export const SportTopicPanel: FC<SportTopicPanelProps> = ({ sportId }) => {
                     </div>
                 </div>
 
-                <div className="flex flex-col overflow-hidden rounded px-3 md:px-4">
+                <div className="flex flex-col px-3 md:px-4">
                     {isLoading ? (
                         <div className="flex h-20 items-center justify-center">
                             <Loading className="size-5" variant="color-red" />

@@ -79,6 +79,34 @@ const createMockCard = (id: number, type: RecommendCardType, title: string, matc
 
 const MOCK_RECOMMEND_CARDS: RecommendCard[] = [
     createMockCard(9002, RecommendCardType.SuperOdd, 'Tonight SuperOdd Boost', ['Portugal vs Croatia', 'France vs USA']),
+    createMockCard(9003, RecommendCardType.SuperOdd, 'Champions Night Combo', [
+        'Real Madrid vs Bayern',
+        'Man City vs PSG',
+        'Inter vs Arsenal',
+    ]),
+    createMockCard(9004, RecommendCardType.SuperOdd, 'Premier League Special', [
+        'Liverpool vs Chelsea',
+        'Tottenham vs Newcastle',
+    ]),
+    createMockCard(9005, RecommendCardType.SuperOdd, 'Brasileirão Boost', [
+        'Flamengo vs Palmeiras',
+        'Corinthians vs São Paulo',
+        'Grêmio vs Internacional',
+        'Fluminense vs Botafogo',
+    ]),
+    createMockCard(9006, RecommendCardType.SuperOdd, 'La Liga Multi', [
+        'Barcelona vs Atlético',
+        'Sevilla vs Valencia',
+        'Villarreal vs Betis',
+    ]),
+    createMockCard(9007, RecommendCardType.SuperOdd, 'Serie A Mega Boost', [
+        'Juventus vs Napoli',
+        'Milan vs Roma',
+        'Lazio vs Atalanta',
+        'Fiorentina vs Torino',
+        'Bologna vs Udinese',
+    ]),
+    createMockCard(9008, RecommendCardType.SuperOdd, 'Weekend Acca', ['Ajax vs PSV', 'Porto vs Benfica']),
 ];
 
 const isMockRecommendCard = (card: RecommendCard): boolean => card.country_code === 'mock';

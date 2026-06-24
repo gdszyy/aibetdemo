@@ -473,6 +473,23 @@ const GLASS_PROFILE: ThemeComponentProfile = {
     },
 };
 
+/* CIS 投后视觉识别：沿用 match 的结构（board/price-first/working-panel），圆角收敛到 8px 卡 / 6px 控件。 */
+const CIS_PROFILE: ThemeComponentProfile = {
+    ...MATCH_PROFILE,
+    brand: 'cis',
+    style: {
+        ...MATCH_PROFILE.style,
+        '--component-nav-item-radius': '6px',
+        '--component-market-card-radius': '8px',
+        '--component-odds-radius': '6px',
+        '--component-slip-cta-radius': '6px',
+        '--component-recommend-card-radius': '8px',
+        '--component-smart-card-radius': '8px',
+        '--component-player-card-radius': '8px',
+        '--component-player-threshold-radius': '6px',
+    },
+};
+
 type DeepPartial<T> = {
     [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
 };
@@ -506,6 +523,7 @@ const BRAND_PROFILE_BASE: Record<SchemeBrand, ThemeComponentProfile> = {
     betano: BETANO_PROFILE,
     betbus: BETBUS_PROFILE,
     glass: GLASS_PROFILE,
+    cis: CIS_PROFILE,
 };
 
 /**

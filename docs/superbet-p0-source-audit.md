@@ -3,9 +3,10 @@
 Date: 2026-06-24
 Brand: superbet
 Priority: P0
-Status: dark source-validated; live-list & social modules desktop source-validated (2026-06-24); light/mobile-detail inferred
+Status: dark source-validated; live-list & social modules desktop source-validated (2026-06-24); home Super Odds (price-boost) module desktop source-validated (2026-06-25); light/mobile-detail inferred
 
 Sources:
+- `https://superbet.bet.br/`
 - `https://superbet.bet.br/apostas/futebol`
 - `https://superbet.bet.br/apostas/ao-vivo`
 - `https://superbet.bet.br/apostas/futebol/ao-vivo`
@@ -36,6 +37,7 @@ Artifacts:
 - Mobile match-detail direct navigation and match-card click navigation fell back to the loading shell in automation. Mobile detail implementation should therefore infer structure from desktop detail plus the verified mobile list/sheet patterns, and should be rechecked manually if a real device/browser session is available.
 - A `2026-06-24` desktop pass (Brazil egress) directly validated the live-list featured modules: the `MELHORES PARTIDAS AO VIVO` top-live card carries exactly three stacked markets plus a chat footer, and the `APOSTAS POPULARES - AO VIVO` card is social proof that opens the match rather than copying the bet.
 - `Supersocial` is a separate product on its own domain (`https://supersocial.com.br/`); its content sits behind a cookie wall and a likely login, so its internal copy/follow UX was not captured and needs a logged-in manual pass.
+- A `2026-06-25` desktop pass captured the homepage `price-boost-carousel` (`SUPER ODDS`) module that earlier P0 passes had missed. It is a gold-themed multi-leg combo carousel; see `PC — Home — Super Odds (Price Boost)`. This corrects the earlier inference that Super Odds was a single `1x2` enhanced odd.
 
 ## PC — Shell & Header
 
@@ -101,6 +103,25 @@ Artifacts:
   - Inner/default surface is dark gray (`rgb(39, 42, 44)` through wrapper/inner).
   - Name and price are horizontal (`1 1.17`, `X 7.30`, `2 19.00`).
   - Selected state turns solid red `rgb(194, 30, 28)` with white text.
+
+## PC — Home — Super Odds (Price Boost)
+
+- Captured live from the homepage `https://superbet.bet.br/` (`2026-06-25`, Brazil egress). Module container class `price-boost-carousel`.
+- This is a **multi-leg combo carousel**, not a single `1x2` enhanced odd: each card bundles several legs into one boosted total price. It is the source analogue of our home `SUPERODD` recommend cards.
+- Header band:
+  - Background `linear-gradient(180deg, rgb(157, 118, 36) 0%, rgb(126, 94, 32) 32%, rgb(7, 7, 8) 84%)` — gold fading to near-black, top to bottom.
+  - Radius `16px 16px 0px 0px`, padding `16px 0px 0px`.
+  - Title `SUPER ODDS`: `rgb(255, 255, 255)`, `Roboto Flex`, `32px`, weight `900`, `italic`, `uppercase`, letter-spacing `1.2px`.
+  - Subtitle `Aumente seus Ganhos!`: `rgb(255, 255, 255)`, `14px`, weight `400`, `Inter`.
+  - `Ver tudo` link: `rgb(255, 109, 87)`, `14px`, weight `600`.
+  - Decorative brand illustration `generosity_price_boost_alt.png`, `80px x 80px`.
+- Combo card:
+  - Surface `rgb(24, 26, 27)`, radius `10px`, padding `12px`.
+  - Per-card badge `SUPER BOOST`: text `rgb(248, 190, 44)` gold, `16px`, weight `900`, `italic`, `uppercase`; pill bg `rgba(248, 190, 44, 0.2)`, radius `1000px`, padding `3px 8px`; leading icon `commerce-price-boost-dark.svg`, `20px x 20px` (multi-color price-boost/lightning glyph).
+  - Legs are stacked vertically (multi-selection parlay).
+  - Odds chip: inner surface `rgb(39, 42, 44)`, radius `4px`, height `32px`.
+  - Boosted total shows the original price struck (`rgba(255, 255, 255, 0.68)`, `12px`, `line-through`) followed by the boosted price (`rgba(255, 255, 255, 0.8)`, weight `600`).
+- Brand-vs-brand note: the price-boost module accent is **gold** (`rgb(248, 190, 44)` / header `rgb(157, 118, 36)`), distinct from the red `rgb(194, 30, 28)` used for header/selected/CTA elsewhere on the site. Gold is reserved for the Super Odds / price-boost identity.
 
 ## PC — Live List
 

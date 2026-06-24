@@ -27,6 +27,15 @@ export const SCHEMES = [
     'betano-dark',
     'glass-light',
     'glass-dark',
+    'glass-brasil-light',
+    'glass-brasil-dark',
+    'glass-mexico-light',
+    'glass-mexico-dark',
+    'glass-azul-light',
+    'glass-azul-dark',
+    'glass-roxo-light',
+    'glass-roxo-dark',
+    'cis-light',
 ] as const;
 export type Scheme = (typeof SCHEMES)[number];
 // 「直接复刻 betbus」转型已定调：默认即 betbus 深色方案；gtb 浅色红仅作可切换回退。

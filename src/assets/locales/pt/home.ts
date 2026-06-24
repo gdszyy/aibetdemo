@@ -118,6 +118,7 @@ export default {
             followers: 'Seguidores',
             streak: '6 wins',
             cta: 'Seguir aposta',
+            totalOdds: 'Odds totais',
         },
         leaderboard: {
             eyebrow: 'Corrida de rollover',

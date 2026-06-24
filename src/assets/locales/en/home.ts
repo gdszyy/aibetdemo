@@ -118,6 +118,7 @@ export default {
             followers: 'Followers',
             streak: '6 wins',
             cta: 'Follow bet',
+            totalOdds: 'Total odds',
         },
         leaderboard: {
             eyebrow: 'Turnover race',

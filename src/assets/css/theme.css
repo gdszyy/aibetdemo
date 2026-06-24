@@ -230,7 +230,7 @@
     --border-subtle: #313131;
     --border-strong: #444444;
     --content-primary: #f2f2f2;
-    --content-secondary: #d4d4d4;
+    --content-secondary: #c3c3c3; /* 对齐本主题 ft-f「secondary text」级(原为 ft-g near-primary)，强化 primary/secondary 层级+跨主题一致 */
     --content-muted: #929292;
     --content-inverse: #160006; /* 深色主题：tooltip/徽章底为浅色(content-primary/ft-g)，反色文字须为深色 */
     --on-brand: #160006; /* 绿/红色块上的文字使用深色以保证亮红底可读 */
@@ -496,6 +496,121 @@
     --func-bonus: #ff9a3d;
     --func-pending: #916d16;
     --func-void: #9ca7b4;
+}
+
+/************ SCHEME: cis-light - warm oatmeal shell + ivy-green accent (CIS 投后视觉识别) ****************/
+:root.cis-light {
+    color-scheme: light;
+
+    --brand-primary-0: #2d6a4f;
+    --brand-primary-1: rgba(45, 106, 79, 0.14);
+    --brand-primary-2: rgba(45, 106, 79, 0.22);
+    --brand-primary-3: #35805e;
+    --brand-primary-4: #245741;
+    --brand-primary-5: #1a2e26;
+
+    --filltext-ft-a: #efeeea;
+    --filltext-ft-b: #ffffff;
+    --filltext-ft-c: #e8e8e3;
+    --filltext-ft-d: #d4d4cc;
+    --filltext-ft-e: #6b6b62;
+    --filltext-ft-f: #54544c;
+    --filltext-ft-g: #33332e;
+    --filltext-ft-h: #1f2a25;
+
+    --neutral-black-a: rgba(31, 42, 37, 0.04);
+    --neutral-black-b: rgba(31, 42, 37, 0.08);
+    --neutral-black-c: rgba(31, 42, 37, 0.12);
+    --neutral-black-d: rgba(31, 42, 37, 0.2);
+    --neutral-black-e: rgba(31, 42, 37, 0.4);
+    --neutral-black-f: rgba(31, 42, 37, 0.6);
+    --neutral-black-g: rgba(31, 42, 37, 0.8);
+    --neutral-black-h: #1f2a25;
+
+    --page-bg: #f7f7f5;
+    --page-bg-transparent: rgba(247, 247, 245, 0);
+    --surface-1: #ffffff;
+    --surface-2: #efeeea;
+    --surface-3: #e4e4de;
+    --surface-shell: #ffffff;
+    --surface-shell-gradient: linear-gradient(90deg, #ffffff 0%, #faf9f6 44%, #ffffff 100%);
+    --surface-selected: #eef3ef;
+    --surface-raised: #ffffff;
+    --surface-muted: #f2f2ee;
+    --border-subtle: #e8e8e3;
+    --border-strong: #d4d4cc;
+    --content-primary: #1f2a25;
+    --content-secondary: #54544c;
+    --content-muted: #6b6b62;
+    --content-inverse: #ffffff;
+    --on-brand: #ffffff;
+    --status-success-surface: #d8f3dc;
+    --status-success-text: #2d6a4f;
+    --status-danger-surface: #ffebee;
+    --status-danger-text: #c62828;
+    --status-info-surface: #e3f2fd;
+
+    --style-card-shadow: 0 2px 8px rgba(26, 46, 38, 0.04), 0 1px 3px rgba(26, 46, 38, 0.03);
+    --style-floating-shadow: 0 8px 24px -10px rgba(26, 46, 38, 0.18);
+    --style-radius-control: 6px;
+    --style-radius-card: 8px;
+    --style-radius-panel: 8px;
+    --style-card-padding: calc(var(--spacing) * 4);
+    --style-card-gap: calc(var(--spacing) * 4);
+    --accent-warm: #b8860b;
+    --interactive-row-text: #54544c;
+    --interactive-row-icon: #6b6b62;
+    --interactive-row-hover-bg: #ffffff;
+    --interactive-row-hover-text: #1f2a25;
+    --interactive-row-hover-icon: #2d6a4f;
+    --interactive-row-active-bg: #eef3ef;
+    --interactive-row-active-text: #1f2a25;
+    --interactive-row-active-icon: #2d6a4f;
+    --interactive-active-rail-bg: #2d6a4f;
+    --interactive-active-rail-shadow: 0 0 8px rgba(45, 106, 79, 0.45);
+    --interactive-card-hover-bg: #ffffff;
+    --interactive-card-hover-shadow: 0 8px 18px -10px rgba(26, 46, 38, 0.16);
+    --odds-idle-hover-bg: #f4faf6;
+    --odds-idle-hover-border: #2d6a4f;
+    --odds-selected-bg: #d8f3dc;
+    --odds-selected-hover-bg: #c4ebcf;
+    --odds-selected-text: #1b4332;
+    --dock-bar-bg: linear-gradient(110deg, #1a2e26 0%, #2d6a4f 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #24493a 0%, #35805e 100%);
+    --mobile-nav-bg: rgba(255, 255, 255, 0.96);
+    --mobile-nav-border: #e8e8e3;
+    --mobile-nav-text: #6b6b62;
+    --mobile-nav-icon: #6b6b62;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #2d6a4f;
+    --mobile-nav-active-text: #245741;
+    --mobile-menu-bg: #ffffff;
+    --mobile-menu-border: #d4d4cc;
+    --mobile-drawer-bg: #ffffff;
+    --mobile-drawer-overlay-bg: rgba(26, 46, 38, 0.42);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(26, 46, 38, 0.22);
+    --mobile-drawer-close-bg: #efeeea;
+    --mobile-drawer-close-border: #d4d4cc;
+    --mobile-summary-bar-border: rgba(26, 46, 38, 0.12);
+    --mobile-summary-bar-radius: 8px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 -6px 20px -12px rgba(26, 46, 38, 0.32);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
+    --mobile-dock-action-bg: #2d6a4f;
+    --mobile-dock-action-hover-bg: #245741;
+    --mobile-sheet-overlay-bg: rgba(26, 46, 38, 0.42);
+    --mobile-sheet-bg: #ffffff;
+    --mobile-sheet-inner-bg: #f7f7f5;
+    --mobile-sheet-radius: 8px;
+    --mobile-sheet-shadow: 0 -16px 36px -16px rgba(26, 46, 38, 0.26);
+
+    --func-win: #2d6a4f;
+    --func-lost: #c62828;
+    --func-favorite: #b8860b;
+    --func-bonus: #b8860b;
+    --func-pending: #916d16;
+    --func-void: #9ca39a;
 }
 
 /************ SCHEME: match-mint - dark navy shell + mint-green accent (薄荷绿) ****************/
@@ -1235,7 +1350,7 @@
     --border-subtle: #282d3a;
     --border-strong: #3b4252;
     --content-primary: #f4f6f9;
-    --content-secondary: #d5d9e1;
+    --content-secondary: #b3bac6; /* 对齐本主题 ft-f「secondary text」级(原为 ft-g near-primary)，强化 primary/secondary 层级+跨主题一致 */
     --content-muted: #858d9b;
     --content-inverse: #07080c;
     --on-brand: #ffffff;
@@ -1469,7 +1584,7 @@
     --border-subtle: #2f3542;
     --border-strong: #3b4252;
     --content-primary: #f4f6fb;
-    --content-secondary: #d4d9e8;
+    --content-secondary: #b1b8cf; /* 对齐本主题 ft-f「secondary text」级(原为 ft-g near-primary)，强化 primary/secondary 层级+跨主题一致 */
     --content-muted: #858da8;
     --content-inverse: #0e0f22;
     --on-brand: #0e0f22;
@@ -1719,7 +1834,7 @@
     --border-subtle: oklch(0.72 0.035 290 / 0.18);
     --border-strong: oklch(0.74 0.06 295 / 0.34);
     --content-primary: #f6f4fe;
-    --content-secondary: #ddd8f0;
+    --content-secondary: #c4bce0; /* 对齐本主题 ft-f「secondary text」级(原为 ft-g near-primary)，强化 primary/secondary 层级+跨主题一致 */
     --content-muted: #9b8fc4;
     --content-inverse: #160d2c;
     --on-brand: #ffffff;
@@ -1788,6 +1903,998 @@
     --func-lost: #fb7185;
     --func-favorite: #c084fc;
     --func-bonus: #f0abfc;
+    --func-pending: #d6b24a;
+    --func-void: #8b85a8;
+    /* 白字徽章底（暗化同色相，白字对比≈5.0 AA） */
+    --func-win-solid: #1c7d55;
+    --func-lost-solid: #c4455c;
+    --func-favorite-solid: #7c4bd0;
+}
+
+/************ SCHEME: glass-brasil-light - iOS26 liquid-glass light · Brazil emerald+gold ****************/
+/* 巴西翡翠绿+金 · 亮：白玻璃面 + 绿/金点缀；涨绿跌红不变。 */
+:root.glass-brasil-light {
+    color-scheme: light;
+
+    --brand-primary-0: #0c8a52;
+    --brand-primary-1: rgba(12, 138, 82, 0.1);
+    --brand-primary-2: rgba(12, 138, 82, 0.18);
+    --brand-primary-3: #16c172;
+    --brand-primary-4: #0a6e42;
+    --brand-primary-5: #064e34;
+
+    --filltext-ft-a: #eafaf2;
+    --filltext-ft-b: #ffffff;
+    --filltext-ft-c: #dbf3e6;
+    --filltext-ft-d: #b8e6cd;
+    --filltext-ft-e: #4c7a66;
+    --filltext-ft-f: #2f5848;
+    --filltext-ft-g: #16382a;
+    --filltext-ft-h: #0a2419;
+
+    --neutral-black-a: rgba(12, 38, 26, 0.04);
+    --neutral-black-b: rgba(12, 38, 26, 0.08);
+    --neutral-black-c: rgba(12, 38, 26, 0.12);
+    --neutral-black-d: rgba(12, 38, 26, 0.2);
+    --neutral-black-e: rgba(12, 38, 26, 0.4);
+    --neutral-black-f: rgba(12, 38, 26, 0.6);
+    --neutral-black-g: rgba(12, 38, 26, 0.8);
+    --neutral-black-h: #0a2419;
+
+    --page-bg: #e8fbf1;
+    --page-bg-transparent: rgba(232, 251, 241, 0);
+    --surface-1: rgba(255, 255, 255, 0.62);
+    --surface-2: rgba(240, 251, 245, 0.66);
+    --surface-3: rgba(232, 250, 240, 0.7);
+    --surface-shell: rgba(255, 255, 255, 0.6);
+    --surface-shell-gradient: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.6) 0%,
+        rgba(240, 251, 245, 0.6) 44%,
+        rgba(255, 255, 255, 0.6) 100%
+    );
+    --surface-selected: rgba(12, 138, 82, 0.16);
+    --surface-raised: rgba(255, 255, 255, 0.66);
+    --surface-muted: rgba(238, 250, 244, 0.55);
+    --border-subtle: rgba(255, 255, 255, 0.6);
+    --border-strong: rgba(12, 138, 82, 0.28);
+    --content-primary: #0a2419;
+    --content-secondary: #2f5848;
+    --content-muted: #4c7a66;
+    --content-inverse: #ffffff;
+    --on-brand: #ffffff;
+    --status-success-surface: rgba(16, 185, 129, 0.14);
+    --status-success-text: #0f9b6c;
+    --status-danger-surface: rgba(244, 63, 94, 0.12);
+    --status-danger-text: #e11d48;
+    --status-info-surface: rgba(37, 99, 235, 0.1);
+
+    --style-card-shadow: 0 12px 32px -20px rgba(12, 138, 82, 0.4);
+    --style-floating-shadow: 0 16px 40px -20px rgba(12, 138, 82, 0.32);
+    --style-radius-control: 999px;
+    --style-radius-card: 18px;
+    --style-radius-panel: 22px;
+    --style-card-padding: calc(var(--spacing) * 4);
+    --style-card-gap: calc(var(--spacing) * 4);
+    --accent-warm: #d99a06;
+    --interactive-row-text: #2f5848;
+    --interactive-row-icon: #4c7a66;
+    --interactive-row-hover-bg: rgba(255, 255, 255, 0.7);
+    --interactive-row-hover-text: #0a2419;
+    --interactive-row-hover-icon: #0c8a52;
+    --interactive-row-active-bg: rgba(12, 138, 82, 0.16);
+    --interactive-row-active-text: #0a2419;
+    --interactive-row-active-icon: #0c8a52;
+    --interactive-active-rail-bg: linear-gradient(180deg, #0c8a52, #d99a06);
+    --interactive-active-rail-shadow: 0 0 8px rgba(12, 138, 82, 0.45);
+    --interactive-card-hover-bg: rgba(255, 255, 255, 0.78);
+    --interactive-card-hover-shadow: 0 12px 28px -16px rgba(12, 138, 82, 0.3);
+    --odds-idle-hover-bg: rgba(12, 138, 82, 0.12);
+    --odds-idle-hover-border: #0c8a52;
+    --odds-selected-bg: linear-gradient(135deg, #0c8a52, #d99a06);
+    --odds-selected-hover-bg: linear-gradient(135deg, #16c172, #fbbf24);
+    --odds-selected-text: #ffffff;
+    --dock-bar-bg: linear-gradient(110deg, #0c8a52 0%, #d99a06 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #16c172 0%, #d99a06 100%);
+    --mobile-nav-bg: rgba(255, 255, 255, 0.78);
+    --mobile-nav-border: rgba(12, 138, 82, 0.16);
+    --mobile-nav-text: #4c7a66;
+    --mobile-nav-icon: #4c7a66;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #0c8a52;
+    --mobile-nav-active-text: #0a6e42;
+    --mobile-menu-bg: rgba(255, 255, 255, 0.86);
+    --mobile-menu-border: rgba(12, 138, 82, 0.2);
+    --mobile-drawer-bg: rgba(255, 255, 255, 0.88);
+    --mobile-drawer-overlay-bg: rgba(12, 38, 26, 0.32);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(12, 138, 82, 0.3);
+    --mobile-drawer-close-bg: rgba(240, 251, 245, 0.8);
+    --mobile-drawer-close-border: rgba(12, 138, 82, 0.2);
+    --mobile-summary-bar-border: rgba(12, 138, 82, 0.16);
+    --mobile-summary-bar-radius: 18px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 -6px 24px -12px rgba(12, 138, 82, 0.25);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.96);
+    --mobile-dock-action-bg: #0c8a52;
+    --mobile-dock-action-hover-bg: #0a6e42;
+    --mobile-sheet-overlay-bg: rgba(12, 38, 26, 0.32);
+    --mobile-sheet-bg: rgba(255, 255, 255, 0.9);
+    --mobile-sheet-inner-bg: rgba(238, 250, 244, 0.7);
+    --mobile-sheet-radius: 22px;
+    --mobile-sheet-shadow: 0 -16px 40px -16px rgba(12, 138, 82, 0.28);
+
+    --func-win: #0f9b6c;
+    --func-lost: #e11d48;
+    --func-favorite: #d99a06;
+    --func-bonus: #f0a90e;
+    --func-pending: #a16207;
+    --func-void: #6f9384;
+}
+
+/************ SCHEME: glass-brasil-dark - iOS26 liquid-glass dark · Brazil emerald+gold ****************/
+/* 巴西翡翠绿+金 · 暗：中性深玻璃面 + 绿/金点缀；赔率涨绿跌红不变，规避紫粉。 */
+:root.glass-brasil-dark {
+    color-scheme: dark;
+
+    --brand-primary-0: #16c172;
+    --brand-primary-1: rgba(22, 193, 114, 0.16);
+    --brand-primary-2: rgba(22, 193, 114, 0.26);
+    --brand-primary-3: #34d98a;
+    --brand-primary-4: #0c9d5a;
+    --brand-primary-5: #064e34;
+
+    --filltext-ft-a: #04140d;
+    --filltext-ft-b: #061e14;
+    --filltext-ft-c: #0a2c1e;
+    --filltext-ft-d: #123f2c;
+    --filltext-ft-e: #8aa99a;
+    --filltext-ft-f: #b4ccc0;
+    --filltext-ft-g: #d4e6dd;
+    --filltext-ft-h: #eefdf5;
+
+    --neutral-black-a: rgba(255, 255, 255, 0.04);
+    --neutral-black-b: rgba(255, 255, 255, 0.08);
+    --neutral-black-c: rgba(255, 255, 255, 0.12);
+    --neutral-black-d: rgba(255, 255, 255, 0.2);
+    --neutral-black-e: rgba(255, 255, 255, 0.4);
+    --neutral-black-f: rgba(255, 255, 255, 0.6);
+    --neutral-black-g: rgba(255, 255, 255, 0.8);
+    --neutral-black-h: #eefdf5;
+
+    /* 暗色玻璃 elevation 阶梯（OKLCH，固定 H≈158°、低 C，靠 L* 等感知步进拉开层次）：
+       底色压到全局最暗，彩光只透微光，单调「越高越亮」，灰阶层级稳定。 */
+    --page-bg: oklch(0.11 0.032 158);
+    --page-bg-transparent: oklch(0.11 0.032 158 / 0);
+    --surface-1: oklch(0.245 0.03 158 / 0.74);
+    --surface-2: oklch(0.3 0.032 158 / 0.76);
+    --surface-3: oklch(0.35 0.034 158 / 0.78);
+    --surface-shell: oklch(0.195 0.028 158 / 0.62);
+    --surface-shell-gradient: linear-gradient(
+        90deg,
+        oklch(0.195 0.028 158 / 0.62) 0%,
+        oklch(0.21 0.034 168 / 0.62) 44%,
+        oklch(0.195 0.028 158 / 0.62) 100%
+    );
+    --surface-selected: oklch(0.55 0.14 168 / 0.26);
+    --surface-raised: oklch(0.275 0.032 158 / 0.82);
+    --surface-muted: oklch(0.175 0.026 158 / 0.55);
+    --border-subtle: oklch(0.72 0.035 158 / 0.18);
+    --border-strong: oklch(0.74 0.06 163 / 0.34);
+    --content-primary: #eefdf5;
+    --content-secondary: #b4ccc0;
+    --content-muted: #8aa99a;
+    --content-inverse: #06231a;
+    --on-brand: #ffffff;
+    --status-success-surface: rgba(52, 211, 153, 0.16);
+    --status-success-text: #34d399;
+    --status-danger-surface: rgba(244, 63, 94, 0.16);
+    --status-danger-text: #fb7185;
+    --status-info-surface: rgba(96, 165, 250, 0.16);
+
+    --style-card-shadow: 0 16px 40px -24px rgba(6, 90, 52, 0.7);
+    --style-floating-shadow: 0 18px 48px -22px rgba(4, 40, 26, 0.8);
+    --style-radius-control: 999px;
+    --style-radius-card: 18px;
+    --style-radius-panel: 22px;
+    --style-card-padding: calc(var(--spacing) * 4);
+    --style-card-gap: calc(var(--spacing) * 4);
+    --accent-warm: #fbbf24;
+    --interactive-row-text: #b4ccc0;
+    --interactive-row-icon: #b4ccc0;
+    --interactive-row-hover-bg: rgba(22, 193, 114, 0.16);
+    --interactive-row-hover-text: #eefdf5;
+    --interactive-row-hover-icon: #4ade80;
+    --interactive-row-active-bg: rgba(22, 193, 114, 0.26);
+    --interactive-row-active-text: #eefdf5;
+    --interactive-row-active-icon: #86efac;
+    --interactive-active-rail-bg: linear-gradient(180deg, #16c172, #fbbf24);
+    --interactive-active-rail-shadow: 0 0 10px rgba(52, 217, 138, 0.6);
+    --interactive-card-hover-bg: oklch(0.3 0.032 158 / 0.78);
+    --interactive-card-hover-shadow: 0 16px 32px -18px rgba(6, 90, 52, 0.6);
+    --odds-idle-hover-bg: rgba(22, 193, 114, 0.18);
+    --odds-idle-hover-border: #34d98a;
+    --odds-selected-bg: linear-gradient(135deg, #16c172, #fbbf24);
+    --odds-selected-hover-bg: linear-gradient(135deg, #0c9d5a, #f0a90e);
+    --odds-selected-text: #ffffff;
+    --dock-bar-bg: linear-gradient(110deg, #16c172 0%, #fbbf24 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #0c9d5a 0%, #f0a90e 100%);
+    --mobile-nav-bg: rgba(10, 30, 21, 0.72);
+    --mobile-nav-border: rgba(160, 235, 200, 0.16);
+    --mobile-nav-text: #8aa99a;
+    --mobile-nav-icon: #8aa99a;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #4ade80;
+    --mobile-nav-active-text: #86efac;
+    --mobile-menu-bg: rgba(14, 40, 28, 0.82);
+    --mobile-menu-border: rgba(160, 235, 200, 0.22);
+    --mobile-drawer-bg: rgba(9, 26, 18, 0.85);
+    --mobile-drawer-overlay-bg: rgba(5, 18, 12, 0.6);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(4, 40, 26, 0.8);
+    --mobile-drawer-close-bg: rgba(24, 56, 42, 0.7);
+    --mobile-drawer-close-border: rgba(160, 235, 200, 0.22);
+    --mobile-summary-bar-border: rgba(160, 235, 200, 0.16);
+    --mobile-summary-bar-radius: 18px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 -6px 24px -12px rgba(6, 90, 52, 0.7);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
+    --mobile-dock-action-bg: #16c172;
+    --mobile-dock-action-hover-bg: #0c9d5a;
+    --mobile-sheet-overlay-bg: rgba(5, 18, 12, 0.6);
+    --mobile-sheet-bg: rgba(14, 40, 28, 0.85);
+    --mobile-sheet-inner-bg: rgba(9, 26, 18, 0.7);
+    --mobile-sheet-radius: 22px;
+    --mobile-sheet-shadow: 0 -16px 40px -16px rgba(4, 40, 26, 0.8);
+
+    --func-win: #34d399;
+    --func-lost: #fb7185;
+    --func-favorite: #fbbf24;
+    --func-bonus: #fcd34d;
+    --func-pending: #d6b24a;
+    --func-void: #82998f;
+    /* 白字徽章底（暗化同色相，白字对比≈5.0 AA） */
+    --func-win-solid: #1c7d55;
+    --func-lost-solid: #c4455c;
+    --func-favorite-solid: #9e7a1a;
+}
+
+/************ SCHEME: glass-mexico-light - iOS26 liquid-glass light · Mexico jade + rosa accent ****************/
+/* 墨西哥翡翠为主+玫粉点缀 · 亮：白玻璃面 + 翡翠主调，Rosa Mexicano 点缀；涨绿跌红不变。 */
+:root.glass-mexico-light {
+    color-scheme: light;
+
+    --brand-primary-0: #0d9488;
+    --brand-primary-1: rgba(13, 148, 136, 0.1);
+    --brand-primary-2: rgba(13, 148, 136, 0.18);
+    --brand-primary-3: #14b8a6;
+    --brand-primary-4: #0f766e;
+    --brand-primary-5: #064e44;
+
+    --filltext-ft-a: #eafaf6;
+    --filltext-ft-b: #ffffff;
+    --filltext-ft-c: #dbf3ee;
+    --filltext-ft-d: #b8e6da;
+    --filltext-ft-e: #4a7a72;
+    --filltext-ft-f: #2d5850;
+    --filltext-ft-g: #163834;
+    --filltext-ft-h: #0a241f;
+
+    --neutral-black-a: rgba(10, 40, 34, 0.04);
+    --neutral-black-b: rgba(10, 40, 34, 0.08);
+    --neutral-black-c: rgba(10, 40, 34, 0.12);
+    --neutral-black-d: rgba(10, 40, 34, 0.2);
+    --neutral-black-e: rgba(10, 40, 34, 0.4);
+    --neutral-black-f: rgba(10, 40, 34, 0.6);
+    --neutral-black-g: rgba(10, 40, 34, 0.8);
+    --neutral-black-h: #0a241f;
+
+    --page-bg: #e6fbf6;
+    --page-bg-transparent: rgba(230, 251, 246, 0);
+    --surface-1: rgba(255, 255, 255, 0.62);
+    --surface-2: rgba(238, 251, 248, 0.66);
+    --surface-3: rgba(230, 250, 245, 0.7);
+    --surface-shell: rgba(255, 255, 255, 0.6);
+    --surface-shell-gradient: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.6) 0%,
+        rgba(238, 251, 248, 0.6) 44%,
+        rgba(255, 255, 255, 0.6) 100%
+    );
+    --surface-selected: rgba(13, 148, 136, 0.16);
+    --surface-raised: rgba(255, 255, 255, 0.66);
+    --surface-muted: rgba(236, 250, 247, 0.55);
+    --border-subtle: rgba(255, 255, 255, 0.6);
+    --border-strong: rgba(13, 148, 136, 0.28);
+    --content-primary: #0a241f;
+    --content-secondary: #2d5850;
+    --content-muted: #4a7a72;
+    --content-inverse: #ffffff;
+    --on-brand: #ffffff;
+    --status-success-surface: rgba(16, 185, 129, 0.14);
+    --status-success-text: #0f9b6c;
+    --status-danger-surface: rgba(244, 63, 94, 0.12);
+    --status-danger-text: #e11d48;
+    --status-info-surface: rgba(13, 148, 136, 0.12);
+
+    --style-card-shadow: 0 12px 32px -20px rgba(13, 148, 136, 0.4);
+    --style-floating-shadow: 0 16px 40px -20px rgba(13, 148, 136, 0.32);
+    --style-radius-control: 999px;
+    --style-radius-card: 18px;
+    --style-radius-panel: 22px;
+    --style-card-padding: calc(var(--spacing) * 4);
+    --style-card-gap: calc(var(--spacing) * 4);
+    --accent-warm: #db1f86;
+    --interactive-row-text: #2d5850;
+    --interactive-row-icon: #4a7a72;
+    --interactive-row-hover-bg: rgba(255, 255, 255, 0.7);
+    --interactive-row-hover-text: #0a241f;
+    --interactive-row-hover-icon: #0d9488;
+    --interactive-row-active-bg: rgba(13, 148, 136, 0.16);
+    --interactive-row-active-text: #0a241f;
+    --interactive-row-active-icon: #0d9488;
+    --interactive-active-rail-bg: linear-gradient(180deg, #0d9488, #0f766e);
+    --interactive-active-rail-shadow: 0 0 8px rgba(13, 148, 136, 0.45);
+    --interactive-card-hover-bg: rgba(255, 255, 255, 0.78);
+    --interactive-card-hover-shadow: 0 12px 28px -16px rgba(13, 148, 136, 0.3);
+    --odds-idle-hover-bg: rgba(13, 148, 136, 0.12);
+    --odds-idle-hover-border: #0d9488;
+    --odds-selected-bg: linear-gradient(135deg, #0d9488, #0f766e);
+    --odds-selected-hover-bg: linear-gradient(135deg, #14b8a6, #0d9488);
+    --odds-selected-text: #ffffff;
+    --dock-bar-bg: linear-gradient(110deg, #0d9488 0%, #0f766e 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #14b8a6 0%, #db1f86 100%);
+    --mobile-nav-bg: rgba(255, 255, 255, 0.78);
+    --mobile-nav-border: rgba(13, 148, 136, 0.16);
+    --mobile-nav-text: #4a7a72;
+    --mobile-nav-icon: #4a7a72;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #0d9488;
+    --mobile-nav-active-text: #0f766e;
+    --mobile-menu-bg: rgba(255, 255, 255, 0.86);
+    --mobile-menu-border: rgba(13, 148, 136, 0.2);
+    --mobile-drawer-bg: rgba(255, 255, 255, 0.88);
+    --mobile-drawer-overlay-bg: rgba(10, 40, 34, 0.32);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(13, 148, 136, 0.3);
+    --mobile-drawer-close-bg: rgba(238, 251, 248, 0.8);
+    --mobile-drawer-close-border: rgba(13, 148, 136, 0.2);
+    --mobile-summary-bar-border: rgba(13, 148, 136, 0.16);
+    --mobile-summary-bar-radius: 18px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 -6px 24px -12px rgba(13, 148, 136, 0.25);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.96);
+    --mobile-dock-action-bg: #0d9488;
+    --mobile-dock-action-hover-bg: #0f766e;
+    --mobile-sheet-overlay-bg: rgba(10, 40, 34, 0.32);
+    --mobile-sheet-bg: rgba(255, 255, 255, 0.9);
+    --mobile-sheet-inner-bg: rgba(236, 250, 247, 0.7);
+    --mobile-sheet-radius: 22px;
+    --mobile-sheet-shadow: 0 -16px 40px -16px rgba(13, 148, 136, 0.28);
+
+    --func-win: #0f9b6c;
+    --func-lost: #e11d48;
+    --func-favorite: #db1f86;
+    --func-bonus: #ec4899;
+    --func-pending: #a16207;
+    --func-void: #6f938c;
+}
+
+/************ SCHEME: glass-mexico-dark - iOS26 liquid-glass dark · Mexico jade + rosa accent ****************/
+/* 墨西哥翡翠为主+玫粉点缀 · 暗：中性深玻璃面 + 翡翠主调，Rosa Mexicano 仅作点缀；涨绿跌红不变。 */
+:root.glass-mexico-dark {
+    color-scheme: dark;
+
+    --brand-primary-0: #10c2a3;
+    --brand-primary-1: rgba(16, 194, 163, 0.16);
+    --brand-primary-2: rgba(16, 194, 163, 0.26);
+    --brand-primary-3: #2dd4bf;
+    --brand-primary-4: #0d9488;
+    --brand-primary-5: #064e44;
+
+    --filltext-ft-a: #04140f;
+    --filltext-ft-b: #061e18;
+    --filltext-ft-c: #0a2c25;
+    --filltext-ft-d: #123f36;
+    --filltext-ft-e: #84a8a0;
+    --filltext-ft-f: #aecbc4;
+    --filltext-ft-g: #d0e6e0;
+    --filltext-ft-h: #ecfdf8;
+
+    --neutral-black-a: rgba(255, 255, 255, 0.04);
+    --neutral-black-b: rgba(255, 255, 255, 0.08);
+    --neutral-black-c: rgba(255, 255, 255, 0.12);
+    --neutral-black-d: rgba(255, 255, 255, 0.2);
+    --neutral-black-e: rgba(255, 255, 255, 0.4);
+    --neutral-black-f: rgba(255, 255, 255, 0.6);
+    --neutral-black-g: rgba(255, 255, 255, 0.8);
+    --neutral-black-h: #ecfdf8;
+
+    /* 暗色玻璃 elevation 阶梯（OKLCH，固定 H≈178°、低 C，靠 L* 等感知步进拉开层次）：
+       底色压到全局最暗，彩光只透微光，单调「越高越亮」，灰阶层级稳定。 */
+    --page-bg: oklch(0.11 0.032 178);
+    --page-bg-transparent: oklch(0.11 0.032 178 / 0);
+    --surface-1: oklch(0.245 0.03 178 / 0.74);
+    --surface-2: oklch(0.3 0.032 178 / 0.76);
+    --surface-3: oklch(0.35 0.034 178 / 0.78);
+    --surface-shell: oklch(0.195 0.028 178 / 0.62);
+    --surface-shell-gradient: linear-gradient(
+        90deg,
+        oklch(0.195 0.028 178 / 0.62) 0%,
+        oklch(0.21 0.034 188 / 0.62) 44%,
+        oklch(0.195 0.028 178 / 0.62) 100%
+    );
+    --surface-selected: oklch(0.55 0.14 188 / 0.26);
+    --surface-raised: oklch(0.275 0.032 178 / 0.82);
+    --surface-muted: oklch(0.175 0.026 178 / 0.55);
+    --border-subtle: oklch(0.72 0.035 178 / 0.18);
+    --border-strong: oklch(0.74 0.06 183 / 0.34);
+    --content-primary: #ecfdf8;
+    --content-secondary: #aecbc4;
+    --content-muted: #84a8a0;
+    --content-inverse: #062320;
+    --on-brand: #ffffff;
+    --status-success-surface: rgba(52, 211, 153, 0.16);
+    --status-success-text: #34d399;
+    --status-danger-surface: rgba(244, 63, 94, 0.16);
+    --status-danger-text: #fb7185;
+    --status-info-surface: rgba(45, 212, 191, 0.18);
+
+    --style-card-shadow: 0 16px 40px -24px rgba(6, 90, 78, 0.7);
+    --style-floating-shadow: 0 18px 48px -22px rgba(4, 40, 31, 0.8);
+    --style-radius-control: 999px;
+    --style-radius-card: 18px;
+    --style-radius-panel: 22px;
+    --style-card-padding: calc(var(--spacing) * 4);
+    --style-card-gap: calc(var(--spacing) * 4);
+    --accent-warm: #ec0e8a;
+    --interactive-row-text: #aecbc4;
+    --interactive-row-icon: #aecbc4;
+    --interactive-row-hover-bg: rgba(16, 194, 163, 0.16);
+    --interactive-row-hover-text: #ecfdf8;
+    --interactive-row-hover-icon: #2dd4bf;
+    --interactive-row-active-bg: rgba(16, 194, 163, 0.26);
+    --interactive-row-active-text: #ecfdf8;
+    --interactive-row-active-icon: #5eead4;
+    --interactive-active-rail-bg: linear-gradient(180deg, #10c2a3, #0d9488);
+    --interactive-active-rail-shadow: 0 0 10px rgba(45, 212, 191, 0.6);
+    --interactive-card-hover-bg: oklch(0.3 0.032 178 / 0.78);
+    --interactive-card-hover-shadow: 0 16px 32px -18px rgba(6, 90, 78, 0.6);
+    --odds-idle-hover-bg: rgba(16, 194, 163, 0.18);
+    --odds-idle-hover-border: #2dd4bf;
+    --odds-selected-bg: linear-gradient(135deg, #10c2a3, #0d9488);
+    --odds-selected-hover-bg: linear-gradient(135deg, #0d9488, #0a766c);
+    --odds-selected-text: #ffffff;
+    --dock-bar-bg: linear-gradient(110deg, #10c2a3 0%, #0d9488 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #0d9488 0%, #0a766c 100%);
+    --mobile-nav-bg: rgba(10, 30, 27, 0.72);
+    --mobile-nav-border: rgba(150, 235, 220, 0.16);
+    --mobile-nav-text: #84a8a0;
+    --mobile-nav-icon: #84a8a0;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #2dd4bf;
+    --mobile-nav-active-text: #5eead4;
+    --mobile-menu-bg: rgba(14, 40, 31, 0.82);
+    --mobile-menu-border: rgba(150, 235, 220, 0.22);
+    --mobile-drawer-bg: rgba(9, 26, 23, 0.85);
+    --mobile-drawer-overlay-bg: rgba(5, 18, 15, 0.6);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(4, 40, 31, 0.8);
+    --mobile-drawer-close-bg: rgba(22, 56, 50, 0.7);
+    --mobile-drawer-close-border: rgba(150, 235, 220, 0.22);
+    --mobile-summary-bar-border: rgba(150, 235, 220, 0.16);
+    --mobile-summary-bar-radius: 18px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 -6px 24px -12px rgba(6, 90, 78, 0.7);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
+    --mobile-dock-action-bg: #10c2a3;
+    --mobile-dock-action-hover-bg: #0d9488;
+    --mobile-sheet-overlay-bg: rgba(5, 18, 15, 0.6);
+    --mobile-sheet-bg: rgba(14, 40, 31, 0.85);
+    --mobile-sheet-inner-bg: rgba(9, 26, 23, 0.7);
+    --mobile-sheet-radius: 22px;
+    --mobile-sheet-shadow: 0 -16px 40px -16px rgba(4, 40, 31, 0.8);
+
+    --func-win: #34d399;
+    --func-lost: #fb7185;
+    --func-favorite: #f472b6;
+    --func-bonus: #f9a8d4;
+    --func-pending: #d6b24a;
+    --func-void: #7f9a95;
+    /* 白字徽章底（暗化同色相，白字对比≈5.0 AA） */
+    --func-win-solid: #1c7d55;
+    --func-lost-solid: #c4455c;
+    --func-favorite-solid: #b03a73;
+}
+
+/************ SCHEME: glass-azul-light - iOS26 liquid-glass light · pan-LATAM deep blue + gold ****************/
+/* 泛拉美深蓝+金 · 亮：白玻璃面 + 蓝主调、金色点缀；涨绿跌红不变。 */
+:root.glass-azul-light {
+    color-scheme: light;
+
+    --brand-primary-0: #2563eb;
+    --brand-primary-1: rgba(37, 99, 235, 0.1);
+    --brand-primary-2: rgba(37, 99, 235, 0.18);
+    --brand-primary-3: #3b82f6;
+    --brand-primary-4: #1d4ed8;
+    --brand-primary-5: #1e3a8a;
+
+    --filltext-ft-a: #eef2fb;
+    --filltext-ft-b: #ffffff;
+    --filltext-ft-c: #e0e9f7;
+    --filltext-ft-d: #bfd2e6;
+    --filltext-ft-e: #4c5a7a;
+    --filltext-ft-f: #2f3e5f;
+    --filltext-ft-g: #16213f;
+    --filltext-ft-h: #0a1226;
+
+    --neutral-black-a: rgba(14, 22, 48, 0.04);
+    --neutral-black-b: rgba(14, 22, 48, 0.08);
+    --neutral-black-c: rgba(14, 22, 48, 0.12);
+    --neutral-black-d: rgba(14, 22, 48, 0.2);
+    --neutral-black-e: rgba(14, 22, 48, 0.4);
+    --neutral-black-f: rgba(14, 22, 48, 0.6);
+    --neutral-black-g: rgba(14, 22, 48, 0.8);
+    --neutral-black-h: #0a1226;
+
+    --page-bg: #e8f0fe;
+    --page-bg-transparent: rgba(232, 240, 254, 0);
+    --surface-1: rgba(255, 255, 255, 0.62);
+    --surface-2: rgba(240, 245, 254, 0.66);
+    --surface-3: rgba(232, 240, 253, 0.7);
+    --surface-shell: rgba(255, 255, 255, 0.6);
+    --surface-shell-gradient: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.6) 0%,
+        rgba(240, 245, 254, 0.6) 44%,
+        rgba(255, 255, 255, 0.6) 100%
+    );
+    --surface-selected: rgba(37, 99, 235, 0.16);
+    --surface-raised: rgba(255, 255, 255, 0.66);
+    --surface-muted: rgba(238, 243, 253, 0.55);
+    --border-subtle: rgba(255, 255, 255, 0.6);
+    --border-strong: rgba(37, 99, 235, 0.28);
+    --content-primary: #0a1226;
+    --content-secondary: #2f3e5f;
+    --content-muted: #4c5a7a;
+    --content-inverse: #ffffff;
+    --on-brand: #ffffff;
+    --status-success-surface: rgba(16, 185, 129, 0.14);
+    --status-success-text: #0f9b6c;
+    --status-danger-surface: rgba(244, 63, 94, 0.12);
+    --status-danger-text: #e11d48;
+    --status-info-surface: rgba(2, 132, 199, 0.12);
+
+    --style-card-shadow: 0 12px 32px -20px rgba(37, 99, 235, 0.4);
+    --style-floating-shadow: 0 16px 40px -20px rgba(37, 99, 235, 0.32);
+    --style-radius-control: 999px;
+    --style-radius-card: 18px;
+    --style-radius-panel: 22px;
+    --style-card-padding: calc(var(--spacing) * 4);
+    --style-card-gap: calc(var(--spacing) * 4);
+    --accent-warm: #d97706;
+    --interactive-row-text: #2f3e5f;
+    --interactive-row-icon: #4c5a7a;
+    --interactive-row-hover-bg: rgba(255, 255, 255, 0.7);
+    --interactive-row-hover-text: #0a1226;
+    --interactive-row-hover-icon: #2563eb;
+    --interactive-row-active-bg: rgba(37, 99, 235, 0.16);
+    --interactive-row-active-text: #0a1226;
+    --interactive-row-active-icon: #2563eb;
+    --interactive-active-rail-bg: linear-gradient(180deg, #2563eb, #1d4ed8);
+    --interactive-active-rail-shadow: 0 0 8px rgba(37, 99, 235, 0.45);
+    --interactive-card-hover-bg: rgba(255, 255, 255, 0.78);
+    --interactive-card-hover-shadow: 0 12px 28px -16px rgba(37, 99, 235, 0.3);
+    --odds-idle-hover-bg: rgba(37, 99, 235, 0.12);
+    --odds-idle-hover-border: #2563eb;
+    --odds-selected-bg: linear-gradient(135deg, #2563eb, #1d4ed8);
+    --odds-selected-hover-bg: linear-gradient(135deg, #3b82f6, #2563eb);
+    --odds-selected-text: #ffffff;
+    --dock-bar-bg: linear-gradient(110deg, #2563eb 0%, #1d4ed8 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #3b82f6 0%, #d97706 100%);
+    --mobile-nav-bg: rgba(255, 255, 255, 0.78);
+    --mobile-nav-border: rgba(37, 99, 235, 0.16);
+    --mobile-nav-text: #4c5a7a;
+    --mobile-nav-icon: #4c5a7a;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #2563eb;
+    --mobile-nav-active-text: #1d4ed8;
+    --mobile-menu-bg: rgba(255, 255, 255, 0.86);
+    --mobile-menu-border: rgba(37, 99, 235, 0.2);
+    --mobile-drawer-bg: rgba(255, 255, 255, 0.88);
+    --mobile-drawer-overlay-bg: rgba(14, 22, 48, 0.32);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(37, 99, 235, 0.3);
+    --mobile-drawer-close-bg: rgba(240, 245, 254, 0.8);
+    --mobile-drawer-close-border: rgba(37, 99, 235, 0.2);
+    --mobile-summary-bar-border: rgba(37, 99, 235, 0.16);
+    --mobile-summary-bar-radius: 18px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 -6px 24px -12px rgba(37, 99, 235, 0.25);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.96);
+    --mobile-dock-action-bg: #2563eb;
+    --mobile-dock-action-hover-bg: #1d4ed8;
+    --mobile-sheet-overlay-bg: rgba(14, 22, 48, 0.32);
+    --mobile-sheet-bg: rgba(255, 255, 255, 0.9);
+    --mobile-sheet-inner-bg: rgba(238, 243, 253, 0.7);
+    --mobile-sheet-radius: 22px;
+    --mobile-sheet-shadow: 0 -16px 40px -16px rgba(37, 99, 235, 0.28);
+
+    --func-win: #0f9b6c;
+    --func-lost: #e11d48;
+    --func-favorite: #d97706;
+    --func-bonus: #f59e0b;
+    --func-pending: #a16207;
+    --func-void: #6f7a93;
+}
+
+/************ SCHEME: glass-azul-dark - iOS26 liquid-glass dark · pan-LATAM deep blue + gold ****************/
+/* 泛拉美深蓝+金 · 暗：中性深玻璃面 + 专业蓝主调、金色点缀；涨绿跌红不变。 */
+:root.glass-azul-dark {
+    color-scheme: dark;
+
+    --brand-primary-0: #3b82f6;
+    --brand-primary-1: rgba(59, 130, 246, 0.16);
+    --brand-primary-2: rgba(59, 130, 246, 0.26);
+    --brand-primary-3: #60a5fa;
+    --brand-primary-4: #2563eb;
+    --brand-primary-5: #1e3a8a;
+
+    --filltext-ft-a: #060a18;
+    --filltext-ft-b: #0a1024;
+    --filltext-ft-c: #111a38;
+    --filltext-ft-d: #1e2a50;
+    --filltext-ft-e: #8a93ad;
+    --filltext-ft-f: #b3bcd2;
+    --filltext-ft-g: #d4dbeb;
+    --filltext-ft-h: #eef4ff;
+
+    --neutral-black-a: rgba(255, 255, 255, 0.04);
+    --neutral-black-b: rgba(255, 255, 255, 0.08);
+    --neutral-black-c: rgba(255, 255, 255, 0.12);
+    --neutral-black-d: rgba(255, 255, 255, 0.2);
+    --neutral-black-e: rgba(255, 255, 255, 0.4);
+    --neutral-black-f: rgba(255, 255, 255, 0.6);
+    --neutral-black-g: rgba(255, 255, 255, 0.8);
+    --neutral-black-h: #eef4ff;
+
+    /* 暗色玻璃 elevation 阶梯（OKLCH，固定 H≈258°、低 C，靠 L* 等感知步进拉开层次）：
+       底色压到全局最暗，彩光只透微光，单调「越高越亮」，灰阶层级稳定。 */
+    --page-bg: oklch(0.11 0.032 258);
+    --page-bg-transparent: oklch(0.11 0.032 258 / 0);
+    --surface-1: oklch(0.245 0.03 258 / 0.74);
+    --surface-2: oklch(0.3 0.032 258 / 0.76);
+    --surface-3: oklch(0.35 0.034 258 / 0.78);
+    --surface-shell: oklch(0.195 0.028 258 / 0.62);
+    --surface-shell-gradient: linear-gradient(
+        90deg,
+        oklch(0.195 0.028 258 / 0.62) 0%,
+        oklch(0.21 0.034 263 / 0.62) 44%,
+        oklch(0.195 0.028 258 / 0.62) 100%
+    );
+    --surface-selected: oklch(0.55 0.14 263 / 0.26);
+    --surface-raised: oklch(0.275 0.032 258 / 0.82);
+    --surface-muted: oklch(0.175 0.026 258 / 0.55);
+    --border-subtle: oklch(0.72 0.035 258 / 0.18);
+    --border-strong: oklch(0.74 0.06 260 / 0.34);
+    --content-primary: #eef4ff;
+    --content-secondary: #b3bcd2;
+    --content-muted: #8a93ad;
+    --content-inverse: #0a1024;
+    --on-brand: #ffffff;
+    --status-success-surface: rgba(52, 211, 153, 0.16);
+    --status-success-text: #34d399;
+    --status-danger-surface: rgba(244, 63, 94, 0.16);
+    --status-danger-text: #fb7185;
+    --status-info-surface: rgba(56, 189, 248, 0.18);
+
+    --style-card-shadow: 0 16px 40px -24px rgba(20, 50, 160, 0.7);
+    --style-floating-shadow: 0 18px 48px -22px rgba(10, 24, 64, 0.8);
+    --style-radius-control: 999px;
+    --style-radius-card: 18px;
+    --style-radius-panel: 22px;
+    --style-card-padding: calc(var(--spacing) * 4);
+    --style-card-gap: calc(var(--spacing) * 4);
+    --accent-warm: #fcd34d;
+    --interactive-row-text: #b3bcd2;
+    --interactive-row-icon: #b3bcd2;
+    --interactive-row-hover-bg: rgba(59, 130, 246, 0.16);
+    --interactive-row-hover-text: #eef4ff;
+    --interactive-row-hover-icon: #60a5fa;
+    --interactive-row-active-bg: rgba(59, 130, 246, 0.26);
+    --interactive-row-active-text: #eef4ff;
+    --interactive-row-active-icon: #93c5fd;
+    --interactive-active-rail-bg: linear-gradient(180deg, #3b82f6, #2563eb);
+    --interactive-active-rail-shadow: 0 0 10px rgba(96, 165, 250, 0.6);
+    --interactive-card-hover-bg: oklch(0.3 0.032 258 / 0.78);
+    --interactive-card-hover-shadow: 0 16px 32px -18px rgba(20, 50, 160, 0.6);
+    --odds-idle-hover-bg: rgba(59, 130, 246, 0.18);
+    --odds-idle-hover-border: #60a5fa;
+    --odds-selected-bg: linear-gradient(135deg, #3b82f6, #2563eb);
+    --odds-selected-hover-bg: linear-gradient(135deg, #2563eb, #1d4ed8);
+    --odds-selected-text: #ffffff;
+    --dock-bar-bg: linear-gradient(110deg, #3b82f6 0%, #2563eb 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #2563eb 0%, #1d4ed8 100%);
+    --mobile-nav-bg: rgba(10, 16, 36, 0.72);
+    --mobile-nav-border: rgba(158, 192, 250, 0.16);
+    --mobile-nav-text: #8a93ad;
+    --mobile-nav-icon: #8a93ad;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #60a5fa;
+    --mobile-nav-active-text: #93c5fd;
+    --mobile-menu-bg: rgba(16, 26, 56, 0.82);
+    --mobile-menu-border: rgba(158, 192, 250, 0.22);
+    --mobile-drawer-bg: rgba(10, 16, 40, 0.85);
+    --mobile-drawer-overlay-bg: rgba(6, 9, 28, 0.6);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(10, 24, 64, 0.8);
+    --mobile-drawer-close-bg: rgba(30, 42, 80, 0.7);
+    --mobile-drawer-close-border: rgba(158, 192, 250, 0.22);
+    --mobile-summary-bar-border: rgba(158, 192, 250, 0.16);
+    --mobile-summary-bar-radius: 18px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 -6px 24px -12px rgba(20, 50, 160, 0.7);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
+    --mobile-dock-action-bg: #3b82f6;
+    --mobile-dock-action-hover-bg: #2563eb;
+    --mobile-sheet-overlay-bg: rgba(6, 9, 28, 0.6);
+    --mobile-sheet-bg: rgba(16, 26, 56, 0.85);
+    --mobile-sheet-inner-bg: rgba(10, 16, 40, 0.7);
+    --mobile-sheet-radius: 22px;
+    --mobile-sheet-shadow: 0 -16px 40px -16px rgba(10, 24, 64, 0.8);
+
+    --func-win: #34d399;
+    --func-lost: #fb7185;
+    --func-favorite: #fcd34d;
+    --func-bonus: #fde68a;
+    --func-pending: #d6b24a;
+    --func-void: #818aa0;
+    /* 白字徽章底（暗化同色相，白字对比≈5.0 AA） */
+    --func-win-solid: #1c7d55;
+    --func-lost-solid: #c4455c;
+    --func-favorite-solid: #b08418;
+}
+
+/************ SCHEME: glass-roxo-light - iOS26 liquid-glass light · bank mono-violet (fintech trust) ****************/
+/* 银行紫 · 亮：白玻璃面 + 单一信任紫（无粉），区别于赌场紫粉；涨绿跌红不变。 */
+:root.glass-roxo-light {
+    color-scheme: light;
+
+    --brand-primary-0: #8410d4;
+    --brand-primary-1: rgba(132, 16, 212, 0.1);
+    --brand-primary-2: rgba(132, 16, 212, 0.18);
+    --brand-primary-3: #9416e0;
+    --brand-primary-4: #6b0fb0;
+    --brand-primary-5: #4a0a72;
+
+    --filltext-ft-a: #f0eafb;
+    --filltext-ft-b: #ffffff;
+    --filltext-ft-c: #e9e0f7;
+    --filltext-ft-d: #d2bfe6;
+    --filltext-ft-e: #6b6390;
+    --filltext-ft-f: #534b73;
+    --filltext-ft-g: #342b52;
+    --filltext-ft-h: #1b1335;
+
+    --neutral-black-a: rgba(30, 16, 56, 0.04);
+    --neutral-black-b: rgba(30, 16, 56, 0.08);
+    --neutral-black-c: rgba(30, 16, 56, 0.12);
+    --neutral-black-d: rgba(30, 16, 56, 0.2);
+    --neutral-black-e: rgba(30, 16, 56, 0.4);
+    --neutral-black-f: rgba(30, 16, 56, 0.6);
+    --neutral-black-g: rgba(30, 16, 56, 0.8);
+    --neutral-black-h: #1b1335;
+
+    --page-bg: #f3eafe;
+    --page-bg-transparent: rgba(243, 234, 254, 0);
+    --surface-1: rgba(255, 255, 255, 0.62);
+    --surface-2: rgba(246, 240, 253, 0.66);
+    --surface-3: rgba(240, 232, 252, 0.7);
+    --surface-shell: rgba(255, 255, 255, 0.6);
+    --surface-shell-gradient: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.6) 0%,
+        rgba(246, 240, 253, 0.6) 44%,
+        rgba(255, 255, 255, 0.6) 100%
+    );
+    --surface-selected: rgba(132, 16, 212, 0.16);
+    --surface-raised: rgba(255, 255, 255, 0.66);
+    --surface-muted: rgba(244, 238, 252, 0.55);
+    --border-subtle: rgba(255, 255, 255, 0.6);
+    --border-strong: rgba(132, 16, 212, 0.28);
+    --content-primary: #1b1335;
+    --content-secondary: #534b73;
+    --content-muted: #6b6390;
+    --content-inverse: #ffffff;
+    --on-brand: #ffffff;
+    --status-success-surface: rgba(16, 185, 129, 0.14);
+    --status-success-text: #0f9b6c;
+    --status-danger-surface: rgba(244, 63, 94, 0.12);
+    --status-danger-text: #e11d48;
+    --status-info-surface: rgba(124, 58, 237, 0.12);
+
+    --style-card-shadow: 0 12px 32px -20px rgba(124, 58, 237, 0.4);
+    --style-floating-shadow: 0 16px 40px -20px rgba(124, 58, 237, 0.32);
+    --style-radius-control: 999px;
+    --style-radius-card: 18px;
+    --style-radius-panel: 22px;
+    --style-card-padding: calc(var(--spacing) * 4);
+    --style-card-gap: calc(var(--spacing) * 4);
+    --accent-warm: #7c3aed;
+    --interactive-row-text: #534b73;
+    --interactive-row-icon: #6b6390;
+    --interactive-row-hover-bg: rgba(255, 255, 255, 0.7);
+    --interactive-row-hover-text: #1b1335;
+    --interactive-row-hover-icon: #8410d4;
+    --interactive-row-active-bg: rgba(132, 16, 212, 0.16);
+    --interactive-row-active-text: #1b1335;
+    --interactive-row-active-icon: #8410d4;
+    --interactive-active-rail-bg: linear-gradient(180deg, #8410d4, #6b0fb0);
+    --interactive-active-rail-shadow: 0 0 8px rgba(132, 16, 212, 0.45);
+    --interactive-card-hover-bg: rgba(255, 255, 255, 0.78);
+    --interactive-card-hover-shadow: 0 12px 28px -16px rgba(124, 58, 237, 0.3);
+    --odds-idle-hover-bg: rgba(132, 16, 212, 0.12);
+    --odds-idle-hover-border: #8410d4;
+    --odds-selected-bg: linear-gradient(135deg, #8410d4, #6b0fb0);
+    --odds-selected-hover-bg: linear-gradient(135deg, #9416e0, #7a0fbd);
+    --odds-selected-text: #ffffff;
+    --dock-bar-bg: linear-gradient(110deg, #8410d4 0%, #6b0fb0 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #9416e0 0%, #7c3aed 100%);
+    --mobile-nav-bg: rgba(255, 255, 255, 0.78);
+    --mobile-nav-border: rgba(132, 16, 212, 0.16);
+    --mobile-nav-text: #6b6390;
+    --mobile-nav-icon: #6b6390;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #8410d4;
+    --mobile-nav-active-text: #6b0fb0;
+    --mobile-menu-bg: rgba(255, 255, 255, 0.86);
+    --mobile-menu-border: rgba(132, 16, 212, 0.2);
+    --mobile-drawer-bg: rgba(255, 255, 255, 0.88);
+    --mobile-drawer-overlay-bg: rgba(30, 16, 56, 0.32);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(124, 58, 237, 0.3);
+    --mobile-drawer-close-bg: rgba(246, 240, 253, 0.8);
+    --mobile-drawer-close-border: rgba(132, 16, 212, 0.2);
+    --mobile-summary-bar-border: rgba(132, 16, 212, 0.16);
+    --mobile-summary-bar-radius: 18px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 -6px 24px -12px rgba(124, 58, 237, 0.25);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.96);
+    --mobile-dock-action-bg: #8410d4;
+    --mobile-dock-action-hover-bg: #6b0fb0;
+    --mobile-sheet-overlay-bg: rgba(30, 16, 56, 0.32);
+    --mobile-sheet-bg: rgba(255, 255, 255, 0.9);
+    --mobile-sheet-inner-bg: rgba(244, 238, 252, 0.7);
+    --mobile-sheet-radius: 22px;
+    --mobile-sheet-shadow: 0 -16px 40px -16px rgba(124, 58, 237, 0.28);
+
+    --func-win: #0f9b6c;
+    --func-lost: #e11d48;
+    --func-favorite: #8410d4;
+    --func-bonus: #a855f7;
+    --func-pending: #a16207;
+    --func-void: #837a9b;
+}
+
+/************ SCHEME: glass-roxo-dark - iOS26 liquid-glass dark · bank mono-violet (fintech trust) ****************/
+/* 银行紫 · 暗：单一紫色相（无粉渐变），深而饱和的信任紫，区别于赌场紫粉；涨绿跌红不变。 */
+:root.glass-roxo-dark {
+    color-scheme: dark;
+
+    --brand-primary-0: #9416e0;
+    --brand-primary-1: rgba(148, 22, 224, 0.16);
+    --brand-primary-2: rgba(148, 22, 224, 0.26);
+    --brand-primary-3: #b15ef5;
+    --brand-primary-4: #7a0fbd;
+    --brand-primary-5: #4a0a72;
+
+    --filltext-ft-a: #0e0820;
+    --filltext-ft-b: #160d2c;
+    --filltext-ft-c: #211538;
+    --filltext-ft-d: #322150;
+    --filltext-ft-e: #9b8fc4;
+    --filltext-ft-f: #c4bce0;
+    --filltext-ft-g: #ddd8f0;
+    --filltext-ft-h: #f5f0fe;
+
+    --neutral-black-a: rgba(255, 255, 255, 0.04);
+    --neutral-black-b: rgba(255, 255, 255, 0.08);
+    --neutral-black-c: rgba(255, 255, 255, 0.12);
+    --neutral-black-d: rgba(255, 255, 255, 0.2);
+    --neutral-black-e: rgba(255, 255, 255, 0.4);
+    --neutral-black-f: rgba(255, 255, 255, 0.6);
+    --neutral-black-g: rgba(255, 255, 255, 0.8);
+    --neutral-black-h: #f5f0fe;
+
+    /* 暗色玻璃 elevation 阶梯（OKLCH，固定 H≈303°、低 C，靠 L* 等感知步进拉开层次）：
+       底色压到全局最暗，彩光只透微光，单调「越高越亮」，灰阶层级稳定。 */
+    --page-bg: oklch(0.11 0.032 303);
+    --page-bg-transparent: oklch(0.11 0.032 303 / 0);
+    --surface-1: oklch(0.245 0.03 303 / 0.74);
+    --surface-2: oklch(0.3 0.032 303 / 0.76);
+    --surface-3: oklch(0.35 0.034 303 / 0.78);
+    --surface-shell: oklch(0.195 0.028 303 / 0.62);
+    --surface-shell-gradient: linear-gradient(
+        90deg,
+        oklch(0.195 0.028 303 / 0.62) 0%,
+        oklch(0.21 0.034 305 / 0.62) 44%,
+        oklch(0.195 0.028 303 / 0.62) 100%
+    );
+    --surface-selected: oklch(0.55 0.14 305 / 0.26);
+    --surface-raised: oklch(0.275 0.032 303 / 0.82);
+    --surface-muted: oklch(0.175 0.026 303 / 0.55);
+    --border-subtle: oklch(0.72 0.035 303 / 0.18);
+    --border-strong: oklch(0.74 0.06 304 / 0.34);
+    --content-primary: #f5f0fe;
+    --content-secondary: #c4bce0;
+    --content-muted: #9b8fc4;
+    --content-inverse: #160d2c;
+    --on-brand: #ffffff;
+    --status-success-surface: rgba(52, 211, 153, 0.16);
+    --status-success-text: #34d399;
+    --status-danger-surface: rgba(244, 63, 94, 0.16);
+    --status-danger-text: #fb7185;
+    --status-info-surface: rgba(167, 139, 250, 0.18);
+
+    --style-card-shadow: 0 16px 40px -24px rgba(70, 18, 160, 0.7);
+    --style-floating-shadow: 0 18px 48px -22px rgba(34, 16, 74, 0.8);
+    --style-radius-control: 999px;
+    --style-radius-card: 18px;
+    --style-radius-panel: 22px;
+    --style-card-padding: calc(var(--spacing) * 4);
+    --style-card-gap: calc(var(--spacing) * 4);
+    --accent-warm: #c4b5fd;
+    --interactive-row-text: #c4bce0;
+    --interactive-row-icon: #c4bce0;
+    --interactive-row-hover-bg: rgba(148, 22, 224, 0.16);
+    --interactive-row-hover-text: #f5f0fe;
+    --interactive-row-hover-icon: #c084fc;
+    --interactive-row-active-bg: rgba(148, 22, 224, 0.26);
+    --interactive-row-active-text: #f5f0fe;
+    --interactive-row-active-icon: #d8b4fe;
+    --interactive-active-rail-bg: linear-gradient(180deg, #9416e0, #7a0fbd);
+    --interactive-active-rail-shadow: 0 0 10px rgba(177, 94, 245, 0.6);
+    --interactive-card-hover-bg: oklch(0.3 0.032 303 / 0.78);
+    --interactive-card-hover-shadow: 0 16px 32px -18px rgba(70, 18, 160, 0.6);
+    --odds-idle-hover-bg: rgba(148, 22, 224, 0.18);
+    --odds-idle-hover-border: #b15ef5;
+    --odds-selected-bg: linear-gradient(135deg, #9416e0, #7a0fbd);
+    --odds-selected-hover-bg: linear-gradient(135deg, #a92ff0, #8a12d0);
+    --odds-selected-text: #ffffff;
+    --dock-bar-bg: linear-gradient(110deg, #9416e0 0%, #7a0fbd 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #a92ff0 0%, #8a12d0 100%);
+    --mobile-nav-bg: rgba(26, 12, 46, 0.72);
+    --mobile-nav-border: rgba(205, 180, 250, 0.16);
+    --mobile-nav-text: #9b8fc4;
+    --mobile-nav-icon: #9b8fc4;
+    --mobile-nav-active-icon-bg: transparent;
+    --mobile-nav-active-icon: #c084fc;
+    --mobile-nav-active-text: #d8b4fe;
+    --mobile-menu-bg: rgba(38, 18, 62, 0.82);
+    --mobile-menu-border: rgba(205, 180, 250, 0.22);
+    --mobile-drawer-bg: rgba(24, 10, 44, 0.85);
+    --mobile-drawer-overlay-bg: rgba(12, 5, 24, 0.6);
+    --mobile-drawer-border: transparent;
+    --mobile-drawer-shadow: 6px 0 30px -8px rgba(34, 16, 74, 0.8);
+    --mobile-drawer-close-bg: rgba(52, 30, 84, 0.7);
+    --mobile-drawer-close-border: rgba(205, 180, 250, 0.22);
+    --mobile-summary-bar-border: rgba(205, 180, 250, 0.16);
+    --mobile-summary-bar-radius: 18px;
+    --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 -6px 24px -12px rgba(70, 18, 160, 0.7);
+    --mobile-dock-icon-bg: transparent;
+    --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
+    --mobile-dock-action-bg: #9416e0;
+    --mobile-dock-action-hover-bg: #7a0fbd;
+    --mobile-sheet-overlay-bg: rgba(12, 5, 24, 0.6);
+    --mobile-sheet-bg: rgba(38, 18, 62, 0.85);
+    --mobile-sheet-inner-bg: rgba(24, 10, 44, 0.7);
+    --mobile-sheet-radius: 22px;
+    --mobile-sheet-shadow: 0 -16px 40px -16px rgba(34, 16, 74, 0.8);
+
+    --func-win: #34d399;
+    --func-lost: #fb7185;
+    --func-favorite: #c084fc;
+    --func-bonus: #d8b4fe;
     --func-pending: #d6b24a;
     --func-void: #8b85a8;
     /* 白字徽章底（暗化同色相，白字对比≈5.0 AA） */

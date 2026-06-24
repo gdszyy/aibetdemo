@@ -35,6 +35,7 @@ export default {
         matchesTab: 'Matches',
         popular: 'Popular',
         popularFutures: 'Popular Futures',
+        next3h: 'Next 3 hours',
         next12h: 'Next 12 hours',
         next24h: 'Next 24 hours',
         timeFilterNote: 'Time filter needs backend time-window support',

@@ -35,6 +35,7 @@ export default {
         matchesTab: 'Partidas',
         popular: 'Popular',
         popularFutures: 'Futuras Populares',
+        next3h: 'Próximas 3 horas',
         next12h: 'Próximas 12 horas',
         next24h: 'Próximas 24 horas',
         timeFilterNote: 'O filtro por tempo depende do back-end',

@@ -332,68 +332,167 @@
     padding-bottom: 6px;
 }
 
+/* World Cup Hubs：以主题令牌为底的赛事入口卡，国家/分组色仅作 accent，不再整块铺旗色。 */
 .leagueCard {
     position: relative;
-    flex: 0 0 204px;
-    height: 96px;
+    display: flex;
+    flex: 0 0 236px;
+    flex-direction: column;
+    gap: 10px;
     overflow: hidden;
     scroll-snap-align: start;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 12px;
+    border: 1px solid var(--home-line);
+    border-radius: var(--home-recommend-radius);
+    background:
+        linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--league-accent, var(--home-accent)) 12%, transparent),
+            transparent 58%
+        ),
+        var(--home-surface);
     padding: 13px 14px;
-    color: #ffffff;
-    box-shadow: inset 0 -34px 42px -22px rgba(0, 0, 0, 0.55);
+    color: var(--home-text);
+    box-shadow: var(--home-card-shadow);
+    transition:
+        background 160ms ease,
+        border-color 160ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
+
+.leagueCard:hover {
+    border-color: var(--home-line-2);
+    box-shadow: var(--home-floating-shadow);
+    transform: translateY(var(--home-card-hover-y));
+}
+
+.leagueHead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.leagueCode {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--league-accent, var(--home-accent)) 42%, transparent);
+    border-radius: 9px;
+    background: color-mix(in srgb, var(--league-accent, var(--home-accent)) 15%, var(--home-surface-2));
+    color: var(--home-text);
+    font-size: 11.5px;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    line-height: 1;
+}
+
+.leagueTitles {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.leagueEyebrow {
+    color: var(--home-text-mute);
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 13px;
+    text-transform: uppercase;
 }
 
 .leagueName {
-    position: relative;
-    z-index: 2;
-    display: block;
-    max-width: 118px;
-    color: #ffffff;
-    font-size: 14px;
+    overflow: hidden;
+    color: var(--home-text);
+    font-size: 14.5px;
     font-weight: 900;
-    line-height: 1.15;
-    text-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
+    line-height: 18px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .leagueIcon {
-    position: absolute;
-    top: 48%;
-    right: 14px;
-    z-index: 1;
-    width: 62px;
-    height: 62px;
-    transform: translateY(-50%);
-    color: #ffffff;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
-    opacity: 0.9;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 auto;
+    color: var(--league-accent, var(--home-accent));
+    opacity: 0.85;
 }
 
-.leagueWatch {
-    position: absolute;
-    right: 10px;
-    bottom: 11px;
-    z-index: 2;
+.leagueNext {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 7px;
+    overflow: hidden;
+    color: var(--home-text-dim);
+    font-size: 11.5px;
+    font-weight: 700;
+    line-height: 15px;
+    white-space: nowrap;
+}
+
+.leagueNextHint {
+    flex: 0 0 auto;
+    border-radius: 4px;
+    background: var(--home-surface-2);
+    padding: 2px 5px;
+    color: var(--home-text-mute);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 12px;
+}
+
+.leagueNextValue {
+    overflow: hidden;
+    font-variant-numeric: tabular-nums;
+    text-overflow: ellipsis;
+}
+
+.leagueMeta {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border-top: 1px solid color-mix(in srgb, var(--home-line) 70%, transparent);
+    padding-top: 9px;
+    color: var(--home-text-mute);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 14px;
+}
+
+.leagueLive {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    border-radius: 20px;
-    background: var(--home-live);
-    color: #ffffff;
-    padding: 3px 9px;
-    font-variant-numeric: tabular-nums;
-    font-size: 11px;
+    color: var(--home-live);
     font-weight: 800;
-    line-height: 14px;
-    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
 }
 
-.watchDot {
-    width: 7px;
-    height: 7px;
-    border-radius: 999px;
-    background: currentColor;
+.leagueCount {
+    color: var(--home-text-dim);
+}
+
+.leagueWatch {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: auto;
+    color: var(--home-text-mute);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+}
+
+.watchIcon {
+    width: 13px;
+    height: 13px;
+    flex: 0 0 auto;
+    opacity: 0.8;
 }
 
 .mainGrid {
@@ -1225,7 +1324,7 @@
     }
 
     .leagueCard {
-        flex-basis: 184px;
+        flex-basis: 208px;
     }
 
     .trendCard {

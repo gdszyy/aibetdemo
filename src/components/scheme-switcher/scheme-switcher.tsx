@@ -16,6 +16,15 @@ const SCHEME_LABELS: Partial<Record<Scheme, string>> = {
     'betano-dark': 'Betano Dark',
     'glass-light': 'Glass Light',
     'glass-dark': 'Glass Dark',
+    'glass-brasil-light': 'Glass Brasil Light',
+    'glass-brasil-dark': 'Glass Brasil Dark',
+    'glass-mexico-light': 'Glass México Light',
+    'glass-mexico-dark': 'Glass México Dark',
+    'glass-azul-light': 'Glass Azul Light',
+    'glass-azul-dark': 'Glass Azul Dark',
+    'glass-roxo-light': 'Glass Banco Light',
+    'glass-roxo-dark': 'Glass Banco Dark',
+    'cis-light': 'CIS Light',
 };
 
 const getSchemeLabel = (scheme: Scheme) => {
@@ -44,8 +53,39 @@ const MATCH_VARIANT_SCHEMES = new Set<Scheme>(
     MATCH_COLOR_VARIANTS.filter((variant) => variant.scheme !== 'match').map((variant) => variant.scheme),
 );
 
-/** 主列表 = 全部 scheme 去掉 5 个 MATCH 深色变体，它们改由独立色板行切换。 */
-const PRIMARY_SCHEMES = SCHEMES.filter((scheme) => !MATCH_VARIANT_SCHEMES.has(scheme));
+/** Glass 配色变体（左下角独立色板行）：仅切色相，沿用当前明暗。bg=暗壳预览，accent=主色预览。 */
+type GlassColor = 'neon' | 'brasil' | 'mexico' | 'azul' | 'banco';
+
+interface GlassColorVariant {
+    color: GlassColor;
+    label: string;
+    light: Scheme;
+    dark: Scheme;
+    bg: string;
+    accent: string;
+}
+
+const GLASS_COLOR_VARIANTS: GlassColorVariant[] = [
+    { color: 'neon', label: 'Néon', light: 'glass-light', dark: 'glass-dark', bg: '#1a1230', accent: '#8b5cf6' },
+    { color: 'brasil', label: 'Brasil', light: 'glass-brasil-light', dark: 'glass-brasil-dark', bg: '#0a1e15', accent: '#16c172' },
+    { color: 'mexico', label: 'México', light: 'glass-mexico-light', dark: 'glass-mexico-dark', bg: '#0a1e1b', accent: '#10c2a3' },
+    { color: 'azul', label: 'Azul', light: 'glass-azul-light', dark: 'glass-azul-dark', bg: '#0a1024', accent: '#3b82f6' },
+    { color: 'banco', label: 'Banco', light: 'glass-roxo-light', dark: 'glass-roxo-dark', bg: '#1a0c2e', accent: '#9416e0' },
+];
+
+/** 主列表隐藏的 8 个 Glass 配色变体（glass-light / glass-dark 作为入口仍保留）。 */
+const GLASS_VARIANT_SCHEMES = new Set<Scheme>(
+    GLASS_COLOR_VARIANTS.flatMap((variant) => (variant.color === 'neon' ? [] : [variant.light, variant.dark])),
+);
+
+/** 由当前 scheme 反查所属 Glass 色相（落到色板高亮）。 */
+const getGlassColor = (scheme: Scheme): GlassColor =>
+    GLASS_COLOR_VARIANTS.find((variant) => variant.light === scheme || variant.dark === scheme)?.color ?? 'neon';
+
+/** 主列表 = 全部 scheme 去掉 MATCH 深色变体与 Glass 配色变体，二者改由独立色板行切换（不平铺）。 */
+const PRIMARY_SCHEMES = SCHEMES.filter(
+    (scheme) => !MATCH_VARIANT_SCHEMES.has(scheme) && !GLASS_VARIANT_SCHEMES.has(scheme),
+);
 
 export const SchemeSwitcher: FC = () => {
     const { theme, setTheme } = useTheme();
@@ -61,7 +101,10 @@ export const SchemeSwitcher: FC = () => {
     }
 
     const active = (theme as Scheme) ?? SCHEMES[0];
-    const isMatchBrand = getSchemeMeta(active).brand === 'match';
+    const activeMeta = getSchemeMeta(active);
+    const isMatchBrand = activeMeta.brand === 'match';
+    const isGlassBrand = activeMeta.brand === 'glass';
+    const activeGlassColor = getGlassColor(active);
 
     return (
         <div className="fixed bottom-20 left-3 z-[9999] flex flex-col items-start gap-2 md:bottom-4">
@@ -127,6 +170,41 @@ export const SchemeSwitcher: FC = () => {
                                             type="button"
                                             key={variant.scheme}
                                             onClick={() => setTheme(variant.scheme)}
+                                            title={variant.label}
+                                            aria-label={variant.label}
+                                            aria-pressed={isActive}
+                                            className={cn(
+                                                'relative grid size-8 place-items-center rounded-full border transition-transform',
+                                                isActive
+                                                    ? 'scale-110 border-brand-primary-0'
+                                                    : 'border-border-subtle hover:border-border-strong',
+                                            )}
+                                            style={{ background: variant.bg }}
+                                        >
+                                            <span
+                                                className="size-3.5 rounded-full"
+                                                style={{ background: variant.accent }}
+                                                aria-hidden
+                                            />
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    )}
+
+                    {isGlassBrand && (
+                        <div className="mt-3 border-t border-border-subtle pt-3" data-glass-color-swatches="">
+                            <p className="mb-2 text-auxiliary-md font-bold text-content-muted">Glass Color</p>
+                            <div className="flex flex-wrap gap-2">
+                                {GLASS_COLOR_VARIANTS.map((variant) => {
+                                    const isActive = variant.color === activeGlassColor;
+
+                                    return (
+                                        <button
+                                            type="button"
+                                            key={variant.color}
+                                            onClick={() => setTheme(activeMeta.mode === 'light' ? variant.light : variant.dark)}
                                             title={variant.label}
                                             aria-label={variant.label}
                                             aria-pressed={isActive}

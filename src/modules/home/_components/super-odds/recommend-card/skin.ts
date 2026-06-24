@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { SchemeBrand, SchemeMode } from '@/components/theme-provider/scheme-meta';
+import type { BoostMotifKind } from './boost-motif';
 
 export type RecommendCardSkin = SchemeBrand;
 
@@ -19,6 +20,10 @@ interface RecommendSectionSkin {
     footerInnerClassName: string;
     footerIconClassName: string;
     footerOddsClassName: string;
+    /** SuperOdd 角标处「加成」造型（替换 Superbet 原生小闪电），按品牌主题切换。 */
+    boostMotif: BoostMotifKind;
+    /** 「加成」造型的颜色/尺寸类名（通过 text-[color] 驱动 currentColor）。 */
+    boostMotifClassName: string;
 }
 
 export const getRecommendCardSkin = (brand: SchemeBrand): RecommendCardSkin => {
@@ -32,38 +37,47 @@ const getNonSuperbetSuperOddCardClassName = (isLight: boolean): string =>
 
 export const getRecommendSectionSkin = (skin: RecommendCardSkin, mode: SchemeMode): RecommendSectionSkin => {
     if (skin === 'superbet') {
-        // Superbet 品牌色：选中/CTA 红 #c21e1c，中性深底 #181a1b（与 brand-ui-skin 的
-        // --brand-odds-selected-bg / --brand-match-card-bg 对齐），不再使用偏亮的 #ff1f32 与酒红底。
+        // Superbet 官网真实「SUPER ODDS」模块为金色（2026-06 实测覆盖）：
+        // 模块头部金→近黑渐变 linear-gradient(180deg,#9d7624 0%,#7e5e20 32%,#070708 84%)，
+        // 标题白色斜体，「SUPER BOOST」角标为金字 #f8be2c + 金色 20% 透明胶囊（radius 1000px），
+        // 卡面中性深底 #181a1b（radius 10px）。此前误调研成 #c21e1c 红，本次按官网实测金色覆盖。
         const isLight = mode === 'light';
         const superOddCardClassName = isLight
-            ? 'relative rounded-md border border-[#f0c2c4] bg-[#fffafa] shadow-[0_18px_34px_-26px_rgba(194,30,28,0.34)]'
-            : 'relative rounded-md border border-[#2b2f31] bg-[#181a1b] shadow-[0_18px_34px_-24px_rgba(0,0,0,0.84)]';
+            ? 'relative rounded-[10px] border border-[#efe0bb] bg-[#fffdf7] shadow-[0_18px_34px_-26px_rgba(157,118,36,0.34)]'
+            : 'relative rounded-[10px] border border-[#2b2f31] bg-[#181a1b] shadow-[0_18px_34px_-24px_rgba(0,0,0,0.84)]';
 
         return {
             rootClassName: isLight
-                ? 'rounded-md border border-[#e6dcdd] px-3 pt-4 shadow-[0_18px_36px_-30px_rgba(194,30,28,0.22)]'
-                : 'rounded-md border border-[#23262a] px-3 pt-4 shadow-[0_18px_36px_-26px_rgba(0,0,0,0.86)]',
+                ? 'rounded-md border border-[#ecdcb4] px-3 pt-4 shadow-[0_18px_36px_-30px_rgba(157,118,36,0.26)]'
+                : 'rounded-md border border-[#3a3320] px-3 pt-4 shadow-[0_18px_36px_-26px_rgba(0,0,0,0.86)]',
             rootStyle: {
                 background: isLight
-                    ? 'linear-gradient(180deg, #fbe3e3 0%, #fffafa 42%, rgba(255, 255, 255, 0) 90%)'
-                    : 'linear-gradient(180deg, rgba(194, 30, 28, 0.22) 0%, #14171a 48%, rgba(7, 8, 12, 0) 92%)',
+                    ? 'linear-gradient(180deg, #f7e6bb 0%, #fdf6e6 42%, rgba(255, 255, 255, 0) 90%)'
+                    : 'linear-gradient(180deg, #9d7624 0%, #7e5e20 32%, #070708 84%)',
             },
-            titleClassName: isLight ? 'text-[#151923]' : 'text-[#f4f6f9]',
-            titleAccentClassName: 'bg-[#c21e1c]',
+            titleClassName: isLight ? 'text-[#3a2c0a]' : 'text-[#ffffff]',
+            titleAccentClassName: isLight ? 'bg-[#c8920c]' : 'bg-[#f8be2c]',
             cardClassName: superOddCardClassName,
-            cardTitleClassName: isLight ? 'text-[#c21e1c]' : 'text-[#ffffff]',
+            cardTitleClassName: isLight ? 'text-[#8a6308]' : 'text-[#ffffff]',
             dividerStyle: {
                 background:
-                    'linear-gradient(90deg, rgba(194, 30, 28, 0) 0%, rgba(194, 30, 28, 0.65) 50%, rgba(194, 30, 28, 0) 100%)',
+                    'linear-gradient(90deg, rgba(248, 190, 44, 0) 0%, rgba(248, 190, 44, 0.6) 50%, rgba(248, 190, 44, 0) 100%)',
             },
-            badgeClassName: 'rounded-full bg-[#181a1b] px-2.5 py-1 text-[#ffffff] shadow-[0_0_0_1px_rgba(194,30,28,0.55)]',
-            badgeTextClassName: 'text-auxiliary-xxs font-black uppercase leading-none',
+            badgeClassName: isLight
+                ? 'rounded-full bg-[#fbeec2] px-2 py-0.5 text-[#a9760a]'
+                : 'rounded-full bg-[rgba(248,190,44,0.2)] px-2 py-0.5 text-[#f8be2c]',
+            badgeTextClassName: 'text-auxiliary-xxs font-black uppercase italic leading-none',
             selectionTitleClassName: isLight ? 'text-[#151923]' : 'text-[#f4f6f9]',
             selectionMetaClassName: isLight ? 'text-[#5c6879]' : 'text-[#b3bac6]',
-            footerButtonClassName: 'rounded-sm border-[#c21e1c] bg-[#c21e1c]',
-            footerInnerClassName: 'rounded-[6px] bg-[#c21e1c] group-hover/betBtn:bg-[#d2302d]',
-            footerIconClassName: 'bg-[#ffffff] text-[#c21e1c]',
-            footerOddsClassName: 'text-[#ffffff]',
+            footerButtonClassName: isLight ? 'rounded-sm border-[#e9ad17] bg-[#e9ad17]' : 'rounded-sm border-[#f8be2c] bg-[#f8be2c]',
+            footerInnerClassName: isLight
+                ? 'rounded-[6px] bg-[#e9ad17] group-hover/betBtn:bg-[#f5bd2a]'
+                : 'rounded-[6px] bg-[#f8be2c] group-hover/betBtn:bg-[#ffce3a]',
+            footerIconClassName: 'bg-[#181a1b] text-[#f8be2c]',
+            footerOddsClassName: 'text-[#181a1b]',
+            // superbet 保留官网原生「小闪电」造型（金色），其余品牌用各自主题造型。
+            boostMotif: 'bolt',
+            boostMotifClassName: isLight ? 'text-[#c8920c]' : 'text-[#f8be2c]',
         };
     }
 
@@ -96,6 +110,8 @@ export const getRecommendSectionSkin = (skin: RecommendCardSkin, mode: SchemeMod
                 : 'rounded-[6px] bg-[#31d893] group-hover/betBtn:bg-[#42e5a3]',
             footerIconClassName: isLight ? 'bg-[#ffffff] text-[#00a067]' : 'bg-[#071040] text-[#31d893]',
             footerOddsClassName: isLight ? 'text-[#ffffff]' : 'text-[#071040]',
+            boostMotif: 'boost',
+            boostMotifClassName: 'text-[#ffffff]',
         };
     }
 
@@ -129,6 +145,8 @@ export const getRecommendSectionSkin = (skin: RecommendCardSkin, mode: SchemeMod
                 : 'rounded-[6px] bg-[#1e1e1e] group-hover/betBtn:bg-[#242424]',
             footerIconClassName: isLight ? 'bg-[#169c63] text-[#ffffff]' : 'bg-[#26c07a] text-[#07130d]',
             footerOddsClassName: isLight ? 'text-[#0f7f50]' : 'text-[#33d488]',
+            boostMotif: 'spark',
+            boostMotifClassName: isLight ? 'text-[#0f7f50]' : 'text-[#33d488]',
         };
     }
 
@@ -162,6 +180,8 @@ export const getRecommendSectionSkin = (skin: RecommendCardSkin, mode: SchemeMod
                 : 'rounded-[6px] bg-[#121212] group-hover/betBtn:bg-[#2f2f2f]',
             footerIconClassName: isLight ? 'bg-[#169c63] text-[#ffffff]' : 'bg-[#fa434e] text-[#ffffff]',
             footerOddsClassName: isLight ? 'text-[#0f7f50]' : 'text-[#f2f2f2]',
+            boostMotif: 'star',
+            boostMotifClassName: isLight ? 'text-[#0f7f50]' : 'text-[#fa434e]',
         };
     }
 
@@ -183,5 +203,7 @@ export const getRecommendSectionSkin = (skin: RecommendCardSkin, mode: SchemeMod
         footerInnerClassName: 'rounded-xs bg-filltext-ft-a group-hover/betBtn:bg-filltext-ft-b',
         footerIconClassName: '',
         footerOddsClassName: 'text-filltext-ft-g',
+        boostMotif: 'spark',
+        boostMotifClassName: 'text-[#ffffff]',
     };
 };

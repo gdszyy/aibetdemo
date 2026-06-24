@@ -2,6 +2,7 @@
 
 import { useQueryClient } from '@tanstack/react-query';
 import { useDeepCompareEffect, useEventListener } from 'ahooks';
+import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import { Footer } from '@/components/footer';
 import { useBrandUiSkin } from '@/components/theme-provider/brand-ui-skin';
@@ -10,9 +11,6 @@ import { useIsDesktop } from '@/hooks/use-media-query';
 import { PARLAY_BOOST_RULE_QUERY_KEY } from '@/hooks/use-parlay-boost-rule';
 import { useTopSports } from '@/hooks/use-sports';
 import { usePathname } from '@/i18n';
-import { BetSlipBottomSheet } from '@/modules/bet-slip/_components/bet-slip-bottom-sheet';
-import { DesktopFloatingBetSlip } from '@/modules/bet-slip/_components/desktop-floating-bet-slip';
-import { MobileCartSummaryBar } from '@/modules/bet-slip/_components/mobile-cart-summary-bar';
 import { useBetSlipSubscription } from '@/modules/bet-slip/_hooks/use-bet-slip-subscription';
 import { useOrderResultHandler } from '@/modules/bet-slip/_hooks/use-order-result-handler';
 import { useBetSlipStore } from '@/modules/bet-slip/stores/bet-slip-store';
@@ -21,6 +19,27 @@ import { useTreeStore } from '@/modules/match/sidebar/service/store';
 import { useIsLogin } from '@/stores/session-store';
 import { useUIStore } from '@/stores/ui-store';
 import { cn } from '@/utils/common';
+
+/**
+ * 投注单浮层（桌面浮窗 / 移动购物车条 / 移动底部抽屉）整体是一套交互很重的子系统，
+ * 但初始进入 (sports) 布局时它要么不可见（移动端选中数为 0）、要么是收起态。
+ * 静态引入会把整套投注单代码压进 (sports) 布局首包，跨路由组切入时拖慢首屏。
+ * 改为 next/dynamic 按需加载（ssr: false，纯客户端交互、初始无内容，无需骨架），
+ * 把这套子系统从布局关键包里拆出，加快导航切入。
+ */
+const DesktopFloatingBetSlip = dynamic(
+    () =>
+        import('@/modules/bet-slip/_components/desktop-floating-bet-slip').then((m) => m.DesktopFloatingBetSlip),
+    { ssr: false },
+);
+const MobileCartSummaryBar = dynamic(
+    () => import('@/modules/bet-slip/_components/mobile-cart-summary-bar').then((m) => m.MobileCartSummaryBar),
+    { ssr: false },
+);
+const BetSlipBottomSheet = dynamic(
+    () => import('@/modules/bet-slip/_components/bet-slip-bottom-sheet').then((m) => m.BetSlipBottomSheet),
+    { ssr: false },
+);
 
 export function SportsLayoutClient({
     children,

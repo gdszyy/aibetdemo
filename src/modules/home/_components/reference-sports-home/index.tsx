@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
-import { type ComponentType, type FC, type FormEvent, useEffect, useRef, useState } from 'react';
+import { type ComponentType, type CSSProperties, type FC, type FormEvent, useEffect, useRef, useState } from 'react';
 import type { CasinoGame } from '@/api/models/casino';
 import { ProductEnum, ProductRawEnum } from '@/api/models/market';
 import anniversaryBr from '@/assets/images/promotion/anniversary-br.png';
@@ -50,45 +50,124 @@ const PROMO_BANNERS: BannerItem[] = [
     { id: 3, title: 'Lightning Goal: ENG vs CRO', link: '/sports/promotions', imageUrl: refundBr },
 ];
 
-const LEAGUES = [
+interface LeagueHub {
+    /** 主标题，如 'Group C' / 'Brazil' */
+    title: string;
+    /** 上方小标，如 'World Cup' / 'Nation' / 'Futures' */
+    eyebrow: string;
+    /** 角标短码，如 'C' / 'BRA' / 'GB' */
+    code: string;
+    /** 国家/分组识别色：仅用于 accent 条、角标描边、12% 低饱和底纹，不再整块铺底 */
+    accent: string;
+    href: string;
+    /** 当前直播场次，0 表示无直播 */
+    live: number;
+    /** 次要计数文案，如 '6 matches' / 'Outright' */
+    meta: string;
+    /** 下一条信息的前缀，如 'NEXT' / 'LIVE' / 'OPENS' */
+    nextHint: string;
+    /** 下一场/核心市场描述，如 'SCO vs BRA · 18:00' */
+    next: string;
+    viewers: string;
+}
+
+const LEAGUES: LeagueHub[] = [
     {
-        name: 'World Cup - Group C',
+        title: 'Group C',
+        eyebrow: 'World Cup',
+        code: 'C',
+        accent: '#16a34a',
         href: '/leagues/80462',
+        live: 2,
+        meta: '6 matches',
+        nextHint: 'NEXT',
+        next: 'SCO vs BRA · 18:00',
         viewers: '42,318',
-        bg: 'linear-gradient(135deg,#0b6b3a,#f4c430)',
     },
     {
-        name: 'World Cup - Group A',
+        title: 'Group A',
+        eyebrow: 'World Cup',
+        code: 'A',
+        accent: '#0d9488',
         href: '/leagues/84635',
+        live: 1,
+        meta: '6 matches',
+        nextHint: 'NEXT',
+        next: 'CZE vs MEX · 21:00',
         viewers: '36,904',
-        bg: 'linear-gradient(135deg,#006847,#ce1126)',
     },
     {
-        name: 'World Cup - Group B',
+        title: 'Group B',
+        eyebrow: 'World Cup',
+        code: 'B',
+        accent: '#dc2626',
         href: '/leagues/84437',
+        live: 1,
+        meta: '6 matches',
+        nextHint: 'NEXT',
+        next: 'SUI vs CAN · 15:00',
         viewers: '31,576',
-        bg: 'linear-gradient(135deg,#d52b1e,#ffffff)',
     },
     {
-        name: 'World Cup - Group K',
+        title: 'Group K',
+        eyebrow: 'World Cup',
+        code: 'K',
+        accent: '#2563eb',
         href: '/leagues/85334',
+        live: 2,
+        meta: '6 matches',
+        nextHint: 'LIVE',
+        next: "POR vs UZB · 62'",
         viewers: '24,690',
-        bg: 'linear-gradient(135deg,#fcd116,#003893)',
     },
     {
-        name: 'Brazil Matches',
+        title: 'Brazil',
+        eyebrow: 'Nation',
+        code: 'BRA',
+        accent: '#15803d',
         href: '/leagues/84182',
+        live: 1,
+        meta: '4 matches',
+        nextHint: 'NEXT',
+        next: 'SCO vs BRA · 18:00',
         viewers: '58,112',
-        bg: 'linear-gradient(135deg,#009b3a,#ffdf00)',
     },
-    { name: 'Mexico Matches', href: '/leagues/325', viewers: '49,280', bg: 'linear-gradient(135deg,#006847,#ce1126)' },
     {
-        name: 'Knockout Futures',
-        href: '/leagues/85215',
-        viewers: '19,844',
-        bg: 'linear-gradient(135deg,#102a43,#d4af37)',
+        title: 'Mexico',
+        eyebrow: 'Nation',
+        code: 'MEX',
+        accent: '#0f766e',
+        href: '/leagues/325',
+        live: 0,
+        meta: '3 matches',
+        nextHint: 'NEXT',
+        next: 'CZE vs MEX · 21:00',
+        viewers: '49,280',
     },
-    { name: 'Golden Boot', href: '/leagues/80875', viewers: '16,731', bg: 'linear-gradient(135deg,#5c2d91,#f2a900)' },
+    {
+        title: 'Knockout',
+        eyebrow: 'Futures',
+        code: 'KO',
+        accent: '#4f46e5',
+        href: '/leagues/85215',
+        live: 0,
+        meta: 'Bracket',
+        nextHint: 'OPENS',
+        next: 'Round of 32 · Sat',
+        viewers: '19,844',
+    },
+    {
+        title: 'Golden Boot',
+        eyebrow: 'Futures',
+        code: 'GB',
+        accent: '#7c3aed',
+        href: '/leagues/80875',
+        live: 0,
+        meta: 'Outright',
+        nextHint: 'MARKET',
+        next: 'Top scorer',
+        viewers: '16,731',
+    },
 ];
 
 const TREND_TABS = [
@@ -436,6 +515,18 @@ const FireIcon: FC<{ className?: string }> = ({ className }) => (
     </svg>
 );
 
+const EyeIcon: FC<{ className?: string }> = ({ className }) => (
+    <svg className={className} viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path
+            d="M10 4.6c-3.6 0-6.6 2.2-8 5.4 1.4 3.2 4.4 5.4 8 5.4s6.6-2.2 8-5.4c-1.4-3.2-4.4-5.4-8-5.4Z"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+        />
+        <circle cx="10" cy="10" r="2.3" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+);
+
 const SectionHeader: FC<{
     title: string;
     target?: string;
@@ -592,22 +683,38 @@ const PromoCards: FC = () => {
     return <BannerCarousel banners={banners} />;
 };
 
-const TrendingCompetitionCard: FC<{ league: (typeof LEAGUES)[number]; icon: IconComponent }> = ({
-    league,
-    icon: Icon,
-}) => (
+const TrendingCompetitionCard: FC<{ league: LeagueHub; icon: IconComponent }> = ({ league, icon: Icon }) => (
     <Link
         href={league.href}
         className={styles.leagueCard}
         data-home-recommend-card-kind="competition"
-        style={{ background: league.bg }}
+        style={{ '--league-accent': league.accent } as CSSProperties}
     >
-        <span className={styles.leagueName}>{league.name}</span>
-        <Icon className={styles.leagueIcon} />
-        <span className={styles.leagueWatch}>
-            <span className={styles.watchDot} />
-            {league.viewers}
-        </span>
+        <div className={styles.leagueHead}>
+            <span className={styles.leagueCode}>{league.code}</span>
+            <span className={styles.leagueTitles}>
+                <span className={styles.leagueEyebrow}>{league.eyebrow}</span>
+                <span className={styles.leagueName}>{league.title}</span>
+            </span>
+            <Icon className={styles.leagueIcon} />
+        </div>
+        <div className={styles.leagueNext}>
+            <span className={styles.leagueNextHint}>{league.nextHint}</span>
+            <span className={styles.leagueNextValue}>{league.next}</span>
+        </div>
+        <div className={styles.leagueMeta}>
+            {league.live > 0 ? (
+                <span className={styles.leagueLive}>
+                    <span className={styles.liveDot} />
+                    {league.live} Live
+                </span>
+            ) : null}
+            <span className={styles.leagueCount}>{league.meta}</span>
+            <span className={styles.leagueWatch}>
+                <EyeIcon className={styles.watchIcon} />
+                {league.viewers}
+            </span>
+        </div>
     </Link>
 );
 
@@ -912,7 +1019,7 @@ export const ReferenceSportsHome: FC = () => {
                 <SectionHeader title="World Cup Hubs" target="competitions" onScroll={handleScroll} />
                 <HorizontalScroller id="competitions" className={styles.leagueRow} setScroller={setScroller}>
                     {LEAGUES.map((league) => (
-                        <TrendingCompetitionCard key={league.name} league={league} icon={SportFootballOutlined} />
+                        <TrendingCompetitionCard key={league.href} league={league} icon={SportFootballOutlined} />
                     ))}
                 </HorizontalScroller>
             </section>
@@ -1004,11 +1111,7 @@ export const ReferenceSportsHome: FC = () => {
                     <PlayerProps />
                 </div>
 
-                <div className={styles.section}>
-                    <SmartActivityCards />
-                </div>
-
-                {/* Tier 4 · 期货 & 异业交叉销售（紧迫度最低，置底） */}
+                {/* 期货 & 异业交叉销售：按需求上移至 Smart Activity Cards（Cards da Copa em destaque）之前 */}
                 <section className={styles.section}>
                     <SectionHeader title="Who will win the World Cup?" target="outrights" onScroll={handleScroll} />
                     <HorizontalScroller id="outrights" setScroller={setScroller}>
@@ -1031,6 +1134,11 @@ export const ReferenceSportsHome: FC = () => {
                         </HorizontalScroller>
                     </section>
                 ) : null}
+
+                {/* Smart Activity Cards（Cards da Copa em destaque）置于上述两块之后 */}
+                <div className={styles.section}>
+                    <SmartActivityCards />
+                </div>
             </div>
         </div>
     );

@@ -7,6 +7,7 @@ import { useThemeComponentProfile } from '@/components/theme-provider/component-
 import type { SchemeMode } from '@/components/theme-provider/scheme-meta';
 import { useOddsFormat } from '@/stores/slip-settings-store';
 import { cn } from '@/utils/common';
+import { BoostMotif } from './boost-motif';
 import { CARD_SELECTION_LIMIT } from './constants';
 import { getRecommendSectionSkin, type RecommendCardSkin } from './skin';
 import { getRecommendCardQualifiedSelections, getSelectionDescription } from './utils';
@@ -209,10 +210,14 @@ export const CardBody: FC<CardBodyProps> = ({
             >
                 <span
                     className={cn(
-                        'inline-flex shrink-0 items-center justify-center self-start',
+                        'inline-flex shrink-0 items-center justify-center gap-1 self-start',
                         skinConfig.badgeClassName,
                     )}
                 >
+                    <BoostMotif
+                        kind={skinConfig.boostMotif}
+                        className={cn('size-3', skinConfig.boostMotifClassName)}
+                    />
                     <span className={skinConfig.badgeTextClassName}>{badgeLabel}</span>
                 </span>
                 {showMoreButton && (

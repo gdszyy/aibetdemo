@@ -544,6 +544,70 @@ const MATCH_LIGHT_UI_STYLE: BrandUiSkinStyle = {
     '--brand-mobile-sport-nav-shadow': '0 12px 22px -18px rgba(15, 23, 38, 0.32)',
 };
 
+/* CIS 投后视觉识别 · 暖燕麦浅底 + 常春藤绿主色，深森林顶栏为品牌标志。 */
+const CIS_LIGHT_UI_STYLE: BrandUiSkinStyle = {
+    '--brand-topbar-bg': '#1a2e26',
+    '--brand-topbar-border': '#15251e',
+    '--brand-topbar-before-bg': '#1a2e26',
+    '--brand-nav-item-text': '#e7efe9',
+    '--brand-nav-item-hover-bg': 'rgba(255, 255, 255, 0.1)',
+    '--brand-nav-active-bg': '#2d6a4f',
+    '--brand-nav-active-hover-bg': '#35805e',
+    '--brand-nav-active-text': '#ffffff',
+    '--brand-nav-active-underline': 'transparent',
+    '--brand-nav-live-badge-bg': '#c62828',
+    '--brand-nav-live-badge-text': '#ffffff',
+    '--brand-logo-hover-bg': 'rgba(255, 255, 255, 0.08)',
+
+    '--brand-sidebar-bg': '#ffffff',
+    '--brand-sidebar-border': '#e8e8e3',
+    '--brand-sidebar-header-bg': '#f7f7f5',
+    '--brand-right-rail-bg': '#ffffff',
+    '--brand-right-rail-button-bg': '#efeeea',
+    '--brand-right-rail-button-border': '#d4d4cc',
+
+    '--interactive-row-text': '#54544c',
+    '--interactive-row-icon': '#6b6b62',
+    '--interactive-row-hover-bg': '#ffffff',
+    '--interactive-row-hover-text': '#1f2a25',
+    '--interactive-row-hover-icon': '#2d6a4f',
+    '--interactive-row-active-bg': '#eef3ef',
+    '--interactive-row-active-text': '#1f2a25',
+    '--interactive-row-active-icon': '#2d6a4f',
+    '--interactive-active-rail-bg': '#2d6a4f',
+    '--interactive-active-rail-shadow': '0 0 8px rgba(45, 106, 79, 0.45)',
+
+    '--brand-match-card-bg': '#ffffff',
+    '--brand-match-card-border': '#e8e8e3',
+    '--brand-match-card-hover-bg': '#ffffff',
+    '--brand-match-card-shadow': '0 2px 8px rgba(26, 46, 38, 0.04), 0 1px 3px rgba(26, 46, 38, 0.03)',
+    '--brand-match-card-radius': '8px',
+    '--brand-match-divider': '#e8e8e3',
+    '--brand-match-muted': '#6b6b62',
+    '--brand-match-team-text': '#1f2a25',
+    '--brand-match-league-text': '#54544c',
+
+    '--brand-odds-bg': '#f2f2ee',
+    '--brand-odds-border': '#e8e8e3',
+    '--brand-odds-radius': '6px',
+    '--brand-odds-hover-bg': '#f4faf6',
+    '--brand-odds-hover-border': '#2d6a4f',
+    '--brand-odds-name': '#54544c',
+    '--brand-odds-value': '#1f2a25',
+    '--brand-odds-selected-bg': 'linear-gradient(140deg, #2d6a4f, #1b4332)',
+    '--brand-odds-selected-hover-bg': 'linear-gradient(140deg, #35805e, #245741)',
+    '--brand-odds-selected-text': '#ffffff',
+    '--brand-odds-short-height': '36px',
+
+    '--brand-mobile-sport-nav-bg': '#ffffff',
+    '--brand-mobile-sport-nav-border': '#e8e8e3',
+    '--brand-mobile-sport-nav-hover-bg': '#f2f2ee',
+    '--brand-mobile-sport-nav-icon-bg': '#eef3ef',
+    '--brand-mobile-sport-nav-icon': '#2d6a4f',
+    '--brand-mobile-sport-nav-text': '#1f2a25',
+    '--brand-mobile-sport-nav-shadow': '0 12px 22px -18px rgba(26, 46, 38, 0.28)',
+};
+
 /* MATCH 配色变体 · 薄荷绿：深蓝灰底 + 薄荷绿主色。 */
 const MATCH_MINT_UI_STYLE: BrandUiSkinStyle = {
     '--brand-topbar-bg': 'linear-gradient(90deg, #0b0e13 0%, #10141b 42%, #0b0e13 100%)',
@@ -960,6 +1024,15 @@ export const getBrandUiSkin = (schemeMeta: SchemeMeta): BrandUiSkin => {
             brand: 'glass',
             mode: schemeMeta.mode,
             style: schemeMeta.mode === 'light' ? GLASS_LIGHT_UI_STYLE : GLASS_DARK_UI_STYLE,
+        };
+    }
+
+    if (schemeMeta.brand === 'cis') {
+        // CIS 仅有浅色一套，恒返回 CIS_LIGHT_UI_STYLE（无 dark 常量）。
+        return {
+            brand: 'cis',
+            mode: schemeMeta.mode,
+            style: CIS_LIGHT_UI_STYLE,
         };
     }
 

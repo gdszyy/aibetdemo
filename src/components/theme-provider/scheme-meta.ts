@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import { type Scheme, useTheme } from '@/components/theme-provider/theme-provider';
 
-export type SchemeBrand = 'superbet' | 'betano' | 'betbus' | 'match' | 'glass';
+export type SchemeBrand = 'superbet' | 'betano' | 'betbus' | 'match' | 'glass' | 'cis';
 export type SchemeMode = 'light' | 'dark';
 
 export interface SchemeMeta {
@@ -93,6 +93,51 @@ const SCHEME_META: Record<Scheme, SchemeMeta> = {
         scheme: 'glass-dark',
         brand: 'glass',
         mode: 'dark',
+    },
+    'glass-brasil-light': {
+        scheme: 'glass-brasil-light',
+        brand: 'glass',
+        mode: 'light',
+    },
+    'glass-brasil-dark': {
+        scheme: 'glass-brasil-dark',
+        brand: 'glass',
+        mode: 'dark',
+    },
+    'glass-mexico-light': {
+        scheme: 'glass-mexico-light',
+        brand: 'glass',
+        mode: 'light',
+    },
+    'glass-mexico-dark': {
+        scheme: 'glass-mexico-dark',
+        brand: 'glass',
+        mode: 'dark',
+    },
+    'glass-azul-light': {
+        scheme: 'glass-azul-light',
+        brand: 'glass',
+        mode: 'light',
+    },
+    'glass-azul-dark': {
+        scheme: 'glass-azul-dark',
+        brand: 'glass',
+        mode: 'dark',
+    },
+    'glass-roxo-light': {
+        scheme: 'glass-roxo-light',
+        brand: 'glass',
+        mode: 'light',
+    },
+    'glass-roxo-dark': {
+        scheme: 'glass-roxo-dark',
+        brand: 'glass',
+        mode: 'dark',
+    },
+    'cis-light': {
+        scheme: 'cis-light',
+        brand: 'cis',
+        mode: 'light',
     },
 };
 

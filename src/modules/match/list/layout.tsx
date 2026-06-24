@@ -8,6 +8,7 @@ import { useTimeZone, useTranslations } from 'next-intl';
 import { type FC, type ReactNode, useMemo, useState } from 'react';
 import { MatchStatus } from '@/api/models/match';
 import { StickyBlurHeader } from '@/components/sticky-blur-header';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { useLiveMatchTotalData, useLiveMatchTotalRefresh } from '@/hooks/use-live-match-total';
 import type { Timezone } from '@/i18n';
 import { Link } from '@/i18n';
@@ -39,6 +40,10 @@ export const MatchListShell: FC<MatchListShellProps> = ({ sportId, children }) =
     const t = useTranslations('matches');
     const searchParams = useSearchParams();
     const tz = useTimeZone();
+    // 只有 superbet 用这套外层头部（面包屑 + All/Live/Today）；其余主题用 SportTopicPanel 自带的 hero + tabs，
+    // 避免「体育标题 + tab」在专题页重复。
+    const { brand } = useThemeComponentProfile();
+    const isSuperbet = brand === 'superbet';
     const { data: liveCount = 0 } = useLiveMatchTotalData(sportId);
     const refreshLiveMatchTotal = useLiveMatchTotalRefresh();
 
@@ -82,8 +87,9 @@ export const MatchListShell: FC<MatchListShellProps> = ({ sportId, children }) =
     return (
         <CollapseContext value={{ isCollapsed, setIsCollapsed }}>
             <section className="px-4 pb-6">
-                {/* top */}
-                <StickyBlurHeader className="pt-6 pb-2" innerClassName="px-4">
+                {/* top — 仅 superbet 渲染这套面包屑 + All/Live/Today 头部 */}
+                {isSuperbet && (
+                    <StickyBlurHeader className="pt-6 pb-2" innerClassName="px-4">
                     <BreadcrumbTitle sportId={sportId} className="mb-1" />
                     {/* tabs */}
                     <div className="flex h-10 mb-2 flex-row items-center justify-between gap-x-4 border-b-[0.5px] border-filltext-ft-d">
@@ -161,7 +167,8 @@ export const MatchListShell: FC<MatchListShellProps> = ({ sportId, children }) =
                             </div>
                         </div>
                     </div>
-                </StickyBlurHeader>
+                    </StickyBlurHeader>
+                )}
 
                 {/* content */}
                 {children}

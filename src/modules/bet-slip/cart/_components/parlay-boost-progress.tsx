@@ -119,6 +119,18 @@ const PARLAY_BOOST_SKIN = {
         minOddsText: 'text-content-primary',
         emphasisText: 'text-brand-primary-0',
     },
+    cis: {
+        root: 'border-border-strong bg-surface-muted',
+        activeTier: 'bg-brand-primary-0 text-on-brand',
+        inactiveTier: 'text-content-muted',
+        activeArrow: 'border-t-brand-primary-0',
+        inactiveArrow: 'border-t-border-strong',
+        filledSegment: 'bg-brand-primary-0 shadow-[0_0_7px_color-mix(in_srgb,var(--brand-primary-0)_35%,transparent)]',
+        emptySegment: 'bg-surface-3',
+        minOddsBg: 'bg-surface-3',
+        minOddsText: 'text-content-primary',
+        emphasisText: 'text-brand-primary-0',
+    },
 } as const;
 
 const getFilledSegmentCount = (qualifyingCount: number, maxLegs: number): number => {

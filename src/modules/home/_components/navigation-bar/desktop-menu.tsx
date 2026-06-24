@@ -33,8 +33,6 @@ export const DesktopMenu: FunctionComponent = () => {
     const allMenus = useMemo(() => {
         const sportItem = FIXED_NAV_ITEMS.find((item) => item.key === 'sport');
         const liveItem = FIXED_NAV_ITEMS.find((item) => item.key === 'sport-live');
-        const transmisionItem = FIXED_NAV_ITEMS.find((item) => item.key === 'transmision');
-        const myBetsItem = FIXED_NAV_ITEMS.find((item) => item.key === 'mybets');
         const casinoItem = {
             ...getCasinoNavItem(lobbies),
             label: 'Casino',
@@ -45,8 +43,6 @@ export const DesktopMenu: FunctionComponent = () => {
             ...(sportItem ? [sportItem] : []),
             ...(liveItem ? [liveItem] : []),
             casinoItem,
-            ...(transmisionItem ? [transmisionItem] : []),
-            ...(myBetsItem ? [myBetsItem] : []),
         ];
     }, [lobbies]);
 

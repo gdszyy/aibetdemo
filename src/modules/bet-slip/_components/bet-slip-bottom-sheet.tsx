@@ -30,7 +30,8 @@ export const BetSlipBottomSheet: FC<BetSlipBottomSheetProps> = ({ open, onOpenCh
                     'bottom-[env(safe-area-inset-bottom)] z-40',
                     isCtaLedSheet
                         ? 'h-[calc(100dvh-8px)] max-h-[calc(100dvh-8px)]'
-                        : 'h-[72dvh] max-h-[calc(100dvh-64px)]',
+                        : // 少量卡片时按内容高度展开（不顶满），上方留出蒙层空间；卡片多时封顶 72dvh 内部滚动
+                          'h-auto max-h-[72dvh]',
                     'overflow-hidden rounded-t-[var(--mobile-sheet-radius)] border border-b-0 border-[color:var(--mobile-summary-bar-border)] bg-[var(--mobile-sheet-bg)] [box-shadow:var(--mobile-sheet-shadow)]',
                 )}
                 data-bet-slip-profile={componentProfile.betSlip.profile}
