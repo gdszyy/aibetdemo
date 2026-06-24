@@ -15,7 +15,7 @@ export const Banner: FunctionComponent = () => {
     const casinoAdPlacementBanners = adPlacementBanners.filter(
         (item): item is CasinoBannerAdPlacement => item.activity_type === AdPlacementType.CasinoBanner,
     );
-    const banners = casinoAdPlacementBanners.map(adPlacementToBannerItem);
+    const banners = casinoAdPlacementBanners.map((item) => adPlacementToBannerItem(item));
     const handleBannerClick = (banner: BannerItem) => {
         const item = casinoAdPlacementBanners.find((adPlacementBanner) => adPlacementBanner.id === banner.id);
         if (!item) return;

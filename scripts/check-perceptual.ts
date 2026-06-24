@@ -18,7 +18,7 @@
  * 四项检查（均在 OKLCH 空间）：
  *   1. 色阶亮度均匀度  ramp     —— surface / filltext 台阶应单调且步长大致等距，不许两阶撞在一起。
  *   2. 文字层级单调    tier     —— primary→secondary→muted 相对 page-bg 的明暗距离须单调递减，步长可辨。
- *   3. 跨方案同语义亮度 parity  —— 同 mode 下同一角色（content-*/surface-*/func-*）的 L 应落在窄带内
+ *   3. 跨方案同语义亮度 parity  —— 同 mode 下同一角色（content-*、surface-*、func-*）的 L 应落在窄带内
  *                                （= 固定 L、变 H 的保证）。
  *   4. 品牌色相保持+色域 brand  —— brand-primary-0..5 的有效色相应一致；并报告饱和度占用 C/Cmax
  *                                与 sRGB 色域越界（越界=硬错）。
