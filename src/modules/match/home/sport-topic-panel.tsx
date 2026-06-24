@@ -12,9 +12,11 @@ import {
 import type { MatchEvent, TournamentGroup } from '@/api/models/match-game';
 import type { MenuCategory } from '@/api/models/menu';
 import { Arrow } from '@/components/Arrow';
+import { CupFilled } from '@/components/icons';
 import { ClockOutlined } from '@/components/icons2/ClockOutlined';
 import { StarFilled } from '@/components/icons2/StarFilled';
 import { Loading } from '@/components/loading/loading';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { getSportConfig } from '@/constants/sports-config';
 import { useGameSubscription } from '@/hooks/use-game-subscription';
 import { Link } from '@/i18n';
@@ -51,13 +53,21 @@ const TopicTabs: FC<{
     matchesLabel: string;
     futuresLabel: string;
 }> = ({ active, onChange, matchesLabel, futuresLabel }) => {
+    const componentProfile = useThemeComponentProfile();
+    const isBetano = componentProfile.homeRecommend.profile === 'betano-ticket-feed';
     const tabs: { key: TopicTab; label: string }[] = [
         { key: 'matches', label: matchesLabel },
         { key: 'futures', label: futuresLabel },
     ];
 
     return (
-        <div className="flex h-11 items-end gap-6 border-filltext-ft-c border-b px-3 md:px-4">
+        <div
+            className={cn(
+                'flex h-11 items-end gap-6 border-filltext-ft-c border-b px-3 md:px-4',
+                isBetano &&
+                    'mx-3 mt-2 h-10 items-center gap-1 rounded-[var(--component-topic-hero-radius)] border border-[var(--component-topic-tabs-border)] bg-[var(--component-topic-tabs-bg)] p-1 md:mx-4',
+            )}
+        >
             {tabs.map((tab) => {
                 const selected = active === tab.key;
                 return (
@@ -65,17 +75,26 @@ const TopicTabs: FC<{
                         key={tab.key}
                         type="button"
                         onClick={() => onChange(tab.key)}
-                        className="flex h-11 cursor-pointer flex-col items-center justify-center"
+                        className={cn(
+                            'flex h-11 cursor-pointer flex-col items-center justify-center',
+                            isBetano && 'h-8 rounded px-3',
+                        )}
                     >
                         <span
                             className={cn(
                                 'whitespace-nowrap text-body-lg transition-colors',
                                 selected ? 'font-bold text-filltext-ft-h' : 'text-filltext-ft-f',
+                                isBetano && 'text-body-sm',
                             )}
                         >
                             {tab.label}
                         </span>
-                        <span className="mt-2 flex h-0.5 w-full min-w-9 rounded bg-brand-primary-0">
+                        <span
+                            className={cn(
+                                'mt-2 flex h-0.5 w-full min-w-9 rounded bg-brand-primary-0',
+                                isBetano && 'mt-1',
+                            )}
+                        >
                             <span
                                 className={cn(
                                     'h-full w-full rounded bg-brand-primary-0',
@@ -97,8 +116,43 @@ const SportTopicHero: FC<{
     totalCompetitions: number;
 }> = ({ sportId, title, totalMatches, totalCompetitions }) => {
     const t = useTranslations('matches');
+    const componentProfile = useThemeComponentProfile();
+    const isBetano = componentProfile.homeRecommend.profile === 'betano-ticket-feed';
     const sportConfig = getSportConfig(sportId);
     const HeroIcon = sportConfig?.shadowIcon ?? sportConfig?.icon;
+
+    if (isBetano) {
+        return (
+            <div
+                data-topic-hero-profile={componentProfile.homeRecommend.profile}
+                className="mx-3 mt-3 min-h-[var(--component-topic-hero-min-height)] rounded-[var(--component-topic-hero-radius)] border border-[var(--component-topic-hero-border)] bg-[var(--component-topic-hero-bg)] px-3 py-3 md:mx-4 md:px-4"
+            >
+                <div className="flex h-full min-h-[68px] items-center justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-3">
+                        <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-brand-primary-0/20 bg-brand-primary-0/10 text-brand-primary-0">
+                            {HeroIcon && <HeroIcon className="size-6" />}
+                        </span>
+                        <div className="min-w-0">
+                            <h1 className="truncate text-title-md font-bold text-filltext-ft-h md:text-title-lg">
+                                {title}
+                            </h1>
+                            <p className="mt-0.5 truncate text-auxiliary-md text-filltext-ft-f">
+                                {t('topicPage.heroSubtitle')}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex shrink-0 flex-col items-end gap-1 sm:flex-row sm:items-center">
+                        <span className="rounded border border-[var(--component-topic-card-border)] bg-surface-2 px-2.5 py-1 text-auxiliary-md font-bold text-filltext-ft-h">
+                            {t('topicPage.matchCount', { count: totalMatches })}
+                        </span>
+                        <span className="hidden rounded border border-[var(--component-topic-card-border)] bg-surface-2 px-2.5 py-1 text-auxiliary-md font-bold text-filltext-ft-g sm:inline-flex">
+                            {t('topicPage.competitionCount', { count: totalCompetitions })}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="relative min-h-[128px] overflow-hidden bg-[linear-gradient(120deg,#055a29_0%,#087a35_52%,#0a4d27_100%)] px-4 py-4 md:min-h-[156px] md:px-6">
@@ -233,44 +287,82 @@ const CountryAccordion: FC<{ sportId: string; category: MenuCategory; liveSuffix
     });
 
     return (
-        <div className="overflow-hidden bg-surface-1">
+        <div className="border-filltext-ft-d/25 border-b last:border-b-0">
+            {/* 地区（父级）行：字母头像 + 加粗名称 + 数量徽章 + 圆形箭头。
+                展开时整行抬升到 surface-2 并加左侧品牌色导引条，使其明显区别于下方联赛子项。 */}
             <button
                 type="button"
                 onClick={() => setOpen((prev) => !prev)}
-                className="flex h-11 w-full cursor-pointer items-center justify-between border-filltext-ft-d/40 border-b px-4"
+                className={cn(
+                    'relative flex h-13 w-full cursor-pointer items-center gap-3 px-3 transition-colors md:px-4',
+                    open ? 'bg-surface-2' : 'bg-surface-1 hover:bg-surface-2/60',
+                    open &&
+                        "before:absolute before:top-2 before:bottom-2 before:left-0 before:w-[3px] before:rounded-r-sm before:bg-brand-primary-0 before:content-['']",
+                )}
             >
-                <span className="min-w-0 flex-1 truncate text-left text-body-md text-filltext-ft-h">
+                <span
+                    className={cn(
+                        'inline-flex size-7 shrink-0 items-center justify-center rounded-sm text-auxiliary-sm font-bold uppercase transition-colors',
+                        open ? 'bg-brand-primary-0/15 text-brand-primary-0' : 'bg-surface-3 text-filltext-ft-f',
+                    )}
+                >
+                    {firstLetter(category.name)}
+                </span>
+                <span className="min-w-0 flex-1 truncate text-left text-body-md font-bold text-filltext-ft-h">
                     {category.name}
                 </span>
-                <span className="flex shrink-0 items-center gap-2">
-                    <span className="text-auxiliary-md text-filltext-ft-f">{category.match_count}</span>
-                    <Arrow className="size-3 text-filltext-ft-f" direction={open ? 'up' : 'down'} />
+                <span
+                    className={cn(
+                        'shrink-0 rounded-full px-2 py-0.5 text-auxiliary-sm font-bold transition-colors',
+                        open ? 'bg-brand-primary-0/15 text-brand-primary-0' : 'bg-surface-3 text-filltext-ft-f',
+                    )}
+                >
+                    {category.match_count}
+                </span>
+                <span
+                    className={cn(
+                        'inline-flex size-5 shrink-0 items-center justify-center rounded-full transition-colors',
+                        open ? 'bg-brand-primary-0/15' : 'bg-surface-3',
+                    )}
+                >
+                    <Arrow
+                        className={cn('size-2.5', open ? 'text-brand-primary-0' : 'text-filltext-ft-f')}
+                        direction={open ? 'up' : 'down'}
+                    />
                 </span>
             </button>
+
+            {/* 联赛（子级）区：整体缩进 + 左侧导引轨，行更矮、字号更小、配奖杯图标，
+                明确从属于上方地区，建立清晰的两级层级。 */}
             {open && (
-                <div className="grid grid-cols-1 gap-px bg-filltext-ft-d/35 md:grid-cols-3">
-                    {isLoading ? (
-                        <div className="flex h-12 items-center justify-center">
-                            <Loading className="size-4" variant="color-red" />
-                        </div>
-                    ) : (
-                        leagues.map((league) => (
-                            <Link
-                                key={league.tournament_id}
-                                href={
-                                    futures
-                                        ? `/leagues/${league.tournament_id}/outright${liveSuffix}`
-                                        : `/leagues/${league.tournament_id}${liveSuffix}`
-                                }
-                                className="flex h-10 items-center justify-between bg-surface-1 px-4 text-body-sm text-filltext-ft-g transition-colors hover:bg-surface-2 hover:text-filltext-ft-h"
-                            >
-                                <span className="min-w-0 flex-1 truncate">{league.name}</span>
-                                <span className="shrink-0 text-auxiliary-md text-filltext-ft-f">
-                                    {league.match_count}
-                                </span>
-                            </Link>
-                        ))
-                    )}
+                <div className="bg-surface-1 px-3 pb-3 md:px-4">
+                    <div className="ml-3 border-filltext-ft-d/40 border-l pl-3">
+                        {isLoading ? (
+                            <div className="flex h-12 items-center justify-center">
+                                <Loading className="size-4" variant="color-red" />
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 gap-0.5 md:grid-cols-2">
+                                {leagues.map((league) => (
+                                    <Link
+                                        key={league.tournament_id}
+                                        href={
+                                            futures
+                                                ? `/leagues/${league.tournament_id}/outright${liveSuffix}`
+                                                : `/leagues/${league.tournament_id}${liveSuffix}`
+                                        }
+                                        className="group/league flex h-9 items-center gap-2 rounded-xs px-2 text-body-sm text-filltext-ft-g transition-colors hover:bg-surface-2 hover:text-filltext-ft-h"
+                                    >
+                                        <CupFilled className="size-4 shrink-0 text-filltext-ft-e transition-colors group-hover/league:text-brand-primary-0" />
+                                        <span className="min-w-0 flex-1 truncate">{league.name}</span>
+                                        <span className="shrink-0 text-auxiliary-md text-filltext-ft-f">
+                                            {league.match_count}
+                                        </span>
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
             )}
         </div>
@@ -284,6 +376,8 @@ interface SportTopicPanelProps {
 export const SportTopicPanel: FC<SportTopicPanelProps> = ({ sportId }) => {
     const navMode = useSportNavMode();
     const t = useTranslations('matches');
+    const componentProfile = useThemeComponentProfile();
+    const isBetano = componentProfile.homeRecommend.profile === 'betano-ticket-feed';
     const liveSuffix = useLiveStatusSuffix();
     const [activeLetter, setActiveLetter] = useState<string | null>(null);
     const [timeWindow, setTimeWindow] = useState<'12h' | '24h' | null>(null);
@@ -326,7 +420,15 @@ export const SportTopicPanel: FC<SportTopicPanelProps> = ({ sportId }) => {
     const isFutures = activeTab === 'futures';
 
     return (
-        <section className="mb-6 flex flex-col overflow-hidden rounded-sm bg-filltext-ft-b">
+        <section
+            data-topic-shell-profile={componentProfile.homeRecommend.profile}
+            style={isBetano ? componentProfile.style : undefined}
+            className={cn(
+                'mb-6 flex flex-col overflow-hidden rounded-sm bg-filltext-ft-b',
+                isBetano &&
+                    'overflow-visible rounded-[var(--component-topic-shell-radius)] bg-[var(--component-topic-shell-bg)] pb-2',
+            )}
+        >
             <SportTopicHero
                 sportId={sportId}
                 title={sportTitle}

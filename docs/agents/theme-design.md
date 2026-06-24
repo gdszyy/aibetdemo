@@ -15,6 +15,8 @@ Use this guide when the task mentions:
 
 Related engineering plan: `docs/theme-style-cleanup-plan.md`.
 
+Layout/style variation map: `docs/component-layout-style-variation-map.md`.
+
 ## Required Inputs
 
 Before designing a theme, collect or infer:
@@ -25,10 +27,35 @@ Before designing a theme, collect or infer:
 - Primary color family: one main brand hue.
 - Accent policy: whether bonus/gold, success/green, and danger/red should remain distinct from the brand hue.
 - Scope: core sportsbook only, account pages, casino, marketing pages, or full site.
+- Target reference: the official site/page, internal capture, or legacy product screen this scheme is meant to follow.
+- Component surfaces: the specific local components that must be compared against that target reference before tuning tokens.
 
 If inputs are missing, make conservative assumptions and document them in the final summary.
 
 ## Design Principles
+
+### Reference First, Component By Component
+
+Themes in this project are not interchangeable skins. Each scheme must be compared against its own target reference:
+
+- `betbus` follows Betbus sportsbook pages and bet slip behavior.
+- `match` and `match-light` follow the internal Match sportsbook captures.
+- `superbet-light` and `superbet-dark` follow Superbet references for the matching mode.
+- `betano-light` and `betano-dark` follow Betano references for the matching mode.
+- `gtb` preserves the current legacy product direction unless explicitly migrated.
+
+Run the comparison by component before changing tokens or skin variables. At minimum, inspect shell/navigation, match cards, market/detail cards, betting cards, recommendation/carousel cards, account/money cards, and feedback components. Record any intentional divergence in `docs/theme-reference-drift-audit.md`.
+
+### Betting Card Priority
+
+The betting card and bet slip are the primary conversion surface. For every target theme, compare their local layout against the target reference with special attention to:
+
+- selection, market, match, league, time/live state, odds, stake, payout, and warning information order
+- remove/clear actions, quick stake buttons, accept-odds-change actions, deposit/login actions, collapse/expand controls, and primary CTA placement
+- desktop floating/panel layout, mobile summary bar, bottom sheet, keypad, sticky footer, and safe-area behavior
+- single, parlay, locked, inactive, odds up/down, odds-change pending, insufficient-balance, logged-out, success, and submit-error states
+
+Do not treat a theme as visually accepted if the global page color is close but the betting-card information hierarchy or button order differs from the target reference without a documented product reason.
 
 ### Betting First
 

@@ -3,6 +3,18 @@ import type { IMessage } from './helper';
 
 export const showWsLog = SHOW_WS_LOG;
 
+type WSEventPayload = {
+    event_id?: unknown;
+    sport_event_id?: unknown;
+    id?: unknown;
+};
+
+declare global {
+    interface Window {
+        __WS_LOGGER__?: WSLogger;
+    }
+}
+
 export class WSLogger {
     private limit = 10000;
     private buffer: { time: number; cmd: number; text?: string; json?: unknown; eventId?: string }[] = [];
@@ -10,7 +22,7 @@ export class WSLogger {
 
     constructor() {
         if (typeof window !== 'undefined') {
-            (window as any).__WS_LOGGER__ = this;
+            window.__WS_LOGGER__ = this;
             this.enabled = showWsLog; // Enabled by default in development
         }
     }
@@ -21,8 +33,9 @@ export class WSLogger {
         // Try to extract eventId
         let eventId: string | undefined;
         if (msg.json) {
-            const data = msg.json as any;
-            eventId = data?.event_id || data?.sport_event_id || data?.id;
+            const data = msg.json as WSEventPayload;
+            const rawEventId = data?.event_id || data?.sport_event_id || data?.id;
+            eventId = rawEventId === undefined ? undefined : String(rawEventId);
         }
 
         this.buffer.push({
@@ -30,7 +43,7 @@ export class WSLogger {
             cmd: msg.cmd,
             text: msg.text,
             json: msg.json,
-            eventId: eventId ? String(eventId) : undefined,
+            eventId,
         });
 
         // Maintain circular buffer

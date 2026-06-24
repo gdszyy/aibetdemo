@@ -54,7 +54,7 @@ export function AccountLayoutClient({ children }: Readonly<{ children: React.Rea
                 {isDesktop && (
                     <div
                         className={cn(
-                            'shrink-0 transition-[width] duration-200 ease-in-out fixed top-[calc(72px+var(--header-strip-height))] left-0 h-[calc(100vh-72px-var(--header-strip-height))] z-50 overflow-y-auto overscroll-y-contain',
+                            'shrink-0 transition-[width] duration-200 ease-in-out fixed top-[calc(var(--desktop-nav-height)+var(--header-strip-height))] left-0 h-[calc(100vh-var(--desktop-nav-height)-var(--header-strip-height))] z-50 overflow-y-auto overscroll-y-contain',
                             sidebarCollapsed ? 'w-[var(--sidebar-width-collapse)]' : 'w-[var(--sidebar-width-expand)]',
                         )}
                     >
@@ -74,7 +74,7 @@ export function AccountLayoutClient({ children }: Readonly<{ children: React.Rea
 
                         {/* Right column - toolbar */}
                         {isDesktop && (
-                            <div className="flex flex-col sticky top-[calc(72px+var(--header-strip-height))] h-[calc(100vh-72px-var(--header-strip-height))] shrink-0 z-20">
+                            <div className="flex flex-col sticky top-[calc(var(--desktop-nav-height)+var(--header-strip-height))] h-[calc(100vh-var(--desktop-nav-height)-var(--header-strip-height))] shrink-0 z-20">
                                 <aside className="flex flex-1 min-h-0 shrink-0 border-l-[0.5px] border-filltext-ft-c bg-surface-1">
                                     <RightAside />
                                 </aside>

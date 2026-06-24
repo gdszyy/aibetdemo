@@ -92,7 +92,7 @@ export const DesktopMenu: FunctionComponent = () => {
                             <Link
                                 className={cn(
                                     isSportLive && 'inline-flex gap-x-2 items-center',
-                                    'relative h-9 rounded px-4 py-2',
+                                    'relative h-9 rounded-[var(--component-nav-item-radius,4px)] px-4 py-2',
                                     'whitespace-nowrap text-title-sm font-bold uppercase',
                                     'text-[var(--brand-nav-item-text,var(--filltext-ft-h))]',
                                     'transition-colors hover:bg-[var(--brand-nav-item-hover-bg,var(--neutral-white-b))]',

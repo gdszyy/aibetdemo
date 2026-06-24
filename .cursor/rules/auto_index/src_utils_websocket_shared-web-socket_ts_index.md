@@ -1,6 +1,6 @@
-# src\utils\websocket\shared-web-socket.ts 函数索引
+# src/utils/websocket/shared-web-socket.ts 函数索引
 
-> 自动生成于 2026-06-18 | 总行数: 806 | 函数数: 11 | 语言: typescript
+> 自动生成于 2026-06-24 | 总行数: 807 | 函数数: 11 | 语言: typescript
 > **本文件由 code-indexer 脚本自动生成，严禁手动编辑。**
 
 **巨型函数警告**: 本文件包含 1 个超过 200 行的函数，建议优先通过 `@section` 标记进行内部导航。

@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 const SERVICE_TARGETS: Record<string, string> = {
     uof: process.env.API_PROXY_UOF_ORIGIN || 'https://xp-service-test1-api.helix.city',
@@ -37,7 +37,9 @@ const buildProxyUrl = (origin: string, path: string[] | undefined, search: strin
 const buildProxyHeaders = (request: NextRequest) => {
     const headers = new Headers(request.headers);
 
-    HOP_BY_HOP_HEADERS.forEach((header) => headers.delete(header));
+    for (const header of HOP_BY_HOP_HEADERS) {
+        headers.delete(header);
+    }
     headers.set('x-forwarded-host', request.headers.get('host') || '');
     headers.set('x-forwarded-proto', request.nextUrl.protocol.replace(':', ''));
 

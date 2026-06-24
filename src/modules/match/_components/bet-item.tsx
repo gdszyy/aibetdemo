@@ -8,6 +8,7 @@ import { ArrowDown } from '@/components/icons';
 import { DoubleArrowDownOutlined } from '@/components/icons2/DoubleArrowDownOutlined';
 import { ExclamationCircleOutlined } from '@/components/icons2/ExclamationCircleOutlined';
 import { FavoriteOutlined } from '@/components/icons2/FavoriteOutlined';
+import { type MarketCardProfile, useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { Toast } from '@/components/toast';
 import { cn } from '@/utils/common';
 import { useForceCollapse } from '../_hooks/use-force-collapse';
@@ -83,7 +84,7 @@ const BET_ITEM_SURFACE_CLASS: Record<
     }
 > = {
     default: {
-        body: 'p-4 gap-3',
+        body: 'p-4 gap-[var(--component-market-body-gap,12px)]',
         row: 'gap-x-2 gap-y-3',
         header: 'gap-2 px-2 pb-1 items-end',
         headerWrap: 'flex flex-col gap-3 p-4',
@@ -92,7 +93,7 @@ const BET_ITEM_SURFACE_CLASS: Record<
         buttonSurface: 'default',
     },
     detail: {
-        body: 'gap-2 px-2 py-2 md:py-2',
+        body: 'gap-[var(--component-market-body-gap,8px)] px-2 py-2 md:py-2',
         row: 'gap-x-2 gap-y-2',
         header: 'gap-2 px-2 py-2',
         headerWrap: 'flex flex-col',
@@ -111,17 +112,22 @@ const BetItemHeader: FC<{
     isExpanded: boolean;
     marketName: string;
     surface: BetItemSurface;
+    marketCardProfile: MarketCardProfile;
     tooltipDesc?: string;
     onComingSoonClick: () => void;
-}> = ({ isExpanded, marketName, surface, tooltipDesc, onComingSoonClick }) => {
+}> = ({ isExpanded, marketName, surface, marketCardProfile, tooltipDesc, onComingSoonClick }) => {
     const isDetail = surface === 'detail';
     const tooltipIcon = <ExclamationCircleOutlined className="size-4" />;
 
     return (
         <div
             className={cn(
-                'flex min-h-10 flex-row items-start justify-between border-filltext-ft-c transition-colors',
+                'flex min-h-[var(--component-market-header-min-height,2.5rem)] flex-row items-start justify-between border-filltext-ft-c transition-colors',
                 isDetail ? 'min-h-9 bg-surface-2 px-3' : 'border-b px-4',
+                marketCardProfile === 'superbet-rich-grid' &&
+                    'border-[color:var(--brand-match-divider,var(--border-subtle))] bg-[var(--brand-match-card-bg,var(--surface-1))] px-3 md:px-4',
+                marketCardProfile === 'betano-table-ticket' &&
+                    'border-[color:var(--brand-match-card-border,var(--border-subtle))] border-b bg-[var(--brand-match-card-bg,var(--surface-1))]',
             )}
         >
             <CollapsibleTrigger asChild>
@@ -129,13 +135,17 @@ const BetItemHeader: FC<{
                     type="button"
                     className={cn(
                         'flex min-w-0 flex-1 cursor-pointer items-center text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-0',
-                        isDetail ? 'min-h-9 py-2' : 'min-h-10 py-2.5',
+                        isDetail
+                            ? 'min-h-[var(--component-market-header-min-height,2.25rem)] py-2'
+                            : 'min-h-[var(--component-market-header-min-height,2.5rem)] py-2.5',
                     )}
                 >
                     <span
                         className={cn(
                             'whitespace-normal text-filltext-ft-g capitalize leading-5 wrap-break-word',
                             isDetail ? 'text-body-md font-bold text-filltext-ft-h' : 'text-body-lg',
+                            marketCardProfile === 'superbet-rich-grid' &&
+                                'text-[var(--brand-match-team-text,var(--filltext-ft-h))]',
                         )}
                     >
                         {marketName}
@@ -145,7 +155,7 @@ const BetItemHeader: FC<{
 
             <div
                 className={cn(
-                    'flex min-h-10 items-center justify-center',
+                    'flex min-h-[var(--component-market-header-min-height,2.5rem)] items-center justify-center',
                     isDetail ? 'gap-4 text-filltext-ft-e' : 'size-3',
                 )}
             >
@@ -624,6 +634,9 @@ export const BetItem: FC<BetItemProps> = ({
     tooltipDesc,
 }) => {
     const tCommon = useTranslations('common');
+    const componentProfile = useThemeComponentProfile();
+    const isBetanoMarketCard = componentProfile.marketCard.profile === 'betano-table-ticket';
+    const isSuperbetMarketCard = componentProfile.marketCard.profile === 'superbet-rich-grid';
     const [isExpanded, setIsExpanded] = useForceCollapse(!forceExpanded);
     const displayableLines =
         market.card_type === MarketCardType.Type5
@@ -649,14 +662,24 @@ export const BetItem: FC<BetItemProps> = ({
             open={isExpanded}
             onOpenChange={handleOpenChange}
             className={cn(
-                'flex w-full flex-col overflow-hidden rounded-sm',
+                'flex w-full flex-col overflow-hidden rounded-[var(--component-market-card-radius,var(--style-radius-card))]',
                 surface === 'detail' ? 'bg-surface-muted' : 'bg-surface-1',
+                isSuperbetMarketCard &&
+                    'border border-[color:var(--brand-match-card-border,var(--border-subtle))] bg-[var(--brand-match-card-bg,var(--surface-1))] shadow-[var(--brand-match-card-shadow,var(--style-card-shadow))]',
+                isBetanoMarketCard &&
+                    'border border-[color:var(--brand-match-card-border,var(--border-subtle))] bg-[var(--brand-match-card-bg,var(--surface-1))]',
             )}
+            data-market-card-profile={componentProfile.marketCard.profile}
+            data-market-card-density={componentProfile.marketCard.density}
+            data-market-header-treatment={componentProfile.marketCard.headerTreatment}
+            data-odds-profile={componentProfile.oddsButton.profile}
+            style={componentProfile.style}
         >
             <BetItemHeader
                 isExpanded={isExpanded}
                 marketName={market.name}
                 surface={surface}
+                marketCardProfile={componentProfile.marketCard.profile}
                 tooltipDesc={tooltipDesc}
                 onComingSoonClick={handleComingSoonClick}
             />
@@ -667,6 +690,10 @@ export const BetItem: FC<BetItemProps> = ({
                     surface === 'detail'
                         ? 'border-filltext-ft-b border-t bg-surface-muted'
                         : 'data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down',
+                    isSuperbetMarketCard &&
+                        'border-[color:var(--brand-match-divider,var(--border-subtle))] bg-[var(--brand-match-card-bg,var(--surface-1))]',
+                    isBetanoMarketCard &&
+                        'border-[color:var(--brand-match-card-border,var(--border-subtle))] bg-[var(--brand-match-card-bg,var(--surface-1))]',
                 )}
             >
                 <Content market={market} visibleLines={visibleLines} ctx={ctx} surface={surface} />

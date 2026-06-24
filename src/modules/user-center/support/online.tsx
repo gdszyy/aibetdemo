@@ -80,7 +80,7 @@ export const OnlineCall = () => {
             <div className="flex gap-8 items-center justify-center">
                 <button
                     type="button"
-                    className="cursor-pointer bg-func-lost text-neutral-white-h rounded-lg px-4 h-8 text-body-lg w-[90px] hover:opacity-90 transition-opacity"
+                    className="cursor-pointer bg-func-lost-solid text-neutral-white-h rounded-lg px-4 h-8 text-body-lg w-[90px] hover:opacity-90 transition-opacity"
                 >
                     {t('support.no')}
                 </button>
@@ -89,7 +89,7 @@ export const OnlineCall = () => {
                     onClick={handleConfirm}
                     disabled={!phone}
                     className={cn(
-                        'bg-func-win text-neutral-white-h rounded-lg px-4 h-8 text-body-lg w-[90px] transition-opacity',
+                        'bg-func-win-solid text-neutral-white-h rounded-lg px-4 h-8 text-body-lg w-[90px] transition-opacity',
                         phone ? 'cursor-pointer hover:opacity-90' : 'cursor-not-allowed opacity-50',
                     )}
                 >

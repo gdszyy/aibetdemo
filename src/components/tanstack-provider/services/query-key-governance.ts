@@ -23,6 +23,8 @@ type QueryClientMethod = (...args: readonly unknown[]) => unknown;
 
 /** 避免同一个 QueryClient 被重复 patch。 */
 const PATCHED_CLIENTS = new WeakSet<QueryClient>();
+const MAX_DEV_QUERY_KEY_WARNINGS = 10;
+const SUPPRESSED_WARNINGS_KEY = '__query-key-warnings-suppressed__';
 
 /**
  * queryClient 分为 3 类
@@ -111,6 +113,14 @@ const emitWarningIfNeeded = ({
     const warningKey = serializeQueryKey(queryKey);
 
     if (warnedQueryKeys.has(warningKey)) {
+        return;
+    }
+
+    if (warnedQueryKeys.size >= MAX_DEV_QUERY_KEY_WARNINGS) {
+        if (!warnedQueryKeys.has(SUPPRESSED_WARNINGS_KEY)) {
+            warnedQueryKeys.add(SUPPRESSED_WARNINGS_KEY);
+            console.warn('[QueryKey] Further invalid queryKey warnings suppressed in this session.');
+        }
         return;
     }
 

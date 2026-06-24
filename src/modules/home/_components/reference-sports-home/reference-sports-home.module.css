@@ -1,0 +1,1386 @@
+.root {
+    --home-bg: var(--page-bg);
+    --home-surface: var(--surface-1);
+    --home-surface-2: var(--surface-2);
+    --home-surface-3: var(--surface-3);
+    --home-line: var(--border-subtle);
+    --home-line-2: var(--border-strong);
+    --home-text: var(--content-primary);
+    --home-text-dim: var(--content-secondary);
+    --home-text-mute: var(--content-muted);
+    --home-accent: var(--brand-primary-0);
+    --home-accent-2: var(--brand-primary-3);
+    --home-accent-3: var(--brand-primary-4);
+    --home-on-accent: var(--on-brand);
+    --home-accent-soft: var(--brand-primary-1);
+    --home-live: var(--func-lost);
+    --home-gold: var(--accent-warm);
+    --home-card-shadow: var(--style-card-shadow);
+    --home-floating-shadow: var(--style-floating-shadow);
+    --home-radius: var(--component-smart-card-radius, 12px);
+    --home-recommend-radius: var(--component-recommend-card-radius, var(--home-radius));
+    --home-odds-radius: var(--component-odds-radius, 8px);
+    --home-card-hover-y: -3px;
+    --home-trend-card-width: 246px;
+    --home-hot-card-width: 332px;
+    --home-hot-card-min-height: 236px;
+    --home-odd-direction: column;
+    --home-odd-justify: center;
+    --home-odd-min-height: 58px;
+
+    display: flex;
+    min-width: 0;
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+    padding: 18px 16px 44px;
+    color: var(--home-text);
+    letter-spacing: 0;
+}
+
+.root[data-home-recommend-profile="match-market-board"] {
+    --home-card-hover-y: -1px;
+    --home-trend-card-width: 250px;
+    --home-hot-card-width: 330px;
+    --home-odd-min-height: 54px;
+}
+
+.root[data-home-recommend-profile="superbet-promo-rail"] {
+    --home-card-hover-y: -4px;
+    --home-trend-card-width: 286px;
+    --home-hot-card-width: 372px;
+    --home-hot-card-min-height: 258px;
+    --home-odd-min-height: 48px;
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] {
+    --home-card-hover-y: 0px;
+    --home-card-shadow: none;
+    --home-floating-shadow: none;
+    --home-trend-card-width: 292px;
+    --home-hot-card-width: 348px;
+    --home-hot-card-min-height: 230px;
+    --home-odd-direction: row;
+    --home-odd-justify: space-between;
+    --home-odd-min-height: 44px;
+}
+
+.topSearch {
+    position: relative;
+    z-index: 30;
+    display: flex;
+    min-height: 46px;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--home-line);
+    border-radius: 11px;
+    background: var(--home-surface);
+    padding: 12px 15px;
+    color: var(--home-text-mute);
+    box-shadow: var(--home-card-shadow);
+    transition: border-color 160ms ease;
+}
+
+.topSearch:focus-within {
+    border-color: var(--home-accent);
+}
+
+.searchIcon {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 auto;
+}
+
+.topSearch input {
+    min-width: 0;
+    flex: 1;
+    border: 0;
+    background: transparent;
+    color: var(--home-text);
+    font-size: 14.5px;
+    line-height: 20px;
+    outline: 0;
+}
+
+.topSearch input::placeholder {
+    color: var(--home-text-mute);
+}
+
+.searchPop {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    left: 0;
+    z-index: 60;
+    overflow-y: auto;
+    max-height: 64vh;
+    border: 1px solid var(--home-line-2);
+    border-radius: 13px;
+    background: var(--home-surface);
+    padding: 8px 8px 10px;
+    box-shadow: 0 24px 50px -22px rgba(0, 0, 0, 0.8);
+}
+
+.searchPop[hidden] {
+    display: none;
+}
+
+/* iOS26 液态玻璃：搜索下拉是 surface-1 浮层，但用 CSS Module 类（background: var(--home-surface)）
+   上色，不会被 glass.css 的 .bg-surface-1 / [class*="brand-*-bg"] 子串选择器命中，所以缺了背景模糊。
+   这里按通用玻璃面（glass.css 第 2 组）同款配方显式补上：底色本就是半透明的 --surface-1
+   （glass scheme 内 alpha<1），加 backdrop-filter 后才能透出背后的彩色墙纸形成毛玻璃。
+   仅 glass 生效——其它 scheme 的 --surface-1 不透明，blur 既无效又徒增合成开销，故不全局开启。 */
+:global(:root.glass-light) .searchPop,
+:global(:root.glass-dark) .searchPop {
+    -webkit-backdrop-filter: blur(18px) saturate(1.7);
+    backdrop-filter: blur(18px) saturate(1.7) url(#glass-refraction);
+}
+
+.searchGroup {
+    padding: 6px 4px;
+}
+
+.searchHeading {
+    padding: 4px 8px;
+    color: var(--home-text-mute);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    line-height: 14px;
+    text-transform: uppercase;
+}
+
+.searchChips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 2px 4px;
+}
+
+.searchChips button {
+    cursor: pointer;
+    border: 1px solid var(--home-line);
+    border-radius: 20px;
+    background: var(--home-surface-2);
+    padding: 6px 13px;
+    color: var(--home-text-dim);
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 16px;
+    transition:
+        border-color 140ms ease,
+        color 140ms ease;
+}
+
+.searchChips button:hover {
+    border-color: var(--home-accent);
+    color: var(--home-accent);
+}
+
+.searchResult {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    gap: 11px;
+    border-radius: 9px;
+    padding: 9px 8px;
+    transition: background 140ms ease;
+}
+
+.searchResult:hover {
+    background: var(--home-surface-2);
+}
+
+.searchResultIcon {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    color: var(--home-text-dim);
+}
+
+.searchGameIcon {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 7px;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.searchResultTitle {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: 1px;
+    overflow: hidden;
+    color: var(--home-text);
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 18px;
+}
+
+.searchResultTitle i {
+    overflow: hidden;
+    color: var(--home-text-mute);
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.searchOdd {
+    flex: 0 0 auto;
+    color: var(--home-text);
+    font-variant-numeric: tabular-nums;
+    font-size: 13.5px;
+    font-weight: 800;
+    line-height: 18px;
+}
+
+.section {
+    min-width: 0;
+    margin-bottom: 22px;
+}
+
+.sectionCompact {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.sectionHead {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.sectionTitle {
+    margin: 0;
+    color: var(--home-text);
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 24px;
+}
+
+.sectionMore {
+    margin-left: auto;
+    color: var(--home-text-mute);
+    font-size: 12.5px;
+    font-weight: 700;
+    line-height: 18px;
+    transition: color 160ms ease;
+}
+
+.sectionMore:hover {
+    color: var(--home-accent);
+}
+
+.navArrows {
+    display: flex;
+    gap: 7px;
+    margin-left: auto;
+}
+
+.arrowButton {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border: 1px solid var(--home-line-2);
+    border-radius: 8px;
+    color: var(--home-text-dim);
+    transition:
+        border-color 160ms ease,
+        color 160ms ease;
+}
+
+.arrowButton:hover {
+    border-color: var(--home-accent);
+    color: var(--home-accent);
+}
+
+.arrowIcon {
+    width: 17px;
+    height: 17px;
+}
+
+.hScroll {
+    display: flex;
+    gap: 14px;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 0 16px;
+    margin: -8px 0 -10px;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+}
+
+.hScroll::-webkit-scrollbar {
+    display: none;
+}
+
+.leagueRow {
+    gap: 13px;
+    padding-bottom: 6px;
+}
+
+.leagueCard {
+    position: relative;
+    flex: 0 0 204px;
+    height: 96px;
+    overflow: hidden;
+    scroll-snap-align: start;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+    padding: 13px 14px;
+    color: #ffffff;
+    box-shadow: inset 0 -34px 42px -22px rgba(0, 0, 0, 0.55);
+}
+
+.leagueName {
+    position: relative;
+    z-index: 2;
+    display: block;
+    max-width: 118px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.15;
+    text-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
+}
+
+.leagueIcon {
+    position: absolute;
+    top: 48%;
+    right: 14px;
+    z-index: 1;
+    width: 62px;
+    height: 62px;
+    transform: translateY(-50%);
+    color: #ffffff;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+    opacity: 0.9;
+}
+
+.leagueWatch {
+    position: absolute;
+    right: 10px;
+    bottom: 11px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 20px;
+    background: var(--home-live);
+    color: #ffffff;
+    padding: 3px 9px;
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 14px;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
+}
+
+.watchDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: currentColor;
+}
+
+.mainGrid {
+    min-width: 0;
+    margin-top: 8px;
+}
+
+.trendTabs {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--home-line);
+    margin-bottom: 20px;
+    scrollbar-width: none;
+}
+
+.trendTabs::-webkit-scrollbar {
+    display: none;
+}
+
+.trendTab {
+    flex: 0 0 auto;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    padding: 11px 14px;
+    color: var(--home-text-dim);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 18px;
+    white-space: nowrap;
+    transition:
+        border-color 160ms ease,
+        color 160ms ease;
+}
+
+.trendTab:hover,
+.trendTabActive {
+    color: var(--home-text);
+}
+
+.trendTabActive {
+    border-bottom-color: var(--home-accent);
+}
+
+.trendCard {
+    flex: 0 0 var(--home-trend-card-width);
+    scroll-snap-align: start;
+    border: 1px solid var(--home-line);
+    border-radius: var(--home-recommend-radius);
+    background: var(--home-surface);
+    padding: 13px 13px 12px;
+    box-shadow: var(--home-card-shadow);
+    transition:
+        background 160ms ease,
+        border-color 160ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
+
+.trendCard:hover {
+    border-color: var(--home-line-2);
+    background: var(--home-surface-2);
+    box-shadow: var(--home-floating-shadow);
+    transform: translateY(var(--home-card-hover-y));
+}
+
+.trendTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 13px;
+    color: var(--home-text-dim);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 15px;
+}
+
+.trendTop span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.playMark {
+    width: 0;
+    height: 0;
+    flex: 0 0 auto;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 9px solid currentColor;
+}
+
+.trendMiddle {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: start;
+    gap: 8px;
+    margin-bottom: 13px;
+}
+
+.trendTeam {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+
+.avatar,
+.flag {
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    color: #ffffff;
+    font-weight: 900;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        inset 0 -2px 5px rgba(0, 0, 0, 0.25),
+        0 2px 5px -1px rgba(0, 0, 0, 0.35);
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 9.5px;
+    line-height: 1;
+}
+
+.teamName {
+    max-width: 100%;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    color: var(--home-text);
+    font-size: 11.5px;
+    font-weight: 700;
+    line-height: 15px;
+    white-space: nowrap;
+}
+
+.trendTime {
+    padding-top: 4px;
+    text-align: center;
+    color: var(--home-text-mute);
+    font-size: 10.5px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.trendTime b {
+    display: block;
+    color: var(--home-text);
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+}
+
+.oddsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.odd {
+    display: flex;
+    min-width: 0;
+    min-height: var(--home-odd-min-height);
+    cursor: pointer;
+    flex-direction: var(--home-odd-direction);
+    align-items: center;
+    justify-content: var(--home-odd-justify);
+    gap: 4px;
+    border: 1px solid var(--brand-odds-border, var(--home-line));
+    border-radius: var(--home-odds-radius);
+    background: var(--brand-odds-bg, var(--home-surface-2));
+    padding: 9px 6px;
+    transition:
+        background 140ms ease,
+        border-color 140ms ease,
+        transform 140ms ease;
+}
+
+.odd:hover {
+    border-color: var(--brand-odds-hover-border, var(--home-accent));
+    background: var(--brand-odds-hover-bg, var(--home-accent-soft));
+}
+
+.odd:active {
+    transform: scale(0.98);
+}
+
+.oddLabel {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--brand-odds-name, var(--home-text-dim));
+    font-size: 10.5px;
+    font-weight: 700;
+    line-height: 14px;
+    white-space: nowrap;
+}
+
+.oddValue {
+    color: var(--brand-odds-value, var(--home-text));
+    font-variant-numeric: tabular-nums;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 18px;
+}
+
+.oddSelected,
+.oddSelected:hover {
+    border-color: transparent;
+    background: var(--brand-odds-selected-bg, var(--home-accent));
+}
+
+.oddSelected .oddLabel,
+.oddSelected .oddValue {
+    color: var(--brand-odds-selected-text, var(--home-on-accent));
+}
+
+.popularRow {
+    gap: 8px;
+}
+
+.gameTile {
+    position: relative;
+    flex: 0 0 132px;
+    scroll-snap-align: start;
+    cursor: pointer;
+    transition: transform 160ms ease;
+}
+
+.gameTile:hover {
+    transform: translateY(-4px);
+}
+
+.gameThumb {
+    position: relative;
+    display: flex;
+    aspect-ratio: 3 / 4;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: var(--home-surface-2);
+    padding: 11px;
+    box-shadow: inset 0 -36px 46px -28px rgba(0, 0, 0, 0.66);
+    transition: box-shadow 160ms ease;
+}
+
+.gameThumb::after {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, transparent 42%, rgba(0, 0, 0, 0.8));
+    content: "";
+}
+
+.gameTile:hover .gameThumb {
+    box-shadow:
+        0 10px 20px -10px rgba(15, 23, 38, 0.28),
+        inset 0 -36px 46px -28px rgba(0, 0, 0, 0.66);
+}
+
+.gameMono {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.14);
+    font-size: 42px;
+    font-weight: 900;
+}
+
+.gameCover {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    object-fit: cover;
+}
+
+.gameProvider {
+    position: absolute;
+    top: 9px;
+    left: 11px;
+    z-index: 2;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 12px;
+    text-transform: uppercase;
+}
+
+.gamePlay {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(7, 19, 13, 0.46);
+    opacity: 0;
+    transition: opacity 160ms ease;
+}
+
+.gameTile:hover .gamePlay {
+    opacity: 1;
+}
+
+.gamePlay span {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9px;
+    background: var(--home-accent);
+    color: var(--home-on-accent);
+    padding: 9px 16px;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 15px;
+}
+
+.gameName {
+    display: block;
+    margin-top: 7px;
+    color: var(--home-text);
+    font-size: 12.5px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.hotCard {
+    display: flex;
+    flex: 0 0 var(--home-hot-card-width);
+    min-height: var(--home-hot-card-min-height);
+    scroll-snap-align: start;
+    flex-direction: column;
+    border: 1px solid transparent;
+    border-radius: var(--home-recommend-radius);
+    background: var(--home-surface);
+    padding: 16px 17px;
+    box-shadow: var(--home-card-shadow);
+    transition:
+        background 160ms ease,
+        border-color 160ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
+
+.hotCard:hover {
+    border-color: var(--home-line-2);
+    background: var(--home-surface-2);
+    box-shadow: var(--home-floating-shadow);
+    transform: translateY(var(--home-card-hover-y));
+}
+
+.hotTop {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: var(--home-text-mute);
+    font-size: 11.5px;
+    line-height: 16px;
+}
+
+.hotLeague {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    color: var(--home-text-dim);
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.smallIcon {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 auto;
+}
+
+.star {
+    color: var(--home-text-mute);
+    transition: color 140ms ease;
+}
+
+.star:hover {
+    color: var(--home-gold);
+}
+
+.hotTime {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    color: var(--home-text-dim);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 18px;
+}
+
+.marketTag {
+    display: inline-flex;
+    border: 1px solid var(--home-line);
+    border-radius: 5px;
+    background: var(--home-surface-2);
+    padding: 1px 6px;
+    color: var(--home-text-mute);
+    font-size: 10.5px;
+    font-weight: 700;
+    line-height: 14px;
+}
+
+.boost {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-left: auto;
+    border-radius: 5px;
+    background: linear-gradient(135deg, var(--home-gold), #e8901c);
+    color: #1c1304;
+    padding: 2px 7px;
+    font-size: 9.5px;
+    font-weight: 900;
+    line-height: 13px;
+}
+
+.matchup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.country {
+    display: flex;
+    width: 78px;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    text-align: center;
+}
+
+.flag {
+    width: 36px;
+    height: 36px;
+    border: 2px solid rgba(255, 255, 255, 0.14);
+    font-size: 10px;
+    line-height: 1;
+}
+
+.countryName {
+    color: var(--home-text);
+    font-size: 12.5px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.vs {
+    color: var(--home-text-mute);
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.popularity {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 13px;
+    color: var(--home-text-mute);
+    font-size: 11.5px;
+    line-height: 16px;
+}
+
+.fire {
+    color: #ff9a3d;
+}
+
+.popularity b {
+    color: var(--home-text-dim);
+    font-weight: 800;
+}
+
+.outrightCard {
+    flex: 0 0 150px;
+    scroll-snap-align: start;
+    border: 1px solid transparent;
+    border-radius: var(--home-recommend-radius);
+    background: var(--home-surface);
+    padding: 16px 12px;
+    text-align: center;
+    box-shadow: var(--home-card-shadow);
+    cursor: pointer;
+    transition:
+        border-color 160ms ease,
+        box-shadow 160ms ease;
+}
+
+.outrightCard:hover {
+    border-color: var(--home-accent);
+    box-shadow: var(--home-floating-shadow);
+}
+
+.outrightCard .flag {
+    margin: 0 auto 10px;
+}
+
+.outrightName {
+    margin-bottom: 12px;
+    color: var(--home-text);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 18px;
+}
+
+.outrightOdd {
+    border: 1px solid var(--brand-odds-border, var(--home-line));
+    border-radius: var(--home-odds-radius);
+    background: var(--brand-odds-bg, var(--home-surface-2));
+    padding: 8px;
+    color: var(--brand-odds-value, var(--home-text));
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 18px;
+}
+
+.liveTitlePill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--home-live) 14%, transparent);
+    color: var(--home-live);
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 14px;
+}
+
+.liveDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: currentColor;
+    animation: pulse 1.3s infinite;
+}
+
+.filterRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.tabs {
+    display: inline-flex;
+    gap: 5px;
+    overflow-x: auto;
+    border: 1px solid var(--home-line);
+    border-radius: 11px;
+    background: var(--home-surface);
+    padding: 4px;
+    scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tabButton {
+    flex: 0 0 auto;
+    border-radius: 8px;
+    padding: 8px 18px;
+    color: var(--home-text-dim);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 16px;
+    white-space: nowrap;
+    transition:
+        background 150ms ease,
+        color 150ms ease;
+}
+
+.tabButton:hover {
+    background: var(--home-surface-2);
+    color: var(--home-text);
+}
+
+.tabActive {
+    background: var(--home-accent);
+    color: var(--home-on-accent);
+}
+
+.tabActive:hover {
+    background: var(--home-accent);
+    color: var(--home-on-accent);
+}
+
+.matchRow {
+    border: 1px solid var(--home-line);
+    border-radius: var(--home-recommend-radius);
+    background: var(--home-surface);
+    padding: 15px 17px;
+    margin-bottom: 10px;
+    box-shadow: var(--home-card-shadow);
+    transition:
+        background 160ms ease,
+        border-color 160ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
+
+.matchRow:hover {
+    border-color: var(--home-line-2);
+    background: var(--home-surface-2);
+    box-shadow: var(--home-floating-shadow);
+    transform: translateY(var(--home-card-hover-y));
+}
+
+.matchTop {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 12px;
+    color: var(--home-text-mute);
+    font-size: 11.5px;
+    line-height: 16px;
+}
+
+.matchLeague {
+    color: var(--home-text-dim);
+    font-weight: 800;
+}
+
+.matchMinute {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: auto;
+    color: var(--home-live);
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.matchBody {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    align-items: center;
+    gap: 16px;
+}
+
+.teams {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.teamLine {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 10px;
+    color: var(--home-text);
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 20px;
+}
+
+.teamLineName {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.teamScore {
+    min-width: 18px;
+    color: var(--home-text);
+    font-variant-numeric: tabular-nums;
+    font-size: 18px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.smallAvatar {
+    display: grid;
+    width: 22px;
+    height: 22px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid var(--home-line-2);
+    border-radius: 999px;
+    background: var(--home-surface-2);
+    color: var(--home-text-dim);
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.matchBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid color-mix(in srgb, var(--home-line) 70%, transparent);
+    margin-top: 12px;
+    padding-top: 11px;
+    color: var(--home-text-mute);
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.matchBottom a {
+    transition: color 150ms ease;
+}
+
+.matchBottom a:hover {
+    color: var(--home-accent);
+}
+
+.upcomingRow {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) 280px;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid var(--home-line);
+    border-radius: var(--home-recommend-radius);
+    background: var(--home-surface);
+    padding: 12px 15px;
+    margin-bottom: 9px;
+    box-shadow: var(--home-card-shadow);
+    transition:
+        background 160ms ease,
+        border-color 160ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
+
+.upcomingRow:hover {
+    border-color: var(--home-line-2);
+    background: var(--home-surface-2);
+    box-shadow: var(--home-floating-shadow);
+    transform: translateY(var(--home-card-hover-y));
+}
+
+.when {
+    color: var(--home-text-mute);
+    font-size: 11.5px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.when b {
+    display: block;
+    color: var(--home-text);
+    font-variant-numeric: tabular-nums;
+    font-size: 15px;
+}
+
+.upcomingTeams {
+    min-width: 0;
+    color: var(--home-text);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 18px;
+}
+
+.upcomingTeams small {
+    display: block;
+    overflow: hidden;
+    color: var(--home-text-mute);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.35;
+    }
+}
+
+@media (max-width: 1080px) {
+    .root {
+        padding: 12px 12px 40px;
+    }
+
+    .matchBody,
+    .upcomingRow {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .root {
+        gap: 14px;
+        padding: 8px 8px 32px;
+    }
+
+    .topSearch {
+        min-height: 44px;
+        padding: 10px 12px;
+    }
+
+    .searchPop {
+        max-height: 70vh;
+    }
+
+    .section {
+        margin-bottom: 26px;
+    }
+
+    .sectionTitle {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .leagueCard {
+        flex-basis: 184px;
+    }
+
+    .trendCard {
+        flex-basis: 230px;
+    }
+
+    .gameTile {
+        flex-basis: 120px;
+    }
+
+    .hotCard {
+        flex-basis: 300px;
+    }
+
+    .outrightCard {
+        flex-basis: 136px;
+    }
+
+    .tabs {
+        max-width: 100%;
+    }
+
+    .tabButton {
+        padding: 7px 14px;
+    }
+
+    .matchRow {
+        padding: 13px 12px;
+    }
+
+    .upcomingRow {
+        padding: 12px;
+    }
+}
+
+.root[data-home-recommend-profile="match-market-board"] .marketTag,
+.root[data-home-recommend-profile="match-market-board"] .boost {
+    border-radius: 4px;
+}
+
+.root[data-home-recommend-profile="superbet-promo-rail"] .marketTag,
+.root[data-home-recommend-profile="superbet-promo-rail"] .boost {
+    border-radius: 999px;
+}
+
+.root[data-home-recommend-profile="superbet-promo-rail"] .trendCard,
+.root[data-home-recommend-profile="superbet-promo-rail"] .hotCard {
+    padding: 16px;
+}
+
+/* Betano cards use subtle full borders; do not add an orange left rail without source evidence. */
+.root[data-home-recommend-profile="betano-ticket-feed"] .trendCard,
+.root[data-home-recommend-profile="betano-ticket-feed"] .hotCard,
+.root[data-home-recommend-profile="betano-ticket-feed"] .outrightCard,
+.root[data-home-recommend-profile="betano-ticket-feed"] .matchRow,
+.root[data-home-recommend-profile="betano-ticket-feed"] .upcomingRow {
+    border-color: var(--home-line);
+    background: var(--home-surface);
+    box-shadow: none;
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .trendCard:hover,
+.root[data-home-recommend-profile="betano-ticket-feed"] .hotCard:hover,
+.root[data-home-recommend-profile="betano-ticket-feed"] .outrightCard:hover,
+.root[data-home-recommend-profile="betano-ticket-feed"] .matchRow:hover,
+.root[data-home-recommend-profile="betano-ticket-feed"] .upcomingRow:hover {
+    border-color: var(--home-line);
+    background: var(--home-surface);
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .marketTag {
+    border-color: var(--brand-odds-border, var(--home-line));
+    background: var(--brand-odds-bg, var(--home-surface-2));
+    color: var(--home-text-dim);
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .trendTabs {
+    border-bottom-color: var(--home-line);
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .trendTabActive {
+    color: var(--home-text);
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .topSearch,
+.root[data-home-recommend-profile="betano-ticket-feed"] .searchPop,
+.root[data-home-recommend-profile="betano-ticket-feed"] .tabs {
+    border-color: var(--home-line);
+    border-radius: var(--home-recommend-radius);
+    background: var(--home-surface);
+    box-shadow: none;
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .searchPop {
+    top: calc(100% + 8px);
+    padding: 8px;
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .searchChips button,
+.root[data-home-recommend-profile="betano-ticket-feed"] .searchResult,
+.root[data-home-recommend-profile="betano-ticket-feed"] .arrowButton,
+.root[data-home-recommend-profile="betano-ticket-feed"] .tabButton {
+    border-radius: var(--home-odds-radius);
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .searchChips button {
+    background: var(--brand-odds-bg, var(--home-surface-2));
+    font-weight: 700;
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .searchResult:hover {
+    background: var(--brand-odds-bg, var(--home-surface-2));
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .arrowButton {
+    background: var(--home-surface);
+    box-shadow: none;
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .arrowButton:hover {
+    border-color: var(--home-accent);
+    background: var(--brand-odds-bg, var(--home-surface-2));
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .gameTile:hover {
+    transform: none;
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .gameThumb {
+    border-radius: var(--home-recommend-radius);
+    box-shadow: inset 0 -34px 44px -28px rgba(0, 0, 0, 0.62);
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .gamePlay span {
+    border-radius: var(--component-slip-cta-radius, var(--home-odds-radius));
+    background: var(--slip-cta-bg, #007a43);
+    color: var(--slip-cta-text, #ffffff);
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .gameTile:hover .gameThumb {
+    box-shadow:
+        0 0 0 1px var(--home-line),
+        inset 0 -34px 44px -28px rgba(0, 0, 0, 0.62);
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .liveTitlePill,
+.root[data-home-recommend-profile="betano-ticket-feed"] .boost {
+    border-radius: var(--home-odds-radius);
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .odd {
+    padding: 8px 10px;
+}
+
+.root[data-home-recommend-profile="betano-ticket-feed"] .oddLabel,
+.root[data-home-recommend-profile="betano-ticket-feed"] .oddValue {
+    line-height: 16px;
+}

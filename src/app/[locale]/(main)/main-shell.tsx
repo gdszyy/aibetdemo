@@ -1,6 +1,7 @@
 'use client';
 
 import { match, P } from 'ts-pattern';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { config } from '@/constants/config';
 import { useIsDesktop } from '@/hooks/use-media-query';
 import { usePathname } from '@/i18n';
@@ -23,10 +24,15 @@ export function MainShell({ children }: { children: React.ReactNode }) {
     const betSlipDrawerOpen = useUIStore((s) => s.betSlipDrawerOpen);
     const selectionCount = useSelectionCount();
     const isUnauthenticated = useIsUnauthenticated();
+    const componentProfile = useThemeComponentProfile();
     const pathname = usePathname();
     const hasSidebar = isDesktop && checkHasSidebar(pathname);
     const hasMobileBetSlipSummary = checkIsSportsActive(pathname) || checkIsSportsLiveActive(pathname);
-    const showMobileAuthActionBar = !isDesktop && !betSlipDrawerOpen && isUnauthenticated;
+    const showMobileAuthActionBar =
+        !isDesktop &&
+        !betSlipDrawerOpen &&
+        isUnauthenticated &&
+        componentProfile.nav.profile !== 'betano-orange-utility';
     const mobileBottomPaddingClass = match({
         isDesktop,
         betSlipDrawerOpen,
@@ -85,7 +91,7 @@ export function MainShell({ children }: { children: React.ReactNode }) {
             {/* Mobile bottom TabBar */}
             {!isDesktop && !betSlipDrawerOpen && (
                 <>
-                    <MobileAuthActionBar />
+                    {showMobileAuthActionBar && <MobileAuthActionBar />}
                     <BottomTabBar />
                 </>
             )}

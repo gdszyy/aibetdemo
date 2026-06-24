@@ -36,7 +36,7 @@ export const PlaceBetButton: FC<PlaceBetButtonProps> = ({
             onClick={onClick}
             disabled={disabled || loading}
             className={cn(
-                'flex h-10 cursor-pointer items-center rounded-sm transition-all',
+                'flex h-10 cursor-pointer items-center rounded-[var(--component-slip-cta-radius,var(--style-radius-control))] transition-all',
                 'min-w-[226px] w-[calc(100%-32px)] mx-auto',
                 '[background:var(--slip-cta-bg,var(--odds-selected-bg))]',
                 'text-body-md leading-4 font-bold text-[var(--slip-cta-text,var(--odds-selected-text))]',

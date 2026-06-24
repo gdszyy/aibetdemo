@@ -107,7 +107,7 @@ export const TicketLegStatusNode: FC<{
             cn(
                 'border-func-lost',
                 isLossInMixedPendingCard
-                    ? 'bg-func-lost text-neutral-white-h shadow-[0_0_4px_var(--func-lost)]'
+                    ? 'bg-func-lost-solid text-neutral-white-h shadow-[0_0_4px_var(--func-lost)]'
                     : 'bg-surface-1 text-func-lost',
             ),
         )

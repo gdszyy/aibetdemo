@@ -19,6 +19,8 @@
         "test": "",
         "test:logic": "node --import tsx --test src/modules/match/_logic/*.test.ts",
         "theme:check": "tsx scripts/check-theme-index.ts",
+        "theme:contrast": "tsx scripts/check-contrast.ts",
+        "theme:perceptual": "tsx scripts/check-perceptual.ts",
         "icon:build": "svgr src/assets/icons",
         "icon2:build": "pnpm dlx svg-to-component-cli@^1 parse -o src/components/icons2 src/assets/icons2",
         "icon2:preview": "pnpm dlx svg-to-component-cli@^1 preview src/assets/icons2",

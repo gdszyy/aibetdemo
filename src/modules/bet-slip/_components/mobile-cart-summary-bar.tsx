@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 import { BetType } from '@/api/models/cart';
 import { DoubleArrowUpThinOutlined } from '@/components/icons2/DoubleArrowUpThinOutlined';
 import { SlipOutlined } from '@/components/icons2/SlipOutlined';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { useSchemeMeta } from '@/components/theme-provider/scheme-meta';
 import { useIntlFormatter } from '@/hooks/use-intl-formatter';
 import { useParlayBoostRule } from '@/hooks/use-parlay-boost-rule';
@@ -63,6 +64,7 @@ export const MobileCartSummaryBar: FC<MobileCartSummaryBarProps> = ({ className 
     const t = useTranslations('betSlip');
     const schemeMeta = useSchemeMeta();
     const slipSkin = getBetSlipSkin(schemeMeta);
+    const componentProfile = useThemeComponentProfile();
     const openBetSlipDrawer = useUIStore((state) => state.openBetSlipDrawer);
     const isUnauthenticated = useIsUnauthenticated();
     const selections = useBetSlipStore((state) => state.selections);
@@ -116,6 +118,101 @@ export const MobileCartSummaryBar: FC<MobileCartSummaryBarProps> = ({ className 
               : 0;
     const formattedStake = formatCurrency(totalStake, SUMMARY_CURRENCY_FORMAT_OPTIONS);
     const formattedPotentialWin = formatCurrency(totalPotentialWin, SUMMARY_CURRENCY_FORMAT_OPTIONS);
+    const isBetanoCtaFlow = componentProfile.betSlip.mobilePlacement === 'cta-drawer';
+    const isSuperbetMetricsSummary = componentProfile.betSlip.mobileSummaryLayout === 'superbet-metrics';
+
+    if (isBetanoCtaFlow) {
+        return (
+            <button
+                type="button"
+                onClick={openBetSlipDrawer}
+                className={cn(
+                    'fixed right-0 bottom-0 left-0 z-50 flex h-14 w-full items-center bg-[var(--slip-footer-bg,var(--surface-1))] px-2 py-2 md:hidden',
+                    'border-[color:var(--slip-panel-border,var(--border-subtle))] border-t',
+                    className,
+                )}
+                data-bet-slip-profile={componentProfile.betSlip.profile}
+                data-mobile-bet-flow={componentProfile.betSlip.mobileFlow}
+                data-mobile-bet-placement={componentProfile.betSlip.mobilePlacement}
+                style={{ ...slipSkin.style, ...componentProfile.style }}
+            >
+                <span className="flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--component-slip-cta-radius,8px)] bg-[var(--slip-cta-bg,#37a25c)] px-3 text-[var(--slip-cta-text,#ffffff)] transition-colors hover:bg-[var(--slip-cta-hover-bg,#2f8e50)]">
+                    <span className="min-w-0 truncate text-body-md font-bold">
+                        {totalStake > 0 ? 'APOSTE JA' : 'DEFINIR VALOR'}
+                    </span>
+                    <span className="ml-2 shrink-0 rounded-full bg-white/16 px-2 py-0.5 text-auxiliary-xs font-bold">
+                        {selectionCount}
+                    </span>
+                </span>
+            </button>
+        );
+    }
+
+    if (isSuperbetMetricsSummary) {
+        return (
+            <button
+                type="button"
+                onClick={openBetSlipDrawer}
+                className={cn(
+                    'group/mobile-dock fixed left-0 right-0 z-40',
+                    isUnauthenticated
+                        ? 'bottom-[calc(var(--bottom-bar-safe-height)+var(--mobile-auth-action-bar-height))]'
+                        : 'bottom-[var(--bottom-bar-safe-height)]',
+                    'flex h-[var(--component-slip-mobile-summary-height,var(--mobile-cart-summary-bar-height))] w-full items-center gap-3 rounded-t-[var(--mobile-summary-bar-radius)] border-t px-3 py-2 text-neutral-white-h',
+                    'border-[color:var(--slip-summary-border,var(--mobile-summary-bar-border))]',
+                    '[background:var(--slip-dock-bg,var(--dock-bar-bg))] [box-shadow:var(--slip-summary-shadow,var(--mobile-summary-bar-shadow))]',
+                    'transition-[background,opacity] duration-200 hover:[background:var(--slip-dock-hover-bg,var(--dock-bar-hover-bg))] active:[opacity:var(--mobile-touch-active-opacity)]',
+                    'md:hidden',
+                    className,
+                )}
+                data-bet-slip-profile={componentProfile.betSlip.profile}
+                data-mobile-bet-flow={componentProfile.betSlip.mobileFlow}
+                data-mobile-bet-placement={componentProfile.betSlip.mobilePlacement}
+                data-mobile-summary-layout={componentProfile.betSlip.mobileSummaryLayout}
+                style={{ ...slipSkin.style, ...componentProfile.style }}
+            >
+                <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--component-odds-radius,5px)] bg-[var(--slip-dock-icon-bg,rgba(0,0,0,0.18))] text-[var(--slip-cta-text,#ffffff)]">
+                    <SlipOutlined className="size-5" />
+                    <span className="-right-1 -top-1 absolute" data-energy-ball-target="mobile-betslip-badge">
+                        <SelectionBadge
+                            count={selectionCount}
+                            className="h-4 min-w-4 rounded-full bg-white px-1 text-auxiliary-xxs font-bold leading-4 text-[var(--slip-accent,#c21e1c)]"
+                        />
+                    </span>
+                </div>
+
+                <div className="flex min-w-0 flex-1 items-center gap-2">
+                    <div className="flex min-w-[62px] flex-col items-start">
+                        <span className="text-auxiliary-2xs font-medium text-white/72">
+                            {selectionCount} {MOBILE_SUMMARY_COPY.selections}
+                        </span>
+                        <span className="text-body-md font-bold leading-5 text-white">
+                            {t('summary.odds')} {displayOdds > 0 ? formatOddsByFormat(displayOdds, oddsFormat) : '0.00'}
+                        </span>
+                    </div>
+                    <div className="h-8 w-px shrink-0 bg-white/16" />
+                    <div className="flex min-w-0 flex-1 flex-col items-start">
+                        <span className="text-auxiliary-2xs text-white/68">{t('summary.stake')}</span>
+                        <span
+                            className="max-w-full truncate text-body-md font-bold leading-5 text-white"
+                            title={formatNumber(totalStake)}
+                        >
+                            {formattedStake}
+                        </span>
+                    </div>
+                    <div className="flex min-w-0 flex-1 flex-col items-start">
+                        <span className="text-auxiliary-2xs text-white/68">{t('summary.potentialWin')}</span>
+                        <span
+                            className="max-w-full truncate text-body-md font-bold leading-5 text-[var(--slip-dock-value-text,var(--neutral-white-h))]"
+                            title={formatNumber(totalPotentialWin)}
+                        >
+                            {formattedPotentialWin}
+                        </span>
+                    </div>
+                </div>
+            </button>
+        );
+    }
 
     return (
         <button
@@ -131,9 +228,12 @@ export const MobileCartSummaryBar: FC<MobileCartSummaryBarProps> = ({ className 
                 '[background:var(--slip-dock-bg,var(--dock-bar-bg))] [box-shadow:var(--slip-summary-shadow,var(--mobile-summary-bar-shadow))]',
                 'transition-[background,opacity] duration-200 hover:[background:var(--slip-dock-hover-bg,var(--dock-bar-hover-bg))] active:[opacity:var(--mobile-touch-active-opacity)]',
                 'md:hidden',
+                componentProfile.betSlip.mobileFlow === 'cta-led-sheet' && 'gap-2.5',
                 className,
             )}
-            style={slipSkin.style}
+            data-bet-slip-profile={componentProfile.betSlip.profile}
+            data-mobile-bet-flow={componentProfile.betSlip.mobileFlow}
+            style={{ ...slipSkin.style, ...componentProfile.style }}
         >
             <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-[var(--slip-dock-icon-bg,var(--mobile-dock-icon-bg))] text-[var(--mobile-dock-icon-text)]">
                 <SlipOutlined className="size-5" />
@@ -165,7 +265,7 @@ export const MobileCartSummaryBar: FC<MobileCartSummaryBarProps> = ({ className 
                 <div className="flex min-w-0 flex-1 flex-col items-start">
                     <span className="text-auxiliary-2xs text-neutral-white-h/68">{t('summary.potentialWin')}</span>
                     <span
-                        className="max-w-full truncate text-body-md font-bold leading-5 text-accent-warm"
+                        className="max-w-full truncate text-body-md font-bold leading-5 text-[var(--slip-dock-value-text,var(--neutral-white-h))]"
                         title={formatNumber(totalPotentialWin)}
                     >
                         {formattedPotentialWin}

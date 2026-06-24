@@ -73,7 +73,16 @@ const AppInitializer: FC = () => {
 
     // Firebase Analytics lazy init
     useEffect(() => {
-        getFirebaseAnalytics();
+        const run = () => {
+            getFirebaseAnalytics();
+        };
+        if ('requestIdleCallback' in window) {
+            const idleId = window.requestIdleCallback(run, { timeout: 3000 });
+            return () => window.cancelIdleCallback(idleId);
+        }
+
+        const timeoutId = globalThis.setTimeout(run, 1500);
+        return () => globalThis.clearTimeout(timeoutId);
     }, []);
 
     // WS Connection

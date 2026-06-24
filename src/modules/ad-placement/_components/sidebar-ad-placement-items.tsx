@@ -9,6 +9,7 @@ import { useAdPlacements } from '../_hooks/use-ad-placements';
 
 const SidebarRemoteIcon =
     (src: string, alt: string): FC<{ className?: string }> =>
+    // biome-ignore lint/performance/noImgElement: Sidebar icons are backend-provided remote URLs with dynamic hosts.
     ({ className }) => <img src={src} alt={alt} className={className} />;
 
 /**

@@ -60,7 +60,7 @@ export const QuickStakeButton: FC<QuickStakeButtonProps> = ({
             className={cn(
                 // Size
                 'flex h-8 w-[46px] shrink-0 flex-col items-center justify-center px-1 py-2',
-                'rounded-sm transition-colors',
+                'rounded-[var(--component-odds-radius,var(--style-radius-control))] transition-colors',
                 'text-auxiliary-sm text-filltext-ft-g font-poppins',
                 variant === 'default' &&
                     'bg-[var(--slip-quick-bg,var(--surface-muted))] text-filltext-ft-f hover:bg-[var(--slip-quick-hover-bg,var(--surface-selected))] hover:text-[var(--slip-quick-hover-text,var(--accent-warm))]',

@@ -37,15 +37,15 @@ export const BorderBeam: FC<BorderBeamProps> = ({
     className,
     delay = 0,
     duration = 6,
-    colorFrom = '#ffaa40',
-    colorTo = '#9c40ff',
+    colorFrom = 'var(--accent-warm)',
+    colorTo = 'var(--brand-primary-0)',
     blur = 14,
     arc = [220, 320, 350, 355],
     style,
     reverse = false,
 }) => {
     return (
-        <div className="pointer-events-none absolute inset-0 overflow-clip p-px rounded-[inherit] [mask-clip:content-box,padding-box] [mask-composite:intersect] [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)]">
+        <div className="pointer-events-none absolute inset-0 overflow-clip p-px rounded-[inherit] [mask-clip:content-box,padding-box] [mask-composite:intersect] [mask-image:linear-gradient(transparent,transparent),linear-gradient(black,black)]">
             <div
                 className={cn('absolute left-[-50%] top-[-50%] h-[200%] w-[200%] will-change-transform', className)}
                 style={

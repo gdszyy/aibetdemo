@@ -1,5 +1,12 @@
 # GOTO
 
+## Generated Code Index
+
+- Large-file navigation index: `.cursor/rules/auto_index/INDEX.md`
+- Process insight registry: `.cursor/rules/process_insights/index.md`
+- Compatibility entrypoint: `.cursorrules`
+- Keep design documents separate from code: put plans, audits, ADRs, and workflow notes under `docs/`, `.agent/`, or `.cursor/rules/`; keep implementation files under `src/`, `scripts/`, `public/`, and config roots.
+
 > 体育博彩与在线赌场平台（**GOTO**），基于 Next.js 16 (App Router)、React 19 和 Tailwind CSS v4 构建。模块化 DDD 架构，支持实时 WebSocket 数据、多语言（pt 默认/es/en）和 Zustand + React Query 状态管理。React Compiler 已启用。输出：standalone（CI 中容器化）。
 
 ## 技术栈
@@ -106,7 +113,7 @@ pnpm sync:agents      # 同步 .agent/ → 所有 agent 配置
 | `.agent/rules/` | 编码规范 + 前端架构 | **始终**在启动时读取 |
 | `.agent/plans/` | 实现计划（6 个计划） | **按需** — 仅加载与当前任务相关的计划 |
 | `.agent/workflows/` | 斜杠命令：`/init`、`/a`、`/cr`、`/uc` | 使用命令时读取 |
-| `.agent/references/` | 按需文档（Figma、图标、UOF、CR 反模式、模块概览、组件库、Stores/Hooks/Utils、API/路由/i18n） | **按需** — 仅在任务需要时读取 |
+| `.agent/references/` | 按需文档（Figma、图标、UOF、CR 反模式、模块概览、组件库、Stores/Hooks/Utils、API/路由/i18n、品牌调研文档格式、主题与多配色方案） | **按需** — 仅在任务需要时读取 |
 
 ### 工作流
 
@@ -130,3 +137,7 @@ This repo uses the default triage labels: `needs-triage`, `needs-info`, `ready-f
 ### Domain docs
 
 This repo uses a single-context layout with one root `CONTEXT.md` and `docs/adr/`. See `docs/agents/domain.md`.
+
+### Dev server process management
+
+Before starting any local preview or dev server, agents must check whether the target port is already in use, reuse an existing valid service when possible, track any process they start, and close temporary verification servers before finishing. See `docs/agents/dev-server-process.md`.

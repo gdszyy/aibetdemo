@@ -5,7 +5,7 @@ import type { Currency } from '@/api/models/currency';
 import { StorageEnum } from '@/constants';
 import { config } from '@/constants/config';
 import type { CurrencyCode } from '@/i18nV2';
-import { useRegionConfig, useRegionIntlLocale } from '@/i18nV2/store';
+import { FALLBACK_CURRENCY_CODE, useRegionConfig, useRegionIntlLocale } from '@/i18nV2/store';
 import { useRegionStore } from '@/stores/region-store';
 import { useSessionStore } from '@/stores/session-store';
 
@@ -163,7 +163,7 @@ export const useWalletDispatchBalance = () => {
 export const useCurrencyCode = (): CurrencyCode => {
     const userCurrencyCode = useWallet((s) => s.currencyCode);
     const guestCurrencyCode = useRegionConfig()?.currencyCode;
-    return userCurrencyCode || guestCurrencyCode;
+    return userCurrencyCode || guestCurrencyCode || FALLBACK_CURRENCY_CODE;
 };
 
 /** 获取货币的符号 */

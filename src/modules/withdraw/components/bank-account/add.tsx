@@ -28,6 +28,7 @@ import { Password } from '../password';
 type DataRequest = InterfaceRequest<typeof createInterface>;
 
 type FormField = 'account_no' | 'account_name' | 'bank_name';
+type BankAccountFormKey = 'pay_platform' | 'account_type' | 'bank_code' | FormField;
 
 /** 不同AccountType 需要的 表单项 */
 const accountTypeToFormNames: Record<
@@ -295,9 +296,12 @@ const Main: FC = () => {
     /** 根据要出现的表单项，设置formSchema */
     useEffect(() => {
         // 要保留的key
-        const keepKeys = ['account_type', 'bank_code'].concat(needFormNames);
+        const keepKeys: BankAccountFormKey[] = ['account_type', 'bank_code', ...needFormNames];
         let schema = allFormSchema.current.clone();
-        schema = schema.pick(Object.fromEntries(keepKeys.map((k) => [k, true])) as any);
+        const pickMask = Object.fromEntries(keepKeys.map((k) => [k, true])) as Partial<
+            Record<BankAccountFormKey, true>
+        >;
+        schema = schema.pick(pickMask);
         if (keepKeys.includes('account_no')) {
             schema = schema.extend({
                 account_no: z

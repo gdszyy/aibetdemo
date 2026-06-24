@@ -2,7 +2,7 @@
 
 import { type ContextType, createContext, type FunctionComponent, type PropsWithChildren, useContext } from 'react';
 
-const PageStoreContext = createContext({} as {});
+const PageStoreContext = createContext<Record<string, never>>({});
 
 export function usePageStore() {
     return useContext(PageStoreContext);

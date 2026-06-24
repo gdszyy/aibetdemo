@@ -8,6 +8,7 @@ import type { ComponentProps, FC, PropsWithChildren } from 'react';
 import { MobileZoomLock } from '@/components/mobile-zoom-lock';
 import { SchemeSwitcher } from '@/components/scheme-switcher/scheme-switcher';
 import { TanstackProvider } from '@/components/tanstack-provider/tanstack-provider';
+import { GlassFilterDefs } from '@/components/theme-provider/glass-filter-defs';
 import { ThemeProvider } from '@/components/theme-provider/theme-provider';
 import { EnvProvider } from '../env-provider';
 
@@ -31,6 +32,7 @@ export const RootProviders: FC<
                     {children}
                 </TanstackProvider>
                 <SchemeSwitcher />
+                <GlassFilterDefs />
             </ThemeProvider>
         </EnvProvider>
     );

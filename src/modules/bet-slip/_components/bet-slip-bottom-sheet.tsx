@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import type { FC } from 'react';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from '@/components/ui/sheet';
 import { DomIdEnum } from '@/constants';
 import { BetSlipDrawer } from '@/modules/bet-slip';
@@ -15,6 +16,8 @@ interface BetSlipBottomSheetProps {
 
 export const BetSlipBottomSheet: FC<BetSlipBottomSheetProps> = ({ open, onOpenChange }) => {
     const t = useTranslations('common');
+    const componentProfile = useThemeComponentProfile();
+    const isCtaLedSheet = componentProfile.betSlip.mobileFlow === 'cta-led-sheet';
 
     return (
         <Sheet open={open} onOpenChange={onOpenChange}>
@@ -24,9 +27,16 @@ export const BetSlipBottomSheet: FC<BetSlipBottomSheetProps> = ({ open, onOpenCh
                 container={getPortalContainer(DomIdEnum.AppContainer)}
                 overlayClassName="bottom-0 z-40 bg-[var(--mobile-sheet-overlay-bg)] backdrop-blur-0"
                 className={cn(
-                    'bottom-[env(safe-area-inset-bottom)] z-40 h-[72dvh] max-h-[calc(100dvh-64px)]',
+                    'bottom-[env(safe-area-inset-bottom)] z-40',
+                    isCtaLedSheet
+                        ? 'h-[calc(100dvh-8px)] max-h-[calc(100dvh-8px)]'
+                        : 'h-[72dvh] max-h-[calc(100dvh-64px)]',
                     'overflow-hidden rounded-t-[var(--mobile-sheet-radius)] border border-b-0 border-[color:var(--mobile-summary-bar-border)] bg-[var(--mobile-sheet-bg)] [box-shadow:var(--mobile-sheet-shadow)]',
                 )}
+                data-bet-slip-profile={componentProfile.betSlip.profile}
+                data-mobile-bet-placement={componentProfile.betSlip.mobilePlacement}
+                data-mobile-bet-flow={componentProfile.betSlip.mobileFlow}
+                style={componentProfile.style}
                 onOpenAutoFocus={(event) => {
                     event.preventDefault();
                     (event.currentTarget as HTMLElement | null)?.focus();

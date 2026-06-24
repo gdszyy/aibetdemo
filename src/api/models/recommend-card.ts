@@ -2,9 +2,7 @@ import type { LineStatus, OutcomeActiveEnum } from '@/api/models/market';
 
 /** Home recommend card type. */
 export enum RecommendCardType {
-    ParlayBoost = 1,
     SuperOdd = 2,
-    FollowBet = 3,
 }
 
 /** 推荐串关加赔卡片投注腿参数。 */
@@ -77,7 +75,7 @@ export interface RecommendCardSelection {
 export interface RecommendCard {
     /** 推荐卡片 ID。 */
     id: number;
-    /** Card type. Missing legacy data is treated as parlay boost. */
+    /** Card type. Only SuperOdd is rendered on home; other values are ignored. */
     type?: RecommendCardType | number | string;
     /** Compatibility aliases for card type. */
     card_type?: RecommendCardType | number | string;

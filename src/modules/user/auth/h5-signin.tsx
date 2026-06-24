@@ -136,11 +136,7 @@ export const H5Signin: FunctionComponent = () => {
                             </div>
 
                             <Button
-                                className={cn(
-                                    'rounded-full h-11 text-neutral-white-h',
-                                    !isFormReady &&
-                                        'bg-[linear-gradient(90deg,rgba(255,255,255,0.4),rgba(255,255,255,0.4)),linear-gradient(90deg,rgb(232,1,4),rgb(232,1,4))]',
-                                )}
+                                className={cn('rounded-full h-11 text-neutral-white-h', !isFormReady && 'opacity-60')}
                                 type="submit"
                                 block
                                 variant="primary"

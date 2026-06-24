@@ -3,6 +3,8 @@
 ## Rules
 - General Rules: [general-rules.md](./.agent/rules/general-rules.md)
 - Frontend Architecture: [frontend.md](.agent/rules/frontend.md)
+- Dev Server / 本地服务进程管理: [dev-server-process.md](./docs/agents/dev-server-process.md)
+- Agent Dev Server Rule: [dev-server-process.md](./.agent/rules/dev-server-process.md)
 
 ## Workflows
 - `/init` Initialize project context: [init.md](./.agent/workflows/init.md)

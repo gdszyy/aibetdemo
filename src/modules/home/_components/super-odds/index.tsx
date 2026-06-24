@@ -3,52 +3,22 @@
 import { useQuery } from '@tanstack/react-query';
 import useEmblaCarousel from 'embla-carousel-react';
 import WheelGesturesPlugin from 'embla-carousel-wheel-gestures';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { type FunctionComponent, useEffect, useMemo, useState } from 'react';
 import { GetRecommendCardsInterface } from '@/api/handlers/recommend-card';
-import type { ParlayBoostRule } from '@/api/models/parlay-boost';
 import { type RecommendCard, RecommendCardType } from '@/api/models/recommend-card';
 import { CarouselNavButton } from '@/components/carousel-nav-button';
 import { CarouselProgress } from '@/components/carousel-progress';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { useSchemeMeta } from '@/components/theme-provider/scheme-meta';
 import { useCarousel } from '@/hooks/use-carousel';
-import { useParlayBoostRule } from '@/hooks/use-parlay-boost-rule';
 import { cn } from '@/utils/common';
-import imageFlash from './assets/flash.png';
 import { ACTIVE_STATUS, CARD_SELECTION_LIMIT, Card, QUERY_KEY, Sheet, useOddsObserver } from './recommend-card';
 import { getRecommendCardSkin, getRecommendSectionSkin } from './recommend-card/skin';
 import { useUniformRecommendCardHeights } from './recommend-card/use-uniform-card-heights';
-import { getRecommendCardParlayBoostPreview, getRecommendCardQualifiedSelections } from './recommend-card/utils';
+import { getRecommendCardQualifiedSelections } from './recommend-card/utils';
 
-type RecommendCardTypeValue = RecommendCardType.ParlayBoost | RecommendCardType.SuperOdd | RecommendCardType.FollowBet;
-
-interface RecommendCardsSectionConfig {
-    type: RecommendCardTypeValue;
-    title: string;
-    badgeLabel: string;
-    rule: ParlayBoostRule | null;
-}
-
-interface RecommendCardsSectionProps extends RecommendCardsSectionConfig {
-    cards: RecommendCard[];
-}
-
-const RECOMMEND_CARD_TYPE_ALIASES: Record<RecommendCardTypeValue, string[]> = {
-    [RecommendCardType.ParlayBoost]: ['1', 'parlay_boost', 'parlay-boost', 'parlayboost', 'boost'],
-    [RecommendCardType.SuperOdd]: ['2', 'super_odd', 'super-odd', 'superodd', 'super_odds', 'super-odds', 'superodds'],
-    [RecommendCardType.FollowBet]: [
-        '3',
-        'follow_bet',
-        'follow-bet',
-        'followbet',
-        'follow_order',
-        'follow-order',
-        'copy_bet',
-        'copy-bet',
-        'copybet',
-    ],
-};
+const SUPER_ODD_TYPE_ALIASES = ['2', 'super_odd', 'super-odd', 'superodd', 'super_odds', 'super-odds', 'superodds'];
 
 const normalizeRecommendCardType = (value: unknown): string | null => {
     if (value === null || value === undefined || value === '') {
@@ -58,17 +28,11 @@ const normalizeRecommendCardType = (value: unknown): string | null => {
     return String(value).trim().toLowerCase();
 };
 
-const getRecommendCardType = (card: RecommendCard): RecommendCardTypeValue => {
+const isSuperOddCard = (card: RecommendCard): boolean => {
     const values = [card.type, card.card_type, card.recommend_type, card.activity_type];
     const normalizedValues = values.map(normalizeRecommendCardType).filter((value): value is string => Boolean(value));
 
-    for (const [type, aliases] of Object.entries(RECOMMEND_CARD_TYPE_ALIASES)) {
-        if (normalizedValues.some((value) => aliases.includes(value))) {
-            return Number(type) as RecommendCardTypeValue;
-        }
-    }
-
-    return RecommendCardType.ParlayBoost;
+    return normalizedValues.some((value) => SUPER_ODD_TYPE_ALIASES.includes(value));
 };
 
 const createMockSelection = (index: number, title: string): RecommendCard['json_list'][number] => ({
@@ -114,41 +78,76 @@ const createMockCard = (id: number, type: RecommendCardType, title: string, matc
 });
 
 const MOCK_RECOMMEND_CARDS: RecommendCard[] = [
-    createMockCard(9001, RecommendCardType.ParlayBoost, 'World Cup Power Parlay', [
-        'Brazil vs Mexico',
-        'Spain vs Japan',
-        'Argentina vs Denmark',
-    ]),
-    createMockCard(9002, RecommendCardType.SuperOdd, 'Tonight SuperOdd Boost', [
-        'Portugal vs Croatia',
-        'France vs USA',
-    ]),
-    createMockCard(9003, RecommendCardType.FollowBet, 'Expert Follow Card', [
-        'England vs Korea Republic',
-        'Germany vs Morocco',
-        'Netherlands vs Chile',
-    ]),
+    createMockCard(9002, RecommendCardType.SuperOdd, 'Tonight SuperOdd Boost', ['Portugal vs Croatia', 'France vs USA']),
 ];
 
 const isMockRecommendCard = (card: RecommendCard): boolean => card.country_code === 'mock';
 
-const RecommendCardsSection: FunctionComponent<RecommendCardsSectionProps> = ({
-    cards,
-    rule,
-    title,
-    badgeLabel,
-    type,
-}) => {
+const getRecommendSectionClassName = (layout: 'board-rail' | 'promo-rail' | 'ticket-feed'): string => {
+    if (layout === 'promo-rail') {
+        return 'gap-5';
+    }
+
+    if (layout === 'ticket-feed') {
+        return 'gap-3';
+    }
+
+    return 'gap-4';
+};
+
+const getRecommendHeaderClassName = (layout: 'board-rail' | 'promo-rail' | 'ticket-feed'): string => {
+    if (layout === 'promo-rail') {
+        return 'items-center gap-3';
+    }
+
+    if (layout === 'ticket-feed') {
+        return 'items-center gap-2 border-b border-[color:var(--brand-match-divider,var(--border-subtle))] pb-3';
+    }
+
+    return 'items-center gap-2';
+};
+
+const getRecommendTitleClassName = (layout: 'board-rail' | 'promo-rail' | 'ticket-feed'): string => {
+    if (layout === 'promo-rail') {
+        return 'text-2xl md:text-3xl';
+    }
+
+    if (layout === 'ticket-feed') {
+        return 'text-xl md:text-2xl';
+    }
+
+    return 'text-xl md:text-2xl';
+};
+
+const getRecommendViewportClassName = (layout: 'board-rail' | 'promo-rail' | 'ticket-feed'): string => {
+    if (layout === 'promo-rail') {
+        return 'mt-6.5';
+    }
+
+    if (layout === 'ticket-feed') {
+        return 'mt-3';
+    }
+
+    return 'mt-4';
+};
+
+interface RecommendCardsSectionProps {
+    cards: RecommendCard[];
+    title: string;
+    badgeLabel: string;
+}
+
+const RecommendCardsSection: FunctionComponent<RecommendCardsSectionProps> = ({ cards, title, badgeLabel }) => {
     const t = useTranslations('matches');
     const schemeMeta = useSchemeMeta();
+    const componentProfile = useThemeComponentProfile();
+    const recommendProfile = componentProfile.homeRecommend;
     const cardSkin = getRecommendCardSkin(schemeMeta.brand);
     const skinConfig = getRecommendSectionSkin(cardSkin, schemeMeta.mode);
     const [sheetCard, setSheetCard] = useState<RecommendCard | null>(null);
     const cardIds = useMemo(() => cards.map((card) => String(card.id)), [cards]);
     const { uniformHeight, setCardWrapperRef } = useUniformRecommendCardHeights(cardIds);
     const hasSingleCard = cards.length === 1;
-    const isParlayBoost = type === RecommendCardType.ParlayBoost;
-    const sectionRule = isParlayBoost ? rule : null;
 
     const [emblaRef, emblaApi] = useEmblaCarousel({ dragFree: true }, [WheelGesturesPlugin()]);
     const { enable, selectedIndex, snapCount, canScrollPrev, canScrollNext, scrollPrev, scrollNext, scrollTo } =
@@ -163,41 +162,60 @@ const RecommendCardsSection: FunctionComponent<RecommendCardsSectionProps> = ({
 
     return (
         <>
-            <section className="flex min-w-0 w-full flex-col gap-4">
+            <section
+                className={cn(
+                    'flex min-w-0 w-full flex-col',
+                    getRecommendSectionClassName(recommendProfile.sectionLayout),
+                )}
+                data-home-recommend-profile={recommendProfile.profile}
+                data-home-recommend-layout={recommendProfile.sectionLayout}
+                data-home-recommend-interaction={recommendProfile.interaction}
+            >
                 <div
-                    className={cn('relative overflow-hidden', skinConfig.rootClassName)}
+                    className={cn(
+                        'relative overflow-visible',
+                        skinConfig.rootClassName,
+                        recommendProfile.sectionLayout === 'promo-rail' && 'px-4 pb-4',
+                        recommendProfile.sectionLayout === 'ticket-feed' && 'px-3 pb-3',
+                    )}
                     data-recommend-card-skin={cardSkin}
-                    style={
-                        cardSkin === 'superbet'
-                            ? {
-                                  background:
-                                      'linear-gradient(180deg, #FFAF53 0%, #FFE200 32%, rgba(239, 241, 242, 0.00) 84%)',
-                              }
-                            : undefined
-                    }
+                    style={{ ...skinConfig.rootStyle, ...componentProfile.style }}
                 >
-                    <div className="flex items-center gap-2">
+                    <div className={cn('flex', getRecommendHeaderClassName(recommendProfile.sectionLayout))}>
                         <span className={cn('h-6 w-1.5 shrink-0 rounded-full', skinConfig.titleAccentClassName)} />
-                        <div className={cn('text-2xl font-black italic uppercase', skinConfig.titleClassName)}>
+                        <div
+                            className={cn(
+                                'font-black uppercase',
+                                recommendProfile.sectionLayout !== 'ticket-feed' && 'italic',
+                                getRecommendTitleClassName(recommendProfile.sectionLayout),
+                                skinConfig.titleClassName,
+                            )}
+                        >
                             {title}
                         </div>
                     </div>
-                    {skinConfig.showLightning && (
-                        <Image className="absolute right-2 -top-8 w-20" src={imageFlash} loading="eager" alt="" />
-                    )}
-                    <div className="mt-6.5 min-w-0 w-full overflow-hidden" ref={emblaRef}>
-                        <div className="flex items-stretch gap-3 flex-nowrap">
+                    <div
+                        className={cn(
+                            'min-w-0 w-full overflow-hidden',
+                            getRecommendViewportClassName(recommendProfile.sectionLayout),
+                        )}
+                        ref={emblaRef}
+                    >
+                        <div className="flex items-stretch gap-[var(--component-recommend-gap,12px)] flex-nowrap">
                             {cards.map((card) => {
                                 const displaySelectionCount = getRecommendCardQualifiedSelections(
                                     card.json_list,
-                                    sectionRule,
+                                    null,
                                 ).length;
 
                                 return (
                                     <div
                                         key={card.id}
                                         ref={setCardWrapperRef(String(card.id))}
-                                        className={cn('flex h-full shrink-0', hasSingleCard && 'w-full md:w-auto')}
+                                        className={cn(
+                                            'flex h-full shrink-0 snap-start',
+                                            hasSingleCard && 'w-full md:w-auto',
+                                        )}
                                         style={
                                             uniformHeight
                                                 ? { height: uniformHeight, minHeight: uniformHeight }
@@ -206,7 +224,7 @@ const RecommendCardsSection: FunctionComponent<RecommendCardsSectionProps> = ({
                                     >
                                         <Card
                                             card={card}
-                                            rule={sectionRule}
+                                            rule={null}
                                             isUniformHeightReady={Boolean(uniformHeight)}
                                             badgeLabel={badgeLabel}
                                             skin={cardSkin}
@@ -248,7 +266,7 @@ const RecommendCardsSection: FunctionComponent<RecommendCardsSectionProps> = ({
                         }
                     }}
                     card={sheetCard}
-                    rule={sectionRule}
+                    rule={null}
                     badgeLabel={badgeLabel}
                     skin={cardSkin}
                     mode={schemeMeta.mode}
@@ -259,6 +277,7 @@ const RecommendCardsSection: FunctionComponent<RecommendCardsSectionProps> = ({
     );
 };
 
+/** 首页推荐区：仅展示 SuperOdd 卡片。 */
 export const ParlayBoost: FunctionComponent = () => {
     const t = useTranslations('matches');
     const tCommon = useTranslations('common');
@@ -268,80 +287,26 @@ export const ParlayBoost: FunctionComponent = () => {
         staleTime: 60 * 1000,
         retry: false,
     });
-    const { data: parlayBoostRule = null } = useParlayBoostRule();
 
-    const observableCards = useMemo(() => {
+    const superOddCards = useMemo(() => {
         const sourceCards = [...recommendCards, ...MOCK_RECOMMEND_CARDS];
-        return sourceCards.filter((card) => card.status === ACTIVE_STATUS && card.json_list.length > 0);
+        return sourceCards.filter(
+            (card) => card.status === ACTIVE_STATUS && card.json_list.length > 0 && isSuperOddCard(card),
+        );
     }, [recommendCards]);
-    const sectionConfigs = useMemo<RecommendCardsSectionConfig[]>(
-        () => [
-            {
-                type: RecommendCardType.ParlayBoost,
-                title: t('parlayBoost.title'),
-                badgeLabel: tCommon('parlayBoostBadge.boost'),
-                rule: parlayBoostRule,
-            },
-            {
-                type: RecommendCardType.SuperOdd,
-                title: t('superOdd.title'),
-                badgeLabel: tCommon('recommendCardBadge.superOdd'),
-                rule: null,
-            },
-            {
-                type: RecommendCardType.FollowBet,
-                title: t('followBet.title'),
-                badgeLabel: tCommon('recommendCardBadge.followBet'),
-                rule: null,
-            },
-        ],
-        [parlayBoostRule, t, tCommon],
-    );
-    const visibleSections = useMemo(() => {
-        return sectionConfigs
-            .map((section) => {
-                const cards = observableCards.filter((card) => {
-                    if (getRecommendCardType(card) !== section.type) {
-                        return false;
-                    }
 
-                    if (section.type !== RecommendCardType.ParlayBoost) {
-                        return true;
-                    }
-
-                    if (isMockRecommendCard(card)) {
-                        return true;
-                    }
-
-                    return getRecommendCardParlayBoostPreview(card, parlayBoostRule).currentTier !== undefined;
-                });
-
-                return { ...section, cards };
-            })
-            .filter((section) => section.cards.length > 0);
-    }, [observableCards, parlayBoostRule, sectionConfigs]);
-    const observedCards = useMemo(
-        () => observableCards.filter((card) => !isMockRecommendCard(card)),
-        [observableCards],
-    );
+    const observedCards = useMemo(() => superOddCards.filter((card) => !isMockRecommendCard(card)), [superOddCards]);
     useOddsObserver(observedCards);
 
-    if (!visibleSections.length) {
+    if (!superOddCards.length) {
         return null;
     }
 
     return (
-        <>
-            {visibleSections.map((section) => (
-                <RecommendCardsSection
-                    key={section.type}
-                    type={section.type}
-                    title={section.title}
-                    badgeLabel={section.badgeLabel}
-                    cards={section.cards}
-                    rule={section.rule}
-                />
-            ))}
-        </>
+        <RecommendCardsSection
+            cards={superOddCards}
+            title={t('superOdd.title')}
+            badgeLabel={tCommon('recommendCardBadge.superOdd')}
+        />
     );
 };

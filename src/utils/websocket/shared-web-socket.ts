@@ -1,3 +1,4 @@
+import type { LeaderElector } from 'broadcast-channel';
 import { BroadcastChannel, createLeaderElection } from 'broadcast-channel';
 import { getClientLocale } from '@/i18n';
 import { CMD_PING, CMD_SUBSCRIBE_GAME, CMD_UNSUBSCRIBE_GAME } from '@/libs/event-constants';
@@ -26,7 +27,7 @@ interface BroadcastMessage {
         | 'game-subscribe'
         | 'game-sync-request'
         | 'game-sync-response';
-    payload?: any;
+    payload?: unknown;
 }
 
 /**
@@ -104,7 +105,7 @@ const captureSharedSocketError = (
 export class SharedWebSocket {
     private socket: WebSocket | null = null;
     private channel: BroadcastChannel<BroadcastMessage>;
-    private elector: any = null;
+    private elector: LeaderElector | null = null;
     private isLeader = false;
     private isConnected = false;
     private connectionError: string | null = null;

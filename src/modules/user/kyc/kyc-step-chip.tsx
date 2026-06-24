@@ -44,9 +44,9 @@ export const KYCStepChip: FC<KYCStepChipProps> = ({ currentStep = 1, steps, clas
                         {/* Step Number Badge */}
                         <div
                             className={cn(
-                                'flex items-center justify-center size-3.5 rounded-xs text-auxiliary-sm leading-none text-white',
+                                'flex items-center justify-center size-3.5 rounded-xs text-auxiliary-sm leading-none text-neutral-white-h',
                                 isActive && 'bg-brand-red',
-                                isCompleted && 'bg-func-win',
+                                isCompleted && 'bg-func-win-solid',
                                 !isActive && !isCompleted && 'bg-mini-sbd',
                             )}
                         >

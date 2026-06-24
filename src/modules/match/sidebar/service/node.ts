@@ -134,7 +134,10 @@ export class RootNode extends BaseNode {
         const stack: BaseNode[] = [...this.children];
 
         while (stack.length > 0) {
-            const currentNode = stack.pop()!;
+            const currentNode = stack.pop();
+            if (!currentNode) {
+                continue;
+            }
             if (currentNode.key === key) {
                 return currentNode;
             }
@@ -148,7 +151,10 @@ export class RootNode extends BaseNode {
         const stack: BaseNode[] = [...this.children];
 
         while (stack.length > 0) {
-            const currentNode = stack.pop()!;
+            const currentNode = stack.pop();
+            if (!currentNode) {
+                continue;
+            }
             if (currentNode.children.length > 0) {
                 stack.push(...currentNode.children);
                 continue;

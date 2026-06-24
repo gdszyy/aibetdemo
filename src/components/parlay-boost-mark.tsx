@@ -21,7 +21,7 @@ export const ParlayBoostMark: FC<ParlayBoostMarkProps> = ({ className, innerClas
         return (
             <span
                 className={cn(
-                    'inline-flex size-4 shrink-0 items-center justify-center rounded-full bg-[#ff5a1f] text-[#0e0f22]',
+                    'inline-flex size-4 shrink-0 items-center justify-center rounded-full bg-brand-primary-0 text-on-brand',
                     className,
                 )}
                 aria-hidden

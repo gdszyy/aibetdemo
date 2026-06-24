@@ -8,10 +8,8 @@ const FaqQuestionBadge = ({ active }: FaqQuestionBadgeProps) => {
     return (
         <i
             className={cn(
-                'size-7 shrink-0 flex justify-center items-center rounded-full text-neutral-white-h not-italic text-body-lg',
-                active
-                    ? 'bg-[linear-gradient(135deg,#FFB199_3.12%,#FF0844_96.88%)]'
-                    : 'bg-[linear-gradient(135deg,#D8E9FF_3.12%,#638ABD_96.88%)]',
+                'size-7 shrink-0 flex justify-center items-center rounded-full not-italic text-body-lg',
+                active ? 'bg-brand-primary-0 text-on-brand' : 'bg-surface-selected text-content-primary',
             )}
         >
             Q

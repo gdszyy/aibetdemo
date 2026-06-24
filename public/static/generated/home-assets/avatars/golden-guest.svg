@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Golden Guest avatar</title>
+  <defs><linearGradient id="g" x1="24" y1="14" x2="102" y2="118" gradientUnits="userSpaceOnUse"><stop stop-color="#F59E0B"/><stop offset="1" stop-color="#7C2D12"/></linearGradient></defs>
+  <rect width="128" height="128" rx="64" fill="url(#g)"/>
+  <path d="M20 32H108L88 96H40L20 32Z" fill="#FEF3C7" opacity="0.34"/>
+  <circle cx="64" cy="52" r="21" fill="rgba(255,255,255,0.9)"/>
+  <path d="M28 109C34 84 47 72 64 72C81 72 94 84 100 109H28Z" fill="rgba(255,255,255,0.9)"/>
+  <text x="64" y="61" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="850" letter-spacing="0" fill="#101828">GG</text>
+</svg>

@@ -1,0 +1,10 @@
+Project context entrypoints:
+
+1. Read `AGENTS.md` first for the global collaboration contract, tech stack, commands, module boundaries, and safety rules.
+2. Read `.cursor/rules/general-rules.mdc` and `.cursor/rules/frontend.mdc` for Cursor-specific implementation rules.
+3. Use `.cursor/rules/auto_index/INDEX.md` for generated large-file code navigation.
+4. Use `.cursor/rules/process_insights/index.md` when a task touches a cross-module workflow or a previously discovered pitfall.
+
+Keep design documents and implementation code separate. Put plans, audits, ADRs, and workflow notes under `docs/`, `.agent/`, or `.cursor/rules/`; keep source changes in `src/`, `scripts/`, `public/`, and config files.
+
+Generated files under `.cursor/rules/auto_index/` are maintained by the code-indexer script and should not be edited manually.

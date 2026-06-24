@@ -84,6 +84,8 @@ setTheme('betbus'); // 或 'gtb'
 2. `theme-provider.tsx` 的 `SCHEMES` 数组加 `'aurora'`；
 3. 切换器自动出现该项（按 `SCHEMES` 渲染）。
 
+> ⚠️ 上面 3 步是 GTB↔betbus 双方案时代的旧配方，已不完整。系统现已升维到 `scheme = brand × mode`（8 套方案），新增主题还要登记 `scheme-meta.ts`、`brand-ui-skin.ts` skin、`docs/theme-reference-index.md`，并通过 `pnpm theme:check`（含 light skin 17 必填键）；若是新 brand 还要改 `component-profile.ts`、`getBrandUiSkin`、`getSkinKey`。**完整改动清单照** [`theme-component-builder.md`](./theme-component-builder.md) **走。**
+
 ## 6. QA 清单（已知取舍 / 需人工目检）
 
 - [ ] **on-brand 白字对比度**：betbus 主色 `#26c07a` 上的白字对比约 2.2:1，低于 AA。若需更稳，可把 `--on-brand` 改深（如 `#07130d`）或主色取深一档 `#1b9e61`。当前 v1 取白以避免红/橙/win 色块白字回归。

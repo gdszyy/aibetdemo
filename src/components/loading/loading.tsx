@@ -5,13 +5,13 @@ export type LoadingVariant = 'color-red' | 'color-gray' | 'color-white';
 const gradientLiner = (variant: LoadingVariant | undefined): [string, string] => {
     switch (variant) {
         case 'color-red':
-            return ['transparent', 'var(--brand-red)'];
+            return ['transparent', 'var(--status-danger-text)'];
         case 'color-gray':
-            return ['rgba(139, 139, 139, 0)', 'rgba(139, 139, 139, 1)'];
+            return ['transparent', 'var(--content-muted)'];
         case 'color-white':
-            return ['rgba(255, 229, 233, 0)', 'rgba(255, 229, 233, 1)'];
+            return ['transparent', 'var(--content-inverse)'];
         default:
-            return ['rgba(232, 1, 4, 0)', 'rgba(232, 1, 4, 1)'];
+            return ['transparent', 'var(--brand-primary-0)'];
     }
 };
 
@@ -59,7 +59,7 @@ export const Loading: React.FC<LoadingIconProps> = ({ color, gradientColors, var
             />
             <path
                 d="M20 10C20 10.3978 19.842 10.7794 19.5607 11.0607C19.2794 11.342 18.8978 11.5 18.5 11.5C18.1022 11.5 17.7206 11.342 17.4393 11.0607C17.158 10.7794 17 10.3978 17 10L18.5 10H20Z"
-                // fill={getColor(color, 1, '#8B8B8B')}
+                fill={color ?? gradientEnd}
             />
             <defs>
                 <clipPath id="paint0_angular_428_17721_clip_path">

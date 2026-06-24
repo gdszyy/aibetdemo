@@ -8,11 +8,13 @@ import { CasinoOutlined } from '@/components/icons2/CasinoOutlined';
 import { HomeOutlined } from '@/components/icons2/HomeOutlined';
 import { Live2Outlined } from '@/components/icons2/Live2Outlined';
 import { SlipOutlined } from '@/components/icons2/SlipOutlined';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { useLiveMatchTotalData } from '@/hooks/use-live-match-total';
 import { recordNavIntent, useResolvedNavLocation } from '@/hooks/use-nav-intent';
 import { Link } from '@/i18n';
 import { checkIsCasinoActive, checkIsSportsActive, checkIsSportsLiveActive } from '@/libs/navigation';
 import { SelectionBadge } from '@/modules/bet-slip/slip/selection-badge';
+import { useSelectionCount } from '@/modules/bet-slip/stores/bet-slip-store';
 import { cn } from '@/utils/common';
 import { getCasinoNavItem } from '../_constants/nav-menus';
 
@@ -106,6 +108,8 @@ const TabItem = memo<{
 
 export const BottomTabBar: FC = () => {
     const t = useTranslations('common');
+    const componentProfile = useThemeComponentProfile();
+    const selectionCount = useSelectionCount();
     // Optimistic location: lets the tapped tab light up before the route commits.
     const { path: activePath } = useResolvedNavLocation();
 
@@ -174,8 +178,17 @@ export const BottomTabBar: FC = () => {
         return res;
     }, [t, casinoNav, liveCount, lobbies.length]);
 
+    if (componentProfile.betSlip.mobilePlacement === 'cta-drawer' && selectionCount > 0) {
+        return null;
+    }
+
     return (
-        <div className="fixed right-0 bottom-0 left-0 z-50 border-t border-[color:var(--mobile-nav-border)] bg-[var(--mobile-nav-bg)] pb-[var(--bottom-bar-safe-padding)] shadow-floating backdrop-blur-[12px]">
+        <div
+            className="fixed right-0 bottom-0 left-0 z-50 border-t border-[color:var(--mobile-nav-border)] bg-[var(--mobile-nav-bg)] pb-[var(--bottom-bar-safe-padding)] shadow-floating backdrop-blur-[12px]"
+            data-nav-profile={componentProfile.nav.profile}
+            data-mobile-bet-flow={componentProfile.betSlip.mobileFlow}
+            style={componentProfile.style}
+        >
             <div className="flex h-[var(--bottom-bar-height)] items-center justify-around px-3">
                 {tabs.map((tab) => (
                     <TabItem key={tab.key} tab={tab} active={tab.isActive(activePath)} badge={tab.badge || undefined} />

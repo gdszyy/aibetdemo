@@ -42,7 +42,7 @@ const SignTip: FunctionComponent<
 
 /** 信号强度，带图标的 */
 const Main: FunctionComponent = () => {
-    const defaultColor = '#c4c4c4';
+    const defaultColor = 'var(--content-muted)';
 
     const signalLevel = useNetworkSignal();
 
@@ -55,12 +55,12 @@ const Main: FunctionComponent = () => {
             return 'var(--func-lost)';
         }
         if (isMedium) {
-            return '#DAAF3A';
+            return 'var(--func-pending)';
         }
         if (isFast) {
             return 'var(--func-win)';
         }
-        return 'black';
+        return defaultColor;
     }, [isFast, isMedium, isSlow]);
 
     const hasNetInfo = 'connection' in navigator && !!navigator.connection;

@@ -21,7 +21,7 @@ const LiveMatchesTitleRight: FC<{ count: number }> = ({ count }) => {
 
     return (
         <div className="flex shrink-0 items-center gap-2">
-            <span className="rounded-full bg-func-win px-2 py-px text-body-lg text-neutral-white-h">{t('live')}</span>
+            <span className="rounded-full bg-func-win-solid px-2 py-px text-body-lg text-neutral-white-h">{t('live')}</span>
             <span className="text-body-lg text-brand-primary-0 tabular-nums">{t('liveMatchCount', { count })}</span>
         </div>
     );

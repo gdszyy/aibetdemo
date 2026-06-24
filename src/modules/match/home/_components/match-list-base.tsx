@@ -126,7 +126,10 @@ export const MatchListBase: FC<MatchListBaseProps> = ({
     useMatchListObserver({ eventIds: activeEventIds, queryKey });
 
     return (
-        <div data-match-list-root className="scroll-mt-2 md:scroll-mt-[calc(72px+var(--header-strip-height)+16px)]">
+        <div
+            data-match-list-root
+            className="scroll-mt-2 md:scroll-mt-[calc(var(--desktop-nav-height)+var(--header-strip-height)+16px)]"
+        >
             {/* Title - Not Sticky */}
             <BlockTitle2 icon={icon} iconClassName="text-brand-primary-0" title={title} right={titleRight} />
 

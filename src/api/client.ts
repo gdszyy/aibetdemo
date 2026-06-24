@@ -84,9 +84,13 @@ const ServiceProxySegments: Record<ServiceName, string> = {
 
 const RAILWAY_HOST_PATTERN = /(?:^|\.)railway\.app$/i;
 
-const shouldUseRailwayApiProxy = () => {
+// 是否走同源 API 代理（/api/proxy/...）。
+// 默认仅在 *.railway.app 域名启用；本地开发可通过 NEXT_PUBLIC_FORCE_API_PROXY=true 强制开启，
+// 以绕过浏览器对外部测试域的 CORS 限制，便于本地可视化验收多品牌主题。
+const shouldUseApiProxy = () => {
     if (typeof window === 'undefined') return false;
     if (process.env.NEXT_PUBLIC_DISABLE_RAILWAY_API_PROXY === 'true') return false;
+    if (process.env.NEXT_PUBLIC_FORCE_API_PROXY === 'true') return true;
     return RAILWAY_HOST_PATTERN.test(window.location.hostname);
 };
 
@@ -458,7 +462,7 @@ export const getServiceUrl = (serviceName: ServiceName, host?: string) => {
 /** Create service-specific fetcher */
 const createServiceFetcher = (serviceName: ServiceName) => {
     const resolveBaseUrl = () => {
-        if (shouldUseRailwayApiProxy()) {
+        if (shouldUseApiProxy()) {
             return `/api/proxy/${ServiceProxySegments[serviceName]}`;
         }
 

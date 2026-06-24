@@ -20,7 +20,7 @@ const Mask: FunctionComponent<{
                 className,
             )}
             style={{
-                background: `linear-gradient(${isLeft ? -90 : isRight ? 90 : 0}deg, rgba(255, 255, 255, 0.00) 0%, ${color} 100%)`,
+                background: `linear-gradient(${isLeft ? -90 : isRight ? 90 : 0}deg, transparent 0%, ${color} 100%)`,
             }}
         />
     );

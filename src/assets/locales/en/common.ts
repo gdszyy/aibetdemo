@@ -86,7 +86,6 @@ export default {
     },
     recommendCardBadge: {
         superOdd: 'SUPERODD',
-        followBet: 'FOLLOW BET',
     },
 
     /** Parlay boost rules modal */

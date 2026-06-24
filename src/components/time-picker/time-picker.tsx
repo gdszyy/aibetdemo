@@ -191,7 +191,7 @@ export const TimePicker: FC<TimePickerProps> = ({
                                     segment={segment}
                                     className={cn(
                                         'rounded-xs px-0.5 text-center',
-                                        'focus:bg-brand-red focus:text-white',
+                                        'focus:bg-brand-red focus:text-on-brand',
                                         'data-[placeholder]:text-filltext-ft-e',
                                         segment.type === 'literal' && 'text-filltext-ft-e px-0',
                                     )}
@@ -241,7 +241,7 @@ export const TimePicker: FC<TimePickerProps> = ({
                             />
                         )}
                     </div>
-                    <Popover.Arrow className="fill-white" />
+                    <Popover.Arrow className="fill-surface-1" />
                 </Popover.Content>
             </Popover.Portal>
         </Popover.Root>

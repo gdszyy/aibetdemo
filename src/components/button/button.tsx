@@ -13,7 +13,7 @@ const buttonVariants = cva(
         variants: {
             variant: {
                 primary:
-                    'bg-brand-red text-neutral-white-h hover:bg-brand-primary-4 disabled:bg-func-void disabled:text-neutral-white-h',
+                    'bg-brand-red text-on-brand hover:bg-brand-primary-4 disabled:bg-func-void disabled:text-on-brand',
                 secondary: 'bg-filltext-ft-b text-filltext-ft-e disabled:text-func-void',
                 outline: 'py-[11px] bg-surface-1 border border-brand-red text-brand-red disabled:border-func-void',
                 text: 'text-filltext-ft-e disabled:text-func-void',

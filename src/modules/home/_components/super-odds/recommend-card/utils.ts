@@ -1,12 +1,11 @@
 import type { ParlayBoostRule } from '@/api/models/parlay-boost';
-import type { RecommendCard, RecommendCardSelection } from '@/api/models/recommend-card';
+import type { RecommendCardSelection } from '@/api/models/recommend-card';
 import { formatOddsByFormat, type OddsFormat } from '@/utils/odds-format';
 import {
     getParlayBoostDisplayOdds,
     getParlayBoostPreview,
     PARLAY_BOOST_UNIT_DISPLAY_STAKE,
     type ParlayBoostDisplayOdds,
-    type ParlayBoostPreview,
     toParlayBoostNumber,
 } from '@/utils/parlay-boost-preview';
 import {
@@ -34,15 +33,6 @@ export {
     getRecommendCardQualifiedSelections,
     toRecommendCardSelectionInput,
 } from '@/utils/recommend-card-to-odds-entity';
-
-/** 获取推荐卡片当前串关加赔预览，用于判断是否达到最低加赔档位。 */
-export const getRecommendCardParlayBoostPreview = (
-    card: RecommendCard,
-    rule: ParlayBoostRule | null,
-): ParlayBoostPreview => {
-    const qualifiedSelections = getRecommendCardQualifiedSelections(card.json_list, rule);
-    return getParlayBoostPreview(qualifiedSelections.map(toRecommendCardSelectionInput), rule);
-};
 
 /** 推荐卡展示赔率：与购物车 getParlayBoostDisplayOdds 同源，无 stake 时用单位本金 1。 */
 export const getRecommendCardParlayBoostDisplayOdds = (

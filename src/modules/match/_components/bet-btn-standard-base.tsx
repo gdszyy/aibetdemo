@@ -113,7 +113,7 @@ export const BetBtnStandardBase: FC<BetBtnStandardBaseProps> = ({
                 disabled={isLocked}
                 {...testDataAttributes}
                 className={cn(
-                    'group/betBtn relative flex min-h-[44px] min-w-0 flex-1 cursor-pointer items-center rounded bg-[var(--brand-odds-border,var(--border-strong))] p-px transition-colors hover:[background:var(--brand-odds-hover-border,var(--odds-idle-hover-border))]',
+                    'group/betBtn relative flex min-h-[var(--component-detail-odds-shell-height,44px)] min-w-0 flex-1 cursor-pointer items-center rounded-[var(--component-odds-radius,var(--brand-odds-radius,4px))] bg-[var(--brand-odds-border,var(--border-strong))] p-px transition-colors hover:[background:var(--brand-odds-hover-border,var(--odds-idle-hover-border))]',
                     'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-0',
                     selected &&
                         '[background:var(--brand-odds-selected-bg,var(--odds-selected-bg))] hover:[background:var(--brand-odds-selected-hover-bg,var(--odds-selected-hover-bg))]',
@@ -123,7 +123,7 @@ export const BetBtnStandardBase: FC<BetBtnStandardBaseProps> = ({
             >
                 <span
                     className={cn(
-                        'relative flex min-h-[42px] min-w-0 flex-1 items-center justify-between gap-2 rounded bg-[var(--brand-odds-bg,var(--surface-selected))] px-2 transition-colors group-hover/betBtn:[background:var(--brand-odds-hover-bg,var(--odds-idle-hover-bg))]',
+                        'relative flex min-h-[var(--component-detail-odds-inner-height,42px)] min-w-0 flex-1 items-center justify-between gap-2 rounded-[var(--component-odds-radius,var(--brand-odds-radius,4px))] bg-[var(--brand-odds-bg,var(--surface-selected))] px-2 transition-colors group-hover/betBtn:[background:var(--brand-odds-hover-bg,var(--odds-idle-hover-bg))]',
                         !showName && 'justify-center',
                         selected &&
                             '[background:var(--brand-odds-selected-bg,var(--odds-selected-bg))] group-hover/betBtn:[background:var(--brand-odds-selected-hover-bg,var(--odds-selected-hover-bg))]',
@@ -176,7 +176,7 @@ export const BetBtnStandardBase: FC<BetBtnStandardBaseProps> = ({
             onClick={!isLocked ? onClick : undefined}
             disabled={isLocked}
             className={cn(
-                'group/betBtn relative flex min-w-0 flex-1 cursor-pointer rounded-sm border border-[color:var(--brand-odds-border,transparent)] px-3 transition-all hover:border-[color:var(--brand-odds-hover-border,var(--brand-primary-0))] hover:[background:var(--brand-odds-hover-bg,var(--surface-2))]',
+                'group/betBtn relative flex min-w-0 flex-1 cursor-pointer rounded-[var(--component-odds-radius,var(--brand-odds-radius,4px))] border border-[color:var(--brand-odds-border,transparent)] px-3 transition-all hover:border-[color:var(--brand-odds-hover-border,var(--brand-primary-0))] hover:[background:var(--brand-odds-hover-bg,var(--surface-2))]',
                 'max-md:flex-col max-md:items-center max-md:justify-center max-md:gap-0.5 max-md:h-14',
                 layoutClass,
                 isVertical || size === 'tall' ? 'h-14' : 'h-10',

@@ -42,7 +42,7 @@ interface PaginationProps {
 
 const VARIANT_STYLES: Record<PaginationVariant, { active: string; inactive: string; nav: string; page: string }> = {
     default: {
-        active: 'bg-brand-primary-0 text-white rounded-sm',
+        active: 'bg-brand-primary-0 text-on-brand rounded-sm',
         inactive: 'text-filltext-ft-e hover:bg-filltext-ft-b rounded-sm',
         nav: 'rounded-sm text-filltext-ft-e hover:bg-filltext-ft-b',
         page: 'text-body-sm',

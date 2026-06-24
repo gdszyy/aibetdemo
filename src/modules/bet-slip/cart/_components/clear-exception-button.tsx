@@ -37,7 +37,7 @@ export const ClearExceptionButton: FC<ClearExceptionButtonProps> = ({
             className={cn(
                 'flex h-10 cursor-pointer items-center justify-center rounded-full transition-all',
                 'min-w-[226px] w-[calc(100%-32px)] mx-auto',
-                'bg-func-lost',
+                'bg-func-lost-solid',
                 'text-body-md leading-4 text-neutral-white-h',
                 className,
             )}

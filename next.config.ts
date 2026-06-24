@@ -147,6 +147,19 @@ const nextConfig: NextConfig = {
         ];
     },
     reactCompiler: true,
+    experimental: {
+        /**
+         * 客户端路由缓存（Client Router Cache）保鲜时长。
+         * 复用已访问 / 已预加载的页面段，使前进后退与重复访问几乎瞬时。
+         * - dynamic：动态页（读 cookie/header、带 searchParams）缓存 30s
+         * - static：静态 / 已 prefetch 的页缓存 300s
+         * 注：会延长页面内容的“可见过期窗口”，演示场景可接受；如需实时数据请调小。
+         */
+        staleTimes: {
+            dynamic: 30,
+            static: 300,
+        },
+    },
     env: {
         // NEXT_PUBLIC_SENTRY_ENVIRONMENT: getSentryEnvironment(),
         NEXT_PUBLIC_GIT_COMMIT_ID: getGitCommitId(),
@@ -164,10 +177,14 @@ const nextConfig: NextConfig = {
         qualities: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100],
         remotePatterns: [
             {
-                protocol: 'https', // 或 ['http', 'https'] 允许 http（更不安全）
-                hostname: '*', // 匹配所有域名（包括子域名）
-                // port: '', // 空字符串表示匹配任意端口（或指定具体端口，如 '8080'）
-                // pathname: '**', // 匹配所有路径（任意层级的子路径）
+                protocol: 'https',
+                hostname: 'assets.helix.city',
+                pathname: '/materials/**',
+            },
+            {
+                protocol: 'https',
+                hostname: '**',
+                pathname: '/**',
             },
         ],
     },

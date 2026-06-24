@@ -3,7 +3,11 @@
 import Cookies from 'js-cookie';
 import { create } from 'zustand';
 import { CacheKey } from '@/constants/cache';
-import { type RegionCode, regionConfigs } from './services/constant';
+import { type CurrencyCode, type RegionCode, regionConfigs } from './services/constant';
+
+export const FALLBACK_REGION_CODE: RegionCode = 'BR';
+export const FALLBACK_INTL_LOCALE = regionConfigs[FALLBACK_REGION_CODE].intlLocale;
+export const FALLBACK_CURRENCY_CODE: CurrencyCode = regionConfigs[FALLBACK_REGION_CODE].currencyCode;
 
 /** 国际化 store */
 export const useI18nStore = create<{
@@ -37,5 +41,5 @@ export const useRegionConfig = () => {
 
 /** 当前国别的intl locale */
 export const useRegionIntlLocale = () => {
-    return useRegionConfig()?.intlLocale || '';
+    return useRegionConfig()?.intlLocale || FALLBACK_INTL_LOCALE;
 };

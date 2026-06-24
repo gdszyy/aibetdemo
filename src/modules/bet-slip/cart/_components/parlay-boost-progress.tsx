@@ -104,6 +104,21 @@ const PARLAY_BOOST_SKIN = {
         minOddsText: 'text-content-primary',
         emphasisText: 'text-brand-primary-0',
     },
+    // iOS26 液态玻璃：沿用 match 的全变量驱动皮肤。这些 token（--brand-primary-0、--surface-*、
+    // --content-* 等）在 glass-light / glass-dark scheme 内被覆盖为紫→粉玻璃色，亮暗共用同一份即可。
+    // 缺这一项时 PARLAY_BOOST_SKIN[brand] 对 glass 取到 undefined → 加赔进度条崩/错色（红残留根因之一）。
+    glass: {
+        root: 'border-border-strong bg-surface-muted',
+        activeTier: 'bg-brand-primary-0 text-on-brand',
+        inactiveTier: 'text-content-muted',
+        activeArrow: 'border-t-brand-primary-0',
+        inactiveArrow: 'border-t-border-strong',
+        filledSegment: 'bg-brand-primary-0 shadow-[0_0_7px_color-mix(in_srgb,var(--brand-primary-0)_35%,transparent)]',
+        emptySegment: 'bg-surface-3',
+        minOddsBg: 'bg-surface-3',
+        minOddsText: 'text-content-primary',
+        emphasisText: 'text-brand-primary-0',
+    },
 } as const;
 
 const getFilledSegmentCount = (qualifyingCount: number, maxLegs: number): number => {

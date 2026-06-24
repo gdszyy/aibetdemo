@@ -9,6 +9,7 @@ import { HamburgerMenu, PresentsBox, PresentsBoxOpened } from '@/components/icon
 // import { UserOutlined } from '@/components/icons2/UserOutlined';
 import { Logo } from '@/components/Logo';
 import { useBrandUiSkin } from '@/components/theme-provider/brand-ui-skin';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { useIsDesktop } from '@/hooks/use-media-query';
 import { useRechargeActiveConfig } from '@/hooks/use-recharge-code';
 import { Link, usePathname, useRouter } from '@/i18n';
@@ -64,6 +65,10 @@ const MobileGuestActions: FC = () => {
     const router = useRouter();
     const rechargeReward = Number(useRechargeActiveConfig()?.max_withdraw) || 0;
 
+    useEffect(() => {
+        router.prefetch('/signin');
+    }, [router]);
+
     const openSigninPage = (): void => {
         router.push('/signin');
     };
@@ -87,6 +92,32 @@ const MobileGuestActions: FC = () => {
     );
 };
 
+const DesktopTopStrip: FC = () => {
+    return (
+        <div className="fixed inset-x-0 top-0 z-40 hidden h-[var(--header-strip-height)] items-center border-b border-[color:var(--brand-topbar-border,var(--border-subtle))] bg-[var(--brand-topbar-before-bg,var(--surface-shell))] px-4 text-auxiliary-md text-content-muted md:flex">
+            <div className="flex min-w-0 flex-1 items-center gap-5">
+                <Link href="/sports/promotions" className="transition-colors hover:text-content-primary">
+                    Fast deposits
+                </Link>
+                <Link href="/leagues/80462" className="transition-colors hover:text-content-primary">
+                    2026 FIFA World Cup
+                </Link>
+                <Link href="/sports/vip" className="transition-colors hover:text-content-primary">
+                    VIP Club
+                </Link>
+            </div>
+            <div className="flex shrink-0 items-center gap-4">
+                <Link href="/sports/my-bets" className="transition-colors hover:text-content-primary">
+                    My Bets
+                </Link>
+                <span className="rounded-xs border border-[color:var(--border-strong)] px-1.5 py-px font-bold text-content-secondary">
+                    Decimal
+                </span>
+            </div>
+        </div>
+    );
+};
+
 /** Top navigation bar */
 export const NavigationBar: FC = () => {
     const isDesktop = useIsDesktop();
@@ -97,95 +128,107 @@ export const NavigationBar: FC = () => {
     const routeHasSidebar = checkHasSidebar(pathname);
     const isHidden = useMobileNavHidden(isDesktop);
     const brandUiSkin = useBrandUiSkin();
+    const componentProfile = useThemeComponentProfile();
 
     if (pathname === '/signin' || pathname === '/account' || (!isDesktop && checkIsAccountRoute(pathname))) {
         return null;
     }
 
     return (
-        <div
-            className={cn(
-                'shrink-0 flex items-center justify-between',
-                'h-14 md:h-18 px-2 md:pl-3 md:pr-4',
-                '[background:var(--brand-topbar-bg,var(--surface-shell))] md:[background:var(--brand-topbar-bg,var(--surface-shell-gradient))]',
-                'border-b border-[color:var(--brand-topbar-border,var(--brand-primary-0))]',
-                'sticky top-[var(--header-strip-height)] z-40',
-                'transform-gpu transition-transform will-change-transform motion-reduce:transition-none',
-                'before:content-[""] before:absolute before:bottom-full before:left-0 before:right-0 before:h-[var(--header-strip-height)] before:bg-[var(--brand-topbar-before-bg,var(--surface-shell))]',
-                isHidden ? '-translate-y-full duration-150 ease-in' : 'duration-200 ease-out',
-            )}
-            data-brand-ui={brandUiSkin.brand}
-            data-brand-mode={brandUiSkin.mode}
-            style={brandUiSkin.style}
-        >
-            {/* 手机版导航器 */}
-            {!isDesktop && (
-                <>
-                    <div className="flex items-center gap-0.5">
-                        {routeHasSidebar ? (
-                            <MobileNav />
-                        ) : (
-                            <Link href="/" className="flex w-8 items-center justify-center">
-                                <Logo className="w-25" variant="top" />
-                            </Link>
-                        )}
-                        {/* <div className="flex size-8 items-center justify-center text-filltext-ft-h">
+        <>
+            <DesktopTopStrip />
+            <div
+                className={cn(
+                    'shrink-0 flex items-center justify-between',
+                    'h-14 md:h-[var(--desktop-nav-height)] px-2 md:pl-3 md:pr-4',
+                    '[background:var(--brand-topbar-bg,var(--surface-shell))] md:[background:var(--brand-topbar-bg,var(--surface-shell-gradient))]',
+                    'border-b border-[color:var(--brand-topbar-border,var(--brand-primary-0))]',
+                    'sticky top-[var(--header-strip-height)] z-40',
+                    'transform-gpu transition-transform will-change-transform motion-reduce:transition-none',
+                    isHidden ? '-translate-y-full duration-150 ease-in' : 'duration-200 ease-out',
+                )}
+                data-brand-ui={brandUiSkin.brand}
+                data-brand-mode={brandUiSkin.mode}
+                data-nav-profile={componentProfile.nav.profile}
+                data-nav-active-marker={componentProfile.nav.activeMarker}
+                data-nav-promo-weight={componentProfile.nav.promoWeight}
+                style={{ ...brandUiSkin.style, ...componentProfile.style }}
+            >
+                {/* 手机版导航器 */}
+                {!isDesktop && (
+                    <>
+                        <div className="flex items-center gap-0.5">
+                            {routeHasSidebar ? (
+                                <MobileNav />
+                            ) : (
+                                <Link href="/" prefetch className="flex w-8 items-center justify-center">
+                                    <Logo className="w-25" variant="top" />
+                                </Link>
+                            )}
+                            {/* <div className="flex size-8 items-center justify-center text-filltext-ft-h">
                             <SearchOutlined className="size-5" />
                         </div> */}
-                    </div>
-                    {!isLogin && (
-                        <Link href="/" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                            <Logo variant="top" />
-                        </Link>
-                    )}
-                </>
-            )}
-
-            {/* Desktop: inline logo section + nav menu */}
-            {isDesktop && (
-                <div className="flex items-center flex-1 min-w-0 h-18">
-                    {/* Logo section — aligns with sidebar column */}
-                    <div className="flex gap-1 h-full items-center w-60 shrink-0">
-                        {routeHasSidebar ? (
-                            <button
-                                type="button"
-                                onClick={toggleSidebar}
-                                className="size-8 flex items-center justify-center text-filltext-ft-e hover:text-filltext-ft-g hover:bg-filltext-ft-b rounded-full transition-colors cursor-pointer"
+                        </div>
+                        {!isLogin && (
+                            <Link
+                                href="/"
+                                prefetch
+                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
                             >
-                                <HamburgerMenu className="size-4" />
-                            </button>
-                        ) : (
-                            <div className="size-8" />
+                                <Logo variant="top" />
+                            </Link>
                         )}
-                        <Link
-                            className="px-4 py-2 hover:rounded-sm hover:bg-[var(--brand-logo-hover-bg,var(--neutral-white-b))]"
-                            href="/"
-                        >
-                            <Logo
-                                className={brandUiSkin.brand === 'betano' ? 'text-white' : undefined}
-                                variant="long"
-                            />
-                        </Link>
-                    </div>
-
-                    <DesktopMenu />
-                </div>
-            )}
-
-            {/* Right section */}
-            <div className="flex items-center gap-1 md:gap-4">
-                {isDesktop && (
-                    <Link
-                        href="/sports/promotions"
-                        className="size-10 inline-flex items-center justify-center cursor-pointer group relative transition-transform duration-200 ease-out hover:scale-110"
-                    >
-                        <PresentsBox className="size-6 absolute transition-all duration-300 ease-out group-hover:scale-50 group-hover:opacity-0 animate-[gift-wobble_5s_ease-in-out_infinite]" />
-                        <PresentsBoxOpened className="size-8 absolute transition-all duration-300 ease-out scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100" />
-                    </Link>
+                    </>
                 )}
 
-                {isLoginReady && (isLogin ? <Logined /> : isDesktop ? <Signin /> : <MobileGuestActions />)}
+                {/* Desktop: inline logo section + nav menu */}
+                {isDesktop && (
+                    <div className="flex items-center flex-1 min-w-0 h-[var(--desktop-nav-height)]">
+                        {/* Logo section — aligns with sidebar column */}
+                        <div className="flex gap-1 h-full items-center w-[var(--sidebar-width-expand)] shrink-0">
+                            {routeHasSidebar ? (
+                                <button
+                                    type="button"
+                                    onClick={toggleSidebar}
+                                    className="size-8 flex items-center justify-center text-filltext-ft-e hover:text-filltext-ft-g hover:bg-filltext-ft-b rounded-full transition-colors cursor-pointer"
+                                >
+                                    <HamburgerMenu className="size-4" />
+                                </button>
+                            ) : (
+                                <div className="size-8" />
+                            )}
+                            <Link
+                                className="px-4 py-2 hover:rounded-sm hover:bg-[var(--brand-logo-hover-bg,var(--neutral-white-b))]"
+                                href="/"
+                                prefetch
+                            >
+                                <Logo
+                                    className={brandUiSkin.brand === 'betano' ? 'text-white' : undefined}
+                                    variant="long"
+                                />
+                            </Link>
+                        </div>
+
+                        <DesktopMenu />
+                    </div>
+                )}
+
+                {/* Right section */}
+                <div className="flex items-center gap-1 md:gap-4">
+                    {isDesktop && (
+                        <Link
+                            href="/sports/promotions"
+                            prefetch
+                            className="size-10 inline-flex items-center justify-center cursor-pointer group relative transition-transform duration-200 ease-out hover:scale-110"
+                        >
+                            <PresentsBox className="size-6 absolute transition-all duration-300 ease-out group-hover:scale-50 group-hover:opacity-0 animate-[gift-wobble_5s_ease-in-out_infinite]" />
+                            <PresentsBoxOpened className="size-8 absolute transition-all duration-300 ease-out scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100" />
+                        </Link>
+                    )}
+
+                    {isLoginReady && (isLogin ? <Logined /> : isDesktop ? <Signin /> : <MobileGuestActions />)}
+                </div>
             </div>
-        </div>
+        </>
     );
 };

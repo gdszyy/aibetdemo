@@ -11,13 +11,11 @@ import { PARLAY_BOOST_RULE_QUERY_KEY } from '@/hooks/use-parlay-boost-rule';
 import { useTopSports } from '@/hooks/use-sports';
 import { usePathname } from '@/i18n';
 import { BetSlipBottomSheet } from '@/modules/bet-slip/_components/bet-slip-bottom-sheet';
-import { CartToggleButton } from '@/modules/bet-slip/_components/cart-toggle-button';
 import { DesktopFloatingBetSlip } from '@/modules/bet-slip/_components/desktop-floating-bet-slip';
 import { MobileCartSummaryBar } from '@/modules/bet-slip/_components/mobile-cart-summary-bar';
 import { useBetSlipSubscription } from '@/modules/bet-slip/_hooks/use-bet-slip-subscription';
 import { useOrderResultHandler } from '@/modules/bet-slip/_hooks/use-order-result-handler';
 import { useBetSlipStore } from '@/modules/bet-slip/stores/bet-slip-store';
-import { RightAside } from '@/modules/home/_components/right-aside';
 import { Sidebar } from '@/modules/match/sidebar';
 import { useTreeStore } from '@/modules/match/sidebar/service/store';
 import { useIsLogin } from '@/stores/session-store';
@@ -126,7 +124,7 @@ export function SportsLayoutClient({
             {isDesktop && (
                 <div
                     className={cn(
-                        'shrink-0 transition-[width] duration-200 ease-in-out fixed top-[calc(72px+var(--header-strip-height))] left-0 h-[calc(100vh-72px-var(--header-strip-height))] z-50 overflow-y-auto overscroll-y-contain',
+                        'shrink-0 transition-[width] duration-200 ease-in-out fixed top-[calc(var(--desktop-nav-height)+var(--header-strip-height))] left-0 h-[calc(100vh-var(--desktop-nav-height)-var(--header-strip-height))] z-50 overflow-y-auto overscroll-y-contain',
                         isMatchDetailRoute || sidebarCollapsed
                             ? 'w-[var(--sidebar-width-collapse)]'
                             : 'w-[var(--sidebar-width-expand)]',
@@ -145,15 +143,6 @@ export function SportsLayoutClient({
                     </div>
                 </div>
             </div>
-
-            {/* Desktop right utility rail. Bet slip now floats from the lower-right corner. */}
-            {isDesktop && (
-                <aside className="sticky top-[calc(72px+var(--header-strip-height))] z-20 flex h-[calc(100vh-72px-var(--header-strip-height))] shrink-0 border-[color:var(--brand-sidebar-border,var(--filltext-ft-c))] border-l-[0.5px]">
-                    <RightAside>
-                        <CartToggleButton />
-                    </RightAside>
-                </aside>
-            )}
 
             {isDesktop && <DesktopFloatingBetSlip />}
 

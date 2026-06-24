@@ -1,13 +1,14 @@
 'use client';
 
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { type FC, useState } from 'react';
 import { Button } from '@/components/button/button';
-import { UserOutlined } from '@/components/icons2/UserOutlined';
 import { ACCOUNT_ROUTES } from '@/constants/account-routes';
 import { UserCenterMenu } from '@/constants/user-center';
 import { useOpenDepositModal } from '@/hooks/use-open-deposit-modal';
 import { Link } from '@/i18n';
+import { useUser } from '@/stores/session-store';
 import { cn } from '@/utils/common';
 import { Wallet } from './components/Wallet';
 
@@ -28,8 +29,11 @@ const POPOVER_MENUS: UserCenterMenu[] = [
     UserCenterMenu.SUPPORT,
 ];
 
+const DEFAULT_USER_AVATAR = '/static/generated/home-assets/avatars/user-default.svg';
+
 export const AccountPopover: FC<{ className?: string }> = ({ className }) => {
     const tUser = useTranslations('user');
+    const user = useUser();
     const { openDepositModal } = useOpenDepositModal();
     const [open, setOpen] = useState(false);
 
@@ -40,9 +44,16 @@ export const AccountPopover: FC<{ className?: string }> = ({ className }) => {
             <button
                 type="button"
                 onClick={() => setOpen((prev) => !prev)}
-                className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-filltext-ft-b transition-colors hover:bg-filltext-ft-c"
+                className="relative flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-filltext-ft-b transition-colors hover:bg-filltext-ft-c"
             >
-                <UserOutlined className="size-5 text-filltext-ft-h" />
+                <Image
+                    src={user?.avatar || DEFAULT_USER_AVATAR}
+                    alt=""
+                    width={40}
+                    height={40}
+                    sizes="40px"
+                    className="size-full object-cover"
+                />
             </button>
 
             {open && (

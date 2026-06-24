@@ -3,10 +3,12 @@
 import type { FC } from 'react';
 import { useEffect, useMemo } from 'react';
 import type { TournamentGroup } from '@/api/models/match-game';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { Card } from '@/modules/match/_components/card';
 import { getMarketColumnWidth } from '@/modules/match/_constants/constants';
 import { getVisibleMarketsLayout } from '@/modules/match/_hooks/use-visible-markets';
 import { shouldShowMatchInList } from '@/modules/match/_utils/match-utils';
+import { cn } from '@/utils/common';
 import { useForceCollapse } from '../_hooks/use-force-collapse';
 import { CollapsePanel } from './collapse-panel';
 import { TournamentGroupHeader } from './tournament-group-header';
@@ -47,6 +49,7 @@ export const ListItem: FC<ListItemProps> = ({
     currentTournamentId,
 }) => {
     const [isExpanded] = useForceCollapse(forceCollapsed);
+    const componentProfile = useThemeComponentProfile();
 
     // Notify parent when collapse state changes
     useEffect(() => {
@@ -68,18 +71,50 @@ export const ListItem: FC<ListItemProps> = ({
         () => getVisibleMarketsLayout(containerWidth, marketColumnWidths),
         [containerWidth, marketColumnWidths],
     );
+    const resolvedIsMobileLayout = isMobileLayout ?? fallbackLayout.isMobileLayout;
+    const resolvedMaxVisibleMarkets = maxVisibleMarkets ?? fallbackLayout.maxVisibleMarkets;
+    const usesCompactBoardSpacing = componentProfile.matchCard.listLayout === 'board';
+    const usesBetanoDesktopRows =
+        componentProfile.matchCard.desktopListLayout === 'betano-table-row' && !resolvedIsMobileLayout;
+    const usesBetanoMobileCards =
+        componentProfile.matchCard.mobileListLayout === 'betano-ticket-card' && resolvedIsMobileLayout;
 
     if (visibleEvents.length === 0) return null;
 
     return (
-        <div className="flex w-full flex-col gap-3 overflow-clip rounded-sm md:gap-5">
+        <div
+            className={cn(
+                'flex w-full flex-col overflow-clip rounded-sm',
+                usesBetanoDesktopRows
+                    ? 'gap-2 md:gap-2'
+                    : usesBetanoMobileCards
+                      ? 'gap-2.5'
+                      : usesCompactBoardSpacing
+                        ? 'gap-2.5 md:gap-4'
+                        : 'gap-3 md:gap-5',
+            )}
+            data-match-card-layout={componentProfile.matchCard.listLayout}
+        >
             <TournamentGroupHeader
                 tournamentId={tournamentGroup.tournament_id}
                 tournamentName={tournamentGroup.tournament_name}
                 subtitle={tournamentGroup.category_name}
                 isCurrentTournament={currentTournamentId === tournamentGroup.tournament_id}
+                variant={usesBetanoDesktopRows ? 'betano-table' : 'default'}
             />
-            <CollapsePanel open={isExpanded} className="flex w-full flex-col gap-3 pb-3">
+            <CollapsePanel
+                open={isExpanded}
+                className={cn(
+                    'flex w-full flex-col pb-3',
+                    usesBetanoDesktopRows
+                        ? 'gap-0 [&>article+article]:rounded-t-none [&>article+article]:border-t-0 [&>article:not(:last-child)]:rounded-b-none'
+                        : usesBetanoMobileCards
+                          ? 'gap-2'
+                          : usesCompactBoardSpacing
+                            ? 'gap-2.5'
+                            : 'gap-3',
+                )}
+            >
                 {visibleEvents.map((event) => (
                     <Card
                         key={event.event_id}
@@ -90,8 +125,9 @@ export const ListItem: FC<ListItemProps> = ({
                         categoryId={tournamentGroup.category_id}
                         tournamentId={tournamentGroup.tournament_id}
                         tournamentName={tournamentGroup.tournament_name}
-                        maxVisibleMarkets={maxVisibleMarkets ?? fallbackLayout.maxVisibleMarkets}
-                        isMobileLayout={isMobileLayout ?? fallbackLayout.isMobileLayout}
+                        tournamentLogo={tournamentGroup.tournament_logo}
+                        maxVisibleMarkets={resolvedMaxVisibleMarkets}
+                        isMobileLayout={resolvedIsMobileLayout}
                         columnMarkets={tournamentGroup.market_columns}
                         marketColumnWidths={marketColumnWidths}
                     />

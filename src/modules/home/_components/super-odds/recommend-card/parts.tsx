@@ -3,7 +3,7 @@
 import type { CSSProperties, FC, WheelEvent } from 'react';
 import type { ParlayBoostRule } from '@/api/models/parlay-boost';
 import type { RecommendCard, RecommendCardSelection } from '@/api/models/recommend-card';
-import { ParlayBadge } from '@/components/parlay-badge';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import type { SchemeMode } from '@/components/theme-provider/scheme-meta';
 import { useOddsFormat } from '@/stores/slip-settings-store';
 import { cn } from '@/utils/common';
@@ -36,22 +36,36 @@ interface CardTitleProps {
 }
 
 /** 推荐串关加赔卡片标题。 */
-export const CardTitle: FC<CardTitleProps> = ({ title, skin = 'superbet', mode = 'dark', className }) => {
+export const CardTitle: FC<CardTitleProps> = ({
+    title,
+    skin = 'superbet',
+    mode = 'dark',
+    className,
+}) => {
     const skinConfig = getRecommendSectionSkin(skin, mode);
+    const componentProfile = useThemeComponentProfile();
 
     return (
         <div className={cn('pb-2', className)}>
-            <p className={cn('break-words text-center text-body-lg', skinConfig.cardTitleClassName)}>{title}</p>
+            <p
+                className={cn(
+                    'break-words text-body-lg',
+                    componentProfile.homeRecommend.sectionLayout === 'ticket-feed' ? 'text-left' : 'text-center',
+                    skinConfig.cardTitleClassName,
+                )}
+            >
+                {title}
+            </p>
         </div>
     );
 };
 
 /** 推荐串关加赔卡片分隔线。 */
-export const CardDivider: FC<{ skin?: RecommendCardSkin; mode?: SchemeMode; className?: string }> = ({
-    skin = 'superbet',
-    mode = 'dark',
-    className,
-}) => {
+export const CardDivider: FC<{
+    skin?: RecommendCardSkin;
+    mode?: SchemeMode;
+    className?: string;
+}> = ({ skin = 'superbet', mode = 'dark', className }) => {
     const skinConfig = getRecommendSectionSkin(skin, mode);
 
     return <div className={cn('h-px w-full', className)} style={skinConfig.dividerStyle} />;
@@ -81,22 +95,53 @@ export const SelectionList: FC<SelectionListProps> = ({
 }) => {
     const oddsFormat = useOddsFormat();
     const skinConfig = getRecommendSectionSkin(skin, mode);
+    const componentProfile = useThemeComponentProfile();
+    const selectionLayout = componentProfile.homeRecommend.selectionLayout;
 
     return (
-        <div className={cn('flex flex-col gap-y-2.5', className)} style={style} onWheel={onWheel}>
+        <div
+            className={cn(
+                'flex flex-col',
+                selectionLayout === 'event-first' && 'gap-y-3',
+                selectionLayout === 'ticket-line' && 'gap-y-1.5',
+                selectionLayout === 'market-stack' && 'gap-y-2',
+                className,
+            )}
+            style={{ ...componentProfile.style, ...style }}
+            onWheel={onWheel}
+        >
             {selections.map((selection) => {
+                const description = getSelectionDescription(selection, oddsFormat);
+
                 return (
                     <div
                         key={`${selection.event_id}-${selection.market_id}-${selection.outcome_id}`}
-                        className="flex flex-col gap-y-0.5"
+                        className={cn(
+                            'flex flex-col gap-y-0.5',
+                            selectionLayout === 'event-first' &&
+                                'rounded-[var(--component-recommend-card-radius,8px)] bg-[var(--surface-1)] px-2.5 py-2',
+                            selectionLayout === 'ticket-line' &&
+                                'rounded-[var(--component-odds-radius,8px)] border border-[color:var(--brand-odds-border,var(--border-subtle))] bg-[var(--brand-odds-bg,var(--surface-2))] px-2.5 py-2',
+                        )}
                     >
-                        <span className={cn('break-words text-body-lg', skinConfig.selectionTitleClassName)}>
+                        <span
+                            className={cn(
+                                'break-words',
+                                selectionLayout === 'ticket-line' ? 'text-body-md font-bold' : 'text-body-lg',
+                                skinConfig.selectionTitleClassName,
+                            )}
+                        >
                             {selection.title}
                         </span>
                         <span
-                            className={cn('break-words text-auxiliary-xs leading-4', skinConfig.selectionMetaClassName)}
+                            className={cn(
+                                'break-words text-auxiliary-xs leading-4',
+                                selectionLayout === 'ticket-line' &&
+                                    'mt-1 border-t border-[color:var(--brand-match-divider,var(--border-subtle))] pt-1',
+                                skinConfig.selectionMetaClassName,
+                            )}
                         >
-                            {getSelectionDescription(selection, oddsFormat)}
+                            {description}
                         </span>
                     </div>
                 );
@@ -141,6 +186,8 @@ export const CardBody: FC<CardBodyProps> = ({
 }) => {
     const selections = getRecommendCardQualifiedSelections(card.json_list, rule);
     const skinConfig = getRecommendSectionSkin(skin, mode);
+    const componentProfile = useThemeComponentProfile();
+    const recommendProfile = componentProfile.homeRecommend;
     const isScrollableCardList = (variant === 'desktop' || variant === 'mobile') && isUniformHeightReady;
     const displayedSelections =
         variant === 'sheet' || isUniformHeightReady ? selections : selections.slice(0, CARD_SELECTION_LIMIT);
@@ -155,26 +202,24 @@ export const CardBody: FC<CardBodyProps> = ({
             <div
                 className={cn(
                     'mb-2 flex shrink-0 items-center gap-2',
+                    recommendProfile.selectionLayout === 'event-first' && 'mb-3',
+                    recommendProfile.selectionLayout === 'ticket-line' && 'mb-2 justify-between',
                     showMoreButton ? 'justify-between' : 'justify-start',
                 )}
             >
-                {skin === 'superbet' ? (
-                    <ParlayBadge variant="boost" label={badgeLabel} />
-                ) : (
-                    <span
-                        className={cn(
-                            'inline-flex shrink-0 items-center justify-center self-start',
-                            skinConfig.badgeClassName,
-                        )}
-                    >
-                        <span className={skinConfig.badgeTextClassName}>{badgeLabel}</span>
-                    </span>
-                )}
+                <span
+                    className={cn(
+                        'inline-flex shrink-0 items-center justify-center self-start',
+                        skinConfig.badgeClassName,
+                    )}
+                >
+                    <span className={skinConfig.badgeTextClassName}>{badgeLabel}</span>
+                </span>
                 {showMoreButton && (
                     <button
                         type="button"
                         onClick={onShowMore}
-                        className="cursor-pointer rounded-xs py-1 text-auxiliary-sm text-filltext-ft-f transition-colors hover:text-filltext-ft-g"
+                        className="cursor-pointer rounded-[var(--component-odds-radius,4px)] px-2 py-1 text-auxiliary-sm text-filltext-ft-f transition-colors hover:text-filltext-ft-g"
                     >
                         {showMoreLabel}
                     </button>

@@ -72,15 +72,9 @@ export default {
         title: 'Mejor Partido en Vivo',
     },
 
-    parlayBoost: {
-        title: 'BOOST COMBO',
-        sheetClose: 'Cerrar',
-    },
     superOdd: {
         title: 'SUPERODD',
-    },
-    followBet: {
-        title: 'SEGUIR APUESTA',
+        sheetClose: 'Cerrar',
     },
 
     hotLeagues: {
@@ -94,7 +88,10 @@ export default {
     hotLeagueMatchCarousel: {
         liveTitle: 'MEJORES PARTIDOS EN VIVO',
         upcomingTitle: 'MEJORES PARTIDOS',
+        viewAll: 'Ver todo',
         exploreMarkets: 'Haz clic para explorar la oferta completa de mercados.',
         goToSlide: 'Ir a la diapositiva {index}',
+        chatPrompt: 'La gente está conversando',
+        chatCta: 'Entrar al chat',
     },
 };

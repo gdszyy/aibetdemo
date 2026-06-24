@@ -72,15 +72,9 @@ export default {
         title: 'Best Live Match',
     },
 
-    parlayBoost: {
-        title: 'PARLAY BOOST',
-        sheetClose: 'Close',
-    },
     superOdd: {
         title: 'SUPERODD',
-    },
-    followBet: {
-        title: 'FOLLOW BET',
+        sheetClose: 'Close',
     },
 
     hotLeagues: {
@@ -94,7 +88,10 @@ export default {
     hotLeagueMatchCarousel: {
         liveTitle: 'BEST LIVE MATCHES',
         upcomingTitle: 'BEST MATCHES',
+        viewAll: 'View all',
         exploreMarkets: 'Click to explore the full market offer!',
         goToSlide: 'Go to slide {index}',
+        chatPrompt: 'People are chatting',
+        chatCta: 'Join chat',
     },
 };

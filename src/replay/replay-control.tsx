@@ -160,7 +160,8 @@ export function ReplayControl() {
                                     const pad = (n: number, len = 2) => String(n).padStart(len, '0');
                                     const timeStr = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} ${pad(d.getMilliseconds(), 3)}`;
 
-                                    const isError = (log.payload as any)?.filteredSnapshot?.length === 0;
+                                    const payload = log.payload as { filteredSnapshot?: unknown[] } | undefined;
+                                    const isError = payload?.filteredSnapshot?.length === 0;
 
                                     const CopyButton = ({ text }: { text: string }) => (
                                         <button

@@ -27,6 +27,7 @@ interface DesktopMatchBreadcrumbProps {
 export const DesktopMatchFavoriteButton: FC<{ onClick: () => void; label: string }> = ({ onClick, label }) => (
     <button
         type="button"
+        aria-label={label}
         onClick={onClick}
         className="flex size-4 shrink-0 cursor-pointer items-center justify-center text-filltext-ft-g transition-colors hover:text-func-favorite"
     >

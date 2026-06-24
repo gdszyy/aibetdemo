@@ -40,7 +40,7 @@ export const HeroSection: FunctionComponent = () => {
 
     const isLoading = useRechargeCodeStore((s) => s.loading);
 
-    const isActive = isRechargeCodeActive([promotionItem!]);
+    const isActive = promotionItem ? isRechargeCodeActive([promotionItem]) : false;
 
     const handleCTA = () => {
         if (!isLogin) {

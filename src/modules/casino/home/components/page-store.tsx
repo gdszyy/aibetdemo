@@ -24,6 +24,7 @@ import {
 } from '@/api/handlers/casino';
 import type { InterfaceResponse } from '@/api/lib/types';
 import type { CasinoGame } from '@/api/models/casino';
+import { CasinoActions, generateQueryKey, ModuleKeys } from '@/constants/query-keys';
 
 type Merchant = InterfaceResponse<typeof GetCasinoGameMerchantsInterface>[0];
 type Lobby = InterfaceResponse<typeof GetCasinoGameLobbiesV2Interface>[0];
@@ -87,7 +88,7 @@ export const PageStore: FunctionComponent<PropsWithChildren<{ lobbyId: string }>
 
     /** lobby list */
     const { data: lobbies = [], isPending: isLobbiesLoading } = useQuery({
-        queryKey: ['casino', 'lobbies'],
+        queryKey: generateQueryKey(ModuleKeys.CASINO, CasinoActions.LOBBIES),
         queryFn: GetCasinoGameLobbiesV2Interface,
         placeholderData: [],
     });
@@ -97,7 +98,7 @@ export const PageStore: FunctionComponent<PropsWithChildren<{ lobbyId: string }>
 
     /** tags */
     const { data: tags = [], isPending: isTagsLoading } = useQuery({
-        queryKey: ['casino', 'tags', currentLobbyId],
+        queryKey: generateQueryKey(ModuleKeys.CASINO, CasinoActions.TAGS, { lobbyId: currentLobbyId }),
         queryFn: () => {
             if (!currentLobbyId) {
                 throw new Error('Casino lobby id is required');
@@ -111,7 +112,9 @@ export const PageStore: FunctionComponent<PropsWithChildren<{ lobbyId: string }>
 
     /** tag和游戏列表 */
     const { data: gamesByTagId = {}, isPending: isGamesLoading } = useQuery({
-        queryKey: ['casino', 'games', 'byTags', ...tags.map((v) => v.id)],
+        queryKey: generateQueryKey(ModuleKeys.CASINO, CasinoActions.GAMES_BY_TAGS, {
+            tagIds: tags.map((v) => v.id),
+        }),
         queryFn: () => {
             return GetCasinoGamesV2Interface(tags.map((v) => v.id)).then((res) => {
                 const map: GamesByTagId = {};

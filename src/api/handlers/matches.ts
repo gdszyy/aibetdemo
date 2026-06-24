@@ -65,6 +65,7 @@ const normalizeHomeBestMatchesResponse = (response: HomeBestMatchesResponse): To
             category_name: match.category_name,
             tournament_id: match.tournament_id,
             tournament_name: match.tournament_name,
+            tournament_logo: match.tournament_logo,
             market_columns: deriveMarketColumns([event]),
             events: [event],
         };

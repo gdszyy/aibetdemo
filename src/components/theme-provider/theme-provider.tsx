@@ -16,10 +16,17 @@ export const SCHEMES = [
     'betbus',
     'match',
     'match-light',
+    'match-mint',
+    'match-bright',
+    'match-red',
+    'match-navy-red',
+    'match-navy-yellow',
     'superbet-light',
     'superbet-dark',
     'betano-light',
     'betano-dark',
+    'glass-light',
+    'glass-dark',
 ] as const;
 export type Scheme = (typeof SCHEMES)[number];
 // 「直接复刻 betbus」转型已定调：默认即 betbus 深色方案；gtb 浅色红仅作可切换回退。

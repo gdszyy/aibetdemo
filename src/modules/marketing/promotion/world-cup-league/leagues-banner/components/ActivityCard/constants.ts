@@ -22,14 +22,17 @@ export const FIRST_CARD_IMG_H5: Record<RegionCode, StaticImageData> = {
     BR: ChampionBRH5,
 };
 
+export type ActivityCardVariant = 'champion' | 'pass' | 'mission' | 'reward';
+
 export interface ActivityCardType {
     tag: string;
     title: string;
     titleH5?: string;
     desc: string;
     imageUrl: StaticImageData;
-    // imageH5Url?: StaticImageData;
+    imageH5Url?: StaticImageData;
     link: string;
+    variant?: ActivityCardVariant;
 }
 
 export interface ActivityCardItemProps {

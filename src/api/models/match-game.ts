@@ -84,6 +84,8 @@ export type TournamentGroup = {
     tournament_id: string;
     /** Tournament name, e.g., League One */
     tournament_name: string;
+    /** Tournament logo URL */
+    tournament_logo?: string;
     market_columns: MarketColumns;
 
     /** List of match events in this tournament group */
@@ -103,6 +105,8 @@ export type MatchEventWithGroup = MatchEvent & {
     tournament_id: string;
     /** Tournament name, e.g., World Cup */
     tournament_name: string;
+    /** Tournament logo URL */
+    tournament_logo?: string;
 };
 
 export type MatchEventWithGroupResponse = MatchEventResponse & {
@@ -118,6 +122,8 @@ export type MatchEventWithGroupResponse = MatchEventResponse & {
     tournament_id: string;
     /** Tournament name, e.g., World Cup */
     tournament_name: string;
+    /** Tournament logo URL */
+    tournament_logo?: string;
 };
 
 /** Hot matches query parameters */

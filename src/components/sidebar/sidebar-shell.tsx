@@ -2,6 +2,7 @@
 
 import type { FC, ReactNode } from 'react';
 import { HamburgerMenu } from '@/components/icons';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { Link } from '@/i18n';
 import { cn } from '@/utils/common';
 import { Logo } from '../Logo';
@@ -32,15 +33,19 @@ const SidebarInner: FC<Omit<SidebarShellProps, 'collapsed' | 'onCollapsedChange'
     onScrollContainerClickCapture,
 }) => {
     const { state, toggleSidebar } = useSidebar();
+    const componentProfile = useThemeComponentProfile();
     const isCollapsed = state === 'collapsed';
 
     return (
         <div
             data-state={state}
+            data-nav-profile={componentProfile.nav.profile}
+            data-nav-active-marker={componentProfile.nav.activeMarker}
             className={cn(
                 'group flex h-full w-full flex-col border-[color:var(--brand-sidebar-border,var(--filltext-ft-c))] border-r bg-[var(--brand-sidebar-bg,var(--filltext-ft-a))]',
                 className,
             )}
+            style={componentProfile.style}
         >
             {/* Header - Logo + Toggle */}
             {!hideHeader && (

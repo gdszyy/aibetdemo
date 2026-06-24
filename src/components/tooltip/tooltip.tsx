@@ -64,7 +64,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                                 className,
                             )}
                         >
-                            <div className="text-auxiliary-sm text-white break-words">{content}</div>
+                            <div className="text-auxiliary-sm text-content-inverse break-words">{content}</div>
                             <TooltipPrimitive.Arrow asChild width={arrowWidth} height={arrowHeight}>
                                 <svg>
                                     <path

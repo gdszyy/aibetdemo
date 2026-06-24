@@ -3,6 +3,7 @@
 import type { FC } from 'react';
 import type { ParlayBoostRule } from '@/api/models/parlay-boost';
 import type { RecommendCard } from '@/api/models/recommend-card';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import type { SchemeMode } from '@/components/theme-provider/scheme-meta';
 import { useIsDesktop } from '@/hooks/use-media-query';
 import { cn } from '@/utils/common';
@@ -45,14 +46,27 @@ export const Card: FC<CardProps> = ({
     fullWidthOnMobile = false,
 }) => {
     const isDesktop = useIsDesktop();
+    const componentProfile = useThemeComponentProfile();
+    const recommendProfile = componentProfile.homeRecommend;
+    const cardWidthClassName = fullWidthOnMobile
+        ? 'w-full md:w-[var(--component-recommend-card-width,390px)]'
+        : 'w-[min(var(--component-recommend-card-width,300px),calc(100vw-48px))] md:w-[var(--component-recommend-card-width,390px)]';
 
     return (
         <div
             className={cn(
-                'flex h-full shrink-0 flex-col gap-2 overflow-hidden py-4 md:w-97.5',
-                fullWidthOnMobile ? 'w-full' : 'w-70',
+                'flex h-full shrink-0 flex-col overflow-hidden',
+                cardWidthClassName,
+                recommendProfile.cardDensity === 'featured' && 'gap-3 py-5',
+                recommendProfile.cardDensity === 'ticket' && 'gap-2 py-3',
+                recommendProfile.cardDensity === 'compact' && 'gap-2 py-4',
                 className,
+                'rounded-[var(--component-recommend-card-radius,var(--brand-match-card-radius,8px))]',
             )}
+            data-home-recommend-card-profile={recommendProfile.profile}
+            data-home-recommend-card-density={recommendProfile.cardDensity}
+            data-home-recommend-selection-layout={recommendProfile.selectionLayout}
+            style={componentProfile.style}
         >
             <CardTitle title={card.title} skin={skin} mode={mode} className="shrink-0 px-4" />
             <CardDivider skin={skin} mode={mode} className="shrink-0" />

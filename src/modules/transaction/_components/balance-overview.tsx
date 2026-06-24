@@ -50,10 +50,10 @@ function BalanceHeroCard({
     const intlLocale = useRegionIntlLocale();
 
     return (
-        <div className="relative flex flex-col justify-between overflow-hidden rounded-md p-6 h-[120px] md:h-[200px] bg-gradient-to-r from-[#132240] via-[#10172a] to-[#351f2f]">
+        <div className="relative flex flex-col justify-between overflow-hidden rounded-md p-6 h-[120px] md:h-[200px] bg-surface-shell">
             {/* Badge */}
             <div className="shrink-0">
-                <span className="inline-block bg-filltext-ft-g text-white text-body-md px-4 py-1 rounded-tl-md rounded-br-md rounded-bl-xs rounded-tr-xs">
+                <span className="inline-block bg-filltext-ft-g text-neutral-white-h text-body-md px-4 py-1 rounded-tl-md rounded-br-md rounded-bl-xs rounded-tr-xs">
                     {badgeLabel}
                 </span>
             </div>
@@ -66,7 +66,7 @@ function BalanceHeroCard({
             </Button>
 
             {/* Amount — smaller grey symbol + animated number */}
-            <span className="text-headline-lg text-white flex items-baseline gap-1.5">
+            <span className="text-headline-lg text-content-primary flex items-baseline gap-1.5">
                 <span className="text-headline-sm text-filltext-ft-f">{symbol}</span>
                 <NumberFlow locales={intlLocale} value={balance} format={numberFormat} transformTiming={FLOW_TIMING} />
             </span>

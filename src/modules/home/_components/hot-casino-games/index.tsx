@@ -1,28 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
 import useEmblaCarousel from 'embla-carousel-react';
 import WheelGesturesPlugin from 'embla-carousel-wheel-gestures';
 import { useTranslations } from 'next-intl';
 import type { FunctionComponent } from 'react';
-import {
-    GetCasinoGameLobbiesV2Interface,
-    GetCasinoGamesV2Interface,
-    GetCasinoGameTagsInterface,
-} from '@/api/handlers/casino';
-import type { CasinoGame, CasinoGameLobby, CasinoGameTag } from '@/api/models/casino';
 import imageCup from '@/assets/images/gold-cup.png';
 import { BlockTitle2 } from '@/components/block-title-2';
 import { CarouselMask } from '@/components/carousel-mask';
 import { useCarousel } from '@/hooks/use-carousel';
 import { Link } from '@/i18n';
 import { GameCard } from '@/modules/casino/_components/game-card';
+import { type HotCasinoGamesResult, useHotCasinoGames } from './use-hot-casino-games';
 
-interface GameRes {
-    lobby: CasinoGameLobby;
-    tag: CasinoGameTag;
-    games: CasinoGame[];
-}
-
-const Main: FunctionComponent<{ gameRes: GameRes }> = ({ gameRes }) => {
+const Main: FunctionComponent<{ gameRes: HotCasinoGamesResult }> = ({ gameRes }) => {
     const tCommon = useTranslations('common');
     const t = useTranslations('casino');
 
@@ -75,32 +63,7 @@ const Main: FunctionComponent<{ gameRes: GameRes }> = ({ gameRes }) => {
 // 复用 Casino 热门游戏模块或接口能力，使用 locale-aware navigation 跳转 /casino 或默认 lobby。
  */
 export const HotCasinoGames: FunctionComponent = () => {
-    const { data: gameRes } = useQuery({
-        queryKey: ['casino', 'hotGames'],
-        queryFn: () => {
-            return GetCasinoGameLobbiesV2Interface().then((res) => {
-                const lobby = res?.[0];
-                if (!lobby) {
-                    return null;
-                }
-
-                return GetCasinoGameTagsInterface(lobby.id).then(async (res2) => {
-                    const tag = res2?.[0];
-                    if (!tag) {
-                        return null;
-                    }
-                    return GetCasinoGamesV2Interface([tag.id])
-                        .then((res) => {
-                            return res.find((v) => v.tag_id === Number(tag.id))?.game_list || [];
-                        })
-                        .then((res3) => {
-                            return { lobby, tag, games: res3 };
-                        });
-                });
-            });
-        },
-        staleTime: 60 * 60 * 1000,
-    });
+    const { data: gameRes } = useHotCasinoGames();
 
     if (!gameRes?.games?.length) {
         return null;

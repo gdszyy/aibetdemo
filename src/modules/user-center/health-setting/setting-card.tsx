@@ -22,9 +22,9 @@ interface SettingCardProps {
  * Health setting card component
  *
  * Three-state styling:
- * - Default (not set): light gray #a0a8b4 (text-filltext-ft-e)
- * - Set: dark gray #51555e (text-filltext-ft-g)
- * - Active (expanded): red #e80104 (text-brand-red) + red border
+ * - Default (not set): muted content token
+ * - Set: secondary content token
+ * - Active (expanded): brand token with active border
  */
 export const SettingCard: FC<SettingCardProps> = ({ title, value, hasValue, isExpanded, pendingText, onClick }) => {
     // Three-state color logic

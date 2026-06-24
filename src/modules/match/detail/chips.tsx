@@ -5,6 +5,7 @@ import type { FC } from 'react';
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import type { MarketGroup } from '@/api/models/market';
 import type { MarketChip } from '@/api/models/match-game';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { cn } from '@/utils/common';
 
 /** Chip value representing "All" (no specifier filter) */
@@ -72,8 +73,10 @@ interface ChipsProps {
  */
 export const Chips: FC<ChipsProps> = ({ chips, filteredMarkets, resetKey, surface = 'default', children }) => {
     const t = useTranslations('matches');
+    const componentProfile = useThemeComponentProfile();
     const [selectedChipValue, setSelectedChipValue] = useState<ChipValue>(ALL_CHIP_VALUE);
     const surfaceClasses = CHIP_SURFACE_CLASS[surface];
+    const isDetailPill = surface === 'detail' && componentProfile.marketCard.headerTreatment === 'pill';
 
     useEffect(() => {
         if (resetKey === undefined) return;
@@ -120,7 +123,16 @@ export const Chips: FC<ChipsProps> = ({ chips, filteredMarkets, resetKey, surfac
                             key={chip.id ?? chip.label}
                             type="button"
                             onClick={() => setSelectedChipValue(chip.id)}
-                            className={cn(surfaceClasses.button, surfaceClasses.state[buttonState])}
+                            className={cn(
+                                surfaceClasses.button,
+                                isDetailPill &&
+                                    'min-w-0 rounded-[var(--component-detail-tab-radius,999px)] border border-[color:var(--brand-match-card-border,var(--border-subtle))]',
+                                isDetailPill
+                                    ? buttonState === 'selected'
+                                        ? 'bg-[var(--component-detail-tab-active-bg,var(--odds-selected-bg))] text-[var(--component-detail-tab-active-text,var(--odds-selected-text))] hover:bg-[var(--brand-odds-selected-hover-bg,var(--odds-selected-hover-bg))]'
+                                        : 'bg-[var(--brand-odds-bg,var(--surface-1))] text-[var(--brand-match-muted,var(--filltext-ft-f))] hover:bg-[var(--brand-odds-hover-bg,var(--surface-2))] hover:text-[var(--brand-match-team-text,var(--filltext-ft-h))]'
+                                    : surfaceClasses.state[buttonState],
+                            )}
                         >
                             <span className="text-auxiliary-md leading-3.5 text-center whitespace-nowrap">
                                 {chip.label}

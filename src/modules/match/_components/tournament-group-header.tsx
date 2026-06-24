@@ -6,12 +6,14 @@ import { LeagueHeaderIconFilled } from '@/components/icons2/LeagueHeaderIconFill
 import { Toast } from '@/components/toast';
 import { Link } from '@/i18n';
 import { useLiveStatusSuffix } from '@/modules/match/_hooks/use-live-status-suffix';
+import { cn } from '@/utils/common';
 
 interface TournamentGroupHeaderProps {
     tournamentId: string;
     tournamentName: string;
     subtitle: string;
     isCurrentTournament?: boolean;
+    variant?: 'default' | 'betano-table';
 }
 
 /**
@@ -22,6 +24,7 @@ export const TournamentGroupHeader: FC<TournamentGroupHeaderProps> = ({
     tournamentName,
     subtitle,
     isCurrentTournament = false,
+    variant = 'default',
 }) => {
     const tCommon = useTranslations('common');
     const liveStatusSuffix = useLiveStatusSuffix();
@@ -53,13 +56,21 @@ export const TournamentGroupHeader: FC<TournamentGroupHeaderProps> = ({
     );
 
     return (
-        <div className="group/header flex w-full items-center justify-between gap-3 rounded-sm text-left md:items-start">
+        <div
+            className={cn(
+                'group/header flex w-full items-center justify-between gap-3 rounded-sm text-left md:items-start',
+                variant === 'betano-table' && 'h-10 px-2 py-1 md:items-center',
+            )}
+        >
             {isCurrentTournament ? (
                 <div className="flex min-w-0 flex-1 items-center gap-1 md:flex-col md:items-start">{leagueTitle}</div>
             ) : (
                 <Link
                     href={leagueHref}
-                    className="flex min-w-0 flex-1 items-center gap-1 rounded-sm text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-0 md:flex-col md:items-start"
+                    className={cn(
+                        'flex min-w-0 flex-1 items-center gap-1 rounded-sm text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-0 md:flex-col md:items-start',
+                        variant === 'betano-table' && 'md:flex-row md:items-center',
+                    )}
                 >
                     {leagueTitle}
                 </Link>

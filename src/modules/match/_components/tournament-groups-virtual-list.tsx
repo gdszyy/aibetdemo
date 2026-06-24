@@ -48,16 +48,20 @@ const MOBILE_GROUP_GAP = 12;
 const DESKTOP_GROUP_HEADER_HEIGHT = 42;
 const MOBILE_GROUP_HEADER_HEIGHT = 20;
 const DESKTOP_MATCH_CARD_HEIGHT = 118;
+const DESKTOP_STACKED_MATCH_CARD_HEIGHT = 176;
 const MOBILE_MATCH_CARD_HEIGHT = 167;
 const MOBILE_VIEWPORT_GROUP_CONTENT_GAP = 12;
 const MD_LAYOUT_CONTAINER_MIN_WIDTH = 768;
 const MATCH_CARD_GAP = 12;
+const MATCH_STACKED_CARD_GAP = 10;
+const MATCH_STACKED_GROUP_GAP = 20;
+const MATCH_STACKED_GROUP_CONTENT_GAP = 10;
 const GROUP_BOTTOM_PADDING = 12;
 const EVENT_ID_SEPARATOR = '\n';
 const NO_MEASURE_FRAME = -1;
 const VIRTUAL_OVERSCAN = 10;
 const STICKY_FILTER_HEIGHT = 72;
-const STICKY_LEAGUE_HEADER_TOP = `calc(72px + var(--header-strip-height) + ${STICKY_FILTER_HEIGHT}px)`;
+const STICKY_LEAGUE_HEADER_TOP = `calc(var(--desktop-nav-height) + var(--header-strip-height) + ${STICKY_FILTER_HEIGHT}px)`;
 
 export const getTournamentGroupIdentityKey = (group: TournamentGroup): string =>
     `${group.sport_id}-${group.tournament_id}`;
@@ -147,8 +151,13 @@ const getGroupLayoutKey = (
     group: TournamentGroup | undefined,
     containerWidth: number | undefined,
     usesDesktopGroupLayout: boolean,
+    usesStackedMatchCards: boolean,
 ): string => {
-    const cardLayout = isGroupMobileLayout(group, containerWidth) ? 'mobile-card' : 'desktop-card';
+    const cardLayout = usesStackedMatchCards
+        ? 'match-stacked-card'
+        : isGroupMobileLayout(group, containerWidth)
+          ? 'mobile-card'
+          : 'desktop-card';
     const viewportLayout = usesDesktopGroupLayout ? 'md-list' : 'base-list';
 
     return `${cardLayout}:${viewportLayout}`;
@@ -181,11 +190,12 @@ const getMeasurementCacheKey = (
     containerWidth: number | undefined,
     isCollapsed: boolean,
     usesDesktopGroupLayout: boolean,
+    usesStackedMatchCards: boolean,
 ): string =>
     groups
         .map(
             (group) =>
-                `${group.sport_id}-${group.tournament_id}-${getGroupLayoutKey(group, containerWidth, usesDesktopGroupLayout)}-${isCollapsed}-${getGroupEventIdsKey(group)}`,
+                `${group.sport_id}-${group.tournament_id}-${getGroupLayoutKey(group, containerWidth, usesDesktopGroupLayout, usesStackedMatchCards)}-${isCollapsed}-${getGroupEventIdsKey(group)}`,
         )
         .join(EVENT_ID_SEPARATOR);
 
@@ -217,6 +227,7 @@ const MatchCardRow: FC<{
             categoryId={row.group.category_id}
             tournamentId={row.group.tournament_id}
             tournamentName={row.group.tournament_name}
+            tournamentLogo={row.group.tournament_logo}
             maxVisibleMarkets={maxVisibleMarkets}
             isMobileLayout={isMobileLayout}
             columnMarkets={row.group.market_columns}
@@ -246,8 +257,17 @@ export const TournamentGroupsVirtualList: FC<TournamentGroupsVirtualListProps> =
 
     const estimatedContainerWidth = containerWidth ?? (isDesktop ? MD_LAYOUT_CONTAINER_MIN_WIDTH : 1);
     const usesDesktopGroupLayout = isDesktop;
-    const viewportGroupGap = usesDesktopGroupLayout ? DESKTOP_GROUP_GAP : MOBILE_GROUP_GAP;
-    const contentGap = MOBILE_VIEWPORT_GROUP_CONTENT_GAP;
+    const usesStackedMatchCards = false;
+    const viewportGroupGap =
+        usesDesktopGroupLayout && usesStackedMatchCards
+            ? MATCH_STACKED_GROUP_GAP
+            : usesDesktopGroupLayout
+              ? DESKTOP_GROUP_GAP
+              : MOBILE_GROUP_GAP;
+    const contentGap =
+        usesDesktopGroupLayout && usesStackedMatchCards
+            ? MATCH_STACKED_GROUP_CONTENT_GAP
+            : MOBILE_VIEWPORT_GROUP_CONTENT_GAP;
     const virtualRows = useMemo(
         () => buildMatchListRows(tournamentGroups, isCollapsed),
         [isCollapsed, tournamentGroups],
@@ -272,7 +292,12 @@ export const TournamentGroupsVirtualList: FC<TournamentGroupsVirtualListProps> =
         count: virtualRows.length,
         estimateSize: (index) => {
             const row = virtualRows[index];
-            if (!row) return DESKTOP_MATCH_CARD_HEIGHT + MATCH_CARD_GAP;
+            if (!row) {
+                return (
+                    (usesStackedMatchCards ? DESKTOP_STACKED_MATCH_CARD_HEIGHT : DESKTOP_MATCH_CARD_HEIGHT) +
+                    MATCH_CARD_GAP
+                );
+            }
 
             if (row.type === 'header') {
                 if (showHeader === false) {
@@ -286,10 +311,15 @@ export const TournamentGroupsVirtualList: FC<TournamentGroupsVirtualListProps> =
             }
 
             const { isMobileLayout } = getGroupMarketLayout(row.group, estimatedContainerWidth);
-            const cardHeight = isMobileLayout ? MOBILE_MATCH_CARD_HEIGHT : DESKTOP_MATCH_CARD_HEIGHT;
+            const cardHeight = isMobileLayout
+                ? MOBILE_MATCH_CARD_HEIGHT
+                : usesStackedMatchCards
+                  ? DESKTOP_STACKED_MATCH_CARD_HEIGHT
+                  : DESKTOP_MATCH_CARD_HEIGHT;
+            const matchCardGap = !isMobileLayout && usesStackedMatchCards ? MATCH_STACKED_CARD_GAP : MATCH_CARD_GAP;
             const isLastEventInGroup = row.eventIndex === row.group.events.length - 1;
             const groupGap = row.groupIndex === tournamentGroups.length - 1 ? 0 : viewportGroupGap;
-            const bottomSpace = isLastEventInGroup ? GROUP_BOTTOM_PADDING + groupGap : MATCH_CARD_GAP;
+            const bottomSpace = isLastEventInGroup ? GROUP_BOTTOM_PADDING + groupGap : matchCardGap;
 
             return cardHeight + bottomSpace;
         },
@@ -315,7 +345,14 @@ export const TournamentGroupsVirtualList: FC<TournamentGroupsVirtualListProps> =
     }, [measureCurrentLayout]);
 
     const measurementCacheKey = useMemo(
-        () => getMeasurementCacheKey(tournamentGroups, estimatedContainerWidth, isCollapsed, usesDesktopGroupLayout),
+        () =>
+            getMeasurementCacheKey(
+                tournamentGroups,
+                estimatedContainerWidth,
+                isCollapsed,
+                usesDesktopGroupLayout,
+                usesStackedMatchCards,
+            ),
         [estimatedContainerWidth, isCollapsed, tournamentGroups, usesDesktopGroupLayout],
     );
 
@@ -363,6 +400,12 @@ export const TournamentGroupsVirtualList: FC<TournamentGroupsVirtualListProps> =
                     }
 
                     const isStickyHeader = row.type === 'header' && activeStickyIndexRef.current === virtualItem.index;
+                    const rowLayout =
+                        row.type === 'match'
+                            ? getGroupMarketLayout(row.group, estimatedContainerWidth)
+                            : { maxVisibleMarkets: 0, isMobileLayout: false };
+                    const matchCardGap =
+                        !rowLayout.isMobileLayout && usesStackedMatchCards ? MATCH_STACKED_CARD_GAP : MATCH_CARD_GAP;
 
                     return (
                         <Fragment key={virtualItem.key}>
@@ -421,7 +464,7 @@ export const TournamentGroupsVirtualList: FC<TournamentGroupsVirtualListProps> =
                                                       (row.groupIndex === tournamentGroups.length - 1
                                                           ? 0
                                                           : viewportGroupGap)
-                                                    : MATCH_CARD_GAP,
+                                                    : matchCardGap,
                                         }}
                                     >
                                         <MatchCardRow
@@ -429,7 +472,7 @@ export const TournamentGroupsVirtualList: FC<TournamentGroupsVirtualListProps> =
                                             sportId={row.group.sport_id || fallbackSportId || ''}
                                             hideZeroMarketCount={hideZeroMarketCount}
                                             isMock={isMock}
-                                            {...getGroupMarketLayout(row.group, estimatedContainerWidth)}
+                                            {...rowLayout}
                                         />
                                     </div>
                                 )}

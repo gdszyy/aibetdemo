@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import { type Scheme, useTheme } from '@/components/theme-provider/theme-provider';
 
-export type SchemeBrand = 'superbet' | 'betano' | 'betbus' | 'match';
+export type SchemeBrand = 'superbet' | 'betano' | 'betbus' | 'match' | 'glass';
 export type SchemeMode = 'light' | 'dark';
 
 export interface SchemeMeta {
@@ -21,7 +21,7 @@ const DEFAULT_SCHEME_META: SchemeMeta = {
 const SCHEME_META: Record<Scheme, SchemeMeta> = {
     gtb: {
         scheme: 'gtb',
-        brand: 'superbet',
+        brand: 'betbus',
         mode: 'light',
     },
     betbus: {
@@ -38,6 +38,31 @@ const SCHEME_META: Record<Scheme, SchemeMeta> = {
         scheme: 'match-light',
         brand: 'match',
         mode: 'light',
+    },
+    'match-mint': {
+        scheme: 'match-mint',
+        brand: 'match',
+        mode: 'dark',
+    },
+    'match-bright': {
+        scheme: 'match-bright',
+        brand: 'match',
+        mode: 'dark',
+    },
+    'match-red': {
+        scheme: 'match-red',
+        brand: 'match',
+        mode: 'dark',
+    },
+    'match-navy-red': {
+        scheme: 'match-navy-red',
+        brand: 'match',
+        mode: 'dark',
+    },
+    'match-navy-yellow': {
+        scheme: 'match-navy-yellow',
+        brand: 'match',
+        mode: 'dark',
     },
     'superbet-light': {
         scheme: 'superbet-light',
@@ -57,6 +82,16 @@ const SCHEME_META: Record<Scheme, SchemeMeta> = {
     'betano-dark': {
         scheme: 'betano-dark',
         brand: 'betano',
+        mode: 'dark',
+    },
+    'glass-light': {
+        scheme: 'glass-light',
+        brand: 'glass',
+        mode: 'light',
+    },
+    'glass-dark': {
+        scheme: 'glass-dark',
+        brand: 'glass',
         mode: 'dark',
     },
 };

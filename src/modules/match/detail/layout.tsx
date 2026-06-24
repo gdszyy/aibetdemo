@@ -17,6 +17,7 @@ import { ArrowLeft, DetailLiveSwitch } from '@/components/icons';
 import { LiveOverlayBack } from '@/components/icons2/LiveOverlayBack';
 import { LiveOverlayClose } from '@/components/icons2/LiveOverlayClose';
 import { StickyBlurHeader } from '@/components/sticky-blur-header';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { Toast } from '@/components/toast';
 import { useGameSubscription } from '@/hooks/use-game-subscription';
 import { useIsDesktop } from '@/hooks/use-media-query';
@@ -632,6 +633,9 @@ export const MatchDetail: FC<MatchDetailProps> = ({ matchId }) => {
     const tCommon = useTranslations('common');
     const queryClient = useQueryClient();
     const isDesktop = useIsDesktop();
+    const componentProfile = useThemeComponentProfile();
+    const isBetanoProfile = componentProfile.marketCard.profile === 'betano-table-ticket';
+    const isSuperbetProfile = componentProfile.marketCard.profile === 'superbet-rich-grid';
     /** 是否显示 statscore 小部件 */
     const isShowStatscoreWidget = useShowStatscoreWidget();
     const tooltipLocale: Locale = isValidLocale(locale) ? locale : 'en';
@@ -1044,7 +1048,19 @@ export const MatchDetail: FC<MatchDetailProps> = ({ matchId }) => {
                                                         />
 
                                                         {isMarketsView && (
-                                                            <div className="flex w-full items-center md:h-10 md:border-b md:border-filltext-ft-c md:bg-transparent">
+                                                            <div
+                                                                className={cn(
+                                                                    'flex w-full items-center',
+                                                                    isBetanoProfile || isSuperbetProfile
+                                                                        ? 'min-h-12 rounded-[var(--component-detail-category-radius,12px)] border border-[color:var(--component-detail-category-border,var(--border-subtle))] bg-[var(--component-detail-category-bg,var(--surface-1))] px-2 py-2'
+                                                                        : 'md:h-10 md:border-filltext-ft-c md:border-b md:bg-transparent',
+                                                                )}
+                                                                style={
+                                                                    isBetanoProfile || isSuperbetProfile
+                                                                        ? componentProfile.style
+                                                                        : undefined
+                                                                }
+                                                            >
                                                                 <div className="min-w-0 flex-1">
                                                                     <Filters
                                                                         tabs={visibleTabs}

@@ -68,6 +68,8 @@ const EXCLUDED_MENUS = new Set([
     UserCenterMenu.LOGOUT,
 ]);
 
+const DEFAULT_USER_AVATAR = '/static/generated/home-assets/avatars/user-default.svg';
+
 export function AccountMenuClient() {
     const isDesktop = useIsDesktop();
     const router = useRouter();
@@ -101,6 +103,14 @@ export function AccountMenuClient() {
         () => getVisibleAccountRoutes(user?.kyc_status).filter((route) => !EXCLUDED_MENUS.has(route.menu)),
         [user?.kyc_status],
     );
+
+    useEffect(() => {
+        ['/account/deposit', '/account/withdraw', '/account/notifications', '/account/settings']
+            .concat(visibleRoutes.map((route) => route.path))
+            .forEach((path) => {
+                router.prefetch(path);
+            });
+    }, [router, visibleRoutes]);
 
     // Group routes by group number
     const groups = useMemo(() => {
@@ -160,6 +170,7 @@ export function AccountMenuClient() {
                 <div className="ml-auto flex items-center gap-3">
                     <Link
                         href="/account/notifications"
+                        prefetch
                         className="flex items-center justify-center size-8 bg-neutral-white-e rounded-full relative"
                     >
                         <Notice className="size-5 text-neutral-white-h" />
@@ -169,6 +180,7 @@ export function AccountMenuClient() {
                     </Link>
                     <Link
                         href="/account/settings"
+                        prefetch
                         className="flex items-center justify-center size-8 bg-neutral-white-e rounded-full"
                     >
                         <Setting className="size-5 text-neutral-white-h" />
@@ -180,7 +192,7 @@ export function AccountMenuClient() {
             <div className="relative flex flex-col items-center mt-10 gap-[10px]">
                 <Image
                     className="size-[60px] rounded-full overflow-hidden"
-                    src={user?.avatar || 'https://placehold.co/100x100?text=User'}
+                    src={user?.avatar || DEFAULT_USER_AVATAR}
                     alt=""
                     width={60}
                     height={60}
@@ -254,6 +266,7 @@ export function AccountMenuClient() {
                                 <Link
                                     key={route.path}
                                     href={route.path}
+                                    prefetch
                                     className="flex items-center justify-between h-12 px-3 bg-surface-1"
                                 >
                                     <div className="flex items-center gap-2">

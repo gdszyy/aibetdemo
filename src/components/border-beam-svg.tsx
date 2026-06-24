@@ -29,7 +29,7 @@ interface BorderBeamSvgProps {
  *
  * Parent needs `position: relative`.
  */
-export const BorderBeamSvg: FC<BorderBeamSvgProps> = ({ duration = 2, color = '#ffaa40', radius = 8 }) => {
+export const BorderBeamSvg: FC<BorderBeamSvgProps> = ({ duration = 2, color = 'var(--accent-warm)', radius = 8 }) => {
     const sharedRect = {
         x: '0',
         y: '0',

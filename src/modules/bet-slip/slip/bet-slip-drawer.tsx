@@ -2,6 +2,7 @@
 
 import { type FC, useState } from 'react';
 import { CartStatus } from '@/api/models/cart';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { useSchemeMeta } from '@/components/theme-provider/scheme-meta';
 import { useIsDesktop } from '@/hooks/use-media-query';
 import { DRAWER_SHELL_WIDTH, DRAWER_WIDTH } from '@/modules/bet-slip/_constants/constants';
@@ -46,6 +47,16 @@ export const BetSlipDrawer: FC<BetSlipDrawerProps> = ({ className }) => {
     const isDesktop = useIsDesktop();
     const schemeMeta = useSchemeMeta();
     const slipSkin = getBetSlipSkin(schemeMeta);
+    const componentProfile = useThemeComponentProfile();
+    const isBetanoDesktopDrawer = isDesktop && componentProfile.betSlip.desktopPlacement === 'bottom-right-drawer';
+    const isRightRailPanel = isDesktop && componentProfile.betSlip.desktopPlacement === 'right-rail-panel';
+    const drawerWidth =
+        isBetanoDesktopDrawer || isRightRailPanel ? 'var(--component-slip-desktop-width,320px)' : DRAWER_WIDTH;
+    const drawerShellWidth = isBetanoDesktopDrawer
+        ? 'var(--component-slip-desktop-shell-width,364px)'
+        : isRightRailPanel
+          ? 'var(--component-slip-desktop-shell-width,320px)'
+          : DRAWER_SHELL_WIDTH;
 
     const handleTabChange = (nextTab: SlipTabType) => {
         setActiveTab(nextTab);
@@ -59,13 +70,24 @@ export const BetSlipDrawer: FC<BetSlipDrawerProps> = ({ className }) => {
                     'flex flex-col items-center transition-all duration-200',
                     !isDesktop && 'gap-0 bg-transparent',
                     isLocked && 'pointer-events-none',
+                    isDesktop &&
+                        componentProfile.betSlip.desktop === 'empty-panel' &&
+                        !isRightRailPanel &&
+                        'rounded-[var(--style-radius-panel)] shadow-floating',
+                    isRightRailPanel &&
+                        'h-full overflow-hidden rounded-[var(--component-slip-desktop-radius,10px)] border border-[color:var(--slip-panel-border,var(--border-subtle))] bg-[var(--slip-panel-bg,var(--surface-1))] shadow-floating',
+                    isBetanoDesktopDrawer &&
+                        'overflow-hidden rounded-[var(--component-slip-desktop-radius,32px_32px_0_0)] border border-b-0 border-[color:var(--slip-panel-border,var(--border-subtle))] bg-[var(--slip-panel-bg,var(--surface-1))] shadow-floating',
                     className,
                 )}
                 data-testid="bet-slip-drawer"
                 data-bet-slip-brand={slipSkin.brand}
+                data-bet-slip-profile={componentProfile.betSlip.profile}
+                data-mobile-bet-flow={componentProfile.betSlip.mobileFlow}
                 style={{
                     ...slipSkin.style,
-                    width: isDesktop ? DRAWER_WIDTH : undefined,
+                    ...componentProfile.style,
+                    width: isDesktop ? drawerWidth : undefined,
                 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
@@ -76,16 +98,18 @@ export const BetSlipDrawer: FC<BetSlipDrawerProps> = ({ className }) => {
                         'shrink-0 overflow-hidden',
                         isDesktop &&
                             activeTab === 'slip' &&
+                            !isRightRailPanel &&
                             'relative before:absolute before:inset-x-0 before:bottom-0 before:h-1/2 before:bg-page-bg before:content-[""]',
                         !isDesktop && 'w-full bg-[var(--slip-footer-bg,var(--mobile-sheet-bg))]',
                         isLocked && 'opacity-50',
                     )}
-                    style={{ width: isDesktop ? DRAWER_SHELL_WIDTH : undefined }}
+                    style={{ width: isDesktop ? drawerShellWidth : undefined }}
                 >
                     <div
                         className={cn(
                             'relative overflow-hidden border-b border-[color:var(--slip-panel-border,var(--border-subtle))] bg-[var(--slip-header-bg,var(--surface-shell))] shadow-none',
                             isDesktop &&
+                                !isRightRailPanel &&
                                 'rounded-sm border border-[color:var(--slip-panel-border,var(--border-subtle))]',
                         )}
                     >
@@ -102,14 +126,19 @@ export const BetSlipDrawer: FC<BetSlipDrawerProps> = ({ className }) => {
                     <div
                         className={cn(
                             'relative flex min-h-0 flex-col items-center',
-                            activeTab === 'slip' ? 'flex-none' : 'flex-1',
+                            activeTab === 'slip' && !isRightRailPanel ? 'flex-none' : 'flex-1',
                         )}
-                        style={{ width: DRAWER_SHELL_WIDTH }}
+                        style={{ width: drawerShellWidth }}
                     >
                         {/* Middle selections list */}
                         {/* Slip Tab — StakeCard list */}
                         {activeTab === 'slip' && (
-                            <div className="relative flex min-h-0 w-full flex-none flex-col rounded-b-sm bg-[var(--slip-shell-bg,var(--page-bg))]">
+                            <div
+                                className={cn(
+                                    'relative flex min-h-0 w-full flex-col rounded-b-sm bg-[var(--slip-shell-bg,var(--page-bg))]',
+                                    isRightRailPanel ? 'flex-1' : 'flex-none',
+                                )}
+                            >
                                 <Cart />
                             </div>
                         )}

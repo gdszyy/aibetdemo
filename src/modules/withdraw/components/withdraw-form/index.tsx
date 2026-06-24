@@ -119,7 +119,7 @@ export const WithdrawForm: FC = () => {
 
     const formSchema = z.object({
         bankAccount: z.refine(
-            (v) => {
+            () => {
                 return bankAccounts?.length > 0;
             },
             { message: t('withdraw.selectError') },

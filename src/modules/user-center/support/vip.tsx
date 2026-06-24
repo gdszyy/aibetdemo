@@ -42,7 +42,7 @@ const VipSupportItem = ({ support, onContact }: VipSupportItemProps) => {
                     {/* VIP Badge */}
                     <div className="absolute right-[-10px] bottom-[-2px] flex items-center h-4 w-[42px]">
                         <Image src={VIPBadge} alt="VIP Level" fill sizes="42px" className="object-contain" />
-                        <span className="absolute right-1.5 text-white text-[11px] font-bold leading-[14px]">
+                        <span className="absolute right-1.5 text-neutral-white-h text-[11px] font-bold leading-[14px]">
                             {support.support_level}
                         </span>
                     </div>
@@ -76,8 +76,17 @@ const VipSupportItem = ({ support, onContact }: VipSupportItemProps) => {
                         : 'bg-func-void cursor-not-allowed pointer-events-none',
                 )}
             >
-                <Support className="shrink-0 size-5 text-neutral-white-h" />
-                <span className="text-neutral-white-h text-body-lg leading-4">{t('support.contact')}</span>
+                <Support
+                    className={cn('shrink-0 size-5', support.is_working ? 'text-func-bonus-on' : 'text-neutral-white-h')}
+                />
+                <span
+                    className={cn(
+                        'text-body-lg leading-4',
+                        support.is_working ? 'text-func-bonus-on' : 'text-neutral-white-h',
+                    )}
+                >
+                    {t('support.contact')}
+                </span>
             </a>
         </div>
     );

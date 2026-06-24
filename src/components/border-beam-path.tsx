@@ -23,7 +23,7 @@ interface BorderBeamPathProps {
  */
 export const BorderBeamPath: FC<BorderBeamPathProps> = ({
     duration = 2.5,
-    color = '#ffaa40',
+    color = 'var(--accent-warm)',
     beamLength = 360,
     radius = 8,
 }) => {

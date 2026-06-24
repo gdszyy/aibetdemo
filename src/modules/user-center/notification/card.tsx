@@ -136,11 +136,13 @@ const CardBanner: FC<{ message: SystemMessage }> = ({ message }) => {
                 onClick={(e) => e.stopPropagation()}
                 className="mt-2 w-full block cursor-pointer"
             >
+                {/* biome-ignore lint/performance/noImgElement: Notification banners are backend-provided remote URLs with dynamic hosts. */}
                 <img src={message.banner} alt="banner" className="w-full rounded-[16px] h-[120px] object-cover" />
             </a>
         );
     }
 
+    // biome-ignore lint/performance/noImgElement: Notification banners are backend-provided remote URLs with dynamic hosts.
     return <img src={message.banner} alt="banner" className="mt-2 w-full rounded-[16px] h-[120px] object-cover" />;
 };
 

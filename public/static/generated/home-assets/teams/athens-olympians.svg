@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Athens Olympians crest</title>
+  <defs>
+    <linearGradient id="g" x1="18" y1="8" x2="112" y2="122" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <filter id="s" x="0" y="0" width="128" height="128" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#05070A" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <path filter="url(#s)" d="M64 7L108 22V57C108 86 91 109 64 121C37 109 20 86 20 57V22L64 7Z" fill="url(#g)"/>
+  <path d="M64 15L99 27V58C99 82 86 101 64 112C42 101 29 82 29 58V27L64 15Z" stroke="rgba(255,255,255,0.48)" stroke-width="3"/>
+  <path d="M64 31L72 52H95L76 65L84 88L64 74L44 88L52 65L33 52H56L64 31Z" fill="#FDE68A" opacity="0.96"/>
+  <circle cx="64" cy="66" r="25" fill="rgba(3,7,18,0.24)"/>
+  <text x="64" y="75" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="0" fill="#FFFFFF">AO</text>
+</svg>

@@ -6,6 +6,7 @@ import { ApiError, sanitizeForSentry } from '@/libs/observability/sentry';
 import { applyQueryKeyGovernance } from './services/query-key-governance';
 
 const TANSTACK_ERROR_STYLE = 'color: #F44336; font-weight: bold;';
+const DEFAULT_QUERY_STALE_TIME = 15_000;
 const shouldLogTanStackError = config.isDev;
 
 const logTanStackError = (label: string, error: unknown) => {
@@ -61,7 +62,7 @@ export const QUERY_CLIENT = new QueryClient({
         queries: {
             // With SSR, we usually want to set some default staleTime
             // above 0 to avoid refetching immediately on the client
-            staleTime: 0,
+            staleTime: DEFAULT_QUERY_STALE_TIME,
             retry: 0,
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,

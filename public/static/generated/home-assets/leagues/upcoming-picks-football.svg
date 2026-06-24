@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Upcoming Picks Football league logo</title>
+  <defs><linearGradient id="g" x1="18" y1="14" x2="114" y2="116" gradientUnits="userSpaceOnUse"><stop stop-color="#17A76F"/><stop offset="1" stop-color="#083344"/></linearGradient></defs>
+  <rect x="10" y="10" width="108" height="108" rx="30" fill="url(#g)"/>
+  <rect x="18" y="18" width="92" height="92" rx="24" stroke="rgba(255,255,255,0.42)" stroke-width="3"/>
+  <path d="M64 31L72 52H95L76 65L84 88L64 74L44 88L52 65L33 52H56L64 31Z" fill="#CFFAFE" opacity="0.95"/>
+  <text x="64" y="77" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="850" letter-spacing="0" fill="#fff">UF</text>
+</svg>

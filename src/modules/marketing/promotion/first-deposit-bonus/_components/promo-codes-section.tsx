@@ -88,7 +88,7 @@ const PromoCodeRow = ({
                         type="button"
                         onClick={handleCopy}
                         className={`p-2 rounded-full transition-all active:scale-95 cursor-pointer hover:opacity-85 shrink-0 ${
-                            copied ? 'bg-func-win' : 'bg-brand-red'
+                            copied ? 'bg-func-win-solid' : 'bg-brand-red'
                         } text-white`}
                         title={copied ? t('promoCodes.copied') : t('promoCodes.copyCode')}
                     >

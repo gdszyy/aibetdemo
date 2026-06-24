@@ -28,6 +28,7 @@ export const TournamentItem: FC<TournamentItemProps> = ({ tournamentNode }) => {
     return (
         <Link
             href={`/leagues/${tournamentNode.tournament_id}${liveStatusSuffix}`}
+            prefetch
             className={cn(
                 // 未选中
                 // 背景色

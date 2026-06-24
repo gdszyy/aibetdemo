@@ -14,7 +14,6 @@ import { ConditionalTooltip } from '@/components/tooltip';
 import { getSportConfig } from '@/constants/sports-config';
 import { useInfiniteScroll } from '@/hooks/use-infinite-scroll';
 import { Link } from '@/i18n';
-import { useSportNavMode } from '@/stores/layout-experiment-store';
 import { cn } from '@/utils/common';
 import { useLiveStatusSuffix } from '../_hooks/use-live-status-suffix';
 import { CategoryItem } from './category-item';
@@ -36,7 +35,7 @@ export interface SportItemProps {
 export const SportItem: FC<SportItemProps> = memo(({ sportNode, isOpen, isActive, isChildActive, onToggleOpen }) => {
     const { state } = useSidebar();
     const collapsed = state === 'collapsed';
-    const navMode = useSportNavMode();
+    const navMode = 'topic';
     const t = useTranslations('common');
     const tHome = useTranslations('home');
     const liveStatusSuffix = useLiveStatusSuffix();
@@ -117,6 +116,7 @@ export const SportItem: FC<SportItemProps> = memo(({ sportNode, isOpen, isActive
             <div key="collapsed">
                 <Link
                     href={`/sports/${sportNode.sport_id}${liveStatusSuffix}`}
+                    prefetch={!sportNode.isComingSoon}
                     className={cn(
                         // 未选中
                         // 背景色
@@ -158,6 +158,7 @@ export const SportItem: FC<SportItemProps> = memo(({ sportNode, isOpen, isActive
         return (
             <Link
                 href={`/sports/${sportNode.sport_id}${liveStatusSuffix}`}
+                prefetch={!sportNode.isComingSoon}
                 onClick={() => {
                     if (sportNode.isComingSoon) {
                         Toast.info(t('message.coming'), { id: 'coming-soon', duration: 650 });
@@ -323,6 +324,7 @@ export const SportItem: FC<SportItemProps> = memo(({ sportNode, isOpen, isActive
                 {/* Left link area: icon + text, navigates to sport page */}
                 <Link
                     href={`/sports/${sportNode.sport_id}${liveStatusSuffix}`}
+                    prefetch={!sportNode.isComingSoon}
                     onClick={onExpandToggleClick}
                     className={cn('flex-auto min-w-0 h-full flex items-center gap-x-2')}
                 >

@@ -144,6 +144,7 @@ const QuestionsCard: FunctionComponent = () => {
                                             '[&_a]:text-brand-primary-0 [&_a]:underline',
                                             '[&_li]:ml-4 [&_li]:list-disc [&_ol]:ml-4 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_ul]:ml-4',
                                         )}
+                                        // biome-ignore lint/security/noDangerouslySetInnerHtml: FAQ answers are trusted CMS/localized HTML content.
                                         dangerouslySetInnerHTML={{ __html: item.answer }}
                                     />
                                 </Accordion.Content>

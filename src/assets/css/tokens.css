@@ -97,6 +97,11 @@
     --color-func-pending: var(--func-pending);
     --color-func-void: var(--func-void);
 
+    --color-func-win-solid: var(--func-win-solid);
+    --color-func-lost-solid: var(--func-lost-solid);
+    --color-func-favorite-solid: var(--func-favorite-solid);
+    --color-func-bonus-on: var(--func-bonus-on);
+
     --color-promo-parlay-boost-bg: var(--promo-parlay-boost-bg);
     --color-promo-parlay-boost-accent: var(--promo-parlay-boost-accent);
 
@@ -189,7 +194,7 @@
     --bottom-bar-safe-height: calc(var(--bottom-bar-height) + var(--bottom-bar-safe-padding));
     --mobile-cart-summary-bar-height: 60px;
     --mobile-auth-action-bar-height: 48px;
-    --main-content-max-width: 1280px;
+    --main-content-max-width: 1600px;
 }
 
 @utility text-headline-sm {

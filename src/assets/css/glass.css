@@ -1,0 +1,199 @@
+/* ============================================================
+   iOS26 液态玻璃材质层 —— 仅 :root.glass-light / :root.glass-dark 生效。
+   真实 backdrop-filter 模糊 + 饱和提色 + SVG feDisplacementMap 折射 + 边缘高光描边。
+
+   作用域：每条规则都以 :root.glass-light / :root.glass-dark 起头（class 挂在 <html> 上，
+   Portal 到 body 的抽屉/弹层也在 html 之下，同样命中），其它 8 套 scheme 零影响。
+   SVG 滤镜 id（#glass-refraction / #glass-edge）由 <GlassFilterDefs/>（root-providers）注入。
+
+   外壳命中方式：topbar / sidebar / right-rail / match card / odds / mobile sport nav 经
+   Tailwind 任意值类（如 bg-[var(--brand-sidebar-bg)]）上色，类名里直接含变量名，
+   故用 [class*="brand-...-bg"] 子串选择器精准命中，无需逐组件改 TSX。
+   ============================================================ */
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    /* 1) 彩色网格墙纸：给 backdrop-filter 提供可采样的鲜亮背景；fixed 让滚动时折射稳定。
+          叠在 --page-bg 之上，仍是 glass scheme 专属。 */
+    :root.glass-light body,
+    :root.glass-dark body {
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    :root.glass-dark body {
+        /* 底色 = 全局最暗（近黑深紫基底 L*≈0.09–0.11）；彩光收成四角「透出来的微光」（alpha 砍到 0.10–0.14、
+           半径收紧避开内容区中心）。这样底色 L* 永远低于任何玻璃层 —— 在彩光处也不会反超卡片，
+           维持「越高越亮」的单调层级；同时仍透着紫/粉/蓝主题光，不是死黑。 */
+        background-image:
+            radial-gradient(at 14% 8%, rgba(139, 92, 246, 0.14) 0, transparent 30%),
+            radial-gradient(at 86% 5%, rgba(236, 72, 153, 0.1) 0, transparent 28%),
+            radial-gradient(at 80% 84%, rgba(59, 130, 246, 0.1) 0, transparent 32%),
+            radial-gradient(at 20% 92%, rgba(168, 85, 247, 0.12) 0, transparent 30%),
+            linear-gradient(135deg, oklch(0.11 0.034 290) 0%, oklch(0.12 0.04 300) 50%, oklch(0.085 0.026 285) 100%);
+    }
+
+    :root.glass-light body {
+        background-image:
+            radial-gradient(at 16% 14%, rgba(167, 139, 250, 0.5) 0, transparent 46%),
+            radial-gradient(at 84% 10%, rgba(244, 114, 182, 0.42) 0, transparent 42%),
+            radial-gradient(at 78% 80%, rgba(96, 165, 250, 0.38) 0, transparent 48%),
+            radial-gradient(at 22% 86%, rgba(196, 181, 253, 0.45) 0, transparent 46%),
+            linear-gradient(135deg, #f3f0ff 0%, #fdf2ff 50%, #eef0ff 100%);
+    }
+
+    /* 2) 通用玻璃面：语义 surface 工具类 + 账户卡。半透明 + 模糊 + 提色 + 整面液态折射。 */
+    :root.glass-light
+        :is(.bg-surface-shell, .bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-surface-raised, .account-card),
+    :root.glass-dark
+        :is(.bg-surface-shell, .bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-surface-raised, .account-card) {
+        -webkit-backdrop-filter: blur(18px) saturate(1.7);
+        backdrop-filter: blur(18px) saturate(1.7) url(#glass-refraction);
+    }
+
+    /* 3) 品牌外壳面（大结构容器）：整面折射 + 内描边高光，不强加定位，避免影响绝对定位子元素。 */
+    :root.glass-light
+        :is(
+            [class*='brand-topbar-bg'],
+            [class*='brand-sidebar-bg'],
+            [class*='brand-right-rail-bg'],
+            [class*='brand-mobile-sport-nav-bg']
+        ),
+    :root.glass-dark
+        :is(
+            [class*='brand-topbar-bg'],
+            [class*='brand-sidebar-bg'],
+            [class*='brand-right-rail-bg'],
+            [class*='brand-mobile-sport-nav-bg']
+        ) {
+        -webkit-backdrop-filter: blur(16px) saturate(1.6);
+        backdrop-filter: blur(16px) saturate(1.6) url(#glass-refraction);
+        box-shadow: var(--glass-rim-shadow);
+    }
+
+    /* 4) 圆角玻璃瓦片（match card / odds / 账户卡 / 各类浮层）：整面折射 + 边缘折射描边。
+          这些是自包含的卡片/按钮/浮层，置 position:relative 安全，可承载 ::after 描边层。 */
+    :root.glass-light
+        :is(
+            [class*='brand-match-card-bg'],
+            [class*='brand-odds-bg'],
+            [class*='mobile-sheet-bg'],
+            [class*='mobile-drawer-bg'],
+            [class*='mobile-menu-bg'],
+            .account-card,
+            .bg-surface-raised
+        ),
+    :root.glass-dark
+        :is(
+            [class*='brand-match-card-bg'],
+            [class*='brand-odds-bg'],
+            [class*='mobile-sheet-bg'],
+            [class*='mobile-drawer-bg'],
+            [class*='mobile-menu-bg'],
+            .account-card,
+            .bg-surface-raised
+        ) {
+        position: relative;
+        -webkit-backdrop-filter: blur(16px) saturate(1.65);
+        backdrop-filter: blur(16px) saturate(1.65) url(#glass-refraction);
+    }
+
+    /* 边缘折射描边：仅在圆角的「描边带」上绘制（content-box / border-box 互斥遮罩），
+       中心被完全裁掉，绝不遮挡内容；pointer-events:none 不拦截交互。
+       该层自身再走一次更强的 #glass-edge 位移 → 边缘把背景掰弯；叠加白色斜向高光 → 镜面反光。 */
+    :root.glass-light
+        :is(
+            [class*='brand-match-card-bg'],
+            [class*='brand-odds-bg'],
+            [class*='mobile-sheet-bg'],
+            [class*='mobile-drawer-bg'],
+            [class*='mobile-menu-bg'],
+            .account-card,
+            .bg-surface-raised
+        )::after,
+    :root.glass-dark
+        :is(
+            [class*='brand-match-card-bg'],
+            [class*='brand-odds-bg'],
+            [class*='mobile-sheet-bg'],
+            [class*='mobile-drawer-bg'],
+            [class*='mobile-menu-bg'],
+            .account-card,
+            .bg-surface-raised
+        )::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        border-radius: inherit;
+        padding: var(--glass-rim-width);
+        pointer-events: none;
+        background: var(--glass-rim-sheen);
+        -webkit-backdrop-filter: blur(1px) url(#glass-edge);
+        backdrop-filter: blur(1px) url(#glass-edge);
+        -webkit-mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        mask-composite: exclude;
+    }
+
+    /* 4b) 暗色卡片：滚动驱动的边缘高光扫掠 —— 卡片在视口中移动时，镜面高光沿圆角边框游走，
+          复刻真实玻璃随视角变化的反光。仅暗色（亮色保持不变）；尊重 prefers-reduced-motion；
+          仅在支持滚动驱动动画（animation-timeline）的浏览器生效，否则维持静态描边。
+          继承上面 ::after 的 --glass-rim-sheen 背景，这里只加 background-size + 滚动驱动位移。 */
+    @media (prefers-reduced-motion: no-preference) {
+        @supports (animation-timeline: view()) {
+            :root.glass-dark
+                :is(
+                    [class*='brand-match-card-bg'],
+                    [class*='brand-odds-bg'],
+                    .account-card,
+                    .bg-surface-raised
+                )::after {
+                background-size: 220% 220%;
+                animation-name: glass-rim-sweep;
+                animation-timing-function: linear;
+                animation-fill-mode: both;
+                animation-timeline: view();
+            }
+
+            @keyframes glass-rim-sweep {
+                from {
+                    background-position: 0% 0%;
+                }
+                to {
+                    background-position: 100% 100%;
+                }
+            }
+        }
+    }
+
+    /* 5) 玻璃描边的明暗参数（边宽 / 镜面高光斜向渐变 / 外壳内描边阴影）。 */
+    :root.glass-dark {
+        --glass-rim-width: 1px;
+        --glass-rim-sheen: linear-gradient(
+            140deg,
+            rgba(255, 255, 255, 0.55) 0%,
+            rgba(255, 255, 255, 0.06) 32%,
+            rgba(255, 255, 255, 0) 55%,
+            rgba(255, 255, 255, 0.18) 100%
+        );
+        --glass-rim-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    :root.glass-light {
+        --glass-rim-width: 1px;
+        --glass-rim-sheen: linear-gradient(
+            140deg,
+            rgba(255, 255, 255, 0.85) 0%,
+            rgba(255, 255, 255, 0.2) 32%,
+            rgba(255, 255, 255, 0) 55%,
+            rgba(255, 255, 255, 0.4) 100%
+        );
+        --glass-rim-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+}

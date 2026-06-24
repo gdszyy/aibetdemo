@@ -87,7 +87,7 @@ export const PasswordConfirmModal: FC<PasswordConfirmModalProps> = ({ visible, o
                         <Button
                             type="submit"
                             loading={loading}
-                            className="flex-1 h-10 bg-brand-primary-0 text-white rounded-full border-none"
+                            className="flex-1 h-10 bg-brand-primary-0 text-on-brand rounded-full border-none"
                             disabled={!isValid}
                         >
                             {t('healthSetting.confirm')}

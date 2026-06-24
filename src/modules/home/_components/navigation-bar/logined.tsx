@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import type { FunctionComponent } from 'react';
+import { type FunctionComponent, useEffect } from 'react';
 import { Button } from '@/components/button/button';
 import { DepositReward } from '@/components/DepositReward';
 import { NoticeOutlined } from '@/components/icons2/NoticeOutlined';
@@ -79,6 +79,10 @@ export const Logined: FunctionComponent = () => {
     const handleDepositEntryClick = (): void => {
         openDepositModal();
     };
+
+    useEffect(() => {
+        router.prefetch('/sports/promotions');
+    }, [router]);
 
     if (!isDesktop) {
         return (

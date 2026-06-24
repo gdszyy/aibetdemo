@@ -13,10 +13,10 @@ import { SegmentedProgress } from './segmented-progress';
 // ─── Strategy: gradient by bonus type ───────────────────────────────
 
 const BONUS_TYPE_GRADIENT: Record<string, string> = {
-    sportBonus: 'from-[#3c5ad3] to-[#00b3ff]',
-    casinoBonus: 'from-[#ff2c2c] to-[#ffbf48]',
-    freeSport: 'from-[#309d1a] to-[#becf5f]',
-    freeSpin: 'from-[#4d5cfe] to-[#b45bfb]',
+    sportBonus: 'from-auxiliary-blue to-brand-primary-0',
+    casinoBonus: 'from-brand-primary-0 to-accent-warm',
+    freeSport: 'from-func-win to-accent-warm',
+    freeSpin: 'from-auxiliary-purple to-brand-primary-0',
 };
 
 // ─── Countdown formatter ─────────────────────────────────────────────
@@ -70,9 +70,9 @@ export const BonusCard: FC<BonusCardProps> = ({ item, bonusType, onTransfer, tra
                     gradient,
                 )}
             >
-                <span className="text-[10px] text-filltext-ft-a">✦</span>
-                <span className="text-body-lg text-filltext-ft-a truncate">{item.product_name}</span>
-                <span className="text-[10px] text-filltext-ft-a">✦</span>
+                <span className="text-[10px] text-on-brand">✦</span>
+                <span className="text-body-lg text-on-brand truncate">{item.product_name}</span>
+                <span className="text-[10px] text-on-brand">✦</span>
             </div>
 
             {/* Body */}
@@ -154,7 +154,7 @@ export const BonusCard: FC<BonusCardProps> = ({ item, bonusType, onTransfer, tra
                             'w-full h-6 rounded-xs text-auxiliary-sm cursor-pointer transition-colors',
                             isTransferDisabled
                                 ? 'bg-filltext-ft-b text-filltext-ft-e cursor-not-allowed'
-                                : cn('bg-gradient-to-r text-filltext-ft-a', gradient),
+                                : cn('bg-gradient-to-r text-on-brand', gradient),
                         )}
                     >
                         {t('balanceItemTransaction')}

@@ -31,6 +31,9 @@ interface BannerCarouselProps {
     onBannerClick?: (banner: BannerItem) => void;
 }
 
+const isRemoteImageUrl = (value: BannerItem['imageUrl']): value is string =>
+    typeof value === 'string' && /^https?:\/\//.test(value);
+
 /**
  * Pure UI banner carousel component.
  * Data is provided externally via `banners` prop.
@@ -68,7 +71,7 @@ export const BannerCarousel: FC<BannerCarouselProps> = ({
                             <div
                                 key={banner.id}
                                 className={cn(
-                                    'relative w-full min-w-0 shrink-0 grow-0 basis-full',
+                                    'sports-activity-slide relative w-full min-w-0 shrink-0 grow-0 basis-full',
                                     isSingle
                                         ? 'aspect-369/130 md:aspect-970/200'
                                         : 'mr-4 aspect-360/128 md:aspect-360/128 md:basis-[calc((100%-2rem)/3)]',
@@ -103,6 +106,7 @@ export const BannerCarousel: FC<BannerCarouselProps> = ({
                                 {(() => {
                                     const resolvedImageUrl = (isMobile && banner.mobileImageUrl) || banner.imageUrl;
                                     if (!resolvedImageUrl) return null;
+                                    const shouldBypassNextImageOptimizer = isRemoteImageUrl(resolvedImageUrl);
 
                                     const image = (
                                         <Image
@@ -114,6 +118,7 @@ export const BannerCarousel: FC<BannerCarouselProps> = ({
                                             className={cn('w-full', 'h-full object-cover rounded-lg')}
                                             priority={index === startIndex}
                                             loading={index === startIndex ? 'eager' : 'lazy'}
+                                            unoptimized={shouldBypassNextImageOptimizer}
                                         />
                                     );
 

@@ -4,6 +4,7 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { MarketTabResponse } from '@/api/models/match-game';
 import { CarouselInlineNav } from '@/components/carousel-nav-controls';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { useIsDesktop } from '@/hooks/use-media-query';
 import { cn } from '@/utils/common';
 
@@ -16,6 +17,7 @@ interface FilterItemProps {
     isActive?: boolean;
     onClick?: () => void;
     surface?: FiltersProps['surface'];
+    treatment?: 'flat' | 'pill' | 'table';
 }
 
 type FilterSurface = NonNullable<FiltersProps['surface']>;
@@ -73,8 +75,9 @@ const FILTER_SURFACE_CLASS: Record<
         root: 'gap-2',
         track: 'gap-4 md:gap-6',
         itemWrap:
-            'group/filter-item flex h-8 shrink-0 cursor-pointer items-center justify-center rounded-sm px-4 transition-colors md:h-10 md:flex-col md:rounded-none md:px-0',
-        activeIndicator: 'hidden md:block h-0.5 w-full min-w-3 rounded-lg bg-accent-warm transition-opacity',
+            'group/filter-item flex h-8 shrink-0 cursor-pointer items-center justify-center rounded-[var(--component-detail-tab-radius,0.125rem)] px-4 transition-colors md:h-10 md:flex-col md:px-0',
+        activeIndicator:
+            'hidden md:block h-0.5 w-full min-w-3 rounded-lg bg-[var(--component-detail-tab-indicator-bg,var(--brand-primary-0))] transition-opacity',
         labelWrap: 'flex shrink-0 items-center justify-center md:flex-1 md:items-end md:px-2',
         label: 'max-w-full text-center whitespace-nowrap transition-colors text-auxiliary-md md:text-body-lg md:rounded-sm md:px-2 md:py-1',
         nav: 'hidden md:flex gap-4 text-filltext-ft-e',
@@ -84,8 +87,15 @@ const FILTER_SURFACE_CLASS: Record<
     },
 } as const;
 
-const FilterItem: FC<FilterItemProps> = ({ data, isActive = false, onClick, surface = 'default' }) => {
+const FilterItem: FC<FilterItemProps> = ({
+    data,
+    isActive = false,
+    onClick,
+    surface = 'default',
+    treatment = 'flat',
+}) => {
     const surfaceClasses = FILTER_SURFACE_CLASS[surface];
+    const isDetailPill = surface === 'detail' && treatment === 'pill';
 
     if (surface === 'detail') {
         return (
@@ -94,22 +104,39 @@ const FilterItem: FC<FilterItemProps> = ({ data, isActive = false, onClick, surf
                 onClick={() => onClick?.()}
                 className={cn(
                     surfaceClasses.itemWrap,
+                    isDetailPill &&
+                        'h-8 rounded-[var(--component-detail-tab-radius,999px)] border border-[color:var(--brand-match-card-border,var(--border-subtle))] bg-[var(--brand-odds-bg,var(--surface-1))] px-3 md:h-8 md:flex-row md:px-3',
                     isActive
-                        ? '[background:var(--odds-selected-bg)] text-(--odds-selected-text) md:bg-transparent md:text-accent-warm'
-                        : 'bg-surface-1 text-filltext-ft-g hover:bg-filltext-ft-c hover:text-filltext-ft-h md:bg-transparent md:text-filltext-ft-f md:hover:bg-transparent md:hover:text-filltext-ft-f',
+                        ? '[background:var(--component-detail-tab-active-bg,var(--odds-selected-bg))] text-[var(--component-detail-tab-active-text,var(--odds-selected-text))] md:[background:var(--component-detail-tab-desktop-active-bg,transparent)] md:text-[var(--component-detail-tab-desktop-active-text,var(--accent-warm))]'
+                        : cn(
+                              'bg-surface-1 text-filltext-ft-g hover:bg-filltext-ft-c hover:text-filltext-ft-h md:bg-transparent md:text-filltext-ft-f md:hover:bg-transparent md:hover:text-filltext-ft-f',
+                              isDetailPill &&
+                                  'text-[var(--brand-match-muted,var(--filltext-ft-g))] hover:bg-[var(--brand-odds-hover-bg,var(--surface-2))] hover:text-[var(--brand-match-team-text,var(--filltext-ft-h))] md:bg-[var(--brand-odds-bg,var(--surface-1))] md:hover:bg-[var(--brand-odds-hover-bg,var(--surface-2))]',
+                          ),
                 )}
             >
-                <span className="hidden flex-1 items-end justify-center px-2 md:flex">
+                <span
+                    className={cn('hidden flex-1 items-end justify-center px-2 md:flex', isDetailPill && 'md:hidden')}
+                >
                     <span className="h-1 w-full min-w-4 rounded-lg bg-brand-primary-0 opacity-0" />
                 </span>
-                <span className={surfaceClasses.labelWrap}>
+                <span className={cn(surfaceClasses.labelWrap, isDetailPill && 'md:flex-none md:items-center md:px-0')}>
                     <span
-                        className={cn(surfaceClasses.label, !isActive && 'md:group-hover/filter-item:bg-filltext-ft-c')}
+                        className={cn(
+                            surfaceClasses.label,
+                            isDetailPill && 'md:px-0 md:py-0',
+                            !isActive && !isDetailPill && 'md:group-hover/filter-item:bg-filltext-ft-c',
+                        )}
                     >
                         {data.name}
                     </span>
                 </span>
-                <span className="hidden h-2 w-full items-end justify-center px-4 pb-0 md:flex">
+                <span
+                    className={cn(
+                        'hidden h-2 w-full items-end justify-center px-4 pb-0 md:flex',
+                        isDetailPill && 'md:hidden',
+                    )}
+                >
                     <span className={cn(surfaceClasses.activeIndicator, isActive ? 'opacity-100' : 'opacity-0')} />
                 </span>
             </button>
@@ -155,6 +182,8 @@ export const Filters: FC<FiltersProps> = ({
 }) => {
     const surfaceClasses = FILTER_SURFACE_CLASS[surface];
     const isDesktop = useIsDesktop();
+    const componentProfile = useThemeComponentProfile();
+    const treatment = surface === 'detail' ? componentProfile.marketCard.headerTreatment : 'flat';
     const containerRef = useRef<HTMLDivElement | null>(null);
     const hasMountedRef = useRef(false);
 
@@ -280,6 +309,7 @@ export const Filters: FC<FiltersProps> = ({
                                 data={item}
                                 isActive={selectedTabId === item.id}
                                 surface={surface}
+                                treatment={treatment}
                                 onClick={() => {
                                     // center clicked item, then notify
                                     scrollItemToCenter(idx, 'smooth');

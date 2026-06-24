@@ -1,6 +1,6 @@
-# src\modules\bet-slip\cart\single-footer.tsx 函数索引
+# src/modules/bet-slip/cart/single-footer.tsx 函数索引
 
-> 自动生成于 2026-06-18 | 总行数: 546 | 函数数: 0 | 语言: typescript
+> 自动生成于 2026-06-24 | 总行数: 546 | 函数数: 0 | 语言: typescript
 > **本文件由 code-indexer 脚本自动生成，严禁手动编辑。**
 
 ## 函数列表

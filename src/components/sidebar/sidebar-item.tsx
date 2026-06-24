@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { type FC, type MouseEvent, memo, useState } from 'react';
+import { type FC, type MouseEvent, memo } from 'react';
 import { Toast } from '@/components/toast';
 import { ConditionalTooltip } from '@/components/tooltip';
 import { recordNavIntent, usePendingNavPath } from '@/hooks/use-nav-intent';
@@ -60,9 +60,8 @@ export const SidebarItem: FC<SidebarItemProps> = memo(
         const pendingPath = usePendingNavPath();
         const hrefPath = href.split('?')[0];
         const active = pendingPath != null ? pendingPath === hrefPath : isActive;
-        const [shouldPrefetch, setShouldPrefetch] = useState(false);
         const DisplayIcon = active && ActiveIcon ? ActiveIcon : Icon;
-        const warmPrefetch = () => setShouldPrefetch(true);
+        const shouldPrefetch = !comingSoon && href !== '#';
 
         const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
             if (comingSoon) {
@@ -85,8 +84,6 @@ export const SidebarItem: FC<SidebarItemProps> = memo(
                         <Link
                             href={comingSoon ? '#' : href}
                             prefetch={shouldPrefetch}
-                            onMouseEnter={warmPrefetch}
-                            onFocus={warmPrefetch}
                             onClick={handleClick}
                             className={cn(
                                 sidebarItemStateClasses,
@@ -115,8 +112,6 @@ export const SidebarItem: FC<SidebarItemProps> = memo(
                 <Link
                     href={comingSoon ? '#' : href}
                     prefetch={shouldPrefetch}
-                    onMouseEnter={warmPrefetch}
-                    onFocus={warmPrefetch}
                     onClick={handleClick}
                     className={cn(
                         sidebarItemStateClasses,

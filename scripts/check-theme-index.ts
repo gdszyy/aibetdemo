@@ -63,6 +63,7 @@ const getSkinKey = ({ scheme, brand, mode }: SchemeMetaEntry) => {
     if (brand === 'betano') return mode === 'light' ? 'BETANO_LIGHT_UI_STYLE' : 'BETANO_UI_STYLE';
     if (brand === 'betbus') return mode === 'light' ? 'BETBUS_LIGHT_UI_STYLE' : 'BETBUS_UI_STYLE';
     if (brand === 'match') return mode === 'light' ? 'MATCH_LIGHT_UI_STYLE' : 'MATCH_UI_STYLE';
+    if (brand === 'glass') return mode === 'light' ? 'GLASS_LIGHT_UI_STYLE' : 'GLASS_DARK_UI_STYLE';
     return 'SUPERBET_UI_STYLE';
 };
 

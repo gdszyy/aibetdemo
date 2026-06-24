@@ -54,7 +54,7 @@ export const useRechargeActiveConfig = () => {
             }
             return true;
         })
-        .sort((a, b) => {
+        .sort((a) => {
             if (a.type === RechargeCodeType.AnchorIntro) {
                 return -1;
             }

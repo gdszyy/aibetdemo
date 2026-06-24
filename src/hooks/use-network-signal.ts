@@ -19,6 +19,12 @@ const SIGNAL_LEVEL_MAP = {
 
 type SignalKey = keyof typeof SIGNAL_LEVEL_MAP;
 
+type NetworkNavigator = Navigator & {
+    connection?: {
+        effectiveType?: string;
+    };
+};
+
 /**
  * 信号强度
  */
@@ -30,7 +36,7 @@ export const useNetworkSignal: () => SignalLevel = () => {
 
     useEffect(() => {
         // 不支持网络信号探测，则退出
-        if (!(window.navigator as any).connection) {
+        if (!(window.navigator as NetworkNavigator).connection) {
             return;
         }
 

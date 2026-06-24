@@ -15,7 +15,9 @@ import activityBannerRefundBr from '@/assets/images/promotion/refund-br.png';
 import activityBannerRefundMx from '@/assets/images/promotion/refund-mx.png';
 
 import type { BannerItem } from '@/components/banner-carousel';
+import type { Scheme } from '@/components/theme-provider/theme-provider';
 import type { Locale } from '@/i18n';
+import { getGlassActivityBanners, isGlassBannerScheme } from './glass-activity-banners';
 
 /**
  * Mock banner data
@@ -97,6 +99,9 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 export const mockGetBanners = async (ctx?: { queryKey?: readonly unknown[] }): Promise<BannerItem[]> => {
     await delay(200);
     const locale = typeof ctx?.queryKey?.[1] === 'string' ? (ctx.queryKey[1] as string) : undefined;
+    const scheme = typeof ctx?.queryKey?.[2] === 'string' ? (ctx.queryKey[2] as Scheme) : undefined;
     const market = resolveMarketFromLocale(locale);
+    if (isGlassBannerScheme(scheme)) return getGlassActivityBanners(scheme, market);
+
     return buildBanners(market);
 };

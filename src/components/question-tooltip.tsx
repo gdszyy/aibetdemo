@@ -31,9 +31,9 @@ function ContentBody({
     hideTitle?: boolean;
 }) {
     const isDark = variant === 'tooltip';
-    const titleClass = isDark ? 'text-auxiliary-md text-white' : 'text-auxiliary-md text-filltext-ft-g';
-    const bodyClass = isDark ? 'text-auxiliary-sm text-white' : 'text-auxiliary-sm text-filltext-ft-g';
-    const bulletBg = isDark ? 'bg-white' : 'bg-filltext-ft-g';
+    const titleClass = isDark ? 'text-auxiliary-md text-content-inverse' : 'text-auxiliary-md text-filltext-ft-g';
+    const bodyClass = isDark ? 'text-auxiliary-sm text-content-inverse' : 'text-auxiliary-sm text-filltext-ft-g';
+    const bulletBg = isDark ? 'bg-content-inverse' : 'bg-filltext-ft-g';
 
     return (
         <div className="flex flex-col gap-1">

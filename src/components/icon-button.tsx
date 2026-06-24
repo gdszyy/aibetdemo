@@ -100,7 +100,7 @@ export const IconButton: FC<IconButtonProps> = ({
         >
             <Icon className={cn(sizeConfig.icon, iconClassName)} />
             {badge != null && badge > 0 && (
-                <span className="absolute -right-1 -top-1 flex size-3.5 items-center justify-center rounded-xs bg-brand-primary-0 text-[10px] font-semibold leading-none text-neutral-white-h">
+                <span className="absolute -right-1 -top-1 flex size-3.5 items-center justify-center rounded-xs bg-brand-primary-0 text-[10px] font-semibold leading-none text-on-brand">
                     {badge}
                 </span>
             )}

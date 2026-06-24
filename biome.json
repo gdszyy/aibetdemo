@@ -7,7 +7,18 @@
     },
     "files": {
         "ignoreUnknown": true,
-        "includes": ["**", "!node_modules", "!.vscode", "!.next", "!dist", "!build", "!public", "!src/components/icons"]
+        "includes": [
+            "**",
+            "!node_modules",
+            "!.vscode",
+            "!.next",
+            "!.cursor",
+            "!.codex-artifacts",
+            "!dist",
+            "!build",
+            "!public",
+            "!src/components/icons"
+        ]
     },
     "formatter": {
         "enabled": true,

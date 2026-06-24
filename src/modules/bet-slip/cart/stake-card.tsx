@@ -2,6 +2,7 @@
 
 import { type FC, memo, type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { AtOdds, CloseBold, OddsLock, TimePending, TrendDownSolid, TrendUpSolid, Warn } from '@/components/icons';
+import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { ConditionalTooltip } from '@/components/tooltip';
 import { useIsDesktop } from '@/hooks/use-media-query';
 import { DRAWER_CARD_WIDTH } from '@/modules/bet-slip/_constants/constants';
@@ -44,6 +45,13 @@ interface StakeCardViewModel {
     outcomeClassName: string;
     eventClassName: string;
     oddsClassName: string;
+}
+
+type StakeCardInfoKey = 'market' | 'outcome' | 'event';
+
+interface StakeCardInfoRow {
+    key: StakeCardInfoKey;
+    text: string;
 }
 
 const STAKE_CARD_CONTAINER_BASE_CLASS =
@@ -98,7 +106,7 @@ const STAKE_CARD_SURFACE_STRATEGIES: Record<StakeCardSurfaceState, StakeCardStyl
 const WARNING_STYLE_STRATEGY = {
     container: 'border border-func-lost',
     hoverShadow: 'shadow-[0px_2px_4px_0px_var(--func-lost)]',
-    removeButton: 'bg-func-lost text-func-lost',
+    removeButton: 'bg-func-lost-solid text-func-lost',
     removeIcon: 'text-white',
 } as const;
 
@@ -169,6 +177,25 @@ const createStakeCardViewModel = ({
     };
 };
 
+const resolveStakeCardInfoRows = (
+    order: 'market-selection-event' | 'event-selection-market' | 'ticket-market-selection',
+    rows: Record<StakeCardInfoKey, string>,
+): StakeCardInfoRow[] => {
+    if (order === 'event-selection-market') {
+        return [
+            { key: 'event', text: rows.event },
+            { key: 'outcome', text: rows.outcome },
+            { key: 'market', text: rows.market },
+        ];
+    }
+
+    return [
+        { key: 'market', text: rows.market },
+        { key: 'outcome', text: rows.outcome },
+        { key: 'event', text: rows.event },
+    ];
+};
+
 export interface StakeCardProps {
     children?: ReactNode;
     value: OddsEntity;
@@ -215,6 +242,7 @@ export const StakeCard: FC<StakeCardProps> = memo(
         const outcomeName = getOutcomeDisplayName(outcome);
         const oddsFormat = useOddsFormat();
         const isDesktop = useIsDesktop();
+        const componentProfile = useThemeComponentProfile();
         const isOddsAnimationSuspended = useBetSlipStore((state) => state.isOddsAnimationSuspended);
 
         // Track odds change trend
@@ -265,11 +293,23 @@ export const StakeCard: FC<StakeCardProps> = memo(
                 }),
             [isInvalid, isLocked, isPending, oddsTrend, warningHover, warningType],
         );
+        const infoRows = useMemo(
+            () =>
+                resolveStakeCardInfoRows(componentProfile.betSlip.selectionInfoOrder, {
+                    market: marketName,
+                    outcome: outcomeName,
+                    event: title,
+                }),
+            [componentProfile.betSlip.selectionInfoOrder, marketName, outcomeName, title],
+        );
+        const [primaryInfoRow, secondaryInfoRow, tertiaryInfoRow] = infoRows;
 
         return (
             <div
                 className={cn(viewModel.containerClassName, compact && isDesktop && 'text-[12px]', className)}
                 style={{ width: isDesktop ? DRAWER_CARD_WIDTH : '100%' }}
+                data-bet-slip-profile={componentProfile.betSlip.profile}
+                data-slip-info-order={componentProfile.betSlip.selectionInfoOrder}
                 data-energy-ball-selection-id={`${value.eventId}:${value.productId}:${value.marketId}:${value.specifiers}`}
             >
                 {/* Left remove button area */}
@@ -302,43 +342,43 @@ export const StakeCard: FC<StakeCardProps> = memo(
                         )}
                     >
                         <div className="flex min-w-0 flex-1 flex-col">
-                            {/* Market name (primary) - 14px Bold */}
                             <div className="flex min-w-0 items-start gap-1">
                                 {/* Conflict icon: hidden when invalid/loading */}
                                 {viewModel.hasWarning && <Warn className="mt-0.5 size-4 shrink-0 text-func-lost" />}
 
                                 <span
+                                    title={primaryInfoRow.text}
                                     className={cn(
                                         'flex-1 text-body-lg',
                                         compact && isDesktop && 'text-body-md',
                                         viewModel.titleClassName,
                                     )}
                                 >
-                                    {marketName}
+                                    {primaryInfoRow.text}
                                 </span>
                             </div>
-                            {/* Outcome name (secondary) - 12px Regular */}
                             <span
-                                title={outcomeName}
+                                title={secondaryInfoRow.text}
                                 className={cn(
                                     'text-auxiliary-sm capitalize',
                                     compact && isDesktop && 'text-auxiliary-xs',
                                     viewModel.outcomeClassName,
                                 )}
-                                data-energy-ball-outcome
+                                data-energy-ball-outcome={secondaryInfoRow.key === 'outcome' ? '' : undefined}
                             >
-                                {outcomeName}
+                                {secondaryInfoRow.text}
                             </span>
 
-                            {/* Match title (tertiary) - 12px Light */}
                             <span
+                                title={tertiaryInfoRow.text}
                                 className={cn(
                                     'mt-2 text-auxiliary-xs',
                                     compact && isDesktop && 'mt-1 line-clamp-1',
                                     viewModel.eventClassName,
                                 )}
+                                data-energy-ball-outcome={tertiaryInfoRow.key === 'outcome' ? '' : undefined}
                             >
-                                {title}
+                                {tertiaryInfoRow.text}
                             </span>
                         </div>
                         {/* Odds / lock icon / loading: when invalid, show odds only (no lock icon or trend) */}

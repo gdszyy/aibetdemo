@@ -22,6 +22,8 @@ export enum ModuleKeys {
     WORLD_CUP_PASS = 'world_cup_pass',
     /** VIP */
     VIP = 'vip',
+    /** Casino */
+    CASINO = 'casino',
 }
 
 /** Order Action Enumeration */
@@ -78,6 +80,16 @@ export enum VipActions {
     ACTIVITY_STATUS = 'activity_status',
 }
 
+/** Casino Action Enumeration */
+export enum CasinoActions {
+    /** Fetch casino lobby list */
+    LOBBIES = 'lobbies',
+    /** Fetch casino game tags */
+    TAGS = 'tags',
+    /** Fetch casino games grouped by tag */
+    GAMES_BY_TAGS = 'games_by_tags',
+}
+
 /** Mapping between Modules and Actions */
 type ModuleActionMap = {
     [ModuleKeys.DEPOSIT]: DepositActions;
@@ -89,6 +101,7 @@ type ModuleActionMap = {
     [ModuleKeys.HEALTH_SETTING]: HealthSettingActions;
     [ModuleKeys.WORLD_CUP_PASS]: WorldCupPassActions;
     [ModuleKeys.VIP]: VipActions;
+    [ModuleKeys.CASINO]: CasinoActions;
 };
 
 /** Get the corresponding action for a module */

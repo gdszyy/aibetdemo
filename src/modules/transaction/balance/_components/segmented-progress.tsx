@@ -20,9 +20,7 @@ export const SegmentedProgress: FC<SegmentedProgressProps> = ({ current, total }
                     key={i.toString()}
                     className={cn(
                         'h-2 flex-1 rounded-xs',
-                        i < filled
-                            ? 'bg-func-win shadow-card'
-                            : 'bg-surface-1 shadow-[inset_0_0_3px_0_var(--filltext-ft-d)]',
+                        i < filled ? 'bg-func-win shadow-card' : 'border border-border-subtle bg-surface-1',
                     )}
                 />
             ))}

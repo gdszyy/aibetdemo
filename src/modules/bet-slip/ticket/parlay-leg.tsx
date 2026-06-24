@@ -55,7 +55,10 @@ export const ParlayLeg: FC<ParlayLegProps> = ({
         .with(TicketDisplayStatus.Won, () => 'border-func-win text-func-win')
         .with(TicketDisplayStatus.HalfWon, () => 'border-func-win text-func-win')
         .with(TicketDisplayStatus.Lost, () =>
-            cn('border-func-lost', isLossInMixedPendingCard ? 'bg-func-lost text-neutral-white-h' : 'text-func-lost'),
+            cn(
+                'border-func-lost',
+                isLossInMixedPendingCard ? 'bg-func-lost-solid text-neutral-white-h' : 'text-func-lost',
+            ),
         )
         .with(TicketDisplayStatus.HalfLost, () => 'border-func-lost/75 text-func-lost')
         .with(TicketDisplayStatus.Void, () => 'border-func-void text-func-void')

@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import type { FunctionComponent } from 'react';
 import { GetCasinoGameLobbiesV2Interface, GetCasinoGameTagsInterface } from '@/api/handlers/casino';
+import { CasinoActions, generateQueryKey, ModuleKeys } from '@/constants/query-keys';
 import { UserCenterMenu } from '@/constants/user-center';
 import { useAccountNavigator } from '@/hooks/use-account-navigator';
 import { useIsMobile } from '@/hooks/use-media-query';
@@ -33,15 +34,15 @@ const useCasinoLinks = () => {
     const t = useTranslations('common');
 
     const { data: lobbies } = useQuery({
-        queryKey: ['casino', 'lobbies'],
+        queryKey: generateQueryKey(ModuleKeys.CASINO, CasinoActions.LOBBIES),
         queryFn: GetCasinoGameLobbiesV2Interface,
         staleTime: 10 * 60 * 1000,
     });
     const firstLobbyId = lobbies?.[0]?.id;
 
     const { data: tags } = useQuery({
-        queryKey: ['casino', 'tags', firstLobbyId],
-        queryFn: () => GetCasinoGameTagsInterface(firstLobbyId!),
+        queryKey: generateQueryKey(ModuleKeys.CASINO, CasinoActions.TAGS, { lobbyId: firstLobbyId }),
+        queryFn: () => (firstLobbyId ? GetCasinoGameTagsInterface(firstLobbyId) : Promise.resolve([])),
         enabled: !!firstLobbyId,
         staleTime: 10 * 60 * 1000,
     });
@@ -180,10 +181,14 @@ export const SiteMap: FunctionComponent = () => {
                                         );
                                     }
 
+                                    if (!item.href) {
+                                        return null;
+                                    }
+
                                     return (
                                         <Link
                                             key={item.key}
-                                            href={item.href!}
+                                            href={item.href}
                                             className="text-filltext-ft-f text-auxiliary-sm font-normal"
                                         >
                                             {item.title}
@@ -218,10 +223,14 @@ export const SiteMap: FunctionComponent = () => {
                                 );
                             }
 
+                            if (!item.href) {
+                                return null;
+                            }
+
                             return (
                                 <Link
                                     key={item.key}
-                                    href={item.href!}
+                                    href={item.href}
                                     className="text-auxiliary-sm text-filltext-ft-f hover:text-brand-red transition-colors w-fit max-w-full"
                                 >
                                     {item.title}

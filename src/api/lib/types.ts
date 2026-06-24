@@ -7,7 +7,7 @@ export type PromiseType<T extends Promise<unknown>> = T extends Promise<infer U>
 export type InterfaceRequest<T> = T extends (...args: infer Args) => Promise<unknown> ? Args[0] : never;
 
 /** Interface response type */
-export type InterfaceResponse<T extends (...args: any) => Promise<unknown>> = PromiseType<ReturnType<T>>;
+export type InterfaceResponse<T extends (...args: never[]) => Promise<unknown>> = PromiseType<ReturnType<T>>;
 
 /** 关联模型数据 */
 export type Relation<T> = {

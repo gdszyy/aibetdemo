@@ -1,6 +1,6 @@
-# src\modules\match\_utils\match-utils.ts 函数索引
+# src/modules/match/_utils/match-utils.ts 函数索引
 
-> 自动生成于 2026-06-18 | 总行数: 516 | 函数数: 2 | 语言: typescript
+> 自动生成于 2026-06-24 | 总行数: 516 | 函数数: 2 | 语言: typescript
 > **本文件由 code-indexer 脚本自动生成，严禁手动编辑。**
 
 **巨型函数警告**: 本文件包含 1 个超过 200 行的函数，建议优先通过 `@section` 标记进行内部导航。

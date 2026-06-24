@@ -165,6 +165,8 @@ useEventEmitter(); // 返回 emit 函数
 Tailwind CSS v4，`@theme` 位于 `src/assets/css/tailwind.css`。`cn()` 用于 class 合并。禁止裸写 `text-[14px]` 或 `bg-[#xxx]` — 使用项目令牌。
 
 > **完整令牌表**（字体、圆角、背景模糊、颜色、渐变、Z-Index、Toast）：`.agent/references/design-tokens.md` — 编写/审查样式时阅读。
+>
+> **多主题 / 多配色**（`scheme = brand × mode`：新增一套配色方案、做按主题发散结构的组件）：`.agent/references/theme-component-builder.md`（落地手册：A 新增主题 / B 新增组件两支、改动清单、`theme:check` 闸门）+ `.agent/references/scheme-system.md`（颜色链机制） — 接主题或改 `theme.css`/`brand-ui-skin.ts`/`component-profile.ts` 时阅读。
 
 **快速参考**：`text-body-sm/md/lg`（14px 400/500/700），`text-title-sm/md/lg`（16/18/20px bold），`rounded-xs`(4) `rounded-sm`(8) `rounded-md`(16) `rounded-lg`(20)。Z-index：Modal 60、Toast 70、Header 40、Overlay 50。
 

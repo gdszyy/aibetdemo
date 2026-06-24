@@ -55,13 +55,13 @@ export async function fetchSportsLayoutData(locale: string) {
 }
 
 /** 请求接口，处理异常时返回默认值 */
-export const queryWithoutError = async <T extends (...args: any) => Promise<any>>(
+export const queryWithoutError = async <T extends () => Promise<unknown>>(
     apiFn: T,
-    defaultValue?: (T extends () => Promise<infer U> ? U : never) | null,
+    defaultValue?: Awaited<ReturnType<T>> | null,
 ): Promise<Awaited<ReturnType<T>> | null> => {
     try {
         const res = await apiFn();
-        return res;
+        return res as Awaited<ReturnType<T>>;
     } catch (e) {
         // TODO 日志收集错误
         console.error('queryWithoutError error', getRejectError(e as ErrorReject), e);

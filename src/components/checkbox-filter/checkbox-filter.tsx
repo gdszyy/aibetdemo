@@ -102,7 +102,7 @@ export const CheckboxFilter: FC<CheckboxFilterProps> = ({
                                                 {option.label}
                                             </span>
                                             {option.count != null && (
-                                                <span className="shrink-0 size-3.5 flex items-center justify-center rounded-xs bg-filltext-ft-g text-[10px] font-semibold text-white leading-none">
+                                                <span className="shrink-0 size-3.5 flex items-center justify-center rounded-xs bg-filltext-ft-g text-[10px] font-semibold text-content-inverse leading-none">
                                                     {option.count}
                                                 </span>
                                             )}

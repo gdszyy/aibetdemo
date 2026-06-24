@@ -99,13 +99,16 @@ export const GameDetailPage: FC<{
     // Fetch games for related section (reuses cached query)
     const { data: relatedGames = [] } = useQuery({
         queryKey: ['casino', 'relatedGames', game?.tag_ids],
-        queryFn: () =>
-            GetCasinoGamesV2Interface(game!.tag_ids).then((res) => {
-                const res1 = uniqBy(flatten(values(res).map((v) => v.game_list)), 'id').filter(
-                    (v) => v.id !== game!.id,
-                );
+        queryFn: () => {
+            if (!game?.tag_ids?.length) {
+                return Promise.resolve([]);
+            }
+
+            return GetCasinoGamesV2Interface(game.tag_ids).then((res) => {
+                const res1 = uniqBy(flatten(values(res).map((v) => v.game_list)), 'id').filter((v) => v.id !== game.id);
                 return res1;
-            }),
+            });
+        },
         enabled: Boolean(game?.tag_ids?.length),
         placeholderData: [],
     });

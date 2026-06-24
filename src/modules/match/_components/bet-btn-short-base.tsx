@@ -42,7 +42,7 @@ export const BetBtnShortBase: FC<BetBtnShortBaseProps> = ({
             onClick={!isLocked ? onClick : undefined}
             disabled={isLocked}
             className={cn(
-                'group/betBtn relative flex h-8 min-w-0 flex-1 cursor-pointer items-center rounded bg-border-strong p-px transition-colors hover:[background:var(--odds-idle-hover-border)]',
+                'group/betBtn relative flex h-[var(--brand-odds-short-height,2rem)] min-w-0 flex-1 cursor-pointer items-center rounded-[var(--component-odds-radius,var(--brand-odds-radius,4px))] bg-border-strong p-px transition-colors hover:[background:var(--odds-idle-hover-border)]',
                 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-0',
                 '[background:var(--brand-odds-border,var(--border-strong))] hover:[background:var(--brand-odds-hover-border,var(--odds-idle-hover-border))]',
                 selected &&
@@ -53,7 +53,8 @@ export const BetBtnShortBase: FC<BetBtnShortBaseProps> = ({
         >
             <span
                 className={cn(
-                    'relative flex h-[30px] min-w-0 flex-1 items-center justify-between gap-2 rounded bg-[var(--brand-odds-bg,var(--surface-selected))] px-2 transition-colors group-hover/betBtn:[background:var(--brand-odds-hover-bg,var(--odds-idle-hover-bg))]',
+                    'relative flex h-full min-w-0 flex-1 items-center justify-between gap-2 rounded-[var(--component-odds-radius,var(--brand-odds-radius,4px))] bg-[var(--brand-odds-bg,var(--surface-selected))] px-2.5 transition-colors group-hover/betBtn:[background:var(--brand-odds-hover-bg,var(--odds-idle-hover-bg))]',
+                    'group-data-[odds-layout=stacked]/card:flex-col group-data-[odds-layout=stacked]/card:justify-center group-data-[odds-layout=stacked]/card:gap-0.5 group-data-[odds-layout=stacked]/card:px-1.5',
                     selected &&
                         '[background:var(--brand-odds-selected-bg,var(--odds-selected-bg))] group-hover/betBtn:[background:var(--brand-odds-selected-hover-bg,var(--odds-selected-hover-bg))]',
                     isLocked && 'bg-filltext-ft-a',
@@ -67,6 +68,7 @@ export const BetBtnShortBase: FC<BetBtnShortBaseProps> = ({
                             <span
                                 className={cn(
                                     'block min-w-0 flex-1 truncate pr-1 text-left text-[var(--brand-odds-name,var(--filltext-ft-f))] text-auxiliary-sm capitalize transition-colors group-hover/betBtn:text-filltext-ft-h',
+                                    'group-data-[odds-layout=stacked]/card:w-full group-data-[odds-layout=stacked]/card:flex-none group-data-[odds-layout=stacked]/card:pr-0 group-data-[odds-layout=stacked]/card:text-center group-data-[odds-layout=stacked]/card:text-auxiliary-2xs',
                                     selected && 'text-[var(--brand-odds-selected-text,var(--odds-selected-text))]',
                                 )}
                             >
@@ -82,6 +84,7 @@ export const BetBtnShortBase: FC<BetBtnShortBaseProps> = ({
                             <span
                                 className={cn(
                                     'shrink-0 text-center text-[var(--brand-odds-value,var(--accent-warm))] text-auxiliary-md font-bold tabular-nums transition-colors',
+                                    'group-data-[odds-layout=stacked]/card:text-body-md',
                                     selected && 'text-[var(--brand-odds-selected-text,var(--odds-selected-text))]',
                                 )}
                             >

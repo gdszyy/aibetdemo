@@ -216,7 +216,7 @@ export const OddsColumns: FC<OddsColumnsProps> = ({
                     </span>
                 </div>
 
-                <div className="flex h-8 min-w-0 items-center gap-2">
+                <div className="flex h-[var(--brand-odds-short-height,2rem)] min-w-0 items-center gap-2">
                     {slot.outcomes.map((outcome) =>
                         isMock ? (
                             <BetBtnShortBase

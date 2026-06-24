@@ -32,17 +32,17 @@ const FilterItem: FC<FilterItemProps> = ({ sport }) => {
     return (
         <Link
             className={cn(
-                'inline-flex h-[72px] w-[86px] shrink-0 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-sm border px-2 text-center transition-colors',
+                'inline-flex h-15 w-18 shrink-0 cursor-pointer flex-col items-center justify-center gap-1 rounded-sm border px-1.5 text-center transition-colors md:h-[72px] md:w-[86px] md:gap-1.5 md:px-2',
                 'border-[color:var(--brand-mobile-sport-nav-border,var(--border-subtle))] [background:var(--brand-mobile-sport-nav-bg,var(--surface-1))] [box-shadow:var(--brand-mobile-sport-nav-shadow,none)]',
                 'hover:[background:var(--brand-mobile-sport-nav-hover-bg,var(--surface-2))]',
             )}
             href={`/sports/${sport.sport_id}${liveStatusSuffix}`}
             aria-label={sport.name}
         >
-            <span className="grid size-9 place-items-center rounded-sm bg-[var(--brand-mobile-sport-nav-icon-bg,var(--surface-2))] text-[var(--brand-mobile-sport-nav-icon,var(--brand-primary-0))]">
+            <span className="grid size-8 place-items-center rounded-sm bg-[var(--brand-mobile-sport-nav-icon-bg,var(--surface-2))] text-[var(--brand-mobile-sport-nav-icon,var(--brand-primary-0))] md:size-9">
                 {Icon ? <Icon className="size-5" /> : <span className="text-body-lg font-bold">{sport.name[0]}</span>}
             </span>
-            <span className="w-full truncate text-[var(--brand-mobile-sport-nav-text,var(--filltext-ft-h))] text-auxiliary-2xs font-semibold leading-3">
+            <span className="w-full truncate text-[var(--brand-mobile-sport-nav-text,var(--filltext-ft-h))] text-[10px] font-semibold leading-3 md:text-auxiliary-2xs">
                 {sport.name}
             </span>
         </Link>
