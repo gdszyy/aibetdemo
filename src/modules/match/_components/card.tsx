@@ -9,6 +9,7 @@ import { MatchBroadcastFilled } from '@/components/icons2/MatchBroadcastFilled';
 import { MatchPinOutlined } from '@/components/icons2/MatchPinOutlined';
 import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { ConditionalTooltip } from '@/components/tooltip';
+import { useIntentPrefetch } from '@/hooks/use-intent-prefetch';
 import { useIntlFormatter } from '@/hooks/use-intl-formatter';
 import { Link } from '@/i18n';
 import { MATCH_LIST_LAYOUT } from '@/modules/match/_constants/constants';
@@ -295,6 +296,8 @@ export const Card: FC<CardProps> = ({
         [firstLine, firstMarket],
     );
     const matchDetailHref = isMock ? `/sports/${sportId}` : `/matches/${matchData.event_id}`;
+    // 悬停 / 触摸 / 聚焦卡片时预取详情路由，消除点击跳转的冷导航卡顿。
+    const detailLinkIntent = useIntentPrefetch(matchDetailHref);
 
     if (!shouldShowMatchInList(matchData)) return null;
     if (hideZeroMarketCount && batchMarketCount === 0) return null;
@@ -394,6 +397,7 @@ export const Card: FC<CardProps> = ({
                 data-match-card-interaction={componentProfile.matchCard.interaction}
                 data-odds-profile={componentProfile.oddsButton.profile}
                 data-odds-layout="superbet-promo-row"
+                {...detailLinkIntent}
                 style={componentProfile.style}
             >
                 <Link
@@ -502,6 +506,7 @@ export const Card: FC<CardProps> = ({
                     data-match-card-interaction={componentProfile.matchCard.interaction}
                     data-odds-profile={componentProfile.oddsButton.profile}
                     data-odds-layout="betano-desktop-row"
+                    {...detailLinkIntent}
                     style={componentProfile.style}
                 >
                     <Link
@@ -632,6 +637,7 @@ export const Card: FC<CardProps> = ({
                 data-match-card-interaction={componentProfile.matchCard.interaction}
                 data-odds-profile={componentProfile.oddsButton.profile}
                 data-odds-layout="betano-mobile-card"
+                {...detailLinkIntent}
                 style={componentProfile.style}
             >
                 <Link
@@ -772,6 +778,7 @@ export const Card: FC<CardProps> = ({
             data-match-card-interaction={componentProfile.matchCard.interaction}
             data-odds-profile={componentProfile.oddsButton.profile}
             data-odds-layout={useStackedMatchLayout ? 'stacked' : undefined}
+            {...detailLinkIntent}
             style={componentProfile.style}
         >
             <Link

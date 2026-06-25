@@ -19,6 +19,7 @@ import { LSPORTS_SPORT_ID_BY_TYPE } from '@/constants/sports';
 import { getSportConfig } from '@/constants/sports-config';
 import { useCarousel } from '@/hooks/use-carousel';
 import { useGameSubscription } from '@/hooks/use-game-subscription';
+import { useIntentPrefetch } from '@/hooks/use-intent-prefetch';
 import { useIsMobile } from '@/hooks/use-media-query';
 import { useTopSports } from '@/hooks/use-sports';
 import { Link } from '@/i18n';
@@ -334,6 +335,8 @@ const TopLiveCard: FC<TopLiveSuggestion> = ({ group, isMock = false, match }) =>
     const { data: rowCount } = useMatchRowCount(match.event_id, !isMock);
     const isMobile = useIsMobile();
     const matchHref = isMock ? `/sports/${group.sport_id}` : `/matches/${match.event_id}`;
+    // 悬停 / 触摸 / 聚焦卡片时预取详情路由，消除点击跳转的冷导航卡顿。
+    const detailLinkIntent = useIntentPrefetch(matchHref);
     const metaTrail = [group.category_name, group.tournament_name].filter((label) => label?.trim());
     const hiddenMarketCount = Math.max((rowCount ?? match.live_market_count ?? 0) - displayMarkets.length, 0);
 
@@ -343,6 +346,7 @@ const TopLiveCard: FC<TopLiveSuggestion> = ({ group, isMock = false, match }) =>
         <Link
             href={matchHref}
             scroll={true}
+            {...detailLinkIntent}
             className="group/topLive block min-h-[320px] w-full shrink-0 rounded-[var(--brand-match-card-radius,12px)] border border-[color:var(--brand-match-card-border,var(--border-subtle))] bg-[var(--brand-match-card-bg,var(--surface-1))] p-3 text-left shadow-[var(--brand-match-card-shadow,var(--style-card-shadow))] transition-colors [--brand-odds-short-height:48px] hover:bg-[var(--brand-match-card-hover-bg,var(--surface-2))] md:min-h-[360px] md:w-[402px]"
             data-brand-match-card=""
             data-match-card-profile={componentProfile.matchCard.profile}

@@ -8,6 +8,7 @@ import { type MatchEvent, MatchStatus, type TournamentGroup } from '@/api/models
 import { MatchBroadcastFilled } from '@/components/icons2/MatchBroadcastFilled';
 import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { ConditionalTooltip } from '@/components/tooltip';
+import { useIntentPrefetch } from '@/hooks/use-intent-prefetch';
 import { useIntlFormatter } from '@/hooks/use-intl-formatter';
 import { useIsMobile } from '@/hooks/use-media-query';
 import { Link } from '@/i18n';
@@ -150,6 +151,8 @@ export const HotLeagueMatchCard: FC<HotLeagueMatchCardProps> = ({ group, isMock 
     const metaTrail = [group.sport_name, group.category_name, group.tournament_name].filter((label) => label?.trim());
     const showMarketOffer = !primaryMarket;
     const matchDetailHref = isMock ? `/sports/${group.sport_id}` : `/matches/${match.event_id}`;
+    // 悬停 / 触摸 / 聚焦卡片时预取详情路由，消除点击跳转的冷导航卡顿。
+    const detailLinkIntent = useIntentPrefetch(matchDetailHref);
     const periodScoreMode = isMobile ? PeriodScoreDisplayMode.MobileList : PeriodScoreDisplayMode.FullPeriods;
     const showOnlyTotalScore = isMobile && (isBasketballSport(group.sport_id) || isRugbySport(group.sport_id));
     const homeScoreCells = getSportPeriodScoreCells({
@@ -196,6 +199,7 @@ export const HotLeagueMatchCard: FC<HotLeagueMatchCardProps> = ({ group, isMock 
                 data-home-recommend-card-density={componentProfile.homeRecommend.cardDensity}
                 data-home-recommend-selection-layout={componentProfile.homeRecommend.selectionLayout}
                 data-home-recommend-interaction={componentProfile.homeRecommend.interaction}
+                {...detailLinkIntent}
                 data-match-card-profile={componentProfile.matchCard.profile}
                 data-odds-profile={componentProfile.oddsButton.profile}
                 style={componentProfile.style}
@@ -343,6 +347,7 @@ export const HotLeagueMatchCard: FC<HotLeagueMatchCardProps> = ({ group, isMock 
             data-match-card-profile={componentProfile.matchCard.profile}
             data-match-card-layout={componentProfile.matchCard.listLayout}
             data-match-card-interaction={componentProfile.matchCard.interaction}
+            {...detailLinkIntent}
             data-odds-profile={componentProfile.oddsButton.profile}
             data-odds-layout={
                 isSuperbetRecommendCard ? 'superbet-promo-row' : useStackedOddsLayout ? 'stacked' : undefined
