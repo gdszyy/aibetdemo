@@ -5,10 +5,12 @@ import { AtOdds, CloseBold, OddsLock, TimePending, TrendDownSolid, TrendUpSolid,
 import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { ConditionalTooltip } from '@/components/tooltip';
 import { useIsDesktop } from '@/hooks/use-media-query';
+import { Link } from '@/i18n';
 import { DRAWER_CARD_WIDTH } from '@/modules/bet-slip/_constants/constants';
 import type { OddsEntity } from '@/modules/match/_constants/match.types';
 import { useOddsDisplay } from '@/modules/match/_hooks/use-odds-display';
 import { useOddsFormat } from '@/stores/slip-settings-store';
+import { useUIStore } from '@/stores/ui-store';
 import { cn } from '@/utils/common';
 import { formatOddsByFormat, getFullOddsByFormat, hasOddsExtraPrecision } from '@/utils/odds-format';
 import { getOutcomeDisplayName } from '@/utils/outcome-display';
@@ -304,6 +306,59 @@ export const StakeCard: FC<StakeCardProps> = memo(
         );
         const [primaryInfoRow, secondaryInfoRow, tertiaryInfoRow] = infoRows;
 
+        // 比赛详情跳转地址：仅单场比赛（非冠军盘且有 eventId）可点击跳转；冠军盘/缺失 eventId 时降级为纯展示
+        const matchHref = !value.isOutright && value.eventId ? `/matches/${value.eventId}` : null;
+
+        // 点击比赛信息跳转：移动端需关闭投注单抽屉，桌面端常驻面板不受影响
+        const handleNavigateToMatch = (): void => {
+            useUIStore.getState().closeBetSlipDrawer();
+        };
+
+        // 比赛信息文字列（标题/玩法/赛事名）：可跳转时外层包 Link，否则用 div
+        const infoColumnClassName = 'flex min-w-0 flex-1 flex-col';
+        const infoColumnChildren = (
+            <>
+                <div className="flex min-w-0 items-start gap-1">
+                    {/* Conflict icon: hidden when invalid/loading */}
+                    {viewModel.hasWarning && <Warn className="mt-0.5 size-4 shrink-0 text-func-lost" />}
+
+                    <span
+                        title={primaryInfoRow.text}
+                        className={cn(
+                            'flex-1 text-body-lg',
+                            compact && isDesktop && 'text-body-md',
+                            viewModel.titleClassName,
+                        )}
+                    >
+                        {primaryInfoRow.text}
+                    </span>
+                </div>
+                <span
+                    title={secondaryInfoRow.text}
+                    className={cn(
+                        'text-auxiliary-sm capitalize',
+                        compact && isDesktop && 'text-auxiliary-xs',
+                        viewModel.outcomeClassName,
+                    )}
+                    data-energy-ball-outcome={secondaryInfoRow.key === 'outcome' ? '' : undefined}
+                >
+                    {secondaryInfoRow.text}
+                </span>
+
+                <span
+                    title={tertiaryInfoRow.text}
+                    className={cn(
+                        'mt-2 text-auxiliary-xs',
+                        compact && isDesktop && 'mt-1 line-clamp-1',
+                        viewModel.eventClassName,
+                    )}
+                    data-energy-ball-outcome={tertiaryInfoRow.key === 'outcome' ? '' : undefined}
+                >
+                    {tertiaryInfoRow.text}
+                </span>
+            </>
+        );
+
         return (
             <div
                 className={cn(viewModel.containerClassName, compact && isDesktop && 'text-[12px]', className)}
@@ -341,46 +396,18 @@ export const StakeCard: FC<StakeCardProps> = memo(
                             viewModel.topInfoClassName,
                         )}
                     >
-                        <div className="flex min-w-0 flex-1 flex-col">
-                            <div className="flex min-w-0 items-start gap-1">
-                                {/* Conflict icon: hidden when invalid/loading */}
-                                {viewModel.hasWarning && <Warn className="mt-0.5 size-4 shrink-0 text-func-lost" />}
-
-                                <span
-                                    title={primaryInfoRow.text}
-                                    className={cn(
-                                        'flex-1 text-body-lg',
-                                        compact && isDesktop && 'text-body-md',
-                                        viewModel.titleClassName,
-                                    )}
-                                >
-                                    {primaryInfoRow.text}
-                                </span>
-                            </div>
-                            <span
-                                title={secondaryInfoRow.text}
-                                className={cn(
-                                    'text-auxiliary-sm capitalize',
-                                    compact && isDesktop && 'text-auxiliary-xs',
-                                    viewModel.outcomeClassName,
-                                )}
-                                data-energy-ball-outcome={secondaryInfoRow.key === 'outcome' ? '' : undefined}
+                        {matchHref ? (
+                            <Link
+                                href={matchHref}
+                                scroll
+                                onClick={handleNavigateToMatch}
+                                className={cn(infoColumnClassName, 'cursor-pointer')}
                             >
-                                {secondaryInfoRow.text}
-                            </span>
-
-                            <span
-                                title={tertiaryInfoRow.text}
-                                className={cn(
-                                    'mt-2 text-auxiliary-xs',
-                                    compact && isDesktop && 'mt-1 line-clamp-1',
-                                    viewModel.eventClassName,
-                                )}
-                                data-energy-ball-outcome={tertiaryInfoRow.key === 'outcome' ? '' : undefined}
-                            >
-                                {tertiaryInfoRow.text}
-                            </span>
-                        </div>
+                                {infoColumnChildren}
+                            </Link>
+                        ) : (
+                            <div className={infoColumnClassName}>{infoColumnChildren}</div>
+                        )}
                         {/* Odds / lock icon / loading: when invalid, show odds only (no lock icon or trend) */}
                         {viewModel.showLockedIcon ? (
                             <OddsLock className="size-4 shrink-0 text-func-lost" />
