@@ -151,7 +151,7 @@ export const Wallet: FunctionComponent<{
                                 {tUser('menus.deposit')}
                             </Button>
                             <Link
-                                className="h-10 flex items-center justify-center rounded-full border border-filltext-ft-c bg-surface-1 text-body-md text-filltext-ft-e hover:bg-brand-primary-0 hover:text-neutral-white-h"
+                                className="h-10 flex items-center justify-center rounded-full border border-filltext-ft-c bg-surface-1 text-body-md text-filltext-ft-e hover:bg-brand-primary-0 hover:text-on-brand"
                                 href={getAccountPath(UserCenterMenu.TRANSACTION)}
                                 onClick={openAction.setFalse}
                             >

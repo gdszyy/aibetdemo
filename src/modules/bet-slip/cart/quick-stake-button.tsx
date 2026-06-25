@@ -68,7 +68,7 @@ export const QuickStakeButton: FC<QuickStakeButtonProps> = ({
                     'bg-[var(--slip-quick-hover-bg,var(--brand-primary-1))] text-[var(--slip-quick-hover-text,var(--accent-warm))]',
                 variant === 'invalid' && 'bg-neutral-black-a text-neutral-black-d',
                 'cursor-pointer',
-                'active:bg-brand-primary-0 active:text-neutral-white-h',
+                'active:bg-brand-primary-0 active:text-on-brand',
                 blocksInteraction && 'pointer-events-none',
                 className,
             )}

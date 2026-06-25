@@ -62,7 +62,7 @@ export const AdPlacementFloatingCard: FC<AdPlacementFloatingCardProps> = ({ item
                 {item.data.button_text && (
                     <button
                         type="button"
-                        className="group mt-1 ml-auto inline-flex h-3.5 w-fit cursor-pointer items-center gap-1 rounded-full bg-brand-primary-0 px-2 font-poppins text-[8px] text-neutral-white-h shadow-[0_0_4px_0_var(--brandprimary-4),inset_0_0_1.4px_0_var(--neutralwhitef)]"
+                        className="group mt-1 ml-auto inline-flex h-3.5 w-fit cursor-pointer items-center gap-1 rounded-full bg-brand-primary-0 px-2 font-poppins text-[8px] text-on-brand shadow-[0_0_4px_0_var(--brandprimary-4),inset_0_0_1.4px_0_var(--neutralwhitef)]"
                         onClick={() => onClick(item)}
                     >
                         {item.data.button_text}

@@ -47,7 +47,7 @@ const FilterItem: FC<FilterItemProps> = ({ sport, isActive = false, isAll = fals
                 'group/filter-item flex shrink-0 items-center rounded-full transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-0',
                 isDesktop ? 'h-10 gap-2 px-3 py-2' : 'size-10 justify-center p-0',
                 isActive
-                    ? 'bg-brand-primary-0 text-neutral-white-h hover:bg-brand-primary-4'
+                    ? 'bg-brand-primary-0 text-on-brand hover:bg-brand-primary-4'
                     : 'cursor-pointer bg-filltext-ft-c text-filltext-ft-g hover:bg-[image:linear-gradient(var(--neutral-black-a),var(--neutral-black-a))]',
             )}
         >

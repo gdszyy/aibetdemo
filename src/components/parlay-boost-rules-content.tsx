@@ -253,7 +253,7 @@ const TierRow: FC<TierRowProps> = ({ legs, boost, hitLabel, active = false }) =>
             {boost}
         </span>
         {active && (
-            <span className="ml-auto inline-flex h-5 min-w-14 shrink-0 items-center justify-center rounded-full bg-brand-primary-0 px-2 text-auxiliary-md font-semibold text-neutral-white-h">
+            <span className="ml-auto inline-flex h-5 min-w-14 shrink-0 items-center justify-center rounded-full bg-brand-primary-0 px-2 text-auxiliary-md font-semibold text-on-brand">
                 {hitLabel}
             </span>
         )}

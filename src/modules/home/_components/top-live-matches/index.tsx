@@ -152,7 +152,7 @@ const SportSwitch: FC<{
                     className={cn(
                         'flex size-10 shrink-0 items-center justify-center rounded-full border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-0',
                         isActive
-                            ? 'border-brand-primary-0 bg-brand-primary-0 text-neutral-white-h'
+                            ? 'border-brand-primary-0 bg-brand-primary-0 text-on-brand'
                             : 'border-[color:var(--brand-match-card-border,var(--border-subtle))] bg-[var(--brand-match-card-bg,var(--surface-1))] text-[var(--brand-match-muted,var(--filltext-ft-g))] hover:border-brand-primary-0 hover:text-brand-primary-0',
                     )}
                 >

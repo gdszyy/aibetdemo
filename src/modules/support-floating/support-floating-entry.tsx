@@ -37,7 +37,7 @@ const checkIsFloatingTriggerEvent = (event: Event): boolean => {
 const SupportBallIcon: FC<{ className?: string }> = ({ className }) => (
     <span
         className={cn(
-            'relative flex size-10 shrink-0 items-center justify-center rounded-full border border-neutral-white-h bg-brand-primary-0 text-neutral-white-h shadow-[0_2px_4px_0_var(--brand-primary-2)]',
+            'relative flex size-10 shrink-0 items-center justify-center rounded-full border border-neutral-white-h bg-brand-primary-0 text-on-brand shadow-[0_2px_4px_0_var(--brand-primary-2)]',
             className,
         )}
     >

@@ -59,8 +59,8 @@ export const FunsSelectShortCutList: FC<Props> = ({
                                 'text-body-md font-poppins',
                                 'bg-filltext-ft-a text-filltext-ft-g',
                                 'hover:bg-brand-primary-1 hover:text-brand-primary-0',
-                                'active:bg-brand-primary-0 active:text-neutral-white-h',
-                                isActive && 'bg-brand-primary-0 text-neutral-white-h',
+                                'active:bg-brand-primary-0 active:text-on-brand',
+                                isActive && 'bg-brand-primary-0 text-on-brand',
                             )}
                             onClick={() => onShortcutClick(amount)}
                         >

@@ -89,7 +89,7 @@ export const TagsFilterH5: FunctionComponent = () => {
                                 'rounded-full overflow-hidden',
                                 'w-auto px-3',
                                 isActive
-                                    ? 'bg-brand-primary-0 text-neutral-white-h'
+                                    ? 'bg-brand-primary-0 text-on-brand'
                                     : 'bg-filltext-ft-c text-filltext-ft-g',
                             )}
                         >

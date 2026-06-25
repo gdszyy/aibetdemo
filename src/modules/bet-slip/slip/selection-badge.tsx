@@ -36,7 +36,7 @@ export const SelectionBadge = memo<SelectionBadgeProps>(({ count, className }) =
         <span
             ref={scope}
             className={cn(
-                'flex min-w-4 items-center justify-center rounded-xs bg-brand-primary-0 px-0.5 text-center text-auxiliary-md text-neutral-white-h',
+                'flex min-w-4 items-center justify-center rounded-xs bg-brand-primary-0 px-0.5 text-center text-auxiliary-md text-on-brand',
                 className,
             )}
         >

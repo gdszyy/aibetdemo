@@ -343,7 +343,7 @@ export function DateRangePicker({
                                                 'relative z-10 flex size-10 cursor-pointer items-center justify-center rounded-full border border-transparent text-center text-title-sm leading-none text-filltext-ft-g transition-colors',
                                                 'hover:bg-brand-primary-1 focus-visible:ring-1 focus-visible:ring-brand-primary-0',
                                                 (isRangeEndpoint || isDraftStart) &&
-                                                    'bg-brand-primary-0 text-neutral-white-h hover:bg-brand-primary-0',
+                                                    'bg-brand-primary-0 text-on-brand hover:bg-brand-primary-0',
                                                 isPreviewEnd &&
                                                     'border-brand-primary-0 bg-surface-1 text-brand-primary-0 hover:bg-surface-1',
                                                 !isCurrentMonth && !isSelected && 'text-filltext-ft-e',
