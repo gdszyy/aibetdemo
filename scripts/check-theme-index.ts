@@ -63,7 +63,10 @@ const getSkinKey = ({ scheme, brand, mode }: SchemeMetaEntry) => {
     if (brand === 'betano') return mode === 'light' ? 'BETANO_LIGHT_UI_STYLE' : 'BETANO_UI_STYLE';
     if (brand === 'betbus') return mode === 'light' ? 'BETBUS_LIGHT_UI_STYLE' : 'BETBUS_UI_STYLE';
     if (brand === 'match') return mode === 'light' ? 'MATCH_LIGHT_UI_STYLE' : 'MATCH_UI_STYLE';
-    if (brand === 'glass') return mode === 'light' ? 'GLASS_LIGHT_UI_STYLE' : 'GLASS_DARK_UI_STYLE';
+    // Glass dispatches per-scheme (GLASS_SKIN_BY_SCHEME). Derive the const name from
+    // the scheme so each LATAM light skin is covered by the 17-key gate below:
+    // 'glass-brasil-light' -> 'GLASS_BRASIL_LIGHT_UI_STYLE', 'glass-light' -> 'GLASS_LIGHT_UI_STYLE'.
+    if (brand === 'glass') return `${scheme.toUpperCase().replace(/-/g, '_')}_UI_STYLE`;
     if (brand === 'cis') return 'CIS_LIGHT_UI_STYLE';
     return 'SUPERBET_UI_STYLE';
 };

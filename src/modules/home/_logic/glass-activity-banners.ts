@@ -11,11 +11,16 @@ import refundBrGlassLight from '@/assets/images/promotion/ios26-glass/refund-br-
 import refundMxGlassDark from '@/assets/images/promotion/ios26-glass/refund-mx-glass-dark.png';
 import refundMxGlassLight from '@/assets/images/promotion/ios26-glass/refund-mx-glass-light.png';
 import type { BannerItem } from '@/components/banner-carousel';
+import { getSchemeMeta } from '@/components/theme-provider/scheme-meta';
 import type { Scheme } from '@/components/theme-provider/theme-provider';
 
 export type BannerMarket = 'br' | 'mx';
 export type GlassBannerKey = 'anniversary' | 'parlay' | 'refund';
-export type GlassScheme = Extract<Scheme, 'glass-light' | 'glass-dark'>;
+// Every glass scheme shows the activity banners: neon glass-light/-dark plus the LATAM
+// glass-brasil / glass-mexico / glass-azul / glass-roxo × mode. Promo art only exists per
+// mode, so LATAM schemes reuse the light/dark glass art bucket resolved from scheme-meta.
+export type GlassScheme = Extract<Scheme, `glass-${string}`>;
+type GlassBannerImageScheme = 'glass-light' | 'glass-dark';
 
 const GLASS_BANNER_IMAGES = {
     'glass-light': {
@@ -31,10 +36,14 @@ const GLASS_BANNER_IMAGES = {
 } as const;
 
 export const isGlassBannerScheme = (scheme: Scheme | undefined): scheme is GlassScheme =>
-    scheme === 'glass-light' || scheme === 'glass-dark';
+    scheme !== undefined && getSchemeMeta(scheme).brand === 'glass';
+
+// LATAM glass schemes have no dedicated banner art; fall back to the light/dark bucket by mode.
+const resolveGlassImageScheme = (scheme: GlassScheme): GlassBannerImageScheme =>
+    getSchemeMeta(scheme).mode === 'dark' ? 'glass-dark' : 'glass-light';
 
 export const getGlassActivityBannerImage = (scheme: GlassScheme, key: GlassBannerKey, market: BannerMarket) =>
-    GLASS_BANNER_IMAGES[scheme][key][market];
+    GLASS_BANNER_IMAGES[resolveGlassImageScheme(scheme)][key][market];
 
 export const getGlassActivityBanners = (scheme: GlassScheme, market: BannerMarket): BannerItem[] => [
     {

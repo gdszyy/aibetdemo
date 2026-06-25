@@ -1,9 +1,11 @@
 /* ============================================================
-   iOS26 液态玻璃材质层 —— 仅 :root.glass-light / :root.glass-dark 生效。
+   iOS26 液态玻璃材质层 —— 对所有 glass scheme 生效（:root[class*="glass-"]，含 neon 原版与
+   brasil/mexico/azul/roxo × 明暗，共 10 套）。
    真实 backdrop-filter 模糊 + 饱和提色 + SVG feDisplacementMap 折射 + 边缘高光描边。
 
-   作用域：每条规则都以 :root.glass-light / :root.glass-dark 起头（class 挂在 <html> 上，
-   Portal 到 body 的抽屉/弹层也在 html 之下，同样命中），其它 8 套 scheme 零影响。
+   作用域：每条材质规则都以 :root[class*='glass-'] 起头（命中 glass-light/-dark 及 8 套 LATAM 玻璃 scheme；
+   class 挂在 <html> 上，Portal 到 body 的抽屉/弹层也在 html 之下，同样命中），非 glass scheme 零影响。
+   明暗差异（墙纸 / rim 参数 / 滚动扫掠）再用精确类或 [class*='glass-'][class*='-dark'] / [class*='-light'] 细分。
    SVG 滤镜 id（#glass-refraction / #glass-edge）由 <GlassFilterDefs/>（root-providers）注入。
 
    外壳命中方式：topbar / sidebar / right-rail / match card / odds / mobile sport nav 经
@@ -14,8 +16,7 @@
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     /* 1) 彩色网格墙纸：给 backdrop-filter 提供可采样的鲜亮背景；fixed 让滚动时折射稳定。
           叠在 --page-bg 之上，仍是 glass scheme 专属。 */
-    :root.glass-light body,
-    :root.glass-dark body {
+    :root[class*='glass-'] body {
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: cover;
@@ -42,24 +43,90 @@
             linear-gradient(135deg, #f3f0ff 0%, #fdf2ff 50%, #eef0ff 100%);
     }
 
+    /* 1b) LATAM 墙纸：中性深/浅玻璃基底 + 四角文化色「微光」（accent-only）。暗色基底 L* 压到 0.085–0.12，
+          始终低于任意玻璃层，维持「越高越亮」单调层级；亮色基底近白，彩光 alpha 0.32–0.45。
+          roxo 全程单一紫相（无第二色相）；mexico 的玫红仅作单角低 alpha 点缀（不喧宾夺主）。 */
+    :root.glass-brasil-dark body {
+        background-image:
+            radial-gradient(at 14% 8%, rgba(16, 193, 114, 0.14) 0, transparent 30%),
+            radial-gradient(at 86% 5%, rgba(251, 191, 36, 0.1) 0, transparent 28%),
+            radial-gradient(at 80% 84%, rgba(12, 138, 82, 0.1) 0, transparent 32%),
+            radial-gradient(at 20% 92%, rgba(217, 154, 6, 0.12) 0, transparent 30%),
+            linear-gradient(135deg, oklch(0.11 0.03 158) 0%, oklch(0.12 0.038 165) 50%, oklch(0.085 0.024 155) 100%);
+    }
+
+    :root.glass-brasil-light body {
+        background-image:
+            radial-gradient(at 16% 14%, rgba(16, 185, 129, 0.42) 0, transparent 46%),
+            radial-gradient(at 84% 10%, rgba(251, 191, 36, 0.38) 0, transparent 42%),
+            radial-gradient(at 78% 80%, rgba(52, 211, 153, 0.36) 0, transparent 48%),
+            radial-gradient(at 22% 86%, rgba(253, 224, 71, 0.4) 0, transparent 46%),
+            linear-gradient(135deg, #eefbf3 0%, #fffdf2 50%, #eef7f0 100%);
+    }
+
+    :root.glass-mexico-dark body {
+        background-image:
+            radial-gradient(at 14% 8%, rgba(16, 194, 163, 0.14) 0, transparent 30%),
+            radial-gradient(at 86% 5%, rgba(45, 212, 191, 0.1) 0, transparent 28%),
+            radial-gradient(at 80% 84%, rgba(20, 184, 166, 0.1) 0, transparent 32%),
+            radial-gradient(at 20% 92%, rgba(236, 14, 138, 0.1) 0, transparent 28%),
+            linear-gradient(135deg, oklch(0.11 0.03 178) 0%, oklch(0.12 0.036 185) 50%, oklch(0.085 0.022 175) 100%);
+    }
+
+    :root.glass-mexico-light body {
+        background-image:
+            radial-gradient(at 16% 14%, rgba(20, 184, 166, 0.42) 0, transparent 46%),
+            radial-gradient(at 84% 10%, rgba(45, 212, 191, 0.38) 0, transparent 42%),
+            radial-gradient(at 78% 80%, rgba(16, 185, 129, 0.36) 0, transparent 48%),
+            radial-gradient(at 22% 86%, rgba(244, 114, 182, 0.32) 0, transparent 44%),
+            linear-gradient(135deg, #ecfbf7 0%, #fef2f8 50%, #eef8f6 100%);
+    }
+
+    :root.glass-azul-dark body {
+        background-image:
+            radial-gradient(at 14% 8%, rgba(59, 130, 246, 0.14) 0, transparent 30%),
+            radial-gradient(at 86% 5%, rgba(252, 211, 77, 0.1) 0, transparent 28%),
+            radial-gradient(at 80% 84%, rgba(37, 99, 235, 0.11) 0, transparent 32%),
+            radial-gradient(at 20% 92%, rgba(217, 119, 6, 0.1) 0, transparent 30%),
+            linear-gradient(135deg, oklch(0.11 0.035 258) 0%, oklch(0.12 0.045 263) 50%, oklch(0.085 0.028 255) 100%);
+    }
+
+    :root.glass-azul-light body {
+        background-image:
+            radial-gradient(at 16% 14%, rgba(96, 165, 250, 0.45) 0, transparent 46%),
+            radial-gradient(at 84% 10%, rgba(251, 191, 36, 0.38) 0, transparent 42%),
+            radial-gradient(at 78% 80%, rgba(59, 130, 246, 0.4) 0, transparent 48%),
+            radial-gradient(at 22% 86%, rgba(253, 224, 71, 0.4) 0, transparent 46%),
+            linear-gradient(135deg, #eef2ff 0%, #fffdf2 50%, #eef0fb 100%);
+    }
+
+    :root.glass-roxo-dark body {
+        background-image:
+            radial-gradient(at 14% 8%, rgba(148, 22, 224, 0.14) 0, transparent 30%),
+            radial-gradient(at 86% 5%, rgba(177, 94, 245, 0.1) 0, transparent 28%),
+            radial-gradient(at 80% 84%, rgba(168, 58, 224, 0.11) 0, transparent 32%),
+            radial-gradient(at 20% 92%, rgba(124, 15, 189, 0.12) 0, transparent 30%),
+            linear-gradient(135deg, oklch(0.11 0.038 303) 0%, oklch(0.12 0.048 305) 50%, oklch(0.085 0.03 300) 100%);
+    }
+
+    :root.glass-roxo-light body {
+        background-image:
+            radial-gradient(at 16% 14%, rgba(168, 85, 247, 0.45) 0, transparent 46%),
+            radial-gradient(at 84% 10%, rgba(196, 141, 253, 0.4) 0, transparent 42%),
+            radial-gradient(at 78% 80%, rgba(148, 22, 224, 0.38) 0, transparent 48%),
+            radial-gradient(at 22% 86%, rgba(216, 180, 254, 0.42) 0, transparent 46%),
+            linear-gradient(135deg, #f6eeff 0%, #faf2ff 50%, #f3eefc 100%);
+    }
+
     /* 2) 通用玻璃面：语义 surface 工具类 + 账户卡。半透明 + 模糊 + 提色 + 整面液态折射。 */
-    :root.glass-light
-        :is(.bg-surface-shell, .bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-surface-raised, .account-card),
-    :root.glass-dark
+    :root[class*='glass-']
         :is(.bg-surface-shell, .bg-surface-1, .bg-surface-2, .bg-surface-3, .bg-surface-raised, .account-card) {
         -webkit-backdrop-filter: blur(18px) saturate(1.7);
         backdrop-filter: blur(18px) saturate(1.7) url(#glass-refraction);
     }
 
     /* 3) 品牌外壳面（大结构容器）：整面折射 + 内描边高光，不强加定位，避免影响绝对定位子元素。 */
-    :root.glass-light
-        :is(
-            [class*='brand-topbar-bg'],
-            [class*='brand-sidebar-bg'],
-            [class*='brand-right-rail-bg'],
-            [class*='brand-mobile-sport-nav-bg']
-        ),
-    :root.glass-dark
+    :root[class*='glass-']
         :is(
             [class*='brand-topbar-bg'],
             [class*='brand-sidebar-bg'],
@@ -73,17 +140,7 @@
 
     /* 4) 圆角玻璃瓦片（match card / odds / 账户卡 / 各类浮层）：整面折射 + 边缘折射描边。
           这些是自包含的卡片/按钮/浮层，置 position:relative 安全，可承载 ::after 描边层。 */
-    :root.glass-light
-        :is(
-            [class*='brand-match-card-bg'],
-            [class*='brand-odds-bg'],
-            [class*='mobile-sheet-bg'],
-            [class*='mobile-drawer-bg'],
-            [class*='mobile-menu-bg'],
-            .account-card,
-            .bg-surface-raised
-        ),
-    :root.glass-dark
+    :root[class*='glass-']
         :is(
             [class*='brand-match-card-bg'],
             [class*='brand-odds-bg'],
@@ -101,17 +158,7 @@
     /* 边缘折射描边：仅在圆角的「描边带」上绘制（content-box / border-box 互斥遮罩），
        中心被完全裁掉，绝不遮挡内容；pointer-events:none 不拦截交互。
        该层自身再走一次更强的 #glass-edge 位移 → 边缘把背景掰弯；叠加白色斜向高光 → 镜面反光。 */
-    :root.glass-light
-        :is(
-            [class*='brand-match-card-bg'],
-            [class*='brand-odds-bg'],
-            [class*='mobile-sheet-bg'],
-            [class*='mobile-drawer-bg'],
-            [class*='mobile-menu-bg'],
-            .account-card,
-            .bg-surface-raised
-        )::after,
-    :root.glass-dark
+    :root[class*='glass-']
         :is(
             [class*='brand-match-card-bg'],
             [class*='brand-odds-bg'],
@@ -147,7 +194,7 @@
           继承上面 ::after 的 --glass-rim-sheen 背景，这里只加 background-size + 滚动驱动位移。 */
     @media (prefers-reduced-motion: no-preference) {
         @supports (animation-timeline: view()) {
-            :root.glass-dark
+            :root[class*='glass-'][class*='-dark']
                 :is(
                     [class*='brand-match-card-bg'],
                     [class*='brand-odds-bg'],
@@ -173,7 +220,7 @@
     }
 
     /* 5) 玻璃描边的明暗参数（边宽 / 镜面高光斜向渐变 / 外壳内描边阴影）。 */
-    :root.glass-dark {
+    :root[class*='glass-'][class*='-dark'] {
         --glass-rim-width: 1px;
         --glass-rim-sheen: linear-gradient(
             140deg,
@@ -185,7 +232,7 @@
         --glass-rim-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     }
 
-    :root.glass-light {
+    :root[class*='glass-'][class*='-light'] {
         --glass-rim-width: 1px;
         --glass-rim-sheen: linear-gradient(
             140deg,

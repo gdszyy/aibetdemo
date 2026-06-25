@@ -1714,9 +1714,9 @@
     --content-inverse: #ffffff;
     --on-brand: #ffffff;
     --status-success-surface: rgba(16, 185, 129, 0.14);
-    --status-success-text: #0f9b6c;
+    --status-success-text: #007448;
     --status-danger-surface: rgba(244, 63, 94, 0.12);
-    --status-danger-text: #e11d48;
+    --status-danger-text: #c70034;
     --status-info-surface: rgba(124, 58, 237, 0.12);
 
     --style-card-shadow: 0 12px 32px -20px rgba(124, 58, 237, 0.4);
@@ -1774,12 +1774,16 @@
     --mobile-sheet-radius: 22px;
     --mobile-sheet-shadow: 0 -16px 40px -16px rgba(124, 58, 237, 0.28);
 
-    --func-win: #0f9b6c;
-    --func-lost: #e11d48;
+    --func-win: #007448;
+    --func-lost: #c70034;
     --func-favorite: #9333ea;
     --func-bonus: #f195ff;
     --func-pending: #a16207;
     --func-void: #8b85a8;
+    /* 白字徽章底（暗化同色相，白字对比≥4.6 AA；补齐与 4 个同胞 light 方案一致的 -solid 三件套） */
+    --func-win-solid: #197f51;
+    --func-lost-solid: #c4455c;
+    --func-favorite-solid: #7c3aed;
 }
 
 /************ SCHEME: glass-dark - iOS26 liquid-glass dark theme (purple→pink vibrant) ****************/
@@ -1787,7 +1791,7 @@
 :root.glass-dark {
     color-scheme: dark;
 
-    --brand-primary-0: #8b5cf6;
+    --brand-primary-0: #8353ec;
     --brand-primary-1: rgba(139, 92, 246, 0.16);
     --brand-primary-2: rgba(139, 92, 246, 0.26);
     --brand-primary-3: #a855f7;
@@ -1866,8 +1870,8 @@
     --interactive-card-hover-shadow: 0 16px 32px -18px rgba(76, 29, 149, 0.6);
     --odds-idle-hover-bg: rgba(139, 92, 246, 0.18);
     --odds-idle-hover-border: #a855f7;
-    --odds-selected-bg: linear-gradient(135deg, #8b5cf6, #ec4899);
-    --odds-selected-hover-bg: linear-gradient(135deg, #7c3aed, #db2777);
+    --odds-selected-bg: linear-gradient(135deg, #8353ec, #d22b83);
+    --odds-selected-hover-bg: linear-gradient(135deg, #752fe3, #c00062);
     --odds-selected-text: #ffffff;
     --dock-bar-bg: linear-gradient(110deg, #7c3aed 0%, #ec4899 100%);
     --dock-bar-hover-bg: linear-gradient(110deg, #8b5cf6 0%, #f0589f 100%);
@@ -1891,7 +1895,7 @@
     --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 -6px 24px -12px rgba(40, 16, 70, 0.7);
     --mobile-dock-icon-bg: transparent;
     --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
-    --mobile-dock-action-bg: #8b5cf6;
+    --mobile-dock-action-bg: #8353ec;
     --mobile-dock-action-hover-bg: #7c3aed;
     --mobile-sheet-overlay-bg: rgba(8, 4, 20, 0.6);
     --mobile-sheet-bg: rgba(33, 21, 56, 0.85);
@@ -1912,13 +1916,13 @@
 }
 
 /************ SCHEME: glass-brasil-light - iOS26 liquid-glass light · Brazil emerald+gold ****************/
-/* 巴西翡翠绿+金 · 亮：白玻璃面 + 绿/金点缀；涨绿跌红不变。 */
+/* 巴西翡翠绿+金 · 亮：白玻璃面；CTA=深翡翠绿白字(AA)，金色仅作奖励/装饰点缀；涨绿跌红不变。 */
 :root.glass-brasil-light {
     color-scheme: light;
 
-    --brand-primary-0: #0c8a52;
-    --brand-primary-1: rgba(12, 138, 82, 0.1);
-    --brand-primary-2: rgba(12, 138, 82, 0.18);
+    --brand-primary-0: #0a7a45;
+    --brand-primary-1: rgba(10, 122, 69, 0.1);
+    --brand-primary-2: rgba(10, 122, 69, 0.18);
     --brand-primary-3: #16c172;
     --brand-primary-4: #0a6e42;
     --brand-primary-5: #064e34;
@@ -1953,20 +1957,20 @@
         rgba(240, 251, 245, 0.6) 44%,
         rgba(255, 255, 255, 0.6) 100%
     );
-    --surface-selected: rgba(12, 138, 82, 0.16);
+    --surface-selected: rgba(10, 122, 69, 0.16);
     --surface-raised: rgba(255, 255, 255, 0.66);
     --surface-muted: rgba(238, 250, 244, 0.55);
     --border-subtle: rgba(255, 255, 255, 0.6);
-    --border-strong: rgba(12, 138, 82, 0.28);
+    --border-strong: rgba(10, 122, 69, 0.28);
     --content-primary: #0a2419;
     --content-secondary: #2f5848;
     --content-muted: #4c7a66;
     --content-inverse: #ffffff;
     --on-brand: #ffffff;
     --status-success-surface: rgba(16, 185, 129, 0.14);
-    --status-success-text: #0f9b6c;
+    --status-success-text: #007448;
     --status-danger-surface: rgba(244, 63, 94, 0.12);
-    --status-danger-text: #e11d48;
+    --status-danger-text: #c70034;
     --status-info-surface: rgba(37, 99, 235, 0.1);
 
     --style-card-shadow: 0 12px 32px -20px rgba(12, 138, 82, 0.4);
@@ -1981,42 +1985,42 @@
     --interactive-row-icon: #4c7a66;
     --interactive-row-hover-bg: rgba(255, 255, 255, 0.7);
     --interactive-row-hover-text: #0a2419;
-    --interactive-row-hover-icon: #0c8a52;
-    --interactive-row-active-bg: rgba(12, 138, 82, 0.16);
+    --interactive-row-hover-icon: #0a7a45;
+    --interactive-row-active-bg: rgba(10, 122, 69, 0.16);
     --interactive-row-active-text: #0a2419;
-    --interactive-row-active-icon: #0c8a52;
+    --interactive-row-active-icon: #0a7a45;
     --interactive-active-rail-bg: linear-gradient(180deg, #0c8a52, #d99a06);
-    --interactive-active-rail-shadow: 0 0 8px rgba(12, 138, 82, 0.45);
+    --interactive-active-rail-shadow: 0 0 8px rgba(10, 122, 69, 0.45);
     --interactive-card-hover-bg: rgba(255, 255, 255, 0.78);
     --interactive-card-hover-shadow: 0 12px 28px -16px rgba(12, 138, 82, 0.3);
-    --odds-idle-hover-bg: rgba(12, 138, 82, 0.12);
-    --odds-idle-hover-border: #0c8a52;
-    --odds-selected-bg: linear-gradient(135deg, #0c8a52, #d99a06);
-    --odds-selected-hover-bg: linear-gradient(135deg, #16c172, #fbbf24);
+    --odds-idle-hover-bg: rgba(10, 122, 69, 0.12);
+    --odds-idle-hover-border: #0a7a45;
+    --odds-selected-bg: linear-gradient(135deg, #0a7a45, #0a6b3f);
+    --odds-selected-hover-bg: linear-gradient(135deg, #076e3c, #075c34);
     --odds-selected-text: #ffffff;
-    --dock-bar-bg: linear-gradient(110deg, #0c8a52 0%, #d99a06 100%);
-    --dock-bar-hover-bg: linear-gradient(110deg, #16c172 0%, #d99a06 100%);
+    --dock-bar-bg: linear-gradient(110deg, #0a7a45 0%, #0a6b3f 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #076e3c 0%, #075c34 100%);
     --mobile-nav-bg: rgba(255, 255, 255, 0.78);
-    --mobile-nav-border: rgba(12, 138, 82, 0.16);
+    --mobile-nav-border: rgba(10, 122, 69, 0.16);
     --mobile-nav-text: #4c7a66;
     --mobile-nav-icon: #4c7a66;
     --mobile-nav-active-icon-bg: transparent;
-    --mobile-nav-active-icon: #0c8a52;
+    --mobile-nav-active-icon: #0a7a45;
     --mobile-nav-active-text: #0a6e42;
     --mobile-menu-bg: rgba(255, 255, 255, 0.86);
-    --mobile-menu-border: rgba(12, 138, 82, 0.2);
+    --mobile-menu-border: rgba(10, 122, 69, 0.2);
     --mobile-drawer-bg: rgba(255, 255, 255, 0.88);
     --mobile-drawer-overlay-bg: rgba(12, 38, 26, 0.32);
     --mobile-drawer-border: transparent;
     --mobile-drawer-shadow: 6px 0 30px -8px rgba(12, 138, 82, 0.3);
     --mobile-drawer-close-bg: rgba(240, 251, 245, 0.8);
-    --mobile-drawer-close-border: rgba(12, 138, 82, 0.2);
-    --mobile-summary-bar-border: rgba(12, 138, 82, 0.16);
+    --mobile-drawer-close-border: rgba(10, 122, 69, 0.2);
+    --mobile-summary-bar-border: rgba(10, 122, 69, 0.16);
     --mobile-summary-bar-radius: 18px;
     --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 -6px 24px -12px rgba(12, 138, 82, 0.25);
     --mobile-dock-icon-bg: transparent;
     --mobile-dock-icon-text: rgba(255, 255, 255, 0.96);
-    --mobile-dock-action-bg: #0c8a52;
+    --mobile-dock-action-bg: #0a7a45;
     --mobile-dock-action-hover-bg: #0a6e42;
     --mobile-sheet-overlay-bg: rgba(12, 38, 26, 0.32);
     --mobile-sheet-bg: rgba(255, 255, 255, 0.9);
@@ -2024,24 +2028,28 @@
     --mobile-sheet-radius: 22px;
     --mobile-sheet-shadow: 0 -16px 40px -16px rgba(12, 138, 82, 0.28);
 
-    --func-win: #0f9b6c;
-    --func-lost: #e11d48;
-    --func-favorite: #d99a06;
+    --func-win: #007448;
+    --func-lost: #c70034;
+    --func-favorite: #9e5f26;
     --func-bonus: #f0a90e;
     --func-pending: #a16207;
     --func-void: #6f9384;
+    /* 白字徽章底（亮色显式定义，避免回退到亮品牌色导致白字对比不足） */
+    --func-win-solid: #197f51;
+    --func-lost-solid: #c4455c;
+    --func-favorite-solid: #9e5f26;
 }
 
 /************ SCHEME: glass-brasil-dark - iOS26 liquid-glass dark · Brazil emerald+gold ****************/
-/* 巴西翡翠绿+金 · 暗：中性深玻璃面 + 绿/金点缀；赔率涨绿跌红不变，规避紫粉。 */
+/* 巴西翡翠绿+金 · 暗：中性深玻璃面；CTA=深翡翠绿白字(AA)，金色仅作奖励/装饰点缀；涨绿跌红不变，规避紫粉。 */
 :root.glass-brasil-dark {
     color-scheme: dark;
 
-    --brand-primary-0: #16c172;
-    --brand-primary-1: rgba(22, 193, 114, 0.16);
-    --brand-primary-2: rgba(22, 193, 114, 0.26);
-    --brand-primary-3: #34d98a;
-    --brand-primary-4: #0c9d5a;
+    --brand-primary-0: #0a7a45;
+    --brand-primary-1: rgba(10, 122, 69, 0.16);
+    --brand-primary-2: rgba(10, 122, 69, 0.26);
+    --brand-primary-3: #16c172;
+    --brand-primary-4: #0a6e42;
     --brand-primary-5: #064e34;
 
     --filltext-ft-a: #04140d;
@@ -2102,23 +2110,23 @@
     --accent-warm: #fbbf24;
     --interactive-row-text: #b4ccc0;
     --interactive-row-icon: #b4ccc0;
-    --interactive-row-hover-bg: rgba(22, 193, 114, 0.16);
+    --interactive-row-hover-bg: rgba(10, 122, 69, 0.16);
     --interactive-row-hover-text: #eefdf5;
     --interactive-row-hover-icon: #4ade80;
-    --interactive-row-active-bg: rgba(22, 193, 114, 0.26);
+    --interactive-row-active-bg: rgba(10, 122, 69, 0.26);
     --interactive-row-active-text: #eefdf5;
     --interactive-row-active-icon: #86efac;
     --interactive-active-rail-bg: linear-gradient(180deg, #16c172, #fbbf24);
-    --interactive-active-rail-shadow: 0 0 10px rgba(52, 217, 138, 0.6);
+    --interactive-active-rail-shadow: 0 0 10px rgba(22, 193, 114, 0.6);
     --interactive-card-hover-bg: oklch(0.3 0.032 158 / 0.78);
     --interactive-card-hover-shadow: 0 16px 32px -18px rgba(6, 90, 52, 0.6);
-    --odds-idle-hover-bg: rgba(22, 193, 114, 0.18);
-    --odds-idle-hover-border: #34d98a;
-    --odds-selected-bg: linear-gradient(135deg, #16c172, #fbbf24);
-    --odds-selected-hover-bg: linear-gradient(135deg, #0c9d5a, #f0a90e);
+    --odds-idle-hover-bg: rgba(10, 122, 69, 0.18);
+    --odds-idle-hover-border: #16c172;
+    --odds-selected-bg: linear-gradient(135deg, #0a7a45, #0a6b3f);
+    --odds-selected-hover-bg: linear-gradient(135deg, #076e3c, #075c34);
     --odds-selected-text: #ffffff;
-    --dock-bar-bg: linear-gradient(110deg, #16c172 0%, #fbbf24 100%);
-    --dock-bar-hover-bg: linear-gradient(110deg, #0c9d5a 0%, #f0a90e 100%);
+    --dock-bar-bg: linear-gradient(110deg, #0a7a45 0%, #0a6b3f 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #076e3c 0%, #075c34 100%);
     --mobile-nav-bg: rgba(10, 30, 21, 0.72);
     --mobile-nav-border: rgba(160, 235, 200, 0.16);
     --mobile-nav-text: #8aa99a;
@@ -2139,8 +2147,8 @@
     --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 -6px 24px -12px rgba(6, 90, 52, 0.7);
     --mobile-dock-icon-bg: transparent;
     --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
-    --mobile-dock-action-bg: #16c172;
-    --mobile-dock-action-hover-bg: #0c9d5a;
+    --mobile-dock-action-bg: #0a7a45;
+    --mobile-dock-action-hover-bg: #0a6e42;
     --mobile-sheet-overlay-bg: rgba(5, 18, 12, 0.6);
     --mobile-sheet-bg: rgba(14, 40, 28, 0.85);
     --mobile-sheet-inner-bg: rgba(9, 26, 18, 0.7);
@@ -2153,22 +2161,22 @@
     --func-bonus: #fcd34d;
     --func-pending: #d6b24a;
     --func-void: #82998f;
-    /* 白字徽章底（暗化同色相，白字对比≈5.0 AA） */
+    /* 白字徽章底（同色相暗化，白字对比 >= 4.5 AA） */
     --func-win-solid: #1c7d55;
     --func-lost-solid: #c4455c;
-    --func-favorite-solid: #9e7a1a;
+    --func-favorite-solid: #7e6015;
 }
 
 /************ SCHEME: glass-mexico-light - iOS26 liquid-glass light · Mexico jade + rosa accent ****************/
-/* 墨西哥翡翠为主+玫粉点缀 · 亮：白玻璃面 + 翡翠主调，Rosa Mexicano 点缀；涨绿跌红不变。 */
+/* 墨西哥翡翠为主+玫粉点缀 · 亮：白玻璃面；CTA=深翡翠白字(AA)，Rosa Mexicano 仅作奖励/装饰点缀；涨绿跌红不变。 */
 :root.glass-mexico-light {
     color-scheme: light;
 
-    --brand-primary-0: #0d9488;
-    --brand-primary-1: rgba(13, 148, 136, 0.1);
-    --brand-primary-2: rgba(13, 148, 136, 0.18);
+    --brand-primary-0: #0f766e;
+    --brand-primary-1: rgba(15, 118, 110, 0.1);
+    --brand-primary-2: rgba(15, 118, 110, 0.18);
     --brand-primary-3: #14b8a6;
-    --brand-primary-4: #0f766e;
+    --brand-primary-4: #0c5f57;
     --brand-primary-5: #064e44;
 
     --filltext-ft-a: #eafaf6;
@@ -2201,20 +2209,20 @@
         rgba(238, 251, 248, 0.6) 44%,
         rgba(255, 255, 255, 0.6) 100%
     );
-    --surface-selected: rgba(13, 148, 136, 0.16);
+    --surface-selected: rgba(15, 118, 110, 0.16);
     --surface-raised: rgba(255, 255, 255, 0.66);
     --surface-muted: rgba(236, 250, 247, 0.55);
     --border-subtle: rgba(255, 255, 255, 0.6);
-    --border-strong: rgba(13, 148, 136, 0.28);
+    --border-strong: rgba(15, 118, 110, 0.28);
     --content-primary: #0a241f;
     --content-secondary: #2d5850;
     --content-muted: #4a7a72;
     --content-inverse: #ffffff;
     --on-brand: #ffffff;
     --status-success-surface: rgba(16, 185, 129, 0.14);
-    --status-success-text: #0f9b6c;
+    --status-success-text: #007448;
     --status-danger-surface: rgba(244, 63, 94, 0.12);
-    --status-danger-text: #e11d48;
+    --status-danger-text: #c70034;
     --status-info-surface: rgba(13, 148, 136, 0.12);
 
     --style-card-shadow: 0 12px 32px -20px rgba(13, 148, 136, 0.4);
@@ -2229,67 +2237,71 @@
     --interactive-row-icon: #4a7a72;
     --interactive-row-hover-bg: rgba(255, 255, 255, 0.7);
     --interactive-row-hover-text: #0a241f;
-    --interactive-row-hover-icon: #0d9488;
-    --interactive-row-active-bg: rgba(13, 148, 136, 0.16);
+    --interactive-row-hover-icon: #0f766e;
+    --interactive-row-active-bg: rgba(15, 118, 110, 0.16);
     --interactive-row-active-text: #0a241f;
-    --interactive-row-active-icon: #0d9488;
-    --interactive-active-rail-bg: linear-gradient(180deg, #0d9488, #0f766e);
-    --interactive-active-rail-shadow: 0 0 8px rgba(13, 148, 136, 0.45);
+    --interactive-row-active-icon: #0f766e;
+    --interactive-active-rail-bg: linear-gradient(180deg, #0d9488, #db1f86);
+    --interactive-active-rail-shadow: 0 0 8px rgba(15, 118, 110, 0.45);
     --interactive-card-hover-bg: rgba(255, 255, 255, 0.78);
     --interactive-card-hover-shadow: 0 12px 28px -16px rgba(13, 148, 136, 0.3);
-    --odds-idle-hover-bg: rgba(13, 148, 136, 0.12);
-    --odds-idle-hover-border: #0d9488;
-    --odds-selected-bg: linear-gradient(135deg, #0d9488, #0f766e);
-    --odds-selected-hover-bg: linear-gradient(135deg, #14b8a6, #0d9488);
+    --odds-idle-hover-bg: rgba(15, 118, 110, 0.12);
+    --odds-idle-hover-border: #0f766e;
+    --odds-selected-bg: linear-gradient(135deg, #0f766e, #0d6b63);
+    --odds-selected-hover-bg: linear-gradient(135deg, #0c655d, #0a564f);
     --odds-selected-text: #ffffff;
-    --dock-bar-bg: linear-gradient(110deg, #0d9488 0%, #0f766e 100%);
-    --dock-bar-hover-bg: linear-gradient(110deg, #14b8a6 0%, #db1f86 100%);
+    --dock-bar-bg: linear-gradient(110deg, #0f766e 0%, #0d6b63 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #0c655d 0%, #0a564f 100%);
     --mobile-nav-bg: rgba(255, 255, 255, 0.78);
-    --mobile-nav-border: rgba(13, 148, 136, 0.16);
+    --mobile-nav-border: rgba(15, 118, 110, 0.16);
     --mobile-nav-text: #4a7a72;
     --mobile-nav-icon: #4a7a72;
     --mobile-nav-active-icon-bg: transparent;
-    --mobile-nav-active-icon: #0d9488;
-    --mobile-nav-active-text: #0f766e;
+    --mobile-nav-active-icon: #0f766e;
+    --mobile-nav-active-text: #0c5f57;
     --mobile-menu-bg: rgba(255, 255, 255, 0.86);
-    --mobile-menu-border: rgba(13, 148, 136, 0.2);
+    --mobile-menu-border: rgba(15, 118, 110, 0.2);
     --mobile-drawer-bg: rgba(255, 255, 255, 0.88);
     --mobile-drawer-overlay-bg: rgba(10, 40, 34, 0.32);
     --mobile-drawer-border: transparent;
     --mobile-drawer-shadow: 6px 0 30px -8px rgba(13, 148, 136, 0.3);
     --mobile-drawer-close-bg: rgba(238, 251, 248, 0.8);
-    --mobile-drawer-close-border: rgba(13, 148, 136, 0.2);
-    --mobile-summary-bar-border: rgba(13, 148, 136, 0.16);
+    --mobile-drawer-close-border: rgba(15, 118, 110, 0.2);
+    --mobile-summary-bar-border: rgba(15, 118, 110, 0.16);
     --mobile-summary-bar-radius: 18px;
     --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 -6px 24px -12px rgba(13, 148, 136, 0.25);
     --mobile-dock-icon-bg: transparent;
     --mobile-dock-icon-text: rgba(255, 255, 255, 0.96);
-    --mobile-dock-action-bg: #0d9488;
-    --mobile-dock-action-hover-bg: #0f766e;
+    --mobile-dock-action-bg: #0f766e;
+    --mobile-dock-action-hover-bg: #0c5f57;
     --mobile-sheet-overlay-bg: rgba(10, 40, 34, 0.32);
     --mobile-sheet-bg: rgba(255, 255, 255, 0.9);
     --mobile-sheet-inner-bg: rgba(236, 250, 247, 0.7);
     --mobile-sheet-radius: 22px;
     --mobile-sheet-shadow: 0 -16px 40px -16px rgba(13, 148, 136, 0.28);
 
-    --func-win: #0f9b6c;
-    --func-lost: #e11d48;
-    --func-favorite: #db1f86;
+    --func-win: #007448;
+    --func-lost: #c70034;
+    --func-favorite: #b0185f;
     --func-bonus: #ec4899;
     --func-pending: #a16207;
     --func-void: #6f938c;
+    /* 白字徽章底（亮色显式定义，避免回退到亮品牌色导致白字对比不足） */
+    --func-win-solid: #197f51;
+    --func-lost-solid: #c4455c;
+    --func-favorite-solid: #a8185c;
 }
 
 /************ SCHEME: glass-mexico-dark - iOS26 liquid-glass dark · Mexico jade + rosa accent ****************/
-/* 墨西哥翡翠为主+玫粉点缀 · 暗：中性深玻璃面 + 翡翠主调，Rosa Mexicano 仅作点缀；涨绿跌红不变。 */
+/* 墨西哥翡翠为主+玫粉点缀 · 暗：中性深玻璃面；CTA=深翡翠白字(AA)，Rosa Mexicano 仅作奖励/装饰点缀；涨绿跌红不变。 */
 :root.glass-mexico-dark {
     color-scheme: dark;
 
-    --brand-primary-0: #10c2a3;
-    --brand-primary-1: rgba(16, 194, 163, 0.16);
-    --brand-primary-2: rgba(16, 194, 163, 0.26);
+    --brand-primary-0: #0f766e;
+    --brand-primary-1: rgba(15, 118, 110, 0.16);
+    --brand-primary-2: rgba(15, 118, 110, 0.26);
     --brand-primary-3: #2dd4bf;
-    --brand-primary-4: #0d9488;
+    --brand-primary-4: #0d6b63;
     --brand-primary-5: #064e44;
 
     --filltext-ft-a: #04140f;
@@ -2350,23 +2362,23 @@
     --accent-warm: #ec0e8a;
     --interactive-row-text: #aecbc4;
     --interactive-row-icon: #aecbc4;
-    --interactive-row-hover-bg: rgba(16, 194, 163, 0.16);
+    --interactive-row-hover-bg: rgba(15, 118, 110, 0.16);
     --interactive-row-hover-text: #ecfdf8;
     --interactive-row-hover-icon: #2dd4bf;
-    --interactive-row-active-bg: rgba(16, 194, 163, 0.26);
+    --interactive-row-active-bg: rgba(15, 118, 110, 0.26);
     --interactive-row-active-text: #ecfdf8;
     --interactive-row-active-icon: #5eead4;
-    --interactive-active-rail-bg: linear-gradient(180deg, #10c2a3, #0d9488);
+    --interactive-active-rail-bg: linear-gradient(180deg, #10c2a3, #ec0e8a);
     --interactive-active-rail-shadow: 0 0 10px rgba(45, 212, 191, 0.6);
     --interactive-card-hover-bg: oklch(0.3 0.032 178 / 0.78);
     --interactive-card-hover-shadow: 0 16px 32px -18px rgba(6, 90, 78, 0.6);
-    --odds-idle-hover-bg: rgba(16, 194, 163, 0.18);
+    --odds-idle-hover-bg: rgba(15, 118, 110, 0.18);
     --odds-idle-hover-border: #2dd4bf;
-    --odds-selected-bg: linear-gradient(135deg, #10c2a3, #0d9488);
-    --odds-selected-hover-bg: linear-gradient(135deg, #0d9488, #0a766c);
+    --odds-selected-bg: linear-gradient(135deg, #0f766e, #0d6b63);
+    --odds-selected-hover-bg: linear-gradient(135deg, #0c655d, #0a564f);
     --odds-selected-text: #ffffff;
-    --dock-bar-bg: linear-gradient(110deg, #10c2a3 0%, #0d9488 100%);
-    --dock-bar-hover-bg: linear-gradient(110deg, #0d9488 0%, #0a766c 100%);
+    --dock-bar-bg: linear-gradient(110deg, #0f766e 0%, #0d6b63 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #0c655d 0%, #0a564f 100%);
     --mobile-nav-bg: rgba(10, 30, 27, 0.72);
     --mobile-nav-border: rgba(150, 235, 220, 0.16);
     --mobile-nav-text: #84a8a0;
@@ -2387,8 +2399,8 @@
     --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 -6px 24px -12px rgba(6, 90, 78, 0.7);
     --mobile-dock-icon-bg: transparent;
     --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
-    --mobile-dock-action-bg: #10c2a3;
-    --mobile-dock-action-hover-bg: #0d9488;
+    --mobile-dock-action-bg: #0f766e;
+    --mobile-dock-action-hover-bg: #0d6b63;
     --mobile-sheet-overlay-bg: rgba(5, 18, 15, 0.6);
     --mobile-sheet-bg: rgba(14, 40, 31, 0.85);
     --mobile-sheet-inner-bg: rgba(9, 26, 23, 0.7);
@@ -2401,14 +2413,14 @@
     --func-bonus: #f9a8d4;
     --func-pending: #d6b24a;
     --func-void: #7f9a95;
-    /* 白字徽章底（暗化同色相，白字对比≈5.0 AA） */
+    /* 白字徽章底（同色相暗化，白字对比 >= 4.5 AA） */
     --func-win-solid: #1c7d55;
     --func-lost-solid: #c4455c;
-    --func-favorite-solid: #b03a73;
+    --func-favorite-solid: #a8185c;
 }
 
 /************ SCHEME: glass-azul-light - iOS26 liquid-glass light · pan-LATAM deep blue + gold ****************/
-/* 泛拉美深蓝+金 · 亮：白玻璃面 + 蓝主调、金色点缀；涨绿跌红不变。 */
+/* 泛拉美深蓝+金 · 亮：白玻璃面；CTA=专业蓝白字(AA)，金色仅作奖励/装饰点缀；涨绿跌红不变。 */
 :root.glass-azul-light {
     color-scheme: light;
 
@@ -2460,9 +2472,9 @@
     --content-inverse: #ffffff;
     --on-brand: #ffffff;
     --status-success-surface: rgba(16, 185, 129, 0.14);
-    --status-success-text: #0f9b6c;
+    --status-success-text: #007448;
     --status-danger-surface: rgba(244, 63, 94, 0.12);
-    --status-danger-text: #e11d48;
+    --status-danger-text: #c70034;
     --status-info-surface: rgba(2, 132, 199, 0.12);
 
     --style-card-shadow: 0 12px 32px -20px rgba(37, 99, 235, 0.4);
@@ -2481,17 +2493,17 @@
     --interactive-row-active-bg: rgba(37, 99, 235, 0.16);
     --interactive-row-active-text: #0a1226;
     --interactive-row-active-icon: #2563eb;
-    --interactive-active-rail-bg: linear-gradient(180deg, #2563eb, #1d4ed8);
+    --interactive-active-rail-bg: linear-gradient(180deg, #2563eb, #d97706);
     --interactive-active-rail-shadow: 0 0 8px rgba(37, 99, 235, 0.45);
     --interactive-card-hover-bg: rgba(255, 255, 255, 0.78);
     --interactive-card-hover-shadow: 0 12px 28px -16px rgba(37, 99, 235, 0.3);
     --odds-idle-hover-bg: rgba(37, 99, 235, 0.12);
     --odds-idle-hover-border: #2563eb;
     --odds-selected-bg: linear-gradient(135deg, #2563eb, #1d4ed8);
-    --odds-selected-hover-bg: linear-gradient(135deg, #3b82f6, #2563eb);
+    --odds-selected-hover-bg: linear-gradient(135deg, #1d4ed8, #1e40af);
     --odds-selected-text: #ffffff;
     --dock-bar-bg: linear-gradient(110deg, #2563eb 0%, #1d4ed8 100%);
-    --dock-bar-hover-bg: linear-gradient(110deg, #3b82f6 0%, #d97706 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #1d4ed8 0%, #1e40af 100%);
     --mobile-nav-bg: rgba(255, 255, 255, 0.78);
     --mobile-nav-border: rgba(37, 99, 235, 0.16);
     --mobile-nav-text: #4c5a7a;
@@ -2520,24 +2532,28 @@
     --mobile-sheet-radius: 22px;
     --mobile-sheet-shadow: 0 -16px 40px -16px rgba(37, 99, 235, 0.28);
 
-    --func-win: #0f9b6c;
-    --func-lost: #e11d48;
-    --func-favorite: #d97706;
+    --func-win: #007448;
+    --func-lost: #c70034;
+    --func-favorite: #9e5f26;
     --func-bonus: #f59e0b;
     --func-pending: #a16207;
     --func-void: #6f7a93;
+    /* 白字徽章底（亮色显式定义，避免回退到亮品牌色导致白字对比不足） */
+    --func-win-solid: #197f51;
+    --func-lost-solid: #c4455c;
+    --func-favorite-solid: #9e5f26;
 }
 
 /************ SCHEME: glass-azul-dark - iOS26 liquid-glass dark · pan-LATAM deep blue + gold ****************/
-/* 泛拉美深蓝+金 · 暗：中性深玻璃面 + 专业蓝主调、金色点缀；涨绿跌红不变。 */
+/* 泛拉美深蓝+金 · 暗：中性深玻璃面；CTA=专业蓝白字(AA)，金色仅作奖励/装饰点缀；涨绿跌红不变。 */
 :root.glass-azul-dark {
     color-scheme: dark;
 
-    --brand-primary-0: #3b82f6;
-    --brand-primary-1: rgba(59, 130, 246, 0.16);
-    --brand-primary-2: rgba(59, 130, 246, 0.26);
+    --brand-primary-0: #2563eb;
+    --brand-primary-1: rgba(37, 99, 235, 0.16);
+    --brand-primary-2: rgba(37, 99, 235, 0.26);
     --brand-primary-3: #60a5fa;
-    --brand-primary-4: #2563eb;
+    --brand-primary-4: #1d4ed8;
     --brand-primary-5: #1e3a8a;
 
     --filltext-ft-a: #060a18;
@@ -2598,23 +2614,23 @@
     --accent-warm: #fcd34d;
     --interactive-row-text: #b3bcd2;
     --interactive-row-icon: #b3bcd2;
-    --interactive-row-hover-bg: rgba(59, 130, 246, 0.16);
+    --interactive-row-hover-bg: rgba(37, 99, 235, 0.16);
     --interactive-row-hover-text: #eef4ff;
     --interactive-row-hover-icon: #60a5fa;
-    --interactive-row-active-bg: rgba(59, 130, 246, 0.26);
+    --interactive-row-active-bg: rgba(37, 99, 235, 0.26);
     --interactive-row-active-text: #eef4ff;
     --interactive-row-active-icon: #93c5fd;
-    --interactive-active-rail-bg: linear-gradient(180deg, #3b82f6, #2563eb);
+    --interactive-active-rail-bg: linear-gradient(180deg, #3b82f6, #fcd34d);
     --interactive-active-rail-shadow: 0 0 10px rgba(96, 165, 250, 0.6);
     --interactive-card-hover-bg: oklch(0.3 0.032 258 / 0.78);
     --interactive-card-hover-shadow: 0 16px 32px -18px rgba(20, 50, 160, 0.6);
-    --odds-idle-hover-bg: rgba(59, 130, 246, 0.18);
+    --odds-idle-hover-bg: rgba(37, 99, 235, 0.18);
     --odds-idle-hover-border: #60a5fa;
-    --odds-selected-bg: linear-gradient(135deg, #3b82f6, #2563eb);
-    --odds-selected-hover-bg: linear-gradient(135deg, #2563eb, #1d4ed8);
+    --odds-selected-bg: linear-gradient(135deg, #2563eb, #1d4ed8);
+    --odds-selected-hover-bg: linear-gradient(135deg, #1d4ed8, #1e40af);
     --odds-selected-text: #ffffff;
-    --dock-bar-bg: linear-gradient(110deg, #3b82f6 0%, #2563eb 100%);
-    --dock-bar-hover-bg: linear-gradient(110deg, #2563eb 0%, #1d4ed8 100%);
+    --dock-bar-bg: linear-gradient(110deg, #2563eb 0%, #1d4ed8 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #1d4ed8 0%, #1e40af 100%);
     --mobile-nav-bg: rgba(10, 16, 36, 0.72);
     --mobile-nav-border: rgba(158, 192, 250, 0.16);
     --mobile-nav-text: #8a93ad;
@@ -2635,8 +2651,8 @@
     --mobile-summary-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 -6px 24px -12px rgba(20, 50, 160, 0.7);
     --mobile-dock-icon-bg: transparent;
     --mobile-dock-icon-text: rgba(255, 255, 255, 0.94);
-    --mobile-dock-action-bg: #3b82f6;
-    --mobile-dock-action-hover-bg: #2563eb;
+    --mobile-dock-action-bg: #2563eb;
+    --mobile-dock-action-hover-bg: #1d4ed8;
     --mobile-sheet-overlay-bg: rgba(6, 9, 28, 0.6);
     --mobile-sheet-bg: rgba(16, 26, 56, 0.85);
     --mobile-sheet-inner-bg: rgba(10, 16, 40, 0.7);
@@ -2649,14 +2665,14 @@
     --func-bonus: #fde68a;
     --func-pending: #d6b24a;
     --func-void: #818aa0;
-    /* 白字徽章底（暗化同色相，白字对比≈5.0 AA） */
+    /* 白字徽章底（同色相暗化，白字对比 >= 4.5 AA） */
     --func-win-solid: #1c7d55;
     --func-lost-solid: #c4455c;
-    --func-favorite-solid: #b08418;
+    --func-favorite-solid: #9e5f26;
 }
 
 /************ SCHEME: glass-roxo-light - iOS26 liquid-glass light · bank mono-violet (fintech trust) ****************/
-/* 银行紫 · 亮：白玻璃面 + 单一信任紫（无粉），区别于赌场紫粉；涨绿跌红不变。 */
+/* 银行紫 · 亮：白玻璃面 + 单一信任紫(无粉)；CTA=信任紫白字(AA)，区别于赌场紫粉；涨绿跌红不变。 */
 :root.glass-roxo-light {
     color-scheme: light;
 
@@ -2708,9 +2724,9 @@
     --content-inverse: #ffffff;
     --on-brand: #ffffff;
     --status-success-surface: rgba(16, 185, 129, 0.14);
-    --status-success-text: #0f9b6c;
+    --status-success-text: #007448;
     --status-danger-surface: rgba(244, 63, 94, 0.12);
-    --status-danger-text: #e11d48;
+    --status-danger-text: #c70034;
     --status-info-surface: rgba(124, 58, 237, 0.12);
 
     --style-card-shadow: 0 12px 32px -20px rgba(124, 58, 237, 0.4);
@@ -2729,17 +2745,17 @@
     --interactive-row-active-bg: rgba(132, 16, 212, 0.16);
     --interactive-row-active-text: #1b1335;
     --interactive-row-active-icon: #8410d4;
-    --interactive-active-rail-bg: linear-gradient(180deg, #8410d4, #6b0fb0);
+    --interactive-active-rail-bg: linear-gradient(180deg, #8410d4, #b15ef5);
     --interactive-active-rail-shadow: 0 0 8px rgba(132, 16, 212, 0.45);
     --interactive-card-hover-bg: rgba(255, 255, 255, 0.78);
     --interactive-card-hover-shadow: 0 12px 28px -16px rgba(124, 58, 237, 0.3);
     --odds-idle-hover-bg: rgba(132, 16, 212, 0.12);
     --odds-idle-hover-border: #8410d4;
     --odds-selected-bg: linear-gradient(135deg, #8410d4, #6b0fb0);
-    --odds-selected-hover-bg: linear-gradient(135deg, #9416e0, #7a0fbd);
+    --odds-selected-hover-bg: linear-gradient(135deg, #6b0fb0, #560c90);
     --odds-selected-text: #ffffff;
     --dock-bar-bg: linear-gradient(110deg, #8410d4 0%, #6b0fb0 100%);
-    --dock-bar-hover-bg: linear-gradient(110deg, #9416e0 0%, #7c3aed 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #6b0fb0 0%, #560c90 100%);
     --mobile-nav-bg: rgba(255, 255, 255, 0.78);
     --mobile-nav-border: rgba(132, 16, 212, 0.16);
     --mobile-nav-text: #6b6390;
@@ -2768,16 +2784,20 @@
     --mobile-sheet-radius: 22px;
     --mobile-sheet-shadow: 0 -16px 40px -16px rgba(124, 58, 237, 0.28);
 
-    --func-win: #0f9b6c;
-    --func-lost: #e11d48;
-    --func-favorite: #8410d4;
-    --func-bonus: #a855f7;
+    --func-win: #007448;
+    --func-lost: #c70034;
+    --func-favorite: #6b0fb0;
+    --func-bonus: #c084fc;
     --func-pending: #a16207;
     --func-void: #837a9b;
+    /* 白字徽章底（亮色显式定义，避免回退到亮品牌色导致白字对比不足） */
+    --func-win-solid: #197f51;
+    --func-lost-solid: #c4455c;
+    --func-favorite-solid: #7c3aed;
 }
 
 /************ SCHEME: glass-roxo-dark - iOS26 liquid-glass dark · bank mono-violet (fintech trust) ****************/
-/* 银行紫 · 暗：单一紫色相（无粉渐变），深而饱和的信任紫，区别于赌场紫粉；涨绿跌红不变。 */
+/* 银行紫 · 暗：单一紫色相(无粉渐变)；CTA=信任紫白字(AA)，区别于赌场紫粉；涨绿跌红不变。 */
 :root.glass-roxo-dark {
     color-scheme: dark;
 
@@ -2852,17 +2872,17 @@
     --interactive-row-active-bg: rgba(148, 22, 224, 0.26);
     --interactive-row-active-text: #f5f0fe;
     --interactive-row-active-icon: #d8b4fe;
-    --interactive-active-rail-bg: linear-gradient(180deg, #9416e0, #7a0fbd);
+    --interactive-active-rail-bg: linear-gradient(180deg, #9416e0, #b15ef5);
     --interactive-active-rail-shadow: 0 0 10px rgba(177, 94, 245, 0.6);
     --interactive-card-hover-bg: oklch(0.3 0.032 303 / 0.78);
     --interactive-card-hover-shadow: 0 16px 32px -18px rgba(70, 18, 160, 0.6);
     --odds-idle-hover-bg: rgba(148, 22, 224, 0.18);
     --odds-idle-hover-border: #b15ef5;
     --odds-selected-bg: linear-gradient(135deg, #9416e0, #7a0fbd);
-    --odds-selected-hover-bg: linear-gradient(135deg, #a92ff0, #8a12d0);
+    --odds-selected-hover-bg: linear-gradient(135deg, #8312cc, #680ca6);
     --odds-selected-text: #ffffff;
     --dock-bar-bg: linear-gradient(110deg, #9416e0 0%, #7a0fbd 100%);
-    --dock-bar-hover-bg: linear-gradient(110deg, #a92ff0 0%, #8a12d0 100%);
+    --dock-bar-hover-bg: linear-gradient(110deg, #8312cc 0%, #680ca6 100%);
     --mobile-nav-bg: rgba(26, 12, 46, 0.72);
     --mobile-nav-border: rgba(205, 180, 250, 0.16);
     --mobile-nav-text: #9b8fc4;
@@ -2897,8 +2917,9 @@
     --func-bonus: #d8b4fe;
     --func-pending: #d6b24a;
     --func-void: #8b85a8;
-    /* 白字徽章底（暗化同色相，白字对比≈5.0 AA） */
+    /* 白字徽章底（同色相暗化，白字对比 >= 4.5 AA） */
     --func-win-solid: #1c7d55;
     --func-lost-solid: #c4455c;
     --func-favorite-solid: #7c4bd0;
 }
+
