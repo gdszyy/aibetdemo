@@ -43,7 +43,7 @@ interface PromotionCardProps {
 
 const HotCard: FC<{ isHot: boolean; title: string }> = ({ isHot, title }) =>
     isHot ? (
-        <span className="inline-flex items-center rounded-xs bg-brand-primary-4 gap-0.5 pl-1 pr-2 py-0.5 text-auxiliary-md uppercase text-neutral-white-h">
+        <span className="inline-flex items-center rounded-xs bg-brand-primary-4 gap-0.5 pl-1 pr-2 py-0.5 text-auxiliary-md uppercase text-on-brand">
             <Image preload className="w-4 h-4" src={Fire.src} alt="Hot" width={16} height={16} /> {title}
         </span>
     ) : (
@@ -107,7 +107,7 @@ export const PromotionCard: FC<PromotionCardProps> = ({ promotion }) => {
 
                         <button
                             type="button"
-                            className="inline-flex w-full items-center justify-center rounded-full bg-brand-primary-0 px-4 py-1.5 text-auxiliary-md text-neutral-white-h"
+                            className="inline-flex w-full items-center justify-center rounded-full bg-brand-primary-0 px-4 py-1.5 text-auxiliary-md text-on-brand"
                         >
                             {t('list.joinNow')}
                         </button>
@@ -150,7 +150,7 @@ export const PromotionCard: FC<PromotionCardProps> = ({ promotion }) => {
                                     </div>
                                     <button
                                         type="button"
-                                        className="inline-flex gap-1 w-fit items-center rounded-full bg-brand-primary-0 px-3 py-1.5 text-auxiliary-md text-neutral-white-h hover:bg-brand-primary-4 cursor-pointer transition-colors"
+                                        className="inline-flex gap-1 w-fit items-center rounded-full bg-brand-primary-0 px-3 py-1.5 text-auxiliary-md text-on-brand hover:bg-brand-primary-4 cursor-pointer transition-colors"
                                     >
                                         {t('list.joinNow')}
                                         <DoubleArrowRightOutlined className="ml-0 w-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:ml-1 group-hover:w-3 group-hover:opacity-100" />

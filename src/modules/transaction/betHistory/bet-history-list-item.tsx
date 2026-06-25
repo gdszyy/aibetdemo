@@ -131,7 +131,7 @@ export const ListItem: FC<ListItemProps> = ({ item, onDetail }) => {
                         variant="text"
                         className={cn(
                             'col-start-5 mr-8 h-6 justify-self-end rounded-sm bg-filltext-ft-b px-3 py-0 text-body-sm text-filltext-ft-e transition-colors',
-                            'hover:bg-brand-primary-0 hover:text-neutral-white-h',
+                            'hover:bg-brand-primary-0 hover:text-on-brand',
                         )}
                         onClick={onDetail}
                     >

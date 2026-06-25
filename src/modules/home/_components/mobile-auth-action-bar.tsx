@@ -41,7 +41,7 @@ export const MobileAuthActionBar: FC = () => {
             <button
                 type="button"
                 onClick={openSigninPage}
-                className="flex h-8 min-w-0 flex-1 items-center justify-center rounded-full bg-brand-primary-0 px-2 text-auxiliary-md text-neutral-white-h transition-colors active:bg-brand-primary-4"
+                className="flex h-8 min-w-0 flex-1 items-center justify-center rounded-full bg-brand-primary-0 px-2 text-auxiliary-md text-on-brand transition-colors active:bg-brand-primary-4"
             >
                 {t('login.title2')}
             </button>

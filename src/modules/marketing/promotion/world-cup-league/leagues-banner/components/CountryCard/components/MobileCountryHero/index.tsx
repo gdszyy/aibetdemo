@@ -53,7 +53,7 @@ export const MobileCountryHero: FC<MobileCountryHeroProps> = ({ regionCode, odds
                 </strong>
                 <BetActionButton
                     oddsEntity={oddsEntity}
-                    className="mt-0.5 h-6 min-w-21 cursor-pointer rounded-full bg-brand-primary-0 px-3 text-auxiliary-md text-neutral-white-h"
+                    className="mt-0.5 h-6 min-w-21 cursor-pointer rounded-full bg-brand-primary-0 px-3 text-auxiliary-md text-on-brand"
                 >
                     {t('placeBet')}
                 </BetActionButton>

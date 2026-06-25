@@ -11,11 +11,11 @@ const commonButtonVariants = cva(
         variants: {
             variant: {
                 primary:
-                    'border-filltext-ft-h bg-transparent text-filltext-ft-h hover:bg-brand-primary-0 hover:text-neutral-white-h',
+                    'border-filltext-ft-h bg-transparent text-filltext-ft-h hover:bg-brand-primary-0 hover:text-on-brand',
                 secondary:
                     'border-filltext-ft-f bg-transparent text-filltext-ft-f hover:bg-filltext-ft-h hover:text-neutral-white-h',
                 secondarySpecial:
-                    'border-white/55 text-neutral-white-h  bg-transparent  hover:bg-brand-primary-0 hover:text-neutral-white-h hover:border-brand-primary-0',
+                    'border-white/55 text-neutral-white-h  bg-transparent  hover:bg-brand-primary-0 hover:text-on-brand hover:border-brand-primary-0',
             },
             size: {
                 small: 'h-10 text-body-lg',

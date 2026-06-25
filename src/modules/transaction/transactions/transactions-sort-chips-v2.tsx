@@ -31,7 +31,7 @@ export const TransactionsSortChipsV2: FC<TransactionsSortChipsV2Props> = ({ opti
                         className={cn(
                             'flex h-10 shrink-0 items-center justify-center rounded-sm px-4 text-body-md transition-colors',
                             isActive
-                                ? 'bg-brand-primary-0 text-neutral-white-h'
+                                ? 'bg-brand-primary-0 text-on-brand'
                                 : 'bg-surface-1 text-filltext-ft-f hover:bg-filltext-ft-a hover:text-filltext-ft-h',
                         )}
                     >

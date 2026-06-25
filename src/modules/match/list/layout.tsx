@@ -143,7 +143,7 @@ export const MatchListShell: FC<MatchListShellProps> = ({ sportId, children }) =
                                             >
                                                 {tab.title}
                                                 {tab.filterType === FilterType.Live && Boolean(tab.count) && (
-                                                    <span className="inline-flex h-4 min-w-4 items-center justify-center rounded-xs bg-brand-primary-0 px-0.5 text-auxiliary-md text-neutral-white-h tabular-nums">
+                                                    <span className="inline-flex h-4 min-w-4 items-center justify-center rounded-xs bg-brand-primary-0 px-0.5 text-auxiliary-md text-on-brand tabular-nums">
                                                         {formatLiveCount(tab.count ?? 0)}
                                                     </span>
                                                 )}

@@ -67,9 +67,9 @@ export const RightAside: FC<PropsWithChildren<{ className?: string }>> = ({ chil
                 <button
                     type="button"
                     onClick={handleSupportClick}
-                    className="group flex h-10 w-[39px] cursor-pointer flex-col items-center justify-center rounded-sm border border-[color:var(--brand-right-rail-button-border,var(--border-subtle))] bg-[var(--brand-right-rail-button-bg,var(--page-bg))] text-filltext-ft-f transition-colors hover:border-brand-primary-0 hover:bg-brand-primary-0 hover:text-neutral-white-h"
+                    className="group flex h-10 w-[39px] cursor-pointer flex-col items-center justify-center rounded-sm border border-[color:var(--brand-right-rail-button-border,var(--border-subtle))] bg-[var(--brand-right-rail-button-bg,var(--page-bg))] text-filltext-ft-f transition-colors hover:border-brand-primary-0 hover:bg-brand-primary-0 hover:text-on-brand"
                 >
-                    <span className="text-[10px] font-bold leading-none text-brand-primary-0 group-hover:text-neutral-white-h">
+                    <span className="text-[10px] font-bold leading-none text-brand-primary-0 group-hover:text-on-brand">
                         LIVE
                     </span>
                     <span className="mt-1 h-1 w-1 rounded-full bg-brand-primary-0" />
@@ -80,7 +80,7 @@ export const RightAside: FC<PropsWithChildren<{ className?: string }>> = ({ chil
                         key={item.key}
                         type="button"
                         onClick={item.onClick}
-                        className="relative flex size-[39px] cursor-pointer items-center justify-center rounded-sm border border-[color:var(--brand-right-rail-button-border,var(--border-subtle))] bg-[var(--brand-right-rail-button-bg,var(--page-bg))] text-filltext-ft-f transition-colors hover:border-brand-primary-0 hover:bg-brand-primary-0 hover:text-neutral-white-h"
+                        className="relative flex size-[39px] cursor-pointer items-center justify-center rounded-sm border border-[color:var(--brand-right-rail-button-border,var(--border-subtle))] bg-[var(--brand-right-rail-button-bg,var(--page-bg))] text-filltext-ft-f transition-colors hover:border-brand-primary-0 hover:bg-brand-primary-0 hover:text-on-brand"
                     >
                         <item.icon className="size-5" />
                         {item.badge && (
@@ -96,7 +96,7 @@ export const RightAside: FC<PropsWithChildren<{ className?: string }>> = ({ chil
                 <button
                     type="button"
                     onClick={handleSettingClick}
-                    className="flex size-[39px] cursor-pointer items-center justify-center rounded-sm border border-[color:var(--brand-right-rail-button-border,var(--border-subtle))] bg-[var(--brand-right-rail-button-bg,var(--page-bg))] text-filltext-ft-f transition-colors hover:border-brand-primary-0 hover:bg-brand-primary-0 hover:text-neutral-white-h"
+                    className="flex size-[39px] cursor-pointer items-center justify-center rounded-sm border border-[color:var(--brand-right-rail-button-border,var(--border-subtle))] bg-[var(--brand-right-rail-button-bg,var(--page-bg))] text-filltext-ft-f transition-colors hover:border-brand-primary-0 hover:bg-brand-primary-0 hover:text-on-brand"
                 >
                     <Setting className="size-5" />
                 </button>

@@ -564,7 +564,7 @@ const MobileTabPlaceholder: FC<{ active: MatchDetailTopTab }> = ({ active }) => 
             <div className="rounded-sm bg-surface-1 md:hidden">
                 <div className="flex h-11 items-center justify-between border-filltext-ft-c border-b px-3">
                     <div className="text-title-sm font-bold text-filltext-ft-h">Chat</div>
-                    <span className="rounded-full bg-brand-primary-0 px-2 py-0.5 text-auxiliary-sm font-bold text-neutral-white-h">
+                    <span className="rounded-full bg-brand-primary-0 px-2 py-0.5 text-auxiliary-sm font-bold text-on-brand">
                         9,999+
                     </span>
                 </div>
@@ -598,7 +598,7 @@ const MobileTabPlaceholder: FC<{ active: MatchDetailTopTab }> = ({ active }) => 
         return (
             <div className="rounded-sm bg-surface-1 p-3 md:hidden">
                 <div className="relative flex aspect-video items-center justify-center overflow-hidden rounded-sm bg-black">
-                    <span className="absolute left-3 top-3 rounded bg-brand-primary-0 px-2 py-0.5 text-auxiliary-sm font-bold text-neutral-white-h">
+                    <span className="absolute left-3 top-3 rounded bg-brand-primary-0 px-2 py-0.5 text-auxiliary-sm font-bold text-on-brand">
                         LIVE
                     </span>
                     <div className="text-center">
@@ -616,7 +616,7 @@ const MobileTabPlaceholder: FC<{ active: MatchDetailTopTab }> = ({ active }) => 
         <div className="rounded-sm bg-surface-1 px-4 py-5 md:hidden">
             <div className="mb-4 flex items-center justify-between">
                 <div className="text-title-md font-bold text-filltext-ft-h">{meta.title}</div>
-                <span className="rounded-full bg-brand-primary-0 px-3 py-1 text-auxiliary-sm font-bold text-neutral-white-h">
+                <span className="rounded-full bg-brand-primary-0 px-3 py-1 text-auxiliary-sm font-bold text-on-brand">
                     {meta.accent}
                 </span>
             </div>

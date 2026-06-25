@@ -149,7 +149,7 @@ export const PaymentModal: FC<PaymentModalProps> = ({
                                         'h-10 rounded-full px-4 text-body-lg w-full',
                                         isInsufficient
                                             ? 'bg-filltext-ft-b text-filltext-ft-g'
-                                            : 'bg-brand-primary-0 text-neutral-white-h',
+                                            : 'bg-brand-primary-0 text-on-brand',
                                     )}
                                 >
                                     {isInsufficient

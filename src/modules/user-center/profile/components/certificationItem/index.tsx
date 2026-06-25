@@ -82,7 +82,7 @@ export const CertificationItem: FC<CertificationItemProps> = ({ item, onBindCont
                             type="button"
                             onClick={handleBindClick}
                             disabled={pending}
-                            className="px-2 h-6 bg-brand-primary-0 hover:bg-brand-primary-4 text-auxiliary-md text-neutral-white-h rounded-full"
+                            className="px-2 h-6 bg-brand-primary-0 hover:bg-brand-primary-4 text-auxiliary-md text-on-brand rounded-full"
                         >
                             {t('profilePage.certification.linkNow')}
                         </button>

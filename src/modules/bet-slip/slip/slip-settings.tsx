@@ -491,7 +491,7 @@ export const SlipSettings: FC<SlipSettingsProps> = ({ onBack, className }) => {
                     <button
                         type="button"
                         onClick={onBack}
-                        className="flex size-7 cursor-pointer items-center justify-center rounded-sm bg-surface-selected text-filltext-ft-f transition-colors hover:bg-brand-primary-0 hover:text-neutral-white-h"
+                        className="flex size-7 cursor-pointer items-center justify-center rounded-sm bg-surface-selected text-filltext-ft-f transition-colors hover:bg-brand-primary-0 hover:text-on-brand"
                     >
                         <ArrowRight className="size-3" />
                     </button>

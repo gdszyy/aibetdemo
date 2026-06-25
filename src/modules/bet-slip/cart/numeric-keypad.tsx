@@ -154,7 +154,7 @@ export const NumericKeypad: FC<NumericKeypadProps> = ({ value, onChange, onClose
                 <button
                     type="button"
                     onClick={onClose}
-                    className="rounded-sm bg-brand-primary-0 py-2.5 text-body-lg font-bold text-neutral-white-h transition-colors active:bg-brand-primary-4"
+                    className="rounded-sm bg-brand-primary-0 py-2.5 text-body-lg font-bold text-on-brand transition-colors active:bg-brand-primary-4"
                 >
                     Done
                 </button>
