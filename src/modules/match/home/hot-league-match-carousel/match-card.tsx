@@ -6,11 +6,12 @@ import { type FC, Fragment, useMemo } from 'react';
 import type { MarketGroup, MarketLine, OutcomeModel } from '@/api/models/market';
 import { type MatchEvent, MatchStatus, type TournamentGroup } from '@/api/models/match-game';
 import { MatchBroadcastFilled } from '@/components/icons2/MatchBroadcastFilled';
+import { MatchCardLink } from '@/components/match-card-link';
 import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { ConditionalTooltip } from '@/components/tooltip';
+import { useIntentPrefetch } from '@/hooks/use-intent-prefetch';
 import { useIntlFormatter } from '@/hooks/use-intl-formatter';
 import { useIsMobile } from '@/hooks/use-media-query';
-import { Link } from '@/i18n';
 import { BetBtnShort } from '@/modules/match/_components/bet-btn-short';
 import { BetBtnShortBase } from '@/modules/match/_components/bet-btn-short-base';
 import { MarketCountAction } from '@/modules/match/_components/market-count-action';
@@ -150,6 +151,8 @@ export const HotLeagueMatchCard: FC<HotLeagueMatchCardProps> = ({ group, isMock 
     const metaTrail = [group.sport_name, group.category_name, group.tournament_name].filter((label) => label?.trim());
     const showMarketOffer = !primaryMarket;
     const matchDetailHref = isMock ? `/sports/${group.sport_id}` : `/matches/${match.event_id}`;
+    // 悬停 / 触摸 / 聚焦卡片时预取详情路由，消除点击跳转的冷导航卡顿。
+    const detailLinkIntent = useIntentPrefetch(matchDetailHref);
     const periodScoreMode = isMobile ? PeriodScoreDisplayMode.MobileList : PeriodScoreDisplayMode.FullPeriods;
     const showOnlyTotalScore = isMobile && (isBasketballSport(group.sport_id) || isRugbySport(group.sport_id));
     const homeScoreCells = getSportPeriodScoreCells({
@@ -185,17 +188,18 @@ export const HotLeagueMatchCard: FC<HotLeagueMatchCardProps> = ({ group, isMock 
 
     if (isBetanoRecommendCard) {
         return (
-            <Link
+            <MatchCardLink
                 href={matchDetailHref}
                 scroll={true}
                 className={cn(
-                    'block h-[146px] w-[min(var(--component-recommend-card-width,344px),calc(100vw-24px))] min-w-0 shrink-0 rounded-[var(--component-recommend-card-radius,var(--brand-match-card-radius,12px))] border border-[color:var(--brand-match-card-border,var(--border-subtle))] p-2.5 transition-[background-color,border-color,transform] [background:var(--brand-match-card-bg,var(--surface-1))] hover:border-[color:var(--brand-primary-0)] hover:[background:var(--brand-match-card-hover-bg,var(--surface-2))] hover:[transform:var(--component-match-card-hover-transform,none)] md:w-[var(--component-recommend-card-width,344px)]',
+                    'relative block h-[146px] w-[min(var(--component-recommend-card-width,344px),calc(100vw-24px))] min-w-0 shrink-0 rounded-[var(--component-recommend-card-radius,var(--brand-match-card-radius,12px))] border border-[color:var(--brand-match-card-border,var(--border-subtle))] p-2.5 transition-[background-color,border-color,transform] [background:var(--brand-match-card-bg,var(--surface-1))] hover:border-[color:var(--brand-primary-0)] hover:[background:var(--brand-match-card-hover-bg,var(--surface-2))] hover:[transform:var(--component-match-card-hover-transform,none)] md:w-[var(--component-recommend-card-width,344px)]',
                 )}
                 data-brand-match-card=""
                 data-home-recommend-card-profile={componentProfile.homeRecommend.profile}
                 data-home-recommend-card-density={componentProfile.homeRecommend.cardDensity}
                 data-home-recommend-selection-layout={componentProfile.homeRecommend.selectionLayout}
                 data-home-recommend-interaction={componentProfile.homeRecommend.interaction}
+                {...detailLinkIntent}
                 data-match-card-profile={componentProfile.matchCard.profile}
                 data-odds-profile={componentProfile.oddsButton.profile}
                 style={componentProfile.style}
@@ -323,16 +327,16 @@ export const HotLeagueMatchCard: FC<HotLeagueMatchCardProps> = ({ group, isMock 
                         <span className="sr-only">{t('exploreMarkets')}</span>
                     </div>
                 </div>
-            </Link>
+            </MatchCardLink>
         );
     }
 
     return (
-        <Link
+        <MatchCardLink
             href={matchDetailHref}
             scroll={true}
             className={cn(
-                'group/card block w-full min-w-0 shrink-0 rounded-[var(--brand-match-card-radius,4px)] border border-[color:var(--brand-match-card-border,var(--border-subtle))] p-2 transition-[background-color,box-shadow,transform] [background:var(--brand-match-card-bg,var(--surface-1))] [box-shadow:var(--brand-match-card-shadow,var(--style-card-shadow))] hover:[background:var(--brand-match-card-hover-bg,var(--surface-2))] hover:[transform:var(--component-match-card-hover-transform,none)] md:w-[256px]',
+                'group/card relative block w-full min-w-0 shrink-0 rounded-[var(--brand-match-card-radius,4px)] border border-[color:var(--brand-match-card-border,var(--border-subtle))] p-2 transition-[background-color,box-shadow,transform] [background:var(--brand-match-card-bg,var(--surface-1))] [box-shadow:var(--brand-match-card-shadow,var(--style-card-shadow))] hover:[background:var(--brand-match-card-hover-bg,var(--surface-2))] hover:[transform:var(--component-match-card-hover-transform,none)] md:w-[256px]',
                 isSuperbetRecommendCard
                     ? 'h-[var(--component-superbet-promo-card-min-height,160px)] md:w-[min(var(--component-recommend-card-width,390px),calc(100vw-24px))] md:p-3'
                     : useStackedOddsLayout
@@ -343,6 +347,7 @@ export const HotLeagueMatchCard: FC<HotLeagueMatchCardProps> = ({ group, isMock 
             data-match-card-profile={componentProfile.matchCard.profile}
             data-match-card-layout={componentProfile.matchCard.listLayout}
             data-match-card-interaction={componentProfile.matchCard.interaction}
+            {...detailLinkIntent}
             data-odds-profile={componentProfile.oddsButton.profile}
             data-odds-layout={
                 isSuperbetRecommendCard ? 'superbet-promo-row' : useStackedOddsLayout ? 'stacked' : undefined
@@ -479,6 +484,6 @@ export const HotLeagueMatchCard: FC<HotLeagueMatchCardProps> = ({ group, isMock 
                     <span className="sr-only">{t('exploreMarkets')}</span>
                 </div>
             </div>
-        </Link>
+        </MatchCardLink>
     );
 };
