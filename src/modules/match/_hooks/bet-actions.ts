@@ -70,10 +70,8 @@ export const executeBetClick = ({
             Toast.warn(t('toast.tooManySelectionsWarning'), { id: 'selections-warning' });
         }
 
-        // 4. Auto-open drawer on first successful add
-        if (selections.length === 0) {
-            useUIStore.getState().openBetSlipDrawer();
-        }
+        // Intentionally do NOT auto-open the bet slip when adding to an empty cart.
+        // The selection is added silently; the user opens the slip manually (mobile: cart summary bar; desktop: floating panel).
     }
 
     const animationKey = getAnimationKey(oddsEntity);
