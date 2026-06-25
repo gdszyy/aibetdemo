@@ -14,6 +14,7 @@ import { CarouselNavButton } from '@/components/carousel-nav-button';
 import { CarouselProgress } from '@/components/carousel-progress';
 import { DetailLiveSwitch } from '@/components/icons';
 import { LiveOutlined } from '@/components/icons2/LiveOutlined';
+import { MatchCardLink } from '@/components/match-card-link';
 import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { LSPORTS_SPORT_ID_BY_TYPE } from '@/constants/sports';
 import { getSportConfig } from '@/constants/sports-config';
@@ -343,11 +344,11 @@ const TopLiveCard: FC<TopLiveSuggestion> = ({ group, isMock = false, match }) =>
     if (displayMarkets.length === 0) return null;
 
     return (
-        <Link
+        <MatchCardLink
             href={matchHref}
             scroll={true}
             {...detailLinkIntent}
-            className="group/topLive block min-h-[320px] w-full shrink-0 rounded-[var(--brand-match-card-radius,12px)] border border-[color:var(--brand-match-card-border,var(--border-subtle))] bg-[var(--brand-match-card-bg,var(--surface-1))] p-3 text-left shadow-[var(--brand-match-card-shadow,var(--style-card-shadow))] transition-colors [--brand-odds-short-height:48px] hover:bg-[var(--brand-match-card-hover-bg,var(--surface-2))] md:min-h-[360px] md:w-[402px]"
+            className="group/topLive relative block min-h-[320px] w-full shrink-0 rounded-[var(--brand-match-card-radius,12px)] border border-[color:var(--brand-match-card-border,var(--border-subtle))] bg-[var(--brand-match-card-bg,var(--surface-1))] p-3 text-left shadow-[var(--brand-match-card-shadow,var(--style-card-shadow))] transition-colors [--brand-odds-short-height:48px] hover:bg-[var(--brand-match-card-hover-bg,var(--surface-2))] md:min-h-[360px] md:w-[402px]"
             data-brand-match-card=""
             data-match-card-profile={componentProfile.matchCard.profile}
             data-match-card-layout={componentProfile.matchCard.listLayout}
@@ -447,7 +448,7 @@ const TopLiveCard: FC<TopLiveSuggestion> = ({ group, isMock = false, match }) =>
                     </div>
                 </div>
             </div>
-        </Link>
+        </MatchCardLink>
     );
 };
 

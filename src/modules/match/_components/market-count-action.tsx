@@ -15,7 +15,8 @@ interface MarketCountActionProps {
 export const MarketCountAction: FC<MarketCountActionProps> = ({ count, href, className }) => {
     const router = useRouter();
     // 悬停 / 触摸 / 聚焦"+N"入口时预取详情路由，与卡片主体保持一致的瞬时跳转体验。
-    const intentHandlers = useIntentPrefetch(href);
+    // 关闭视口预取：卡片根元素已负责可见预取，小入口无需各自再观察。
+    const intentHandlers = useIntentPrefetch(href, { viewport: false });
 
     const navigateToMatch = useCallback((): void => {
         router.push(href, { scroll: true });

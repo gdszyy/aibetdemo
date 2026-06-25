@@ -7,11 +7,11 @@ import type { MarketColumns, MatchEvent } from '@/api/models/match-game';
 import { MatchStatus } from '@/api/models/match-game';
 import { MatchBroadcastFilled } from '@/components/icons2/MatchBroadcastFilled';
 import { MatchPinOutlined } from '@/components/icons2/MatchPinOutlined';
+import { MatchCardLink } from '@/components/match-card-link';
 import { useThemeComponentProfile } from '@/components/theme-provider/component-profile';
 import { ConditionalTooltip } from '@/components/tooltip';
 import { useIntentPrefetch } from '@/hooks/use-intent-prefetch';
 import { useIntlFormatter } from '@/hooks/use-intl-formatter';
-import { Link } from '@/i18n';
 import { MATCH_LIST_LAYOUT } from '@/modules/match/_constants/constants';
 import { useMatchRowCount } from '@/modules/match/_hooks/use-match-row-count';
 import {
@@ -400,13 +400,13 @@ export const Card: FC<CardProps> = ({
                 {...detailLinkIntent}
                 style={componentProfile.style}
             >
-                <Link
+                <MatchCardLink
                     href={matchDetailHref}
                     scroll={true}
                     className="absolute inset-0 z-10 rounded-[var(--brand-match-card-radius,10px)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-0"
                 >
                     <span className="sr-only">{matchTitle}</span>
-                </Link>
+                </MatchCardLink>
 
                 <div className="flex min-h-[var(--component-superbet-card-header-height,24px)] min-w-0 items-start justify-between gap-2">
                     <MatchTrail labels={trailLabels} logo={tournamentLogo} />
@@ -509,13 +509,13 @@ export const Card: FC<CardProps> = ({
                     {...detailLinkIntent}
                     style={componentProfile.style}
                 >
-                    <Link
+                    <MatchCardLink
                         href={matchDetailHref}
                         scroll={true}
                         className="absolute inset-0 z-10 rounded-[var(--brand-match-card-radius,12px)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-0"
                     >
                         <span className="sr-only">{matchTitle}</span>
-                    </Link>
+                    </MatchCardLink>
 
                     <div
                         className="flex shrink-0 flex-col items-start justify-center gap-1 pr-3"
@@ -640,13 +640,13 @@ export const Card: FC<CardProps> = ({
                 {...detailLinkIntent}
                 style={componentProfile.style}
             >
-                <Link
+                <MatchCardLink
                     href={matchDetailHref}
                     scroll={true}
                     className="absolute inset-0 z-10 rounded-[var(--brand-match-card-radius,12px)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-0"
                 >
                     <span className="sr-only">{matchTitle}</span>
-                </Link>
+                </MatchCardLink>
 
                 <div className="flex h-4 min-w-0 items-center justify-between gap-2">
                     <div className="flex min-w-0 items-center gap-1">{renderBetanoStatus()}</div>
@@ -781,13 +781,13 @@ export const Card: FC<CardProps> = ({
             {...detailLinkIntent}
             style={componentProfile.style}
         >
-            <Link
+            <MatchCardLink
                 href={matchDetailHref}
                 scroll={true}
                 className="absolute inset-0 z-10 rounded-[var(--brand-match-card-radius,4px)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-0"
             >
                 <span className="sr-only">{matchTitle}</span>
-            </Link>
+            </MatchCardLink>
             {useStackedLayout ? (
                 <>
                     <div className="flex min-w-0 items-start gap-2">
